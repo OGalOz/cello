@@ -9,8 +9,11 @@ MAINTAINER KBase Developer
 # RUN apt-get update
 RUN apt-get update
 
-RUN apt-get install -y git gcc-multilib  openjdk-8-jdk openjdk-8-jre-headless maven \
+RUN apt-get install -y gcc-multilib 
+
+RUN apt-get install -y git openjdk-8-jdk openjdk-8-jre-headless maven \
 gnuplot ghostscript graphviz imagemagick python-matplotlib
+
 
 RUN export DEBIAN_FRONTEND=noninteractive && ln -fs /usr/share/zoneinfo/America/New_York /etc/localtime && apt-get install -y tzdata && dpkg-reconfigure --frontend noninteractive tzdata
 
