@@ -5,6 +5,7 @@ import shutil
 import logging
 from biokbase.workspace.client import Workspace
 from installed_clients.KBaseReportClient import KBaseReport
+from installed_clients.DataFileUtilClient import DataFileUtil
 
 #END_HEADER
 
@@ -108,7 +109,14 @@ class cello:
 
         logging.debug(os.listdir(kb_output_folder))
 
-        dir_link = {'path': kb_output_folder, 'name':'Cello Output Directory', 'label':'cello_dir'}
+        dfu = DataFileUtil(self.callback_url)
+
+        file_zip_shock_id = dfu.file_to_shock({'file_path': kb_output_folder,
+                                              'pack': 'zip'})['shock_id']
+
+        
+        #'path': kb_output_folder
+        dir_link = {'shock_id': file_zip_shock_id, 'name':'Cello_Output.zip', 'label':'cello_dir', 'description': 'The directory of outputs from cello'}
         ext_report_params['file_links'] = [dir_link]
         report_info = report.create_extended_report(ext_report_params)
         output = {

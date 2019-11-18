@@ -1,10 +1,10 @@
 #
 # define display information
 #
-name: Method Name Here
+name: Cello
 
 tooltip: |
-    Perform some kind of method
+    Run the program Cello
 
 screenshots: []
 
