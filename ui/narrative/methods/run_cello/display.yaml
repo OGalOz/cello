@@ -31,6 +31,50 @@ parameters :
             The first parameter
         long-hint  : |
             The first parameter that needs to be entered to drive the method. This might be the first of many.
+    inp_gene_name :
+        ui-name : |
+            Input Name
+        short-hint : |
+            The name of the gene (e.g. pTac)
+        long-hint : |
+            Please don't use spaces or special characters.
+    low_RPU :
+        ui-name : | 
+            low RPU
+        short-hint : |
+            The low RPU value (e.g. 0.0034)
+    high_RPU : 
+        ui-name : |
+            high RPU
+        short-hint : |
+            The high RPU value (e.g. 2.8)
+    inp_DNA_sequence : 
+        ui-name : |
+            DNA sequence
+        short-hint : |
+            The DNA sequence of the gene (e.g. AACGATCGTT...)
+    out_gene_name : 
+        ui-name : |
+            Output Name
+        short-hint : |
+            The name of the gene (e.g. YFP)
+    out_DNA_sequence :
+        ui-name : |
+            DNA sequence
+        short-hint : |
+            The DNA sequence of the gene (e.g. AACGATCGTT...)
+
+parameter-groups : 
+    gene_inputs :
+        ui-name : |
+            Input Genes
+        short-hint : |
+            The input genes (up to 3)
+    gene_outputs : 
+        ui-name : |
+            Output Genes
+        short-hint : |
+            The output genes - (currently only 1 allowed)
 
 description : |
     <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed pulvinar efficitur felis, quis tincidunt sem congue at. Vivamus ornare feugiat faucibus. Fusce tincidunt mattis nunc, nec varius purus convallis quis. Nulla facilisi. In at magna dolor. Suspendisse sit amet felis at arcu auctor dapibus vitae pharetra dui. Nam semper mi quis tortor fermentum mollis. Donec a arcu pharetra, rutrum dolor vitae, rutrum mauris. Donec ornare fringilla sagittis. Nam laoreet est in elementum malesuada. Vestibulum id mi eget urna hendrerit feugiat. Donec et ultrices nulla. Phasellus diam eros, dapibus at tempus nec, semper vel ante.</p>
