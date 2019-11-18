@@ -15,6 +15,8 @@ RUN apt-get install -y aptitude
 
 RUN aptitude search libxmu
 
+RUN aptitude search gcc-multilib
+
 RUN aptitude install -y gcc-multilib
 
 #RUN apt-get install -y --fix-missing gcc-multilib 
