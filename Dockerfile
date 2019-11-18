@@ -7,9 +7,13 @@ MAINTAINER KBase Developer
 # installation scripts.
 
 # RUN apt-get update
-RUN apt-get upgrade
+RUN apt-get -y upgrade
 
-RUN apt-get check
+RUN apt-get -y check
+
+RUN apt-get -y dist-upgrade
+
+RUN apt-get -y update
 
 RUN apt-get -f install
 
