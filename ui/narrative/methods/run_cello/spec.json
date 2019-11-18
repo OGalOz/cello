@@ -111,23 +111,12 @@
                     "input_parameter": "parameter_1",
                     "target_property": "parameter_1"
                 },{
-                    "input_parameter": "inp_gene_name",
-                    "target_property": "inp_gene_name"
-                },{
-                    "input_parameter": "low_RPU",
-                    "target_property": "low_RPU"
-                },{
-                    "input_parameter": "high_RPU",
-                    "target_property": "high_RPU"
-                },{
-                    "input_parameter": "inp_DNA_sequence",
-                    "target_property": "inp_DNA_sequence"
-                },{
-                    "input_parameter": "out_gene_name",
-                    "target_property": "out_gene_name"
-                },{
-                    "input_parameter": "out_DNA_sequence",
-                    "target_property": "out_DNA_sequence"
+                    "input_parameter": "gene_inputs",
+                    "target_property": "gene_inputs
+                },
+                {
+                    "input_parameter" : "gene_outputs",
+                    "target_property": "gene_outputs"
                 }
             ],
             "output_mapping": [
