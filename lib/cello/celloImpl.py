@@ -73,6 +73,7 @@ class cello:
         kb_output_folder = os.path.join(self.shared_folder,"cello_output")
         os.mkdir(kb_output_folder)
 
+        '''
         if "gene_inputs" in params:
             gene_inputs = params["gene_inputs"]
             logging.debug(gene_inputs)
@@ -84,7 +85,7 @@ class cello:
             logging.debug(gene_outputs)
         else:
             raise Exception("gene_outputs not in params.")
-
+        '''
 
 
         #Actually running cello:
