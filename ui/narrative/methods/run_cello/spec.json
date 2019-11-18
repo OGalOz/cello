@@ -112,7 +112,7 @@
                     "target_property": "parameter_1"
                 },{
                     "input_parameter": "gene_inputs",
-                    "target_property": "gene_inputs
+                    "target_property": "gene_inputs"
                 },
                 {
                     "input_parameter" : "gene_outputs",
