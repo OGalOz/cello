@@ -7,7 +7,11 @@ MAINTAINER KBase Developer
 # installation scripts.
 
 # RUN apt-get update
-RUN apt-get update
+RUN apt-get dist-upgrade
+
+RUN apt-get check
+
+RUN apt-get -f install
 
 RUN apt-get install  -y libxss1
 
