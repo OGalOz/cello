@@ -61,6 +61,8 @@ class cello:
         ext_report_params = dict()
         ext_report_params["workspace_name"] = params['workspace_name']
 
+
+        #DEBUGGING
         logging.debug("PARAMS")
         logging.debug(params)
         for k in params:
@@ -68,24 +70,31 @@ class cello:
             logging.debug(params[k])
 
         #CODE
-        #Setting variables:
-        #What folder to zip and return to User
-        kb_output_folder = os.path.join(self.shared_folder,"cello_output")
-        os.mkdir(kb_output_folder)
-
-        '''
         if "gene_inputs" in params:
-            gene_inputs = params["gene_inputs"]
+            gene_inputs_list = params["gene_inputs"]
             logging.debug(gene_inputs)
         else:
             raise Exception("gene_inputs not in params.")
 
         if "gene_outputs" in params:
-            gene_outputs = params["gene_outputs"]
+            gene_outputs_list = params["gene_outputs"]
             logging.debug(gene_outputs)
         else:
             raise Exception("gene_outputs not in params.")
-        '''
+
+
+
+        
+        #CODE
+        #Setting variables:
+        #What folder to zip and return to User
+        kb_output_folder = os.path.join(self.shared_folder,"cello_output")
+        os.mkdir(kb_output_folder)
+
+        
+
+
+        raise Exception("Stop running program - Testing.")
 
 
         #Actually running cello:

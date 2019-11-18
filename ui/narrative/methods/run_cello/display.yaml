@@ -24,13 +24,6 @@ suggestions:
 # Configure the display and description of parameters
 #
 parameters :
-    parameter_1 :
-        ui-name : |
-            First parameter
-        short-hint : |
-            The first parameter
-        long-hint  : |
-            The first parameter that needs to be entered to drive the method. This might be the first of many.
     inp_gene_name :
         ui-name : |
             Input Name
@@ -63,6 +56,23 @@ parameters :
             DNA sequence
         short-hint : |
             The DNA sequence of the gene (e.g. AACGATCGTT...)
+    gene_name :
+        ui-name : |
+            Gene Name
+        short-hint : |
+            The name of one of the previously chosen genes
+    truth_value :
+        ui-name : |
+            Truth Table Value
+        short-hint : |
+            Either 0 or 1. 0 if occuring, 1 if not.
+    row_number :
+        ui-name : |
+            Row Number
+        short-hint : |
+            Which Row in the Truth table does this correspond to.
+
+
 
 parameter-groups : 
     gene_inputs :
@@ -75,6 +85,13 @@ parameter-groups :
             Output Genes
         short-hint : |
             The output genes - (currently only 1 allowed)
+    truth_table_values :
+        ui-name : |
+            Truth Table Values
+        short-hint : |
+            For each row in the truth table, choose 1 or 0
+        long-hint : |
+            The Truth Table is the input to Cello.
 
 description : |
     <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed pulvinar efficitur felis, quis tincidunt sem congue at. Vivamus ornare feugiat faucibus. Fusce tincidunt mattis nunc, nec varius purus convallis quis. Nulla facilisi. In at magna dolor. Suspendisse sit amet felis at arcu auctor dapibus vitae pharetra dui. Nam semper mi quis tortor fermentum mollis. Donec a arcu pharetra, rutrum dolor vitae, rutrum mauris. Donec ornare fringilla sagittis. Nam laoreet est in elementum malesuada. Vestibulum id mi eget urna hendrerit feugiat. Donec et ultrices nulla. Phasellus diam eros, dapibus at tempus nec, semper vel ante.</p>

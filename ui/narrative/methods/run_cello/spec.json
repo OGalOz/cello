@@ -33,19 +33,22 @@
             "advanced": false,
             "allow_multiple": false,
             "with_border": true
-        }
-
-    ],
-    "parameters": [ 
-        {
-            "id": "parameter_1",
-            "optional": true,
-            "advanced": false,
-            "allow_multiple": false,
-            "default_values": [ "" ],
-            "field_type": "text"
         },
         {
+            "id": "truth_table_values",
+            "parameters": [
+                "gene_name",
+                "truth_value",
+                "row_number"
+            ],
+            "optional": false,
+            "advanced": false,
+            "allow_multiple": true,
+            "with_border": true
+        }
+    ],
+    "parameters": [ 
+                {
             "id": "inp_gene_name",
             "optional": false,
             "advanced": false,
@@ -92,6 +95,40 @@
             "allow_multiple": false,
             "default_values": [""],
             "field_type": "text"
+        },
+        {
+            "id": "gene_name",
+            "optional": false,
+            "advanced": false,
+            "allow_multiple": false,
+            "default_values": [""],
+            "field_type": "text"
+        },
+        {
+            "id": "truth_value",
+            "optional": false,
+            "advanced": false,
+            "allow_multiple": false,
+            "default_values": [""],
+            "field_type": "dropdown",
+            "dropdown_options":{
+                 "options": [{
+                     "value": "0",
+                     "display": "0"
+                 }, {
+                     "value": "1",
+                     "display": "1"
+                 }]
+                }
+
+        },
+        {
+            "id": "row_number",
+            "optional": false,
+            "advanced": false,
+            "allow_multiple": false,
+            "default_values": [""],
+            "field_type": "text"
         }
 
     ],
@@ -107,9 +144,6 @@
                 },{
                     "narrative_system_variable": "workspace_id",
                     "target_property": "workspace_id"
-                },{
-                    "input_parameter": "parameter_1",
-                    "target_property": "parameter_1"
                 },{
                     "input_parameter": "gene_inputs",
                     "target_property": "gene_inputs"
