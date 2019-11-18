@@ -61,6 +61,12 @@ class cello:
         ext_report_params = dict()
         ext_report_params["workspace_name"] = params['workspace_name']
 
+        logging.debug("PARAMS")
+        logging.debug(params)
+        for k in params:
+            logging.debug(k)
+            logging.debug(params[k])
+
         #CODE
         #Setting variables:
         #What folder to zip and return to User
