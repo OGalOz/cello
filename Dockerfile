@@ -15,7 +15,9 @@ RUN apt-get install -y aptitude
 
 RUN aptitude search libxmu
 
-RUN apt-get install -y --fix-missing gcc-multilib 
+RUN aptitude install -y gcc-multilib
+
+#RUN apt-get install -y --fix-missing gcc-multilib 
 
 RUN apt-get install -y git openjdk-8-jdk openjdk-8-jre-headless maven \
 gnuplot ghostscript graphviz imagemagick python-matplotlib
