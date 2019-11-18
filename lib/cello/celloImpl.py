@@ -6,7 +6,7 @@ import logging
 from biokbase.workspace.client import Workspace
 from installed_clients.KBaseReportClient import KBaseReport
 from installed_clients.DataFileUtilClient import DataFileUtil
-from cello_util.file_maker import make_verilog_case_file_string, make_input_file_str, make_output_file_str,
+from cello_util.file_maker import make_verilog_case_file_string, make_input_file_str, make_output_file_str
 
 
 #END_HEADER
@@ -67,8 +67,19 @@ class cello:
         kb_output_folder = os.path.join(self.shared_folder,"cello_output")
         os.mkdir(kb_output_folder)
 
-        
-        
+        if "gene_inputs" in params:
+            gene_inputs = params["gene_inputs"]
+            logging.debug(gene_inputs)
+        else:
+            raise Exception("gene_inputs not in params.")
+
+        if "gene_outputs" in params:
+            gene_outputs = params["gene_outputs"]
+            logging.debug(gene_outputs)
+        else:
+            raise Exception("gene_outputs not in params.")
+
+
 
         #Actually running cello:
         cello_dir = '/cello'

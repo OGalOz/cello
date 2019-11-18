@@ -63,5 +63,19 @@ class celloTest(unittest.TestCase):
         #
         # Check returned data with
         # self.assertEqual(ret[...], ...) or other unittest methods
-        ret = self.serviceImpl.run_cello(self.ctx, {'workspace_name': self.wsName,
-                                                             'parameter_1': 'Hello World!'})
+
+        gene_input_1 = {"inp_gene_name": "Test1", "low_RPU" : "0.1", "high_RPU": "3.0", "inp_DNA_sequence": "AACT"}
+        gene_input_2 = {"inp_gene_name": "Test2", "low_RPU" : "0.02", "high_RPU": "2.0", "inp_DNA_sequence": "GGCC" }
+
+        gene_inputs = [gene_input_1, gene_input_2]
+
+        gene_output_1 = {"out_gene_name": "Out1", "out_DNA_sequence" : "TTAA" }
+        gene_outputs = [gene_output_1]
+
+
+        ret = self.serviceImpl.run_cello(self.ctx, {
+                                                    'workspace_name': self.wsName,
+                                                    'parameter_1': 'Hello World!',
+                                                    'gene_inputs' : gene_inputs,
+                                                    'gene_outputs' : gene_outputs,
+                                                             })
