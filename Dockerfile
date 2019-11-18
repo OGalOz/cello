@@ -9,6 +9,12 @@ MAINTAINER KBase Developer
 # RUN apt-get update
 RUN apt-get update
 
+RUN apt-get install libxss1
+
+RUN apt-get install aptitude
+
+RUN aptitude search libxmu
+
 RUN apt-get install -y --fix-missing gcc-multilib 
 
 RUN apt-get install -y git openjdk-8-jdk openjdk-8-jre-headless maven \
