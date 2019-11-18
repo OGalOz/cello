@@ -9,9 +9,9 @@ MAINTAINER KBase Developer
 # RUN apt-get update
 RUN apt-get update
 
-RUN apt-get install libxss1
+RUN apt-get install  -y libxss1
 
-RUN apt-get install aptitude
+RUN apt-get install -y aptitude
 
 RUN aptitude search libxmu
 
