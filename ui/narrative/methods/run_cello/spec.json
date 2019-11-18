@@ -9,6 +9,33 @@
         "input": null,
         "output": null
     },
+    "parameter-groups" : [
+        {
+            "id": "gene_inputs",
+            "parameters": [
+                "inp_gene_name",
+                "low_RPU",
+                "high_RPU",
+                "inp_DNA_sequence"
+            ],
+            "optional":false,
+            "advanced": false,
+            "allow_multiple": true,
+            "with_border": true
+        },
+        {
+            "id": "gene_outputs",
+            "parameters": [
+                "out_gene_name",
+                "out_DNA_sequence"
+            ],
+            "optional":false,
+            "advanced": false,
+            "allow_multiple": false,
+            "with_border": true
+        }
+
+    ],
     "parameters": [ 
         {
             "id": "parameter_1",
@@ -17,7 +44,56 @@
             "allow_multiple": false,
             "default_values": [ "" ],
             "field_type": "text"
+        },
+        {
+            "id": "inp_gene_name",
+            "optional": false,
+            "advanced": false,
+            "allow_multiple": false,
+            "default_values": [""],
+            "field_type": "text"
+        },
+        {
+            "id": "low_RPU",
+            "optional": false,
+            "advanced": false,
+            "allow_multiple": false,
+            "default_values": [""],
+            "field_type": "text"
+        },
+        {
+            "id": "high_RPU",
+            "optional": false,
+            "advanced": false,
+            "allow_multiple": false,
+            "default_values": [""],
+            "field_type": "text"
+        },
+        {
+            "id": "inp_DNA_sequence",
+            "optional": false,
+            "advanced": false,
+            "allow_multiple": false,
+            "default_values": [""],
+            "field_type": "text"
+        },
+        {
+            "id": "out_gene_name",
+            "optional": false,
+            "advanced": false,
+            "allow_multiple": false,
+            "default_values": [""],
+            "field_type": "text"
+        },
+        {
+            "id": "out_DNA_sequence",
+            "optional": false,
+            "advanced": false,
+            "allow_multiple": false,
+            "default_values": [""],
+            "field_type": "text"
         }
+
     ],
     "behavior": {
         "service-mapping": {
@@ -34,6 +110,24 @@
                 },{
                     "input_parameter": "parameter_1",
                     "target_property": "parameter_1"
+                },{
+                    "input_parameter": "inp_gene_name",
+                    "target_property": "inp_gene_name"
+                },{
+                    "input_parameter": "low_RPU",
+                    "target_property": "low_RPU"
+                },{
+                    "input_parameter": "high_RPU",
+                    "target_property": "high_RPU"
+                },{
+                    "input_parameter": "inp_DNA_sequence",
+                    "target_property": "inp_DNA_sequence"
+                },{
+                    "input_parameter": "out_gene_name",
+                    "target_property": "out_gene_name"
+                },{
+                    "input_parameter": "out_DNA_sequence",
+                    "target_property": "out_DNA_sequence"
                 }
             ],
             "output_mapping": [

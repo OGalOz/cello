@@ -6,6 +6,8 @@ import logging
 from biokbase.workspace.client import Workspace
 from installed_clients.KBaseReportClient import KBaseReport
 from installed_clients.DataFileUtilClient import DataFileUtil
+from cello_util.file_maker import make_verilog_case_file_string, make_input_file_str, make_output_file_str,
+
 
 #END_HEADER
 
@@ -26,7 +28,7 @@ class cello:
     # the latter method is running.
     ######################################### noqa
     VERSION = "0.0.1"
-    GIT_URL = ""
+    GIT_URL = "https://github.com/OGalOz/cello"
     GIT_COMMIT_HASH = ""
 
     #BEGIN_CLASS_HEADER

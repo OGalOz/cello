@@ -1,10 +1,10 @@
 #
 # define display information
 #
-name: Cello
+name: Cello_Demo
 
 tooltip: |
-    Run the program Cello
+    Run the program Cello on the demo files
 
 screenshots: []
 
