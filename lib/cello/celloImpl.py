@@ -72,13 +72,13 @@ class cello:
         #CODE
         if "gene_inputs" in params:
             gene_inputs_list = params["gene_inputs"]
-            logging.debug(gene_inputs)
+            #logging.debug(gene_inputs_list)
         else:
             raise Exception("gene_inputs not in params.")
 
         if "gene_outputs" in params:
             gene_outputs_list = params["gene_outputs"]
-            logging.debug(gene_outputs)
+            #logging.debug(gene_outputs_list)
         else:
             raise Exception("gene_outputs not in params.")
 

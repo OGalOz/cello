@@ -151,6 +151,11 @@
                 {
                     "input_parameter" : "gene_outputs",
                     "target_property": "gene_outputs"
+                },
+                {
+                    "input_parameter" : "truth_table_values",
+                    "target_property" : "truth_table_values"
+
                 }
             ],
             "output_mapping": [
