@@ -119,6 +119,7 @@ class cello:
         #Writing input files to Cello:
         module_name = "testname"
         vlog_case_filestring = make_verilog_case_file_string(truth_table,module_name)
+        #logging.debug(vlog_case_filestring)
         inputs_filestring = make_input_file_str(gene_inputs_list)
         outputs_filestring = make_output_file_str(gene_outputs_list)
         f = open(os.path.join(cello_kb, "test_verilog.v"), "w")

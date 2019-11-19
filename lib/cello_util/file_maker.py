@@ -54,9 +54,10 @@ def make_header_line(truth_table, module_name):
     header_output_str = "output "
 
     #For now we have only one output
-    output_names = truth_table[0][-1]
-    for output_name in output_names:
-        header_output_str += output_name + ", "
+    output_name = truth_table[0][-1]
+
+    #Eventually we'll need a list of output names.
+    header_output_str += output_name + ", "
 
     header_line = "module " + module_name + "(" + header_output_str + header_input_str + ");\n"
     
