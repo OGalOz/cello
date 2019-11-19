@@ -7,6 +7,7 @@ from biokbase.workspace.client import Workspace
 from installed_clients.KBaseReportClient import KBaseReport
 from installed_clients.DataFileUtilClient import DataFileUtil
 from cello_util.file_maker import make_verilog_case_file_string, make_input_file_str, make_output_file_str
+from cello_util.truth_table import make_truth_table
 
 
 #END_HEADER
@@ -74,17 +75,24 @@ class cello:
             gene_inputs_list = params["gene_inputs"]
             #logging.debug(gene_inputs_list)
         else:
-            raise Exception("gene_inputs not in params.")
+            raise Exception("Gene Inputs not supplied (not in params).")
 
         if "gene_outputs" in params:
             gene_outputs_list = params["gene_outputs"]
             #logging.debug(gene_outputs_list)
         else:
-            raise Exception("gene_outputs not in params.")
+            raise Exception("Gene Outputs not supplied (not in params).")
 
+        if "truth_table_values" in params:
+            truth_table_values = params["truth_table_values"]
+        else:
+            raise Exception("Truth Table Values not supplied (not in params).")
 
+       
+        truth_table = make_truth_table(gene_inputs_list, gene_outputs_list, truth_table_values)
 
-        
+    
+
         #CODE
         #Setting variables:
         #What folder to zip and return to User
@@ -94,7 +102,7 @@ class cello:
         
 
 
-        raise Exception("Stop running program - Testing.")
+        #raise Exception("Stop running program - Testing.")
 
 
         #Actually running cello:
@@ -107,18 +115,34 @@ class cello:
         else:
             raise Exception("kb_run directory already exists within cello ??? Need new directory to run our verilog files.")
 
+        #CODE
+        #Writing input files to Cello:
+        module_name = "testname"
+        vlog_case_filestring = make_verilog_case_file_string(truth_table,module_name)
+        inputs_filestring = make_input_file_str(gene_inputs_list)
+        outputs_filestring = make_output_file_str(gene_outputs_list)
+        f = open(os.path.join(cello_kb, "test_verilog.v"), "w")
+        f.write(vlog_case_filestring)
+        f.close()
+        g = open(os.path.join(cello_kb, "test_inputs.txt"),"w")
+        g.write(inputs_filestring)
+        g.close()
+        h = open(os.path.join(cello_kb, "test_outputs.txt"),"w")
+        h.write(outputs_filestring)
+        h.close()
 
-        #Just running the cello_demo eventually replace cello_demo with cello_kb
-        cello_demo = os.path.join(cello_dir, 'demo')
-        os.chdir(cello_demo)
-        op = os.system('mvn -e -f /cello/pom.xml -DskipTests=true -PCelloMain -Dexec.args="-verilog demo_verilog.v -input_promoters demo_inputs.txt -output_genes demo_outputs.txt"')
+
+        #Just running the cello_demo eventually replace cello_demo with cello_kb, and demo with test.
+        #cello_demo = os.path.join(cello_dir, 'demo')
+        os.chdir(cello_kb)
+        op = os.system('mvn -e -f /cello/pom.xml -DskipTests=true -PCelloMain -Dexec.args="-verilog test_verilog.v -input_promoters test_inputs.txt -output_genes test_outputs.txt"')
         logging.debug(op)
-        dir_list = os.listdir(cello_demo)
+        dir_list = os.listdir(cello_kb)
         logging.debug(dir_list)
         output_dirpath = 'placeholder'
         for f in dir_list:
-            if f not in ['0xFE_verilog.v', 'demo_inputs.txt', 'demo_outputs.txt', 'demo_verilog.v', 'exports']:
-                output_dirpath = os.path.join(cello_demo, f)
+            if f not in ['0xFE_verilog.v', 'test_inputs.txt', 'test_outputs.txt', 'test_verilog.v', 'exports']:
+                output_dirpath = os.path.join(cello_kb, f)
                 dir_name = f
                 logging.debug(output_dirpath)
                 break

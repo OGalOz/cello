@@ -72,7 +72,7 @@ def make_always_line(truth_table):
     #Removing the final comma and adding a close parentheses and new-line.
     always_str = always_str[:-1] + ")\n"
 
-    return always_Str
+    return always_str
 
 def make_case_block(truth_table):
 
@@ -88,7 +88,7 @@ def make_case_block(truth_table):
     case_block_str += opening_block
 
     #We currently have only one output
-    output = truth_table[-1]
+    output = truth_table[0][-1]
     
     case_lines = ''
     for truth_row in truth_table[1:]:
@@ -114,7 +114,7 @@ def make_input_file_str(inp_file_list):
     inp_file_str = ''
 
     for inp_dict in inp_file_list:
-        inp_file_str += inp_dict['name'] + ' ' + inp_dict['low RPU'] + ' ' + inp_dict['high RPU'] + ' ' + inp_dict['DNA sequence'] + '\n'
+        inp_file_str += inp_dict['inp_gene_name'] + ' ' + inp_dict['low_RPU'] + ' ' + inp_dict['high_RPU'] + ' ' + inp_dict['inp_DNA_sequence'] + '\n'
 
     return inp_file_str
 
@@ -128,7 +128,7 @@ def make_output_file_str(output_file_list):
     output_file_str = ''
 
     for out_dict in output_file_list:
-        output_file_str += out_dict['name'] + ' ' + out_dict["DNA sequence"] + '\n'
+        output_file_str += out_dict['out_gene_name'] + ' ' + out_dict["out_DNA_sequence"] + '\n'
     
 
     return output_file_str
