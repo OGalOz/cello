@@ -3,7 +3,46 @@
 # and it returns a truth table
 import logging
 
-def make_truth_table(gene_inputs_list, gene_outputs_list, truth_table_values):
+
+def make_truth_table_from_text(gene_inputs_list, gene_outputs_list,truth_table_text):
+
+
+    """
+    Format of truth_table_text is: (the "|" is to check for correctness"
+    "In1", "In2", "Out1" |
+    "0", "0", "1" |
+    "0", "1", "0" |
+    etc.
+
+
+    """
+
+    truth_table = []
+
+    #Parsing truth_table_text:
+    X = truth_table_text.split('\n')
+    logging.debug(X)
+    for l in X:
+        truth_table_row = []
+        if "," in l:
+            values = l.split(",")
+            for v in values:
+                if '"' in v:
+                    fin = v.split('"')
+                    if len(fin) != 3:
+                        raise Exception("Improper user formatting on truth table - quotations")
+                    f = fin[1]
+                    truth_table_row.append(f)
+                else:
+                    raise Exception("Improper user formatting on truth table - no quotations in each line")
+        truth_table.append(truth_table_row)
+
+    return truth_table
+
+
+
+
+def make_truth_table_from_values(gene_inputs_list, gene_outputs_list, truth_table_values):
     # We find the number of rows in the truth table aside from the names of the genes.
     num_rows = max([int(ttv['row_number']) for ttv in truth_table_values])
     num_inputs = len(gene_inputs_list)
@@ -67,5 +106,7 @@ def make_truth_table(gene_inputs_list, gene_outputs_list, truth_table_values):
 
 
     return truth_table
+
+
 
 

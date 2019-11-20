@@ -7,7 +7,7 @@ from biokbase.workspace.client import Workspace
 from installed_clients.KBaseReportClient import KBaseReport
 from installed_clients.DataFileUtilClient import DataFileUtil
 from cello_util.file_maker import make_verilog_case_file_string, make_input_file_str, make_output_file_str
-from cello_util.truth_table import make_truth_table
+from cello_util.truth_table import make_truth_table_from_values, make_truth_table_from_text
 
 
 #END_HEADER
@@ -87,9 +87,16 @@ class cello:
             truth_table_values = params["truth_table_values"]
         else:
             raise Exception("Truth Table Values not supplied (not in params).")
+        if "truth_table_text" in params:
+            truth_table_text = params["truth_table_text"]
+        else:
+            raise Exception("Truth Table Text not supplied")
 
        
-        truth_table = make_truth_table(gene_inputs_list, gene_outputs_list, truth_table_values)
+        #truth_table = make_truth_table_from_values(gene_inputs_list, gene_outputs_list, truth_table_values)
+        truth_table = make_truth_table_from_text(gene_inputs_list, gene_outputs_list, truth_table_text)
+        logging.debug(truth_table)
+
 
     
 
@@ -102,7 +109,7 @@ class cello:
         
 
 
-        #raise Exception("Stop running program - Testing.")
+        raise Exception("Stop running program for testing purposes.")
 
 
         #Actually running cello:
