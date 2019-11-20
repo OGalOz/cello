@@ -129,7 +129,19 @@
             "allow_multiple": false,
             "default_values": [""],
             "field_type": "text"
+        },
+        {
+            "id": "truth_table_text",
+            "optional": false,
+            "advanced": false,
+            "allow_multiple": false,
+            "default_values": [""],
+            "field_type": "textarea",
+            "textarea_options" : {
+                "n_rows" : 10
+            }
         }
+
 
     ],
     "behavior": {
@@ -156,6 +168,10 @@
                     "input_parameter" : "truth_table_values",
                     "target_property" : "truth_table_values"
 
+                },
+                {
+                    "input_parameter" : "truth_table_text",
+                    "target_property" : "truth_table_text"
                 }
             ],
             "output_mapping": [

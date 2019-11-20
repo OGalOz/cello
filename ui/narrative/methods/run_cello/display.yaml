@@ -71,7 +71,13 @@ parameters :
             Row Number
         short-hint : |
             Which Row in the Truth table does this correspond to.
-
+    truth_table_text :
+        ui-name : |
+            Truth Table
+        short-hint : |
+            Enter your truth table in the format in long-hint
+        long-hint : |
+            First row is name of genes; Comma separated; Every value in quotations.
 
 
 parameter-groups : 
