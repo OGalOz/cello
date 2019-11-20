@@ -7,6 +7,16 @@ import logging
 def make_truth_table_from_text(gene_inputs_list, gene_outputs_list,truth_table_text):
 
 
+    orig_gene_names = []
+    for gene_dict in gene_inputs_list:
+        orig_gene_names.append(gene_dict['inp_gene_name'])
+    for gene_dict in gene_outputs_list:
+        orig_gene_names.append(gene_dict['out_gene_name'])
+
+    logging.debug("Original Gene Names - Truth Table Function")
+    logging.debug(orig_gene_names)
+
+
     """
     Format of truth_table_text is: (the "|" is to check for correctness"
     "In1", "In2", "Out1" |
@@ -22,6 +32,26 @@ def make_truth_table_from_text(gene_inputs_list, gene_outputs_list,truth_table_t
     #Parsing truth_table_text:
     X = truth_table_text.split('\n')
     logging.debug(X)
+    
+    
+    # Make sure first row is all gene names from other inputs:
+    gene_names_string = X[0]
+    truth_table_row = []
+    if "," in gene_names_string:
+        gene_names_rough_list = gene_names_string.split(",")
+        for gn in gene_names_rough_list:
+            if '"' in gn:
+                g = gn.split('"')
+                if len(g) != 3:
+                    raise Exception("Incorrect user formatting on truth table - gene names")
+                final_gene_name = g[1]
+                if finale_gene_name not in orig_gene_names:
+                    raise Exception("Incorrect user input on gene name in truth table- doesn't match input/output gene names.")
+                else:
+                    truth_table_row.append(final_gene_name)
+    truth_table.append(truth_table_row)
+
+    #Now we add the values (1 or 0)
     for l in X:
         truth_table_row = []
         if "," in l:
@@ -32,7 +62,10 @@ def make_truth_table_from_text(gene_inputs_list, gene_outputs_list,truth_table_t
                     if len(fin) != 3:
                         raise Exception("Improper user formatting on truth table - quotations")
                     f = fin[1]
-                    truth_table_row.append(f)
+                    if f not in ["0","1"]:
+                        raise Exception("Incorrect formatting of truth table, values must be 0 or 1. Actual value: " + str(f))
+                    else:
+                        truth_table_row.append(f)
                 else:
                     raise Exception("Improper user formatting on truth table - no quotations in each line")
         truth_table.append(truth_table_row)
