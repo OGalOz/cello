@@ -7,6 +7,8 @@ import logging
 def make_truth_table_from_text(gene_inputs_list, gene_outputs_list,truth_table_text):
 
 
+    #Currently, gene outputs_list is just a dict
+
     orig_gene_names = []
     for gene_dict in gene_inputs_list:
         orig_gene_names.append(gene_dict['inp_gene_name'])
