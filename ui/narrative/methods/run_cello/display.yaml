@@ -56,21 +56,6 @@ parameters :
             DNA sequence
         short-hint : |
             The DNA sequence of the gene (e.g. AACGATCGTT...)
-    gene_name :
-        ui-name : |
-            Gene Name
-        short-hint : |
-            The name of one of the previously chosen genes
-    truth_value :
-        ui-name : |
-            Truth Table Value
-        short-hint : |
-            Either 0 or 1. 0 if occuring, 1 if not.
-    row_number :
-        ui-name : |
-            Row Number
-        short-hint : |
-            Which Row in the Truth table does this correspond to.
     truth_table_text :
         ui-name : |
             Truth Table
@@ -78,8 +63,6 @@ parameters :
             Enter your truth table in the format in description
         long-hint : |
             First row is name of genes; Comma separated; Every value in double quotations. Like in the app description page.
-
-
 parameter-groups : 
     gene_inputs :
         ui-name : |
@@ -91,13 +74,6 @@ parameter-groups :
             Output Genes
         short-hint : |
             The output genes - (currently only 1 allowed)
-    truth_table_values :
-        ui-name : |
-            Truth Table Values
-        short-hint : |
-            For each row in the truth table, choose 1 or 0
-        long-hint : |
-            The Truth Table is the input to Cello.
 
 description : |
     <p>Truth Table Input should look like </p>

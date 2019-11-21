@@ -33,19 +33,7 @@
             "advanced": false,
             "allow_multiple": true,
             "with_border": true
-        },
-        {
-            "id": "truth_table_values",
-            "parameters": [
-                "gene_name",
-                "truth_value",
-                "row_number"
-            ],
-            "optional": false,
-            "advanced": false,
-            "allow_multiple": true,
-            "with_border": true
-        }
+        }    
     ],
     "parameters": [ 
                 {
@@ -97,40 +85,6 @@
             "field_type": "text"
         },
         {
-            "id": "gene_name",
-            "optional": false,
-            "advanced": false,
-            "allow_multiple": false,
-            "default_values": [""],
-            "field_type": "text"
-        },
-        {
-            "id": "truth_value",
-            "optional": false,
-            "advanced": false,
-            "allow_multiple": false,
-            "default_values": [""],
-            "field_type": "dropdown",
-            "dropdown_options":{
-                 "options": [{
-                     "value": "0",
-                     "display": "0"
-                 }, {
-                     "value": "1",
-                     "display": "1"
-                 }]
-                }
-
-        },
-        {
-            "id": "row_number",
-            "optional": false,
-            "advanced": false,
-            "allow_multiple": false,
-            "default_values": [""],
-            "field_type": "text"
-        },
-        {
             "id": "truth_table_text",
             "optional": false,
             "advanced": false,
@@ -163,11 +117,6 @@
                 {
                     "input_parameter" : "gene_outputs",
                     "target_property": "gene_outputs"
-                },
-                {
-                    "input_parameter" : "truth_table_values",
-                    "target_property" : "truth_table_values"
-
                 },
                 {
                     "input_parameter" : "truth_table_text",
