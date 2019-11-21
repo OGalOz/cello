@@ -115,7 +115,9 @@ def make_input_file_str(inp_file_list):
     inp_file_str = ''
 
     for inp_dict in inp_file_list:
-        inp_file_str += inp_dict['inp_gene_name'] + ' ' + inp_dict['low_RPU'] + ' ' + inp_dict['high_RPU'] + ' ' + inp_dict['inp_DNA_sequence'] + '\n'
+        low_RPU = str(inp_dict['low_RPU'])
+        high_RPU = str(inp_dict['high_RPU'])
+        inp_file_str += inp_dict['inp_gene_name'] + ' ' + low_RPU + ' ' + high_RPU + ' ' + inp_dict['inp_DNA_sequence'] + '\n'
 
     return inp_file_str
 
