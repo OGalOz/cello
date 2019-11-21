@@ -1,10 +1,10 @@
 #
 # define display information
 #
-name: Cello_Demo
+name: Cello
 
 tooltip: |
-    Run the program Cello on the demo files
+    Run the program Cello  - CIDAR Labs
 
 screenshots: []
 

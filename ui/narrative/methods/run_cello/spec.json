@@ -46,6 +46,9 @@
         },
         {
             "id": "low_RPU",
+            "text_options" : {
+                "validate_as" : "float"
+            },
             "optional": false,
             "advanced": false,
             "allow_multiple": false,
@@ -54,6 +57,9 @@
         },
         {
             "id": "high_RPU",
+            "text_options" : {
+                "validate_as" : "float"
+            },
             "optional": false,
             "advanced": false,
             "allow_multiple": false,
