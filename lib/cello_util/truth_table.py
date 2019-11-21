@@ -21,9 +21,9 @@ def make_truth_table_from_text(gene_inputs_list, gene_outputs_list,truth_table_t
 
     """
     Format of truth_table_text is: (the "|" is to check for correctness"
-    "In1", "In2", "Out1" |
-    "0", "0", "1" |
-    "0", "1", "0" |
+    "In1", "In2", "Out1" &&
+    "0", "0", "1" &&
+    "0", "1", "0"
     etc.
 
 
@@ -32,7 +32,7 @@ def make_truth_table_from_text(gene_inputs_list, gene_outputs_list,truth_table_t
     truth_table = []
 
     #Parsing truth_table_text:
-    X = truth_table_text.split('\n')
+    X = truth_table_text.split('&&')
     logging.debug(X)
     
     
@@ -47,12 +47,13 @@ def make_truth_table_from_text(gene_inputs_list, gene_outputs_list,truth_table_t
                 if len(g) != 3:
                     raise Exception("Incorrect user formatting on truth table - gene names")
                 final_gene_name = g[1]
-                if finale_gene_name not in orig_gene_names:
+                if final_gene_name not in orig_gene_names:
                     raise Exception("Incorrect user input on gene name in truth table- doesn't match input/output gene names.")
                 else:
                     truth_table_row.append(final_gene_name)
     truth_table.append(truth_table_row)
 
+    X = X[1:]
     #Now we add the values (1 or 0)
     for l in X:
         truth_table_row = []

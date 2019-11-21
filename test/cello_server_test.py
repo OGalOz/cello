@@ -86,12 +86,16 @@ class celloTest(unittest.TestCase):
                 {'gene_name': 'Out1', 'truth_value': '0', 'row_number': '4'}
                 ]
 
+        truth_table_text =    ' "Test1", "Test2", "Out1" && "0", "0", "1" && "0", "1", "0"'
+
+
         ret = self.serviceImpl.run_cello(self.ctx, {
                                                     'workspace_name': self.wsName,
                                                     'parameter_1': 'Hello World!',
                                                     'gene_inputs' : gene_inputs,
                                                     'gene_outputs' : gene_outputs,
                                                     'truth_table_values': truth_table_values,
+                                                    'truth_table_text' : truth_table_text,
 
 
                                                              })
