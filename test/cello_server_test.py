@@ -72,20 +72,7 @@ class celloTest(unittest.TestCase):
         gene_output_1 = {"out_gene_name": "Out1", "out_DNA_sequence" : "TTAA" }
         gene_outputs = [gene_output_1]
 
-        truth_table_values = [{'gene_name': 'Test1', 'truth_value': '0', 'row_number': '1'}, 
-                {'gene_name': 'Test2', 'truth_value': '1', 'row_number': '1'}, 
-                {'gene_name': 'Out1', 'truth_value': '1', 'row_number': '1'},
-                {'gene_name': 'Test1', 'truth_value': '0', 'row_number': '2'},
-                {'gene_name': 'Test2', 'truth_value': '0', 'row_number': '2'},
-                {'gene_name': 'Out1', 'truth_value': '0', 'row_number': '2'},
-                {'gene_name': 'Test1', 'truth_value': '1', 'row_number': '3'},
-                {'gene_name': 'Test2', 'truth_value': '1', 'row_number': '3'},
-                {'gene_name': 'Out1', 'truth_value': '1', 'row_number': '3'},
-                {'gene_name': 'Test1', 'truth_value': '1', 'row_number': '4'}, 
-                {'gene_name': 'Test2', 'truth_value': '0', 'row_number': '4'}, 
-                {'gene_name': 'Out1', 'truth_value': '0', 'row_number': '4'}
-                ]
-
+       
         truth_table_text =    ' "Test1", "Test2", "Out1" && "0", "0", "1" && "0", "1", "0"'
 
 
@@ -94,8 +81,5 @@ class celloTest(unittest.TestCase):
                                                     'parameter_1': 'Hello World!',
                                                     'gene_inputs' : gene_inputs,
                                                     'gene_outputs' : gene_outputs,
-                                                    'truth_table_values': truth_table_values,
                                                     'truth_table_text' : truth_table_text,
-
-
                                                              })

@@ -87,11 +87,6 @@ class cello:
             #logging.debug(gene_outputs_list)
         else:
             raise Exception("Gene Outputs not supplied (not in params).")
-
-        if "truth_table_values" in params:
-            truth_table_values = params["truth_table_values"]
-        else:
-            raise Exception("Truth Table Values not supplied (not in params).")
         if "truth_table_text" in params:
             truth_table_text = params["truth_table_text"]
         else:
