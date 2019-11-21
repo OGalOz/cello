@@ -6,8 +6,10 @@ import logging
 from biokbase.workspace.client import Workspace
 from installed_clients.KBaseReportClient import KBaseReport
 from installed_clients.DataFileUtilClient import DataFileUtil
+from installed_clients.GenomeFileUtilClient import GenomeFileUtil
 from cello_util.file_maker import make_verilog_case_file_string, make_input_file_str, make_output_file_str
-from cello_util.truth_table import make_truth_table_from_values, make_truth_table_from_text
+from cello_util.truth_table import make_truth_table_from_text, make_truth_table_from_values
+from cello_util.prepare_upload import make_genbank_genome_dict
 
 
 #END_HEADER
@@ -62,6 +64,7 @@ class cello:
         ext_report_params = dict()
         ext_report_params["workspace_name"] = params['workspace_name']
 
+        logging.basicConfig(level=logging.DEBUG)
 
         #DEBUGGING
         logging.debug("PARAMS")
@@ -71,6 +74,8 @@ class cello:
             logging.debug(params[k])
 
         #CODE
+        
+        ws_name = params['workspace_name']
         if "gene_inputs" in params:
             gene_inputs_list = params["gene_inputs"]
             #logging.debug(gene_inputs_list)
@@ -109,10 +114,12 @@ class cello:
         
 
 
-        raise Exception("Stop running program for testing purposes.")
+        #raise Exception("Stop running program for testing purposes.")
 
 
-        #Actually running cello:
+        #Actually running cello--------------
+
+        #cello is downloaded by docker to this directory
         cello_dir = '/cello'
 
         #Creating directory to add verilog, input and output files to. We call it /cello/kb_run
@@ -168,7 +175,46 @@ class cello:
                 logging.critical("Unknown destination")
         os.chdir('/kb/module/')
 
-        logging.debug(os.listdir(kb_output_folder))
+        output_folder = os.listdir(kb_output_folder)[0]
+        output_files = os.listdir(os.path.join(kb_output_folder,output_folder))
+        logging.debug("CELLO OUTPUT FOLDER:")
+        logging.debug(output_files)
+
+        #Locating the '.ape' files. List ape_files will contain full paths to files.
+        # ape files are like genbank files.
+        ape_files = []
+        for out_f in output_files:
+            if out_f[-4:] == ".ape":
+                logging.info("Recognized .ape file: " + out_f)
+                ape_files.append(os.path.join(kb_output_folder, os.path.join(output_folder, out_f)))
+
+
+        logging.debug("APE FILES:")
+        logging.debug(ape_files)
+
+        #Uploading the ape files to KBase Genome File Object.
+        gfu = GenomeFileUtil(self.callback_url)
+        genome_ref_list = []
+        for ape_fp in ape_files:
+
+            #Placeholder genome name:
+            g_name = (ape_fp.split('/')[-1])[:-4]
+
+            #renaming file to genbank type:
+            gbk_file_name = ape_fp[:-4] + '.gbk'
+            shutil.copyfile(ape_fp, gbk_file_name)
+
+            # Making the parameters dict: (ws_name defined at top of function ^)
+            genb_gen_dict = make_genbank_genome_dict(gbk_file_name, g_name, ws_name)
+
+            # Calling genbank to genome function
+            result = gfu.genbank_to_genome(genb_gen_dict)
+    
+            genome_ref_list.append({'ref' : result["genome_ref"], 'description':'Genome created for file: ' + g_name + '.gbk'})
+            #DEBUG
+            logging.debug("Genbank to Genome Upload Results for: " + ape_fp)
+            logging.debug(result)
+        
 
         dfu = DataFileUtil(self.callback_url)
 
@@ -179,6 +225,7 @@ class cello:
         #'path': kb_output_folder
         dir_link = {'shock_id': file_zip_shock_id, 'name':'Cello_Output.zip', 'label':'cello_dir', 'description': 'The directory of outputs from cello'}
         ext_report_params['file_links'] = [dir_link]
+        ext_report_params['objects_created'] = genome_ref_list 
         report_info = report.create_extended_report(ext_report_params)
         output = {
             'report_name': report_info['name'],
