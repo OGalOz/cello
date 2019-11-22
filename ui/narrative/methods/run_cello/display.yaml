@@ -30,7 +30,7 @@ parameters :
         short-hint : |
             The name of the gene (e.g. pTac)
         long-hint : |
-            Please don't use spaces or special characters.
+            Don't use spaces or special characters.
     low_RPU :
         ui-name : | 
             low RPU
@@ -76,7 +76,9 @@ parameters :
         ui-name: |
             Output Name
         short-hint : |
-            The name of your output genomes and files (cannot contain spaces or special characters).
+            The name of your output genomes and output folder.
+        long-hint : |
+            Don't use spaces or special characters.
 parameter-groups : 
     gene_inputs :
         ui-name : |
@@ -89,18 +91,18 @@ parameter-groups :
         short-hint : |
             The output genes - (currently only 1 allowed)
 description : |
-    <p> 'Truth Table Input should look like the following- '</p>
+    <p> Truth Table Input should look like the following-</p>
 
-    <p> '"in1", "in2", "out1" &&' </p>
-    <p>  '"0",  "0",  "1" && ' </p>
-    <p>  '"0", "1", "0" && ' </p>
-    <p> '"1", "0", "0" && ' </p>
-    <p> '"1", "1", "1" ' </p>
+    <p> "in1", "in2", "out1" && </p>
+    <p>  "0",  "0",  "1" &&  </p>
+    <p> "0", "1", "0" &&  </p>
+    <p> "1", "0", "0" &&  </p>
+    <p> "1", "1", "1"  </p>
 
-    <p> 'The first row should contain names in quotations exactly the same as input and output names.' </p>
-    <p> 'Separate each row of the truth table with "&&".'</p>
+    <p> The first row should contain names in quotations exactly the same as input and output names. </p>
+    <p> Separate each row of the truth table with "&&".</p>
 
     <p></p>
-    <p> "Please don't use special characters in any of the input names. Only use A,C,T,G in the DNA sequence inputs." </p>
+    <p> Please don't use special characters in any of the input names. Only use A,C,T,G in the DNA sequence inputs. </p>
 
     
