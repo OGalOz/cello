@@ -63,6 +63,18 @@ parameters :
             Enter your truth table in the format in description
         long-hint : |
             First row is name of genes; Comma separated; Every value in double quotations. Like in the app description page.
+    kbase_genome_bool :
+        ui-name : |
+            Create KBase Genomes?
+        short-hint : |
+            Choose Yes if you want the program to make Genome Objects.
+        long-hint : |
+            We upload the output .ape file to KBase and make an annotated Genome Object.
+    output_name :
+        ui-name: |
+            Output Name
+        short-hint : |
+            The name of your output genomes and files (cannot contain spaces).
 parameter-groups : 
     gene_inputs :
         ui-name : |
@@ -76,12 +88,15 @@ parameter-groups :
             The output genes - (currently only 1 allowed)
 
 description : |
-    <p>Truth Table Input should look like </p>
+    <p> 'Truth Table Input should look like the following: '</p>
 
-    <p> '"in1", "in2", "out1" && \n
-        "0",  "0",  "1" && \n
-        "0", "1", "0" && \n
-        "1", "0", "0" && \n
-        "1", "1", "1"' </p>
+    <p> '"in1", "in2", "out1" &&' </p>
+    <p>  '"0",  "0",  "1" && ' </p>
+    <p>  '"0", "1", "0" && ' </p>
+    <p> '"1", "0", "0" && ' </p>
+    <p> '"1", "1", "1" ' </p>
+
+    <p> 'The first row should contain names in quotations exactly the same as input and output names.' </p>
+    <p> 'Separate each row of the truth table with "&&".'</p>
 
     

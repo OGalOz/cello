@@ -90,6 +90,7 @@
             "default_values": [""],
             "field_type": "text"
         },
+        ,
         {
             "id": "truth_table_text",
             "optional": false,
@@ -100,8 +101,33 @@
             "textarea_options" : {
                 "n_rows" : 10
             }
-        }
+        },
+        {
+            "id": "kbase_genome_bool",
+            "optional": false,
+            "advanced": false,
+            "allow_multiple": false,
+            "default_values": [""],
+            "field_type": "dropdown",
+            "dropdown_options":{
+                 "options": [{
+                     "value": "yes",
+                     "display": "Yes"
+                 }, {
+                     "value": "no",
+                     "display": "No"
+                 }]
+                }
 
+        },
+        {
+            "id": "output_name",
+            "optional": false,
+            "advanced": false,
+            "allow_multiple": false,
+            "default_values": [""],
+            "field_type": "text"
+        }
 
     ],
     "behavior": {
@@ -123,6 +149,10 @@
                 {
                     "input_parameter" : "gene_outputs",
                     "target_property": "gene_outputs"
+                },
+                {
+                    "input_parameter" : "output_name",
+                    "target_property" : "output_name"
                 },
                 {
                     "input_parameter" : "truth_table_text",
