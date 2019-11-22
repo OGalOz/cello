@@ -51,6 +51,8 @@ parameters :
             Output Name
         short-hint : |
             The name of the gene (e.g. YFP)
+        long-hint : |
+            Don't use spaces or special characters.
     out_DNA_sequence :
         ui-name : |
             DNA sequence
@@ -74,7 +76,7 @@ parameters :
         ui-name: |
             Output Name
         short-hint : |
-            The name of your output genomes and files (cannot contain spaces).
+            The name of your output genomes and files (cannot contain spaces or special characters).
 parameter-groups : 
     gene_inputs :
         ui-name : |
@@ -97,5 +99,8 @@ description : |
 
     <p> 'The first row should contain names in quotations exactly the same as input and output names.' </p>
     <p> 'Separate each row of the truth table with "&&".'</p>
+
+    <p></p>
+    <p> "Please don't use special characters in any of the input names. Only use A,C,T,G in the DNA sequence inputs." </p>
 
     

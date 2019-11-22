@@ -2,7 +2,7 @@
 #This file creates the necessary cello files from the inputs.
 
 #Functions to send to impl: make_verilog_case_file_string, make_input_file_str, make_output_file_str.
-
+import re
 
 
 
@@ -115,11 +115,14 @@ def make_input_file_str(inp_file_list):
     inp_file_str = ''
 
     for inp_dict in inp_file_list:
+        # We make sure the gene name doesn't contain weird characters:
+        gene_name = check_gene_name(inp_dict['inp_gene_name'])
+
         low_RPU = str(inp_dict['low_RPU'])
         high_RPU = str(inp_dict['high_RPU'])
         #We make the DNA sequence entirely uppercase
         DNA_Sequence = check_DNA_seq(inp_dict['inp_DNA_sequence'], True)
-        inp_file_str += inp_dict['inp_gene_name'] + ' ' + low_RPU + ' ' + high_RPU + ' ' + DNA_Sequence + '\n'
+        inp_file_str += gene_name + ' ' + low_RPU + ' ' + high_RPU + ' ' + DNA_Sequence + '\n'
 
     return inp_file_str
 
@@ -134,9 +137,11 @@ def make_output_file_str(output_file_list):
 
 
     for out_dict in output_file_list:
+        # We make sure the gene name doesn't contain weird characters:
+        gene_name = check_gene_name(out_dict['out_gene_name'])
         # We make the DNA sequence entirely upper case
         DNA_Sequence = check_DNA_seq(out_dict['out_DNA_sequence'], True)
-        output_file_str += out_dict['out_gene_name'] + ' ' + DNA_Sequence + '\n'
+        output_file_str += gene_name + ' ' + DNA_Sequence + '\n'
     
 
     return output_file_str
@@ -153,4 +158,14 @@ def check_DNA_seq(DNA_Sequence, upper_bool):
         return DNA_Sequence.upper()
     else:
         return DNA_Sequence
+
+
+def check_gene_name(gene_name):
+    
+    regex = re.compile('[@ !#$%^&*()<>?/\|}{~:]')
+    if regex.search(gene_name) == None:
+        return gene_name
+    else:
+        raise Exception("Gene Name Contains illegal characters: " + gene_name)
+
 
