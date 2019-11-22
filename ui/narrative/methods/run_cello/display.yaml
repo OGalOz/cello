@@ -70,7 +70,7 @@ parameters :
             Choose Yes if you want the program to make Genome Objects.
         long-hint : |
             We upload the output .ape file to KBase and make an annotated Genome Object.
-    output_name :
+    main_output_name :
         ui-name: |
             Output Name
         short-hint : |

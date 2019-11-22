@@ -9,7 +9,7 @@ from installed_clients.DataFileUtilClient import DataFileUtil
 from installed_clients.GenomeFileUtilClient import GenomeFileUtil
 from cello_util.file_maker import make_verilog_case_file_string, make_input_file_str, make_output_file_str
 from cello_util.truth_table import make_truth_table_from_text, make_truth_table_from_values
-from cello_util.prepare_upload import make_genbank_genome_dict
+from cello_util.upload import make_kbase_genomes
 
 
 #END_HEADER
@@ -73,7 +73,9 @@ class cello:
             logging.debug(k)
             logging.debug(params[k])
 
+
         #CODE
+        # Extracting Values from params
         
         ws_name = params['workspace_name']
         if "gene_inputs" in params:
@@ -81,7 +83,6 @@ class cello:
             #logging.debug(gene_inputs_list)
         else:
             raise Exception("Gene Inputs not supplied (not in params).")
-
         if "gene_outputs" in params:
             gene_outputs_list = params["gene_outputs"]
             #logging.debug(gene_outputs_list)
@@ -91,10 +92,26 @@ class cello:
             truth_table_text = params["truth_table_text"]
         else:
             raise Exception("Truth Table Text not supplied")
+        if "kbase_genome_bool" in params:
+            kb_str = params["kbase_genome_bool"]
+            if kb_str == "yes":
+                kb_genome_bool = True
+            elif kb_str == "no":
+                kb_genome_bool = False
+            else:
+                logging.critical("ERROR: Cannot recognize whether to create Genome Object.")
+                kb_genome_bool = False
+        if "main_output_name" in params:
+            main_output_name = params["main_output_name"]
+        else:
+            raise Exception("Output Name not supplied (not in params).")
 
-       
-        #truth_table = make_truth_table_from_values(gene_inputs_list, gene_outputs_list, truth_table_values)
+
+
+        #Creating truth table:
         truth_table = make_truth_table_from_text(gene_inputs_list, gene_outputs_list, truth_table_text)
+
+        #DEBUG
         logging.debug(truth_table)
 
 
@@ -175,40 +192,11 @@ class cello:
         logging.debug("CELLO OUTPUT FOLDER:")
         logging.debug(output_files)
 
-        #Locating the '.ape' files. List ape_files will contain full paths to files.
-        # ape files are like genbank files.
-        ape_files = []
-        for out_f in output_files:
-            if out_f[-4:] == ".ape":
-                logging.info("Recognized .ape file: " + out_f)
-                ape_files.append(os.path.join(kb_output_folder, os.path.join(output_folder, out_f)))
 
-
-        logging.debug("APE FILES:")
-        logging.debug(ape_files)
-
-        #Uploading the ape files to KBase Genome File Object.
-        gfu = GenomeFileUtil(self.callback_url)
-        genome_ref_list = []
-        for ape_fp in ape_files:
-
-            #Placeholder genome name:
-            g_name = (ape_fp.split('/')[-1])[:-4]
-
-            #renaming file to genbank type:
-            gbk_file_name = ape_fp[:-4] + '.gbk'
-            shutil.copyfile(ape_fp, gbk_file_name)
-
-            # Making the parameters dict: (ws_name defined at top of function ^)
-            genb_gen_dict = make_genbank_genome_dict(gbk_file_name, g_name, ws_name)
-
-            # Calling genbank to genome function
-            result = gfu.genbank_to_genome(genb_gen_dict)
-    
-            genome_ref_list.append({'ref' : result["genome_ref"], 'description':'Genome created for file: ' + g_name + '.gbk'})
-            #DEBUG
-            logging.debug("Genbank to Genome Upload Results for: " + ape_fp)
-            logging.debug(result)
+        if kb_genome_bool == True:
+            gfu = GenomeFileUtil(self.callback_url)
+            genome_ref_list = make_kbase_genomes(output_files, kb_output_folder, output_folder, gfu, ws_name, main_output_name)
+            ext_report_params['objects_created'] = genome_ref_list
         
 
         dfu = DataFileUtil(self.callback_url)
@@ -218,9 +206,8 @@ class cello:
 
         
         #'path': kb_output_folder
-        dir_link = {'shock_id': file_zip_shock_id, 'name':'Cello_Output.zip', 'label':'cello_dir', 'description': 'The directory of outputs from cello'}
+        dir_link = {'shock_id': file_zip_shock_id, 'name': main_output_name + '.zip', 'label':'cello_output_dir', 'description': 'The directory of outputs from cello'}
         ext_report_params['file_links'] = [dir_link]
-        ext_report_params['objects_created'] = genome_ref_list 
         report_info = report.create_extended_report(ext_report_params)
         output = {
             'report_name': report_info['name'],

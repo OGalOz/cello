@@ -120,7 +120,7 @@
 
         },
         {
-            "id": "output_name",
+            "id": "main_output_name",
             "optional": false,
             "advanced": false,
             "allow_multiple": false,
@@ -150,8 +150,12 @@
                     "target_property": "gene_outputs"
                 },
                 {
-                    "input_parameter" : "output_name",
-                    "target_property" : "output_name"
+                    "input_parameter" : "main_output_name",
+                    "target_property" : "main_output_name"
+                },
+                {
+                    "input_parameter" : "kbase_genome_bool",
+                    "target_property" : "kbase_genome_bool"
                 },
                 {
                     "input_parameter" : "truth_table_text",

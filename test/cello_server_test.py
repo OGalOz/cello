@@ -75,10 +75,14 @@ class celloTest(unittest.TestCase):
        
         truth_table_text =    ' "Test1", "Test2", "Out1" && "0", "0", "1" && "0", "1", "0"'
 
+        main_output_name = "Test_11_22_19"
+
+        kbase_genome_bool = "no"
 
         ret = self.serviceImpl.run_cello(self.ctx, {
                                                     'workspace_name': self.wsName,
-                                                    'parameter_1': 'Hello World!',
+                                                    'main_output_name': main_output_name,
+                                                    "kbase_genome_bool": kbase_genome_bool,
                                                     'gene_inputs' : gene_inputs,
                                                     'gene_outputs' : gene_outputs,
                                                     'truth_table_text' : truth_table_text,
