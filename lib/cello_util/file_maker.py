@@ -117,7 +117,8 @@ def make_input_file_str(inp_file_list):
     for inp_dict in inp_file_list:
         low_RPU = str(inp_dict['low_RPU'])
         high_RPU = str(inp_dict['high_RPU'])
-        inp_file_str += inp_dict['inp_gene_name'] + ' ' + low_RPU + ' ' + high_RPU + ' ' + inp_dict['inp_DNA_sequence'] + '\n'
+        DNA_Sequence = check_DNA_seq(inp_dict['inp_DNA_sequence'])
+        inp_file_str += inp_dict['inp_gene_name'] + ' ' + low_RPU + ' ' + high_RPU + ' ' + DNA_Sequence + '\n'
 
     return inp_file_str
 
@@ -130,9 +131,22 @@ def make_output_file_str(output_file_list):
 
     output_file_str = ''
 
+
     for out_dict in output_file_list:
-        output_file_str += out_dict['out_gene_name'] + ' ' + out_dict["out_DNA_sequence"] + '\n'
+
+        DNA_Sequence = check_DNA_seq(out_dict['out_DNA_sequence'])
+        output_file_str += out_dict['out_gene_name'] + ' ' + DNA_Sequence + '\n'
     
 
     return output_file_str
+
+# Could add conversion to uppercase
+def check_DNA_seq(DNA_Sequence):
+    if not isinstance(DNA_Sequence, str):
+        raise Exception("Inputted DNA sequence not 'string'.")
+
+    for i in range(len(DNA_Sequence)):
+        if DNA_Sequence[i] not in ["A","C","T","G", "a","c","t","g"]:
+            raise Exception("DNA Sequence for input must only contain A, C, T, or G. Instead it contains: " + DNA_Sequence[i])
+    return DNA_Sequence.upper()
 
