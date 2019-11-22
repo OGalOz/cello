@@ -90,7 +90,6 @@
             "default_values": [""],
             "field_type": "text"
         },
-        ,
         {
             "id": "truth_table_text",
             "optional": false,
