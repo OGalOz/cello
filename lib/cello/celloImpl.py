@@ -3,6 +3,7 @@
 import os
 import shutil
 import logging
+import re
 from biokbase.workspace.client import Workspace
 from installed_clients.KBaseReportClient import KBaseReport
 from installed_clients.DataFileUtilClient import DataFileUtil
@@ -103,6 +104,9 @@ class cello:
                 kb_genome_bool = False
         if "main_output_name" in params:
             main_output_name = params["main_output_name"]
+            regex = re.compile('[@ !#$%^&*()<>?/\|}{~:]')
+            if regex.search(main_output_name) != None:
+                raise Exception("Output name contains illegal characters.")
         else:
             raise Exception("Output Name not supplied (not in params).")
 
