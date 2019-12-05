@@ -48,6 +48,17 @@ parameters :
             high RPU
         short-hint : |
             The high RPU value (e.g. 2.8)
+    custom_low_RPU :
+        ui-name : | 
+            low RPU
+        short-hint : |
+            The low RPU value (e.g. 0.0034)
+    custom_high_RPU : 
+        ui-name : |
+            high RPU
+        short-hint : |
+            The high RPU value (e.g. 2.8)
+
     inp_DNA_sequence : 
         ui-name : |
             DNA sequence
