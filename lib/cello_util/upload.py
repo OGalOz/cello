@@ -34,7 +34,7 @@ def make_kbase_genomes(output_files, kb_output_folder, output_folder, gfu, ws_na
             #Replace "label" in .ape file with "locus_tag"
 
             for ap_f in ape_files:
-               response = replace_label_with_gene(ap_f)
+               response = replace_label_with_locus_tag(ap_f)
                if response != 0:
                    logging.critical("Issue with replacing 'label' with 'locus_tag'. Could be that no 'label's exist.")
 

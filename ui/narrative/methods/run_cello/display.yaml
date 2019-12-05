@@ -94,9 +94,9 @@ parameters :
             First row is name of genes; Comma separated; Every value in double quotations. Like in the app description page.
     kbase_genome_bool :
         ui-name : |
-            Create KBase Genomes?
+            Create Plasmid (Genome Object)?
         short-hint : |
-            Choose Yes if you want the program to make Genome Objects.
+            Choose Yes if you want the program to make A KBase Genome as a Plasmid.
         long-hint : |
             We upload the output .ape file to KBase and make an annotated Genome Object.
     main_output_name :
