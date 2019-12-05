@@ -4,7 +4,7 @@
     "authors": [
         "omreegaloz"
     ],
-    "contact": "",
+    "contact": "ogaloz@lbl.gov",
     "categories": ["active"],
     "widgets": {
         "input": null,
@@ -71,40 +71,29 @@
             "dropdown_options": {
                 "options": [ 
                     {
-                        "id" : "pTac",
                         "value" : "pTac",
-                        "display" : "pTac",
-                        "ui_name" : "pTac" 
+                        "display" : "pTac"
                     },
                     {
-                        "id" : "pTet",
                         "value" : "pTet",
-                        "display" : "pTet",
-                        "ui_name" : "pTet" 
+                        "display" : "pTet"
                     },
                     {
-                        "id" : "pBAD",
                         "value" : "pBAD",
-                        "display" : "pBAD",
-                        "ui_name" : "pBAD" 
+                        "display" : "pBAD"
                     },
                     {
-                        "id" : "pLuxStar",
                         "value" : "pLuxStar",
-                        "display" : "pLuxStar",
-                        "ui_name" : "pLuxStar" 
+                        "display" : "pLuxStar"
                     },
                     {
                         "id" : "pPhIF",
                         "value" : "pPhIF",
-                        "display" : "pPhIF",
-                        "ui_name" : "pPhIF" 
+                        "display" : "pPhIF"
                     },
                     {
-                        "id" : "pCymRC",
                         "value" : "pCymRC",
-                        "display" : "pCymRC",
-                        "ui_name" : "pCymRC" 
+                        "display" : "pCymRC"
                     }
                 ]
 
