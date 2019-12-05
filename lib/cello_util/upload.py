@@ -8,7 +8,9 @@ def make_genbank_genome_dict(filepath, genome_name, workspace_name):
     gb_dict = dict()
     gb_dict['file'] = {'path': filepath}
     gb_dict['genome_name'] = genome_name
+    gb_dict['genome_type'] = "plasmid"
     gb_dict['workspace_name'] = workspace_name
+    gb_dict['source'] = "Cello Output"
 
     return gb_dict
 
@@ -28,6 +30,15 @@ def make_kbase_genomes(output_files, kb_output_folder, output_folder, gfu, ws_na
 
             logging.debug("APE FILES:")
             logging.debug(ape_files)
+
+            #Replace "label" in .ape file with "locus_tag"
+
+            for ap_f in ape_files:
+               response = replace_label_with_locus_tag(ap_f)
+               if response != 0:
+                   logging.critical("Issue with replacing 'label' with 'locus_tag'. Could be that no 'label's exist.")
+
+
 
 
             #Uploading the ape files to KBase Genome File Object.
@@ -63,3 +74,29 @@ def make_kbase_genomes(output_files, kb_output_folder, output_folder, gfu, ws_na
 
 
             return genome_ref_list
+
+
+# We replace the feature value "label" with "locus_tag" so KBase can recognize the name
+# of the object
+def replace_label_with_locus_tag(filename):
+
+    return_val = 0
+    f = open(filename, "r")
+    f_str = f.read()
+    f.close()
+    if "/label" not in f_str:
+        return_val = 1
+    new_f_str = f_str.replace('/label=','/locus_tag=')
+    #Overwriting old file with new_file
+    g = open(filename, "w")
+    g.write(new_f_str)
+    g.close()
+
+    return return_val
+
+
+
+
+    
+
+

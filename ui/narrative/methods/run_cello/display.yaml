@@ -24,7 +24,14 @@ suggestions:
 # Configure the display and description of parameters
 #
 parameters :
-    inp_gene_name :
+    inp_promoter_name :
+        ui-name : |
+            Input Name
+        short-hint : |
+            The name of the gene (e.g. pTac)
+        long-hint : |
+            Don't use spaces or special characters.
+    custom_inp_promoter_name :
         ui-name : |
             Input Name
         short-hint : |
@@ -45,7 +52,13 @@ parameters :
         ui-name : |
             DNA sequence
         short-hint : |
-            The DNA sequence of the gene (e.g. AACGATCGTT...)
+            Choose from a list of DNA sequences of the promoters (e.g. AACGATCGTT...)
+    custom_inp_DNA_sequence : 
+        ui-name : |
+            Custom DNA sequence
+        short-hint : |
+            Give the DNA sequence of the promoters (e.g. AACGATCGTT...)
+
     out_gene_name : 
         ui-name : |
             Output Name
@@ -53,9 +66,19 @@ parameters :
             The name of the gene (e.g. YFP)
         long-hint : |
             Don't use spaces or special characters.
+    custom_out_gene_name :
+        ui-name : |
+            Custom Output Gene Name
+        short-hint : |
+            The name of your output gene.
     out_DNA_sequence :
         ui-name : |
             DNA sequence
+        short-hint : |
+            The DNA sequence of the gene (e.g. AACGATCGTT...)
+    custom_out_DNA_sequence :
+        ui-name : |
+            Custom DNA sequence
         short-hint : |
             The DNA sequence of the gene (e.g. AACGATCGTT...)
     truth_table_text :
@@ -80,16 +103,27 @@ parameters :
         long-hint : |
             Don't use spaces or special characters.
 parameter-groups : 
-    gene_inputs :
+    promoter_inputs :
         ui-name : |
-            Input Genes
+            Input Promoters
         short-hint : |
-            The input genes (up to 3)
+            Choose an Input Promoter from a given list.
+    custom_promoter_input :
+        ui-name : |
+            Custom Input Promoters
+        short-hint : |
+            Give your own input promoter
     gene_outputs : 
         ui-name : |
             Output Genes
         short-hint : |
-            The output genes - (currently only 1 allowed)
+            The output genes - (currently only 1 allowed).
+    custom_gene_output :
+        ui-name : |
+            Custom Output Gene
+        short-hint : |
+            An output gene - (currently only 1 allowed).
+
 description : |
     <p> Truth Table Input should look like the following-</p>
 

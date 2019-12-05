@@ -11,7 +11,7 @@ def make_truth_table_from_text(gene_inputs_list, gene_outputs_list,truth_table_t
 
     orig_gene_names = []
     for gene_dict in gene_inputs_list:
-        orig_gene_names.append(gene_dict['inp_gene_name'])
+        orig_gene_names.append(gene_dict['inp_promoter_name'])
     for gene_dict in gene_outputs_list:
         orig_gene_names.append(gene_dict['out_gene_name'])
 
@@ -96,7 +96,7 @@ def make_truth_table_from_values(gene_inputs_list, gene_outputs_list, truth_tabl
     #We reserve all gene names to make sure the truth table values accurately list existing genes.
     all_gene_names = []
     for gene_dict in gene_inputs_list:
-        all_gene_names.append(gene_dict['inp_gene_name'])
+        all_gene_names.append(gene_dict['inp_promoter_name'])
     for gene_dict in gene_outputs_list:
         all_gene_names.append(gene_dict['out_gene_name'])
 
@@ -105,8 +105,8 @@ def make_truth_table_from_values(gene_inputs_list, gene_outputs_list, truth_tabl
         tt_dict[gene_name] = num_rows * ['']
 
     for tt_val in truth_table_values:
-        if tt_val['gene_name'] in tt_dict:
-            tt_dict[tt_val['gene_name']][int(tt_val['row_number'])-1] = tt_val['truth_value']
+        if tt_val['inp_promoter_name'] in tt_dict:
+            tt_dict[tt_val['inp_promoter_name']][int(tt_val['row_number'])-1] = tt_val['truth_value']
         else:
             raise Exception("Gene name not inputs or output genes, cannot continue")
     
@@ -125,8 +125,8 @@ def make_truth_table_from_values(gene_inputs_list, gene_outputs_list, truth_tabl
 
     inp_genes = [[].copy() for i in range(num_rows + 1) ]
     for gene_dict in gene_inputs_list:
-        inp_genes[0].append(gene_dict['inp_gene_name'])
-        inp_genes_column = tt_dict[gene_dict['inp_gene_name']]
+        inp_genes[0].append(gene_dict['inp_promoter_name'])
+        inp_genes_column = tt_dict[gene_dict['inp_promoter_name']]
         for i in range(len(inp_genes_column)):
             inp_genes[i+1].append(inp_genes_column[i])
     logging.debug(inp_genes)

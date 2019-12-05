@@ -79,16 +79,22 @@ class cello:
         # Extracting Values from params
         
         ws_name = params['workspace_name']
-        if "gene_inputs" in params:
-            gene_inputs_list = params["gene_inputs"]
-            #logging.debug(gene_inputs_list)
+        if "promoter_inputs" in params or "custom_promoter_inputs" in params:
+            if "promoter_inputs" in params:
+                gene_inputs_list = params["promoter_inputs"]
+                #logging.debug(gene_inputs_list)
+            if "custom_promoter_inputs" in params:
+                custom_promoter_inputs_list = params["custom_promoter_inputs"] 
         else:
-            raise Exception("Gene Inputs not supplied (not in params).")
-        if "gene_outputs" in params:
-            gene_outputs_list = params["gene_outputs"]
-            #logging.debug(gene_outputs_list)
+            raise Exception("Input Promoters not supplied (not in params).")
+        if "gene_outputs" in params or "custom_gene_outputs" in params:
+            if "gene_outputs" in params:
+                gene_outputs_list = params["gene_outputs"]
+                #logging.debug(gene_outputs_list)
+            if "custom_gene_outputs" in params:
+                custom_gene_outputs_list = params["custom_gene_outputs"]
         else:
-            raise Exception("Gene Outputs not supplied (not in params).")
+            raise Exception("No gene outputs supplied (in params).")
         if "truth_table_text" in params:
             truth_table_text = params["truth_table_text"]
         else:

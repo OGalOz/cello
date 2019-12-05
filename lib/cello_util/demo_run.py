@@ -1,5 +1,7 @@
 #python
 
+#This file stores the original code to run the demo.
+
 
 def demo_run():
         #Just running the cello_demo eventually replace cello_demo with cello_kb, and demo with test.

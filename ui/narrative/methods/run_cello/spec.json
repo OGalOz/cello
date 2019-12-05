@@ -1,4 +1,5 @@
 {
+
     "ver": "0.0.1",
     "authors": [
         "omreegaloz"
@@ -11,15 +12,28 @@
     },
     "parameter-groups" : [
         {
-            "id": "gene_inputs",
+            "id": "promoter_inputs",
             "parameters": [
-                "inp_gene_name",
+                "inp_promoter_name",
                 "low_RPU",
                 "high_RPU",
                 "inp_DNA_sequence"
             ],
-            "optional":false,
+            "optional":true,
             "advanced": false,
+            "allow_multiple": true,
+            "with_border": true
+        },
+        {
+            "id": "custom_promoter_input",
+            "parameters": [
+                "custom_inp_promoter_name",
+                "low_RPU",
+                "high_RPU",
+                "custom_inp_DNA_sequence"
+            ],
+            "optional": true,
+            "advanced": true,
             "allow_multiple": true,
             "with_border": true
         },
@@ -29,15 +43,76 @@
                 "out_gene_name",
                 "out_DNA_sequence"
             ],
-            "optional":false,
+            "optional":true,
             "advanced": false,
             "allow_multiple": true,
             "with_border": true
-        }    
+        },
+        {
+            "id": "custom_gene_output",
+            "parameters": [
+                "custom_out_gene_name",
+                "custom_out_DNA_sequence"
+            ],
+            "optional":true,
+            "advanced": true,
+            "allow_multiple": true,
+            "with_border": true
+        }
     ],
     "parameters": [ 
                 {
-            "id": "inp_gene_name",
+            "id": "inp_promoter_name",
+            "optional": false,
+            "advanced": false,
+            "allow_multiple": false,
+            "default_values": [""],
+            "field_type": "dropdown",
+            "dropdown_options": {
+                "options": [ 
+                    {
+                        "id" : "pTac",
+                        "value" : "pTac",
+                        "display" : "pTac",
+                        "ui_name" : "pTac" 
+                    },
+                    {
+                        "id" : "pTet",
+                        "value" : "pTet",
+                        "display" : "pTet",
+                        "ui_name" : "pTet" 
+                    },
+                    {
+                        "id" : "pBAD",
+                        "value" : "pBAD",
+                        "display" : "pBAD",
+                        "ui_name" : "pBAD" 
+                    },
+                    {
+                        "id" : "pLuxStar",
+                        "value" : "pLuxStar",
+                        "display" : "pLuxStar",
+                        "ui_name" : "pLuxStar" 
+                    },
+                    {
+                        "id" : "pPhIF",
+                        "value" : "pPhIF",
+                        "display" : "pPhIF",
+                        "ui_name" : "pPhIF" 
+                    },
+                    {
+                        "id" : "pCymRC",
+                        "value" : "pCymRC",
+                        "display" : "pCymRC",
+                        "ui_name" : "pCymRC" 
+                    }
+                ]
+
+            }
+
+        },
+        {
+            "id": "custom_inp_promoter_name",
             "optional": false,
             "advanced": false,
             "allow_multiple": false,
@@ -52,7 +127,7 @@
             "optional": false,
             "advanced": false,
             "allow_multiple": false,
-            "default_values": [""],
+            "default_values": ["0.005"],
             "field_type": "text"
         },
         {
@@ -63,11 +138,19 @@
             "optional": false,
             "advanced": false,
             "allow_multiple": false,
-            "default_values": [""],
+            "default_values": ["2.5"],
             "field_type": "text"
         },
         {
             "id": "inp_DNA_sequence",
+            "optional": false,
+            "advanced": false,
+            "allow_multiple": false,
+            "default_values": [""],
+            "field_type": "text"
+        },
+        {
+            "id": "custom_inp_DNA_sequence",
             "optional": false,
             "advanced": false,
             "allow_multiple": false,
@@ -83,12 +166,31 @@
             "field_type": "text"
         },
         {
+            "id": "custom_out_gene_name",
+            "optional": false,
+            "advanced": false,
+            "allow_multiple": false,
+            "default_values": [""],
+            "field_type": "text"
+        },
+        {
             "id": "out_DNA_sequence",
             "optional": false,
             "advanced": false,
             "allow_multiple": false,
             "default_values": [""],
             "field_type": "text"
+        },
+        {
+            "id": "custom_out_DNA_sequence",
+            "optional": false,
+            "advanced": false,
+            "allow_multiple": false,
+            "default_values": [""],
+            "field_type": "text"
+ 
+
+
         },
         {
             "id": "truth_table_text",
@@ -143,12 +245,20 @@
                     "narrative_system_variable": "workspace_id",
                     "target_property": "workspace_id"
                 },{
-                    "input_parameter": "gene_inputs",
-                    "target_property": "gene_inputs"
+                    "input_parameter": "promoter_inputs",
+                    "target_property": "promoter_inputs"
+                },
+                {
+                    "input_parameter": "custom_promoter_input",
+                    "target_property": "custom_promoter_input"
                 },
                 {
                     "input_parameter" : "gene_outputs",
                     "target_property": "gene_outputs"
+                },
+                {
+                    "input_parameter" : "custom_gene_output",
+                    "target_property" : "custom_gene_output"
                 },
                 {
                     "input_parameter" : "main_output_name",

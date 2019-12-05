@@ -64,8 +64,8 @@ class celloTest(unittest.TestCase):
         # Check returned data with
         # self.assertEqual(ret[...], ...) or other unittest methods
 
-        gene_input_1 = {"inp_gene_name": "Test1", "low_RPU" : "0.1", "high_RPU": "3.0", "inp_DNA_sequence": "AACT"}
-        gene_input_2 = {"inp_gene_name": "Test2", "low_RPU" : "0.02", "high_RPU": "2.0", "inp_DNA_sequence": "GGCC" }
+        gene_input_1 = {"inp_promoter_name": "Test1", "low_RPU" : "0.1", "high_RPU": "3.0", "inp_DNA_sequence": "AACT"}
+        gene_input_2 = {"inp_promoter_name": "Test2", "low_RPU" : "0.02", "high_RPU": "2.0", "inp_DNA_sequence": "GGCC" }
 
         gene_inputs = [gene_input_1, gene_input_2]
 
@@ -75,7 +75,7 @@ class celloTest(unittest.TestCase):
        
         truth_table_text =    ' "Test1", "Test2", "Out1" && "0", "0", "1" && "0", "1", "0"'
 
-        main_output_name = "Test_11_22_19"
+        main_output_name = "Test_12_05_19"
 
         kbase_genome_bool = "no"
 
@@ -83,7 +83,7 @@ class celloTest(unittest.TestCase):
                                                     'workspace_name': self.wsName,
                                                     'main_output_name': main_output_name,
                                                     "kbase_genome_bool": kbase_genome_bool,
-                                                    'gene_inputs' : gene_inputs,
+                                                    'promoter_inputs' : gene_inputs,
                                                     'gene_outputs' : gene_outputs,
                                                     'truth_table_text' : truth_table_text,
                                                              })

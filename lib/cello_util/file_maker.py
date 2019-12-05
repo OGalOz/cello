@@ -116,7 +116,7 @@ def make_input_file_str(inp_file_list):
 
     for inp_dict in inp_file_list:
         # We make sure the gene name doesn't contain weird characters:
-        gene_name = check_gene_name(inp_dict['inp_gene_name'])
+        gene_name = check_gene_name(inp_dict['inp_promoter_name'])
 
         low_RPU = str(inp_dict['low_RPU'])
         high_RPU = str(inp_dict['high_RPU'])
