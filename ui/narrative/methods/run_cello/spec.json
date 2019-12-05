@@ -16,8 +16,7 @@
             "parameters": [
                 "inp_promoter_name",
                 "low_RPU",
-                "high_RPU",
-                "inp_DNA_sequence"
+                "high_RPU"
             ],
             "optional":true,
             "advanced": false,
@@ -149,15 +148,6 @@
             "advanced": false,
             "allow_multiple": false,
             "default_values": ["2.5"],
-            "field_type": "text"
-        },
-
-        {
-            "id": "inp_DNA_sequence",
-            "optional": false,
-            "advanced": false,
-            "allow_multiple": false,
-            "default_values": [""],
             "field_type": "text"
         },
         {

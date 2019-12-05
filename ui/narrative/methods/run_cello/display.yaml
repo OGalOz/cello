@@ -58,12 +58,6 @@ parameters :
             high RPU
         short-hint : |
             The high RPU value (e.g. 2.8)
-
-    inp_DNA_sequence : 
-        ui-name : |
-            DNA sequence
-        short-hint : |
-            Choose from a list of DNA sequences of the promoters (e.g. AACGATCGTT...)
     custom_inp_DNA_sequence : 
         ui-name : |
             Custom DNA sequence
