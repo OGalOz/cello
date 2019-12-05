@@ -58,7 +58,6 @@ parameters :
             Custom DNA sequence
         short-hint : |
             Give the DNA sequence of the promoters (e.g. AACGATCGTT...)
-
     out_gene_name : 
         ui-name : |
             Output Name
