@@ -28,8 +28,8 @@
             "id": "custom_promoter_input",
             "parameters": [
                 "custom_inp_promoter_name",
-                "low_RPU",
-                "high_RPU",
+                "custom_low_RPU",
+                "custom_high_RPU",
                 "custom_inp_DNA_sequence"
             ],
             "optional": true,
@@ -119,6 +119,17 @@
             "field_type": "text"
         },
         {
+            "id": "custom_low_RPU",
+            "text_options" : {
+                "validate_as" : "float"
+            },
+            "optional": false,
+            "advanced": false,
+            "allow_multiple": false,
+            "default_values": ["0.005"],
+            "field_type": "text"
+        },
+        {
             "id": "high_RPU",
             "text_options" : {
                 "validate_as" : "float"
@@ -129,6 +140,18 @@
             "default_values": ["2.5"],
             "field_type": "text"
         },
+        {
+            "id": "custom_high_RPU",
+            "text_options" : {
+                "validate_as" : "float"
+            },
+            "optional": false,
+            "advanced": false,
+            "allow_multiple": false,
+            "default_values": ["2.5"],
+            "field_type": "text"
+        },
+
         {
             "id": "inp_DNA_sequence",
             "optional": false,
