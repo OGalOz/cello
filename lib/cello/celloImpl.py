@@ -80,19 +80,49 @@ class cello:
         
         ws_name = params['workspace_name']
         if "promoter_inputs" in params or "custom_promoter_inputs" in params:
+            gene_inputs_list = []
             if "promoter_inputs" in params:
-                gene_inputs_list = params["promoter_inputs"]
-                #logging.debug(gene_inputs_list)
+                gene_inputs_sub_list = params["promoter_inputs"]
+                for item in gene_inputs_sub_list:
+                    if isinstance(item, dict):
+                        item["custom_var"] = False
+                        gene_inputs_list.append(item)
+                    else:
+                        raise Exception("Expected template item to be dict, but instead it is " + str(type(item)))
             if "custom_promoter_inputs" in params:
-                custom_promoter_inputs_list = params["custom_promoter_inputs"] 
+                custom_promoter_inputs_list = params["custom_promoter_inputs"]
+                for item in custom_promoter_inputs_list:
+                    if isinstance(item, dict):
+                        item["custom_var"] = True
+                        item["low_RPU"] = item["custom_low_RPU"]
+                        item["high_RPU"] = item["custom_high_RPU"]
+                        gene_inputs_list.append(item)
+                    else:
+                        raise Exception("Expected custom item to be dict, but instead it is " + str(type(item)))
         else:
             raise Exception("Input Promoters not supplied (not in params).")
+
         if "gene_outputs" in params or "custom_gene_outputs" in params:
+            gene_outputs_list = []
             if "gene_outputs" in params:
-                gene_outputs_list = params["gene_outputs"]
+                gene_outputs_sub_list = params["gene_outputs"]
+                for gene_dict in gene_outputs_sub_list:
+                    if isinstance(gene_dict, dict):
+                        gene_dict["custom_var"] = False
+                        gene_outputs_list.append(gene_dict)
+                    else:
+                        raise Exception("Expected template gene output to be dict, but instead it is " + str(type(gene_dict)))
                 #logging.debug(gene_outputs_list)
             if "custom_gene_outputs" in params:
                 custom_gene_outputs_list = params["custom_gene_outputs"]
+                for gene_dict in custom_gene_outputs_list:
+                    if isinstance(gene_dict, dict):
+                        gene_dict["custom_var"] = True
+                        gene_dict["out_gene_name"] = gene_dict["custom_out_gene_name"] 
+                        gene_dict["out_DNA_sequence"] = gene_dict["custom_out_DNA_sequence"]
+                        gene_outputs_list.append(gene_dict)
+                    else:
+                        raise Exception("Expected custom gene output to be dict, but instead it is " + str(type(gene_dict)))
         else:
             raise Exception("No gene outputs supplied (in params).")
         if "truth_table_text" in params:

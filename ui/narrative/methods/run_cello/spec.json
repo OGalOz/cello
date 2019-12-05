@@ -39,8 +39,7 @@
         {
             "id": "gene_outputs",
             "parameters": [
-                "out_gene_name",
-                "out_DNA_sequence"
+                "out_gene_name"
             ],
             "optional":true,
             "advanced": false,
@@ -86,8 +85,8 @@
                         "display" : "pLuxStar"
                     },
                     {
-                        "value" : "pPhIF",
-                        "display" : "pPhIF"
+                        "value" : "pPhlF",
+                        "display" : "pPhlF"
                     },
                     {
                         "value" : "pCymRC",
@@ -164,18 +163,45 @@
             "advanced": false,
             "allow_multiple": false,
             "default_values": [""],
-            "field_type": "text"
+            "field_type": "dropdown",
+            "dropdown_options": {
+                "options": [ 
+                    {
+                        "value" : "YFP",
+                        "display" : "YFP"
+                    },
+                    {
+                        "value" : "RFP",
+                        "display" : "RFP"
+                    },
+                    {
+                        "value" : "BFP",
+                        "display" : "BFP"
+                    },
+                    {
+                        "value" : "sigmaT3",
+                        "display" : "sigmaT3"
+                    },
+                    {
+                        "value" : "sigmaK1FR",
+                        "display" : "sigmaK1FR"
+                    },
+                    {
+                        "value" : "sigmaCGG",
+                        "display" : "sigmaCGG"
+                    },
+                    {
+                        "value" : "sigmaT7",
+                        "display" : "sigmaT7"
+                    }
+
+                ]
+
+            }
+
         },
         {
             "id": "custom_out_gene_name",
-            "optional": false,
-            "advanced": false,
-            "allow_multiple": false,
-            "default_values": [""],
-            "field_type": "text"
-        },
-        {
-            "id": "out_DNA_sequence",
             "optional": false,
             "advanced": false,
             "allow_multiple": false,
@@ -189,9 +215,6 @@
             "allow_multiple": false,
             "default_values": [""],
             "field_type": "text"
- 
-
-
         },
         {
             "id": "truth_table_text",

@@ -64,16 +64,16 @@ class celloTest(unittest.TestCase):
         # Check returned data with
         # self.assertEqual(ret[...], ...) or other unittest methods
 
-        gene_input_1 = {"inp_promoter_name": "Test1", "low_RPU" : "0.1", "high_RPU": "3.0", "inp_DNA_sequence": "AACT"}
-        gene_input_2 = {"inp_promoter_name": "Test2", "low_RPU" : "0.02", "high_RPU": "2.0", "inp_DNA_sequence": "GGCC" }
+        gene_input_1 = {"inp_promoter_name": "pTac", "low_RPU" : "0.1", "high_RPU": "3.0"}
+        gene_input_2 = {"inp_promoter_name": "pTet", "low_RPU" : "0.02", "high_RPU": "2.0"}
 
         gene_inputs = [gene_input_1, gene_input_2]
 
-        gene_output_1 = {"out_gene_name": "Out1", "out_DNA_sequence" : "TTAA" }
+        gene_output_1 = {"out_gene_name": "YFP"}
         gene_outputs = [gene_output_1]
 
        
-        truth_table_text =    ' "Test1", "Test2", "Out1" && "0", "0", "1" && "0", "1", "0"'
+        truth_table_text =    ' "pTac", "pTet", "YFP" && "0", "0", "1" && "0", "1", "0"'
 
         main_output_name = "Test_12_05_19"
 
