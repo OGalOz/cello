@@ -39,7 +39,7 @@ def make_kbase_genomes(output_files, kb_output_folder, output_folder, gfu, ws_na
             logging.debug(ape_files)
 
             if len(ape_files) == 0:
-                logging.critical("NO .APE FILES FOUND - CANNOT MAKE PLASMID")
+                logging.critical("NO .APE FILES FOUND - CANNOT MAKE PLASMID - ONLY RETURNING OUTPUT FOLDER.")
 
             #Replace "label" in .ape file with "locus_tag"
 
