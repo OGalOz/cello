@@ -32,7 +32,7 @@
                 "custom_inp_DNA_sequence"
             ],
             "optional": true,
-            "advanced": true,
+            "advanced": false,
             "allow_multiple": true,
             "with_border": true
         },
@@ -53,7 +53,7 @@
                 "custom_out_DNA_sequence"
             ],
             "optional":true,
-            "advanced": true,
+            "advanced": false,
             "allow_multiple": true,
             "with_border": true
         }
@@ -100,7 +100,7 @@
         {
             "id": "custom_inp_promoter_name",
             "optional": true,
-            "advanced": true,
+            "advanced": false,
             "allow_multiple": false,
             "default_values": [""],
             "field_type": "text"
@@ -122,7 +122,7 @@
                 "validate_as" : "float"
             },
             "optional": true,
-            "advanced": true,
+            "advanced": false,
             "allow_multiple": false,
             "default_values": ["0.005"],
             "field_type": "text"
@@ -144,7 +144,7 @@
                 "validate_as" : "float"
             },
             "optional": true,
-            "advanced": true,
+            "advanced": false,
             "allow_multiple": false,
             "default_values": ["2.5"],
             "field_type": "text"
@@ -152,7 +152,7 @@
         {
             "id": "custom_inp_DNA_sequence",
             "optional": true,
-            "advanced": true,
+            "advanced": false,
             "allow_multiple": false,
             "default_values": [""],
             "field_type": "text"
@@ -203,7 +203,7 @@
         {
             "id": "custom_out_gene_name",
             "optional": true,
-            "advanced": true,
+            "advanced": false,
             "allow_multiple": false,
             "default_values": [""],
             "field_type": "text"
@@ -211,7 +211,7 @@
         {
             "id": "custom_out_DNA_sequence",
             "optional": true,
-            "advanced": true,
+            "advanced": false,
             "allow_multiple": false,
             "default_values": [""],
             "field_type": "text"

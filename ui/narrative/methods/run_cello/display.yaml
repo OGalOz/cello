@@ -50,12 +50,12 @@ parameters :
             The high RPU value (e.g. 2.8)
     custom_low_RPU :
         ui-name : | 
-            low RPU
+            Low RPU
         short-hint : |
             The low RPU value (for custom inputs) 
     custom_high_RPU : 
         ui-name : |
-            high RPU
+            High RPU
         short-hint : |
             The high RPU value (for custom inputs)
     custom_inp_DNA_sequence : 
@@ -127,7 +127,6 @@ parameter-groups :
             Custom Output Gene
         short-hint : |
             An output gene - (currently only 1 allowed).
-
 description : |
     <h1> CIDAR Lab's Cello - cellocad.org </h1>
     <p> Truth Table Input should look like the following-</p>
