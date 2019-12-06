@@ -20,16 +20,26 @@ def make_genbank_genome_dict(filepath, genome_name, workspace_name):
 def make_kbase_genomes(output_files, kb_output_folder, output_folder, gfu, ws_name, main_output_name):
             #Locating the '.ape' files. List ape_files will contain full paths to files.
             # ape files are like genbank files.
-            ape_files = []
+            plasmid_ape_files = []
+            output_ape_files = []
             for out_f in output_files:
                 if out_f[-4:] == ".ape":
                     if "plasmid_circuit" in out_f:
-                        logging.info("Recognized .ape file: " + out_f)
-                        ape_files.append(os.path.join(kb_output_folder, os.path.join(output_folder, out_f)))
+                        logging.info("Recognized plasmid_circuit .ape file: " + out_f)
+                        plasmid_ape_files.append(os.path.join(kb_output_folder, os.path.join(output_folder, out_f)))
+                    else:
+                        logging.info("Other .ape file: " + out_f)
+                        output_ape_files.append(out_f)
+            if len(plasmid_ape_files) == 0:
+                ape_files = output_ape_files
+            else:
+                ape_files = plasmid_ape_files
 
-
-            logging.debug("APE FILES:")
+            logging.debug("PARSED APE FILES:")
             logging.debug(ape_files)
+
+            if len(ape_files) == 0:
+                logging.critical("NO .APE FILES FOUND - CANNOT MAKE PLASMID")
 
             #Replace "label" in .ape file with "locus_tag"
 
