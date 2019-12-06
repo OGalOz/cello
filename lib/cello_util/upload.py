@@ -66,7 +66,7 @@ def make_kbase_genomes(output_files, kb_output_folder, output_folder, gfu, ws_na
                 shutil.copyfile(ape_fp, gbk_file_name)
 
                 #Adding user output_name
-                replace_index = g_name.find("plasmid_circuit")
+                replace_index = g_name.find("plasmid_")
                 if replace_index != -1:
                     g_name = main_output_name + "_" + g_name[replace_index:]
                 else:
