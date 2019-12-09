@@ -5,30 +5,42 @@
 import re
 import logging
 
+"""
+Inputs: 
+    truth_table: (list)
+    module_name: (str)
+    inp_out_dict: (dict)
+        in_num: (int)
+        out_num: (int)
+        
 
-def make_verilog_case_file_string(truth_table, module_name):
+"""
+def make_verilog_case_file_string(truth_table, module_name, inp_out_dict):
 
 
     #First row of truth_table must be the names of the inputs and outputs.
-    #Should be labelled in1, in2, ... out1.
+    #Should be labelled in1, in2, ... out1, out2 ...
 
     check_truth_table(truth_table)
 
-    #For now, assume there is only one output.
-
+    input_num = inp_out_dict["in_num"]
 
     verilog_file_str = ''
     
-    verilog_file_str += make_header_line(truth_table, module_name)
+    verilog_file_str += make_header_line(truth_table, module_name, input_num)
 
-    verilog_file_str += make_always_line(truth_table)
+    verilog_file_str += make_always_line(truth_table, input_num)
     
     verilog_file_str += "\t\tbegin\n"
 
-    verilog_file_str += make_case_block(truth_table)
+    verilog_file_str += make_case_block(truth_table, input_num)
 
     verilog_file_str += "\t\tend\n"
     verilog_file_str += "endmodule"
+
+    logging.debug("Verilog File:")
+
+    logging.debug(verilog_file_str)
 
     return verilog_file_str
     
@@ -41,9 +53,17 @@ def check_truth_table(truth_table):
 
 
 
-def make_header_line(truth_table, module_name):
+def make_header_line(truth_table, module_name, input_num):
 
-    input_names = truth_table[0][:-1]
+    #This is a difficult part: how to differentiate between inputs and outputs. We use inp_out_dict.
+    input_names = truth_table[0][:input_num]
+    output_names = truth_table[0][input_num:]
+    logging.debug("Input Names (verilog creation): ")
+    logging.debug(input_names)
+    logging.debug("Output Names (verilog creation): ")
+    logging.debug(output_names)
+
+    #Writing header line
     header_input_str = "input "
     for inp_name in input_names:
         header_input_str += inp_name + ", "
@@ -53,8 +73,8 @@ def make_header_line(truth_table, module_name):
     
     header_output_str = "output "
 
-    #For now we have only one output
-    output_name = truth_table[0][-1]
+    for output_name in output_names:
+        header_output_str += output_name + ", "
 
     #Eventually we'll need a list of output names.
     header_output_str += output_name + ", "
@@ -64,9 +84,9 @@ def make_header_line(truth_table, module_name):
     return header_line
 
 
-def make_always_line(truth_table):
+def make_always_line(truth_table, input_num):
     always_str = "\talways@("
-    inputs = truth_table[0][:-1]
+    inputs = truth_table[0][:input_num]
     for inp in inputs:
         always_str += inp + ","
 
@@ -75,12 +95,12 @@ def make_always_line(truth_table):
 
     return always_str
 
-def make_case_block(truth_table):
+def make_case_block(truth_table, input_num):
 
     case_block_str = ''
     
     opening_block = '\t\t\tcase({'
-    inputs = truth_table[0][:-1]
+    inputs = truth_table[0][:input_num]
     for inp in inputs:
         opening_block+= inp + ','
 
@@ -89,14 +109,19 @@ def make_case_block(truth_table):
     case_block_str += opening_block
 
     #We currently have only one output
-    output = truth_table[0][-1]
+    outputs = truth_table[0][input_num:]
+    output_str = ','.join(outputs)
+    
     
     case_lines = ''
     for truth_row in truth_table[1:]:
-        line_str = 4*'\t' + str(len(inputs)) + "'b"
-        for inp_val in truth_row[:-1]:
+        line_str = 4*'\t' + str(input_num) + "'b"
+        for inp_val in truth_row[:input_num]:
             line_str += str(inp_val)
-        line_str += ": {" + output + "} = 1'b" + str(truth_row[-1]) + ';\n' 
+        line_str += ": {" + output_str + "} = " + str(len(outputs)) + "'b" 
+        for out_val in truth_row[input_num:]:
+            line_str += str(out_val)
+        line_str += ';\n' 
         case_lines += line_str
 
     case_block_str += case_lines
@@ -189,6 +214,7 @@ def make_output_file_str(output_file_list):
     
 
     return output_file_str
+
 
 '''
 Inputs:

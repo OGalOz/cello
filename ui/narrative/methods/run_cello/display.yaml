@@ -124,7 +124,7 @@ parameter-groups :
             The output genes - (currently only 1 allowed).
     custom_gene_output :
         ui-name : |
-            Custom Output Gene
+            Custom Output Genes
         short-hint : |
             An output gene - (currently only 1 allowed).
 description : |
@@ -139,6 +139,7 @@ description : |
 
     <p> The first row should contain names in quotations exactly the same as input and output names. </p>
     <p> Separate each row of the truth table with "&&".</p>
+    <p> Always list Inputs before Outputs </p>
 
     <p></p>
     <p> Please don't use special characters in any of the input names. Only use A,C,T,G in the DNA sequence inputs. </p>

@@ -4,11 +4,31 @@
 import logging
 
 
+
+
+"""
+(Still need to document the way Inputs are Given.)
+INPUTS:
+    gene_inputs_list: (list of dicts)
+        gene_input_dict: (dict)
+            inp_promoter_name: (str)
+
+
+
+
+
+"""
 def make_truth_table_from_text(gene_inputs_list, gene_outputs_list,truth_table_text):
 
+    logging.debug("TRUTH TABLE FUNCTIONS: Gene Inputs List:")
+    logging.debug(gene_inputs_list)
+    logging.debug("TRUTH TABLE FUNCTIONS: Gene Outputs List:")
+    logging.debug(gene_outputs_list)
 
-    #Currently, gene outputs_list is just a dict
 
+
+    #orig_gene_names stores the gene names given by the Promoter and Output Names, not the Truth Table.
+    # This is used as a test to compare if the truth table and the given names are the same.
     orig_gene_names = []
     for gene_dict in gene_inputs_list:
         orig_gene_names.append(gene_dict['inp_promoter_name'])
@@ -53,7 +73,9 @@ def make_truth_table_from_text(gene_inputs_list, gene_outputs_list,truth_table_t
                     truth_table_row.append(final_gene_name)
     truth_table.append(truth_table_row)
 
+    # We remove the gene names from the input list. Now it is only 1's and 0's.
     X = X[1:]
+
     #Now we add the values (1 or 0)
     for l in X:
         truth_table_row = []
@@ -78,6 +100,11 @@ def make_truth_table_from_text(gene_inputs_list, gene_outputs_list,truth_table_t
 
 
 
+
+
+
+
+# The following function is out of use.
 def make_truth_table_from_values(gene_inputs_list, gene_outputs_list, truth_table_values):
     # We find the number of rows in the truth table aside from the names of the genes.
     num_rows = max([int(ttv['row_number']) for ttv in truth_table_values])

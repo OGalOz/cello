@@ -53,7 +53,7 @@ class cello:
 
     def run_cello(self, ctx, params):
         """
-        This example function accepts any number of parameters and returns results in a KBaseReport
+        This function accepts any number of parameters and returns results in a KBaseReport
         :param params: instance of mapping from String to unspecified object
         :returns: instance of type "ReportResults" -> structure: parameter
            "report_name" of String, parameter "report_ref" of String
@@ -145,7 +145,10 @@ class cello:
                 raise Exception("Output name contains illegal characters.")
         else:
             raise Exception("Output Name not supplied (not in params).")
-
+        #Done extracting parameters
+        num_inputs = len(gene_inputs_list)
+        num_outputs = len(gene_outputs_list)
+        inp_out_dict = {"in_num" : num_inputs, "out_num": num_outputs}
 
 
         #Creating truth table:
@@ -182,12 +185,13 @@ class cello:
             raise Exception("kb_run directory already exists within cello ??? Need new directory to run our verilog files.")
 
         #CODE
-        #Writing input files to Cello:
+        #Creating input files to Cello from params:
         module_name = "testname"
-        vlog_case_filestring = make_verilog_case_file_string(truth_table,module_name)
-        #logging.debug(vlog_case_filestring)
+        vlog_case_filestring = make_verilog_case_file_string(truth_table,module_name, inp_out_dict)
         inputs_filestring = make_input_file_str(gene_inputs_list)
         outputs_filestring = make_output_file_str(gene_outputs_list)
+
+        #WRITING THE INPUT FILES TO CELLO
         f = open(os.path.join(cello_kb, "test_verilog.v"), "w")
         f.write(vlog_case_filestring)
         f.close()
@@ -198,9 +202,7 @@ class cello:
         h.write(outputs_filestring)
         h.close()
 
-
-        #Just running the cello_demo eventually replace cello_demo with cello_kb, and demo with test.
-        #cello_demo = os.path.join(cello_dir, 'demo')
+        #RUNNING CELLO:
         os.chdir(cello_kb)
         op = os.system('mvn -e -f /cello/pom.xml -DskipTests=true -PCelloMain -Dexec.args="-verilog test_verilog.v -input_promoters test_inputs.txt -output_genes test_outputs.txt"')
         logging.debug(op)
