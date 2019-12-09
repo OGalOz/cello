@@ -76,9 +76,6 @@ def make_header_line(truth_table, module_name, input_num):
     for output_name in output_names:
         header_output_str += output_name + ", "
 
-    #Eventually we'll need a list of output names.
-    header_output_str += output_name + ", "
-
     header_line = "module " + module_name + "(" + header_output_str + header_input_str + ");\n"
     
     return header_line
@@ -110,7 +107,11 @@ def make_case_block(truth_table, input_num):
 
     #We currently have only one output
     outputs = truth_table[0][input_num:]
-    output_str = ','.join(outputs)
+    if len(outputs) > 1:
+        output_str = ','.join(outputs)
+    else:
+        output_str = outputs[0]
+
     
     
     case_lines = ''
