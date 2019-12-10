@@ -25,10 +25,10 @@ def make_kbase_genomes(output_files, kb_output_folder, output_folder, gfu, ws_na
             extra_ape_files = []
             for out_f in output_files:
                 if out_f[-4:] == ".ape":
-                    if "plasmid_circuit_P000" in out_f:
+                    if "plasmid_circuit" in out_f:
                         logging.info("Recognized plasmid_circuit .ape file: " + out_f)
                         plasmid_ape_files.append(os.path.join(kb_output_folder, os.path.join(output_folder, out_f)))
-                    elif "plasmid_output_P000" in out_f:
+                    elif "plasmid_output" in out_f:
                         logging.info("Recognized plasmid_output .ape file: " + out_f)
                         output_ape_files.append(os.path.join(kb_output_folder, os.path.join(output_folder, out_f)))
                     else:
@@ -36,7 +36,8 @@ def make_kbase_genomes(output_files, kb_output_folder, output_folder, gfu, ws_na
                         extra_ape_files.append(os.path.join(kb_output_folder, os.path.join(output_folder, out_f)))
                         
             ape_files = plasmid_ape_files + output_ape_files
-
+            logging.debug("Unused ape files: ")
+            logging.debug(extra_ape_files)
 
             logging.debug("PARSED APE FILES:")
             logging.debug(ape_files)
