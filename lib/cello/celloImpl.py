@@ -195,15 +195,15 @@ class cello:
         f = open(os.path.join(cello_kb, "test_verilog.v"), "w")
         f.write(vlog_case_filestring)
         f.close()
-        shutil.copyfile(os.path.join(cello_kb, "test_verilog.v"), os.path.join(kb_output_folder,"VERILOG_INPUT.v" ))
+        #shutil.copyfile(os.path.join(cello_kb, "test_verilog.v"), os.path.join(kb_output_folder,"VERILOG_INPUT.v" ))
         g = open(os.path.join(cello_kb, "test_inputs.txt"),"w")
         g.write(inputs_filestring)
         g.close()
-        shutil.copyfile(os.path.join(cello_kb, "test_inputs.txt"), os.path.join(kb_output_folder,"PROMOTERS_INPUT.txt" ))
+        #shutil.copyfile(os.path.join(cello_kb, "test_inputs.txt"), os.path.join(kb_output_folder,"PROMOTERS_INPUT.txt" ))
         h = open(os.path.join(cello_kb, "test_outputs.txt"),"w")
         h.write(outputs_filestring)
         h.close()
-        shutil.copyfile(os.path.join(cello_kb, "test_outputs.txt"), os.path.join(kb_output_folder,"OUTPUTS_INPUT.txt" ))
+        #shutil.copyfile(os.path.join(cello_kb, "test_outputs.txt"), os.path.join(kb_output_folder,"OUTPUTS_INPUT.txt" ))
 
 
         #RUNNING CELLO:
@@ -234,7 +234,13 @@ class cello:
         os.chdir('/kb/module/')
 
         output_folder = os.listdir(kb_output_folder)[0]
-        output_files = os.listdir(os.path.join(kb_output_folder,output_folder))
+        full_path_output_folder = os.path.join(kb_output_folder,output_folder)
+
+        #Copying input files to output folder.
+        shutil.copyfile(os.path.join(cello_kb, "test_verilog.v"), os.path.join(full_path_output_folder,"VERILOG_INPUT.v" ))
+        shutil.copyfile(os.path.join(cello_kb, "test_inputs.txt"), os.path.join(full_path_output_folder,"PROMOTERS_INPUT.txt" ))
+        shutil.copyfile(os.path.join(cello_kb, "test_outputs.txt"), os.path.join(full_path_output_folder,"OUTPUTS_INPUT.txt" ))
+        output_files = os.listdir(full_path_output_folder)
         logging.debug("CELLO OUTPUT FOLDER:")
         logging.debug(output_files)
 
