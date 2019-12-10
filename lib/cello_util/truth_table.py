@@ -41,11 +41,13 @@ def make_truth_table_from_text(gene_inputs_list, gene_outputs_list,truth_table_t
 
     """
     Format of truth_table_text is: (the "|" is to check for correctness"
-    "In1", "In2", "Out1" &&
-    "0", "0", "1" &&
-    "0", "1", "0"
+    "In1", "In2", "Out1", "Out2" &&
+    "0", "0", "1", "0" &&
+    "0", "1", "0", "1" &&
     etc.
-
+    . 
+    .
+    "1", "1","1","1"
 
     """
 

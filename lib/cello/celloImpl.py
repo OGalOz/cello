@@ -195,6 +195,8 @@ class cello:
         f = open(os.path.join(cello_kb, "test_verilog.v"), "w")
         f.write(vlog_case_filestring)
         f.close()
+        shutil.copyfile(os.path.join(cello_kb, "test_verilog.v"), kb_output_folder)
+
         g = open(os.path.join(cello_kb, "test_inputs.txt"),"w")
         g.write(inputs_filestring)
         g.close()
@@ -234,6 +236,7 @@ class cello:
         logging.debug("CELLO OUTPUT FOLDER:")
         logging.debug(output_files)
 
+        
 
         if kb_genome_bool == True:
             gfu = GenomeFileUtil(self.callback_url)

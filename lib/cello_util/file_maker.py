@@ -13,7 +13,8 @@ Inputs:
         in_num: (int)
         out_num: (int)
         
-
+Outputs:
+    verilog_file_str: (str) String of entire verilog file.
 """
 def make_verilog_case_file_string(truth_table, module_name, inp_out_dict):
 
@@ -52,7 +53,14 @@ def check_truth_table(truth_table):
         raise Exception("Either inputs or outputs are missing from the truth table title row.")
 
 
-
+"""
+Inputs:
+    truth_table: (list) list of lists with information for truth table.
+    module_name: (str) just the name of the module.
+    input_num: (int) number of input promoters
+Outputs:
+    header_line: (str) The string of the first line of the verilog file.
+"""
 def make_header_line(truth_table, module_name, input_num):
 
     #This is a difficult part: how to differentiate between inputs and outputs. We use inp_out_dict.
@@ -81,6 +89,13 @@ def make_header_line(truth_table, module_name, input_num):
     return header_line
 
 
+'''
+Inputs:
+    truth_table: (list) List of lists with truth table info (first row names, next rows 0 or 1).
+    input_num: (int) number of input promoters
+Outputs:
+    always_str: (str) line for always piece of verilog file.
+'''
 def make_always_line(truth_table, input_num):
     always_str = "\talways@("
     inputs = truth_table[0][:input_num]
@@ -92,6 +107,13 @@ def make_always_line(truth_table, input_num):
 
     return always_str
 
+
+'''
+Inputs:
+    Same as above function make_always_line.
+Outputs:
+    case_block_str: (str) multi-line string with case information.
+'''
 def make_case_block(truth_table, input_num):
 
     case_block_str = ''
