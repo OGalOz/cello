@@ -191,18 +191,20 @@ class cello:
         inputs_filestring = make_input_file_str(gene_inputs_list)
         outputs_filestring = make_output_file_str(gene_outputs_list)
 
-        #WRITING THE INPUT FILES TO CELLO
+        #WRITING THE INPUT FILES TO CELLO AND STORING OUTPUT
         f = open(os.path.join(cello_kb, "test_verilog.v"), "w")
         f.write(vlog_case_filestring)
         f.close()
-        shutil.copyfile(os.path.join(cello_kb, "test_verilog.v"), kb_output_folder)
-
+        shutil.copyfile(os.path.join(cello_kb, "test_verilog.v"), os.path.join(kb_output_folder,"VERILOG_INPUT.v" ))
         g = open(os.path.join(cello_kb, "test_inputs.txt"),"w")
         g.write(inputs_filestring)
         g.close()
+        shutil.copyfile(os.path.join(cello_kb, "test_inputs.txt"), os.path.join(kb_output_folder,"PROMOTERS_INPUT.txt" ))
         h = open(os.path.join(cello_kb, "test_outputs.txt"),"w")
         h.write(outputs_filestring)
         h.close()
+        shutil.copyfile(os.path.join(cello_kb, "test_outputs.txt"), os.path.join(kb_output_folder,"OUTPUTS_INPUT.txt" ))
+
 
         #RUNNING CELLO:
         os.chdir(cello_kb)
