@@ -11,6 +11,7 @@ from installed_clients.GenomeFileUtilClient import GenomeFileUtil
 from cello_util.file_maker import make_verilog_case_file_string, make_input_file_str, make_output_file_str
 from cello_util.truth_table import make_truth_table_from_text, make_truth_table_from_values
 from cello_util.upload import make_kbase_genomes
+from cello_util.html_design import build_html 
 
 
 #END_HEADER
@@ -258,7 +259,16 @@ class cello:
         file_zip_shock_id = dfu.file_to_shock({'file_path': kb_output_folder,
                                               'pack': 'zip'})['shock_id']
 
-        
+       
+        #Creating HTML to return to the user
+        html_init_dict = build_html(full_path_output_folder)
+        svg_file_full_path = html_init_dict["wiring_grn_svg"]
+        svg_file_obj = {"path": svg_file_full_path,"name": "Wiring_Diagram", "label": "Logic Circuit Diagram" }
+        html_links = [svg_file_obj]
+        ext_report_params['html_links'] = html_links
+        ext_report_params["direct_html_link_index"] = 0
+
+
         #'path': kb_output_folder
         dir_link = {'shock_id': file_zip_shock_id, 'name': main_output_name + '.zip', 'label':'cello_output_dir', 'description': 'The directory of outputs from cello'}
         ext_report_params['file_links'] = [dir_link]
