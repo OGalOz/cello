@@ -209,6 +209,7 @@ class cello:
         #RUNNING CELLO:
         os.chdir(cello_kb)
         op = os.system('mvn -e -f /cello/pom.xml -DskipTests=true -PCelloMain -Dexec.args="-verilog test_verilog.v -input_promoters test_inputs.txt -output_genes test_outputs.txt"')
+        logging.debug("Response from Cello: ")
         logging.debug(op)
         dir_list = os.listdir(cello_kb)
         logging.debug(dir_list)
