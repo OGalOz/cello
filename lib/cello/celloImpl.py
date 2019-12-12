@@ -97,6 +97,7 @@ class cello:
                         item["custom_var"] = True
                         item["low_RPU"] = item["custom_low_RPU"]
                         item["high_RPU"] = item["custom_high_RPU"]
+                        item["inp_promoter_name"] = item["custom_inp_promoter_name"]
                         gene_inputs_list.append(item)
                     else:
                         raise Exception("Expected custom item to be dict, but instead it is " + str(type(item)))
