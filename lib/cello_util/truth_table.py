@@ -41,9 +41,9 @@ def make_truth_table_from_text(gene_inputs_list, gene_outputs_list,truth_table_t
 
     """
     Format of truth_table_text is: (the "|" is to check for correctness"
-    "In1", "In2", "Out1", "Out2" &&
-    "0", "0", "1", "0" &&
-    "0", "1", "0", "1" &&
+    "In1", "In2", "Out1", "Out2" &
+    "0", "0", "1", "0" &
+    "0", "1", "0", "1" &
     etc.
     . 
     .
@@ -54,7 +54,7 @@ def make_truth_table_from_text(gene_inputs_list, gene_outputs_list,truth_table_t
     truth_table = []
 
     #Parsing truth_table_text:
-    X = truth_table_text.split('&&')
+    X = truth_table_text.split('&')
     logging.debug(X)
     
     
@@ -84,6 +84,13 @@ def make_truth_table_from_text(gene_inputs_list, gene_outputs_list,truth_table_t
         if "," in l:
             values = l.split(",")
             for v in values:
+                #removing whitespace
+                v = v.strip()
+                logging.debug(v)
+                if v in ["0","1"]:
+                    truth_table_row.append(v)
+                else:
+                    raise Exception("Value is not 0 or 1, cannot recognize it: " + str(v))
                 if '"' in v:
                     fin = v.split('"')
                     if len(fin) != 3:
@@ -93,8 +100,6 @@ def make_truth_table_from_text(gene_inputs_list, gene_outputs_list,truth_table_t
                         raise Exception("Incorrect formatting of truth table, values must be 0 or 1. Actual value: " + str(f))
                     else:
                         truth_table_row.append(f)
-                else:
-                    raise Exception("Improper user formatting on truth table - no quotations in each line")
         truth_table.append(truth_table_row)
 
     return truth_table

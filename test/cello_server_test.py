@@ -73,7 +73,7 @@ class celloTest(unittest.TestCase):
         gene_outputs = [gene_output_1]
 
        
-        truth_table_text =    ' "pTac", "pTet", "YFP" && "0", "0", "1" && "0", "1", "0"'
+        truth_table_text =    ' "pTac", "pTet", "YFP" & 0, 0, 1 & 0, 1, 0 & 1,0,1 & 1,1,0'
 
         main_output_name = "Test_12_05_19"
 
