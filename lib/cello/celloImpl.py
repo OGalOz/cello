@@ -262,11 +262,12 @@ class cello:
        
         #Creating HTML to return to the user
         html_init_dict = build_html(full_path_output_folder)
-        svg_file_full_path = html_init_dict["wiring_grn_svg"]
-        svg_file_obj = {"path": svg_file_full_path,"name": "Wiring_Diagram", "label": "Logic Circuit Diagram" }
-        html_links = [svg_file_obj]
-        ext_report_params['html_links'] = html_links
-        ext_report_params["direct_html_link_index"] = 0
+        if html_init_dict["wiring_diagram_found"] == True:
+            svg_file_full_path = html_init_dict["wiring_grn_svg"]
+            svg_file_obj = {"path": svg_file_full_path,"name": "Wiring_Diagram", "label": "Logic Circuit Diagram" }
+            html_links = [svg_file_obj]
+            ext_report_params['html_links'] = html_links
+            ext_report_params["direct_html_link_index"] = 0
 
 
         #'path': kb_output_folder

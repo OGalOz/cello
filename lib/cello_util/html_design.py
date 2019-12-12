@@ -30,6 +30,7 @@ Inputs:
 Outputs:
     out_files_dict: (dict)
         wiring_grn_svg: (str) The full path to the file containing the wiring svg file.
+        wiring_diagram_found: (bool) True if found, False if not.
 """
 def extract_files_from_folder(full_path_to_folder):
 
@@ -38,11 +39,11 @@ def extract_files_from_folder(full_path_to_folder):
 
     out_files_dict = dict()
 
-    #Extracting Circuit Diagram:
+    #Extracting Circuit Diagram - filename should end with 'wiring_grn.svg':
     wiring_grn_files = []
     wiring_grn_found = False
     for f in all_files:
-        if f[-15:] == "wiring_agrn.svg":
+        if f[-15:] == "wiring_grn.svg":
             wiring_grn_files.append(os.path.join(full_path_to_folder,f))
 
     if len(wiring_grn_files) > 0:
@@ -51,13 +52,18 @@ def extract_files_from_folder(full_path_to_folder):
         for i in range(len(wiring_grn_files)):
             logging.debug(wiring_grn_files[i])
     else:
-        logging.critical("Could not find a wiring_agrn file.")
+        logging.critical("Could not find a wiring_grn file.")
+        out_files_dict['wiring_diagram_found'] = False
 
     if wiring_grn_found:
         if len(wiring_grn_files) == 1:
             out_files_dict['wiring_grn_svg'] = wiring_grn_files[0]
+            out_files_dict['wiring_diagram_found'] = True
         else:
-            raise Exception("Multiple wiring grn files found.")
+            logging.critical("Multiple wiring grn files found- Returning the first one.")
+            out_files_dict['wiring_grn_svg'] = wiring_grn_files[0]
+            out_files_dict['wiring_diagram_found'] = True
+
 
 
     return out_files_dict
