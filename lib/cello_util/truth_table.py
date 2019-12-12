@@ -86,20 +86,13 @@ def make_truth_table_from_text(gene_inputs_list, gene_outputs_list,truth_table_t
             for v in values:
                 #removing whitespace
                 v = v.strip()
-                logging.debug(v)
-                if v in ["0","1"]:
-                    truth_table_row.append(v)
-                else:
-                    raise Exception("Value is not 0 or 1, cannot recognize it: " + str(v))
-                if '"' in v:
-                    fin = v.split('"')
-                    if len(fin) != 3:
-                        raise Exception("Improper user formatting on truth table - quotations")
-                    f = fin[1]
-                    if f not in ["0","1"]:
-                        raise Exception("Incorrect formatting of truth table, values must be 0 or 1. Actual value: " + str(f))
+                if v != "":
+                    if v in ["0","1"]:
+                        truth_table_row.append(v)
                     else:
-                        truth_table_row.append(f)
+                        raise Exception("Value is not 0 or 1, cannot recognize it: " + str(v))
+        else:
+            raise Exception("Truth Table Format Incorrect- Row does not contain any commas.")
         truth_table.append(truth_table_row)
 
     return truth_table

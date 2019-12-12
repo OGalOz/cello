@@ -24,7 +24,7 @@
             "with_border": true
         },
         {
-            "id": "custom_promoter_input",
+            "id": "custom_promoter_inputs",
             "parameters": [
                 "custom_inp_promoter_name",
                 "custom_low_RPU",
@@ -47,7 +47,7 @@
             "with_border": true
         },
         {
-            "id": "custom_gene_output",
+            "id": "custom_gene_outputs",
             "parameters": [
                 "custom_out_gene_name",
                 "custom_out_DNA_sequence"
@@ -273,16 +273,16 @@
                     "target_property": "promoter_inputs"
                 },
                 {
-                    "input_parameter": "custom_promoter_input",
-                    "target_property": "custom_promoter_input"
+                    "input_parameter": "custom_promoter_inputs",
+                    "target_property": "custom_promoter_inputs"
                 },
                 {
                     "input_parameter" : "gene_outputs",
                     "target_property": "gene_outputs"
                 },
                 {
-                    "input_parameter" : "custom_gene_output",
-                    "target_property" : "custom_gene_output"
+                    "input_parameter" : "custom_gene_outputs",
+                    "target_property" : "custom_gene_outputs"
                 },
                 {
                     "input_parameter" : "main_output_name",

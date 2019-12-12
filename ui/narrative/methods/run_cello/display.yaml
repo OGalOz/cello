@@ -112,7 +112,7 @@ parameter-groups :
             Input Promoters
         short-hint : |
             Choose an Input Promoter from a given list.
-    custom_promoter_input :
+    custom_promoter_inputs :
         ui-name : |
             Custom Input Promoters
         short-hint : |
@@ -122,7 +122,7 @@ parameter-groups :
             Output Genes
         short-hint : |
             The output genes - (currently only 1 allowed).
-    custom_gene_output :
+    custom_gene_outputs :
         ui-name : |
             Custom Output Genes
         short-hint : |
