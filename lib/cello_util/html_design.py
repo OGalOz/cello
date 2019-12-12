@@ -29,8 +29,13 @@ Inputs:
     full_path_to_folder: (str) The path to the folder containing all the output files from Cello.
 Outputs:
     out_files_dict: (dict)
-        wiring_grn_svg: (str) The full path to the file containing the wiring svg file.
+        wiring_grn_svg: (str) The full path to the wiring svg file.
         wiring_diagram_found: (bool) True if found, False if not.
+        png_files: (list) The full paths to the png files.
+        png_files_found: (bool) True if found, False if not.
+        all_return_files: (list of str) The full paths to all the files.
+
+
 """
 def extract_files_from_folder(full_path_to_folder):
 
@@ -41,10 +46,14 @@ def extract_files_from_folder(full_path_to_folder):
 
     #Extracting Circuit Diagram - filename should end with 'wiring_grn.svg':
     wiring_grn_files = []
+    png_files = []
     wiring_grn_found = False
+    png_files_found = False
     for f in all_files:
         if "wiring_agrn.svg" in f:
             wiring_grn_files.append(os.path.join(full_path_to_folder,f))
+        elif "truth.png" in f:
+            png_files.append(os.path.join(full_path_to_folder,f))
     if len(wiring_grn_files) > 0:
         logging.info("Found wiring_agrn_files: ")
         wiring_grn_found = True
@@ -63,7 +72,15 @@ def extract_files_from_folder(full_path_to_folder):
             out_files_dict['wiring_grn_svg'] = wiring_grn_files[0]
             out_files_dict['wiring_diagram_found'] = True
 
-    out_files_dict['all_wiring_grn_files'] = wiring_grn_files
+    if len(png_files) == 0:
+        logging.critical("No png files found.")
+    else:
+        png_files_found = True
+    
+    out_files_dict['png_files_found'] = png_files_found
+    out_files_dict['png_files'] = png_files
+    all_files = wiring_grn_files + png_files
+    out_files_dict['all_return_files'] = all_files
 
     return out_files_dict
 

@@ -131,14 +131,16 @@ description : |
     <h1> CIDAR Lab's Cello - cellocad.org </h1>
     <p> Truth Table Input should look like the following-</p>
 
-    <p> "pTac", "pTet", "YFP" & </p>
+    <p> pTac, pTet, YFP & </p>
     <p>  0, 0, 1 &  </p>
     <p> 0, 1, 0 &  </p>
     <p> 1, 0, 0 &  </p>
     <p> 1, 1, 1  </p>
 
-    <p> The first row should contain names surrounded by quotations exactly the same as input and output names. </p>
-    <p> Always list Inputs before Outputs </p>
+    <p> The first row should contain names exactly the same as input and output names in the other places in the input. </p>
+    <p> Do not include spaces or special characters in your input names. </p>
+    <p> Do not repeat or reuse Input Names and Output Names. </p>
+    <p> Always list Inputs before Outputs. </p>
     <p> Separate each row of the truth table with "&".</p>
     <p> The number of rows beneath the first row is 2 to the power of however many inputs you list. </p>
     <p> So if you have 3 inputs, e.g. (pTac, pBAD, pPhlF), you should have 9 rows, (9 including first row)</p>

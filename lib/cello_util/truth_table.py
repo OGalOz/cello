@@ -60,19 +60,22 @@ def make_truth_table_from_text(gene_inputs_list, gene_outputs_list,truth_table_t
     
     # Make sure first row is all gene names from other inputs:
     gene_names_string = X[0]
+    previous_gene_names = []
     truth_table_row = []
     if "," in gene_names_string:
         gene_names_rough_list = gene_names_string.split(",")
+        logging.debug("Gene names rough list: ")
+        logging.debug(gene_names_rough_list)
         for gn in gene_names_rough_list:
-            if '"' in gn:
-                g = gn.split('"')
-                if len(g) != 3:
-                    raise Exception("Incorrect user formatting on truth table - gene names")
-                final_gene_name = g[1]
-                if final_gene_name not in orig_gene_names:
-                    raise Exception("Incorrect user input on gene name in truth table- doesn't match input/output gene names.")
+            gn = gn.strip()
+            if gn not in orig_gene_names:
+                raise Exception("Incorrect user input on gene name in truth table- doesn't match input/output gene names: " + gn)
+            else:
+                if gn in previous_gene_names:
+                    raise Exception("Repeat input or output name, cannot continue. Do not use the same name twice as input or output. Repeat: " + gn)
                 else:
-                    truth_table_row.append(final_gene_name)
+                    previous_gene_names.append(gn)
+                    truth_table_row.append(gn)
     truth_table.append(truth_table_row)
 
     # We remove the gene names from the input list. Now it is only 1's and 0's.
