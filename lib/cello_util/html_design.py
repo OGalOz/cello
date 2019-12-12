@@ -46,14 +46,14 @@ def extract_files_from_folder(full_path_to_folder):
 
     #Extracting Circuit Diagram - filename should end with 'wiring_grn.svg':
     wiring_grn_files = []
-    png_files = []
+    pdf_files = []
     wiring_grn_found = False
-    png_files_found = False
+    pdf_files_found = False
     for f in all_files:
         if "wiring_agrn.svg" in f:
             wiring_grn_files.append(os.path.join(full_path_to_folder,f))
-        elif "truth.png" in f:
-            png_files.append(os.path.join(full_path_to_folder,f))
+        elif "truth.pdf" in f:
+            pdf_files.append(os.path.join(full_path_to_folder,f))
     if len(wiring_grn_files) > 0:
         logging.info("Found wiring_agrn_files: ")
         wiring_grn_found = True
@@ -72,14 +72,15 @@ def extract_files_from_folder(full_path_to_folder):
             out_files_dict['wiring_grn_svg'] = wiring_grn_files[0]
             out_files_dict['wiring_diagram_found'] = True
 
-    if len(png_files) == 0:
-        logging.critical("No png files found.")
+    if len(pdf_files) == 0:
+        logging.critical("No pdf files found.")
     else:
-        png_files_found = True
+        logging.info("At least one pdf file found: " + pdf_files[0])
+        pdf_files_found = True
     
-    out_files_dict['png_files_found'] = png_files_found
-    out_files_dict['png_files'] = png_files
-    all_files = wiring_grn_files + png_files
+    out_files_dict['pdf_files_found'] = pdf_files_found
+    out_files_dict['pdf_files'] = pdf_files
+    all_files = wiring_grn_files + pdf_files
     out_files_dict['all_return_files'] = all_files
 
     return out_files_dict
