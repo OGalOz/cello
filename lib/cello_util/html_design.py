@@ -43,10 +43,10 @@ def extract_files_from_folder(full_path_to_folder):
     wiring_grn_files = []
     wiring_grn_found = False
     for f in all_files:
-        if "wiring_grn.svg" in f or "wiring_agrn.svg" in f:
+        if "wiring_agrn.svg" in f:
             wiring_grn_files.append(os.path.join(full_path_to_folder,f))
     if len(wiring_grn_files) > 0:
-        logging.info("Found wiring_grn_files: ")
+        logging.info("Found wiring_agrn_files: ")
         wiring_grn_found = True
         for i in range(len(wiring_grn_files)):
             logging.debug(wiring_grn_files[i])
@@ -63,7 +63,7 @@ def extract_files_from_folder(full_path_to_folder):
             out_files_dict['wiring_grn_svg'] = wiring_grn_files[0]
             out_files_dict['wiring_diagram_found'] = True
 
-
+    out_files_dict['all_wiring_grn_files'] = wiring_grn_files
 
     return out_files_dict
 
