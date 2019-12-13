@@ -256,40 +256,24 @@ class cello:
         
 
         dfu = DataFileUtil(self.callback_url)
-
         file_zip_shock_id = dfu.file_to_shock({'file_path': kb_output_folder,
                                               'pack': 'zip'})['shock_id']
-
        
         #Creating HTML to return to the user
-        html_init_dict = build_html(full_path_output_folder)
-        if html_init_dict["wiring_diagram_found"] == True:
-            svg_file_full_path = html_init_dict["wiring_grn_svg"]
-            svg_file_obj = {"path": svg_file_full_path,"name": "Wiring_Diagram", "label": "Logic Circuit Diagram" }
-            wiring_diagram_links = [svg_file_obj]
+        html_result_dict = build_html(full_path_output_folder, self.shared_folder)
+        
+        report_shock_id = dfu.file_to_shock({'file_path': html_result_dict['output_directory'],
+                                                  'pack': 'zip'})['shock_id']
 
-        if html_init_dict["pdf_files_found"]:
-            pdf_file_links = []
-            pdf_files = html_init_dict['pdf_files']
-            for i in range(len(pdf_files)):
-                    pdf_file_dict = {"path":pdf_files[i], "name": "pdf_file_" + str(i+1), "label": "Truth RPU diagram " + str(i+1)}
-                    pdf_file_links.append(pdf_file_dict)
-
-        if html_init_dict["wiring_diagram_found"] and html_init_dict["pdf_files_found"]:
-            ext_report_params['html_links'] = wiring_diagram_links + pdf_file_links
-            ext_report_params["direct_html_link_index"] = 0
-        elif html_init_dict["wiring_diagram_found"]:
-            ext_report_params['html_links'] = wiring_diagram_links
-            ext_report_params["direct_html_link_index"] = 0
-        elif html_init_dict["pdf_files_found"]:
-            #Note, there may be an issue with having the html link be a pdf file.
-            ext_report_params['html_links'] = pdf_file_links
-            ext_report_params["direct_html_link_index"] = 0
-
+        html_report = [{'shock_id': report_shock_id,
+                            'name': os.path.basename(html_result_dict['result_file_path']),
+                            'label': os.path.basename(html_result_dict['result_file_path']),
+                            'description': 'HTML summary report for Cello App'}]
 
         #'path': kb_output_folder
         dir_link = {'shock_id': file_zip_shock_id, 'name': main_output_name + '.zip', 'label':'cello_output_dir', 'description': 'The directory of outputs from cello'}
         ext_report_params['file_links'] = [dir_link]
+        ext_report_params['html_links'] = html_report
         report_info = report.create_extended_report(ext_report_params)
         output = {
             'report_name': report_info['name'],
