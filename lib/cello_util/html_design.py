@@ -53,16 +53,19 @@ def extract_files_from_folder(results_dir):
     wiring_svg_found = False
     wiring_png_files_found = False
     truth_png_files_found = False
+    plasmid_ape_files_created = 0
     for f in all_files:
         if "wiring_agrn.svg" in f:
             wiring_svg_files.append(os.path.join(results_dir,f))
             wiring_svg_found = True
-        elif "truth.pdf" in f:
+        elif "truth.png" in f:
             truth_png_files.append(os.path.join(results_dir,f))
             truth_png_files_found = True
         elif "wiring_agrn.png" in f:
             wiring_png_files.append(os.path.join(results_dir,f))
             wiring_png_files_found = True
+        elif ".ape" in f:
+            plasmid_ape_files_created += 1
     if wiring_svg_found:
         out_files_dict['wiring_svg'] = wiring_svg_files[0]
         if len(wiring_svg_files) > 1:
@@ -79,6 +82,7 @@ def extract_files_from_folder(results_dir):
     out_files_dict['truth_png_files'] = truth_png_files
     all_output_files = wiring_svg_files + truth_png_files + wiring_png_files
     out_files_dict['all_return_files'] = all_output_files
+    out_files_dict["num_plasmids_created"] = plasmid_ape_files_created
 
     return out_files_dict
 
@@ -101,6 +105,9 @@ def build_html(results_dir, scratch_dir):
     logging.info("Starting to generate html report.")
     
     out_files_dict = extract_files_from_folder(results_dir)
+
+    num_plasmids_created = out_files_dict["num_plasmids_created"]
+    overview_content = '<h1> ' + str(num_plasmids_created) + " Plasmids Created by Cello. Visualizations provided in other tab.</h1>"
 
     output_directory = os.path.join(scratch_dir, "HTML_Report")
     os.makedirs(output_directory, exist_ok=True)
@@ -136,7 +143,7 @@ def build_html(results_dir, scratch_dir):
         truth_graph_path = truth_png_files[i]
 
         truth_graph_name = get_name_from_path(truth_graph_path,"truth")
-        truth_graph_display_name = 'Truth Graph ' + str(i)
+        truth_graph_display_name = 'Truth Graph ' + str(i+1)
 
         shutil.copy2(os.path.join(results_dir, truth_graph_name),
         os.path.join(output_directory, truth_graph_name))
@@ -151,6 +158,7 @@ def build_html(results_dir, scratch_dir):
 
 
     html_file_str = html_file_str.replace('<p>Visualization_Content</p>', visualization_content)
+    html_file_str = html_file_str.replace('<p>Overview_Content</p>',overview_content)
 
     f = open(result_file_path, "w")
     f.write(html_file_str)
