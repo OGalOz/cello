@@ -274,6 +274,10 @@ class cello:
         dir_link = {'shock_id': file_zip_shock_id, 'name': main_output_name + '.zip', 'label':'cello_output_dir', 'description': 'The directory of outputs from cello'}
         ext_report_params['file_links'] = [dir_link]
         ext_report_params['html_links'] = html_report
+        ext_report_params['direct_html_link_index'] = 0
+        ext_report_params["html_window_height"] = 333
+        ext_report_params["report_object_name"] = "kb_cello_report"
+        ext_report_params["message"] = ""
         report_info = report.create_extended_report(ext_report_params)
         output = {
             'report_name': report_info['name'],
