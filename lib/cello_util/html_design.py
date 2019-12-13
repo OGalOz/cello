@@ -34,7 +34,10 @@ Outputs:
         wiring_svg_diagram_found: (bool) True if found, False if not.
         wiring_png_file: (str) The full path to the wiring png file.
         png_diagram_found: (bool) True if found, False if not
-        truth_png_files: (list) The full paths to the png files.
+        truth_png_files: (list) List of dicts, where each contains name of gene and the full path to the png files.
+            truth_dict: (dict)
+                gene_name: (str) Name of gene
+                file_path: (str) Path to file
         truth_png_files_found: (bool) True if found, False if not.
         all_return_files: (list of str) The full paths to all the files.
 
@@ -59,7 +62,9 @@ def extract_files_from_folder(results_dir):
             wiring_svg_files.append(os.path.join(results_dir,f))
             wiring_svg_found = True
         elif "truth.png" in f:
-            truth_png_files.append(os.path.join(results_dir,f))
+            truth_gene_name = get_gene_name_for_truth_graph(f)
+            truth_file_info = {"gene_name" : truth_gene_name, 'file_path': f}
+            truth_png_files.append(truth_file_info)
             truth_png_files_found = True
         elif "wiring_agrn.png" in f:
             wiring_png_files.append(os.path.join(results_dir,f))
@@ -107,7 +112,7 @@ def build_html(results_dir, scratch_dir):
     out_files_dict = extract_files_from_folder(results_dir)
 
     num_plasmids_created = out_files_dict["num_plasmids_created"]
-    overview_content = '<h1> ' + str(num_plasmids_created) + " Plasmids Created by Cello. Visualizations provided in other tab.</h1>"
+    overview_content = '<h5> ' + str(num_plasmids_created) + " Plasmids Created by Cello. Visualizations provided in other tab.</h5>"
 
     output_directory = os.path.join(scratch_dir, "HTML_Report")
     os.makedirs(output_directory, exist_ok=True)
@@ -140,10 +145,13 @@ def build_html(results_dir, scratch_dir):
     k = min(len(truth_png_files), 10)
 
     for i in range(k):
-        truth_graph_path = truth_png_files[i]
+        truth_graph_dict = truth_png_files[i]
+
+        truth_graph_path = truth_graph_dict['file_path']
+        truth_gene_name = truth_graph_dict['gene_name']
 
         truth_graph_name = get_name_from_path(truth_graph_path,"truth")
-        truth_graph_display_name = 'Truth Graph ' + str(i+1)
+        truth_graph_display_name = 'RPU Graph for ' + truth_gene_name
 
         shutil.copy2(os.path.join(results_dir, truth_graph_name),
         os.path.join(output_directory, truth_graph_name))
@@ -182,6 +190,17 @@ def get_name_from_path(filepath, typ):
 
     #For now we just return the filename
     return filepath.split('/')[-1]
+
+
+"""
+Input: 
+    filename: (str) Just the filename (not filepath). Getting name of gene from cello's production of a filename. Normally it looks like: job_1576197897501_A000_BFP_truth.png, we need "BFP" so we split by "_" and take the fourth index until the last index
+
+"""
+def get_gene_name_for_truth_graph(filename):
+
+    return "".join((filename.split("_"))[3:-1])
+
 
 
 
