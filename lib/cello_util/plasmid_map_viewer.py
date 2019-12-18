@@ -284,7 +284,7 @@ def make_js_arrows_and_names(js_feat_list, js_info):
     add_js_str += 'ctx.beginPath(); canvas_arrow(ctx, ' + str(arrow_root[0]) + ', ' + str(arrow_root[1]) + ', ' + str(origin_midpoint[0] + 6) + ', '
     add_js_str += str(origin_midpoint[1]) + ');ctx.stroke();'
     #We add the text box with the name
-    add_js_str += 'var text = "' + 'origin' + '";'
+    add_js_str += 'var text = "' + 'start point' + '";'
     add_js_str += 'wrapText(ctx, text, ' + str(arrow_root[0] + 5) + ', ' + str(arrow_root[1]) + ', maxWidth, lineHeight);'
     js_str += add_js_str
 
