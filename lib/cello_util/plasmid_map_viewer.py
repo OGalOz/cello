@@ -33,12 +33,12 @@ Outputs:
     html_str: (str) The string for the entire HTML file
 
 """
-def make_plasmid_graph(gb_file, gb_info, js_info, base_html_filepath):
+def make_plasmid_graph(gb_file, gb_info, js_info, base_html_filepath, user_output_name):
 
     plasmid_name, js_feat_list = get_js_feat_list(gb_file, gb_info)
     js_plasmid_str = make_js_canvas_plasmid(js_feat_list, js_info)
     js_arrows_and_names_str = make_js_arrows_and_names(js_feat_list, js_info)
-    html_str = create_html_file(plasmid_name, js_plasmid_str, js_arrows_and_names_str, base_html_filepath)
+    html_str = create_html_file(plasmid_name, js_plasmid_str, js_arrows_and_names_str, base_html_filepath, user_output_name)
     
     return html_str
 
@@ -335,12 +335,16 @@ def make_js_arrows_and_names(js_feat_list, js_info):
 
 
 """
-def create_html_file(plasmid_name, js_plasmid_str, js_arrows_and_names_str, base_html_filepath):
+def create_html_file(plasmid_name, js_plasmid_str, js_arrows_and_names_str, base_html_filepath, user_output_name):
     f = open(base_html_filepath, "r")
     file_str = f.read()
     f.close()
 
-    file_str = file_str.replace('Plasmid_Name_Here',plasmid_name)
+    if "job_" == plasmid_name[:4]:
+        plasmid_title = user_output_name + " " + " ".join(plasmid_name.split("_")[3:])
+    else:
+        plasmid_title = user_output_name + " " + plasmid_name
+    file_str = file_str.replace('Plasmid_Name_Here',plasmid_title)
     file_str = file_str.replace('{--Insert Code--}' , js_plasmid_str + '\n' + js_arrows_and_names_str )
 
     return file_str

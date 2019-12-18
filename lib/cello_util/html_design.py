@@ -107,7 +107,7 @@ Outputs:
         "output_directory": (str) path to resulting output_directory in scratch dir.
 
 """
-def build_html(results_dir, scratch_dir):
+def build_html(results_dir, scratch_dir, user_output_name):
     """
     There is a variable amount of png files we need to return to the user. Should we enforce a limit? (10 currently)
     """
@@ -172,7 +172,7 @@ def build_html(results_dir, scratch_dir):
     #Here add plasmid visualization step:
     gbk_files = out_files_dict['gbk_files']
 
-    gb_plasmid_divs_str = make_plasmid_divs(gbk_files)
+    gb_plasmid_divs_str = make_plasmid_divs(gbk_files, user_output_name)
     gb_plasmid_buttons_str = make_plasmid_buttons(gbk_files)
 
     html_file_str = html_file_str.replace('<p>Visualization_Content</p>', visualization_content)
@@ -200,7 +200,7 @@ Inputs:
 Output:
     plasmid_divs_str: (str) A string to insert into report html.
 """
-def make_plasmid_divs(gbk_files):
+def make_plasmid_divs(gbk_files, user_output_name):
     plasmid_divs_str = ''
 
     #We place basic parameters on the design of the plasmid map:
@@ -211,7 +211,7 @@ def make_plasmid_divs(gbk_files):
     k = min(len(gbk_files), 6)
     for i in range(k):
         gb_file = gbk_files[i]
-        plasmid_map_html = make_plasmid_graph(gb_file, gb_info, js_info, base_html_filepath)
+        plasmid_map_html = make_plasmid_graph(gb_file, gb_info, js_info, base_html_filepath, user_output_name)
         plasmid_map_html = plasmid_map_html.replace('id="Plasmid_Div_Id_Here"', 'id="Plasmid_Map_' + str(i+1) + '"')
         plasmid_map_html = plasmid_map_html.replace('myCanvas','myCanvas_' + str(i+1))
         plasmid_divs_str += plasmid_map_html + '\n'

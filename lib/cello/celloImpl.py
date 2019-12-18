@@ -263,7 +263,7 @@ class cello:
                                               'pack': 'zip'})['shock_id']
        
         #Creating HTML to return to the user
-        html_result_dict = build_html(full_path_output_folder, self.shared_folder)
+        html_result_dict = build_html(full_path_output_folder, self.shared_folder, main_output_name)
         
         report_shock_id = dfu.file_to_shock({'file_path': html_result_dict['output_directory'],
                                                   'pack': 'zip'})['shock_id']
