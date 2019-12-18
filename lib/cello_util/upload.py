@@ -18,6 +18,38 @@ def make_genbank_genome_dict(filepath, genome_name, workspace_name):
 
 #TD: Only output the .ape file that has plasmid circuit in its name.
 def make_kbase_genomes(output_files, kb_output_folder, output_folder, gfu, ws_name, main_output_name):
+
+            ape_files = turn_ape_to_gbk(output_files, kb_output_folder, output_folder)
+
+            #Uploading the ape files to KBase Genome File Object.
+            genome_ref_list = []
+            for ape_fp in ape_files:
+
+                #Placeholder genome name:
+                g_name = (ape_fp.split('/')[-1])[:-4]
+
+                #Adding user output_name
+                replace_index = g_name.find("plasmid_")
+                if replace_index != -1:
+                    g_name = main_output_name + "_" + g_name[replace_index:]
+                else:
+                    logging.critical("Could not find plasmid_circuit in file name.")
+
+                # Making the parameters dict: (ws_name defined at top of function ^)
+                genb_gen_dict = make_genbank_genome_dict(gbk_file_name, g_name, ws_name)
+
+                # Calling genbank to genome function
+                result = gfu.genbank_to_genome(genb_gen_dict)
+    
+                genome_ref_list.append({'ref' : result["genome_ref"], 'description':'Genome created for file: ' + g_name + '.gbk'})
+                #DEBUG
+                logging.debug("Genbank to Genome Upload Results for: " + ape_fp)
+                logging.debug(result)
+ 
+            return genome_ref_list
+
+
+def turn_ape_to_gbk(output_files, kb_output_folder, output_folder):
             #Locating the '.ape' files. List ape_files will contain full paths to files.
             # ape files are like genbank files.
             plasmid_ape_files = []
@@ -45,49 +77,22 @@ def make_kbase_genomes(output_files, kb_output_folder, output_folder, gfu, ws_na
             if len(ape_files) == 0:
                 logging.critical("NO .APE FILES FOUND - CANNOT MAKE PLASMID - ONLY RETURNING OUTPUT FOLDER.")
 
-            #Replace "label" in .ape file with "locus_tag"
-
             for ap_f in ape_files:
-               response = replace_label_with_locus_tag(ap_f)
-               if response != 0:
-                   logging.critical("Issue with replacing 'label' with 'locus_tag'. Could be that no 'label's exist.")
-
-
-
-
-            #Uploading the ape files to KBase Genome File Object.
-            genome_ref_list = []
-            for ape_fp in ape_files:
-
+                #Replace "label" in .ape file with "locus_tag"
+                response = replace_label_with_locus_tag(ap_f)
+                if response != 0:
+                    #ISSUE - WE DO NOT CATCH IF THIS FAILS IN LATER STEPS
+                    logging.critical("Issue with replacing 'label' with 'locus_tag'. Could be that no 'label's exist.")
                 #Placeholder genome name:
-                g_name = (ape_fp.split('/')[-1])[:-4]
+                g_name = (ap_f.split('/')[-1])[:-4]
 
                 #renaming file to genbank type:
-                gbk_file_name = ape_fp[:-4] + '.gbk'
-                shutil.copyfile(ape_fp, gbk_file_name)
+                gbk_file_name = ap_f[:-4] + '.gbk'
+                shutil.copyfile(ap_f, gbk_file_name)
 
-                #Adding user output_name
-                replace_index = g_name.find("plasmid_")
-                if replace_index != -1:
-                    g_name = main_output_name + "_" + g_name[replace_index:]
-                else:
-                    logging.critical("Could not find plasmid_circuit in file name.")
-
-                # Making the parameters dict: (ws_name defined at top of function ^)
-                genb_gen_dict = make_genbank_genome_dict(gbk_file_name, g_name, ws_name)
-
-                # Calling genbank to genome function
-                result = gfu.genbank_to_genome(genb_gen_dict)
-    
-                genome_ref_list.append({'ref' : result["genome_ref"], 'description':'Genome created for file: ' + g_name + '.gbk'})
-                #DEBUG
-                logging.debug("Genbank to Genome Upload Results for: " + ape_fp)
-                logging.debug(result)
- 
+            return ape_files
 
 
-
-            return genome_ref_list
 
 
 # We replace the feature value "label" with "locus_tag" so KBase can recognize the name

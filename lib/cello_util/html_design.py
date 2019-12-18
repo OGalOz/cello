@@ -22,7 +22,7 @@ The PDF and the png files are replicates, you can leave out one and keep the oth
 import os
 import logging
 import shutil
-
+from cello_util.plasmid_map_viewer import make_plasmid_graph
 
 
 """
@@ -39,6 +39,7 @@ Outputs:
                 gene_name: (str) Name of gene
                 file_path: (str) Path to file
         truth_png_files_found: (bool) True if found, False if not.
+        gbk_files: (list) List of all paths to gbk files.
         all_return_files: (list of str) The full paths to all the files.
 
 """
@@ -53,6 +54,7 @@ def extract_files_from_folder(results_dir):
     wiring_svg_files = []
     wiring_png_files = []
     truth_png_files = []
+    gbk_files = []
     wiring_svg_found = False
     wiring_png_files_found = False
     truth_png_files_found = False
@@ -71,6 +73,8 @@ def extract_files_from_folder(results_dir):
             wiring_png_files_found = True
         elif ".ape" in f:
             plasmid_ape_files_created += 1
+        elif ".gbk" in f:
+            gbk_files.append(os.path.join(results_dir,f))
     if wiring_svg_found:
         out_files_dict['wiring_svg'] = wiring_svg_files[0]
         if len(wiring_svg_files) > 1:
@@ -88,6 +92,7 @@ def extract_files_from_folder(results_dir):
     all_output_files = wiring_svg_files + truth_png_files + wiring_png_files
     out_files_dict['all_return_files'] = all_output_files
     out_files_dict["num_plasmids_created"] = plasmid_ape_files_created
+    out_files_dict["gbk_files"] = gbk_files
 
     return out_files_dict
 
@@ -100,19 +105,18 @@ Outputs:
     html_result_dict: (dict) 
         "result_file_path" : (str) file path to resulting html file. 
         "output_directory": (str) path to resulting output_directory in scratch dir.
-            }
 
 """
 def build_html(results_dir, scratch_dir):
     """
-    There is a variable amount of png files we need to return to the user. Should we enforce a limit?
+    There is a variable amount of png files we need to return to the user. Should we enforce a limit? (10 currently)
     """
     logging.info("Starting to generate html report.")
     
     out_files_dict = extract_files_from_folder(results_dir)
 
     num_plasmids_created = out_files_dict["num_plasmids_created"]
-    overview_content = '<h5> ' + str(num_plasmids_created) + " Plasmids Created by Cello. Visualizations provided in other tab.</h5>"
+    overview_content = '<h5> ' + str(num_plasmids_created) + " Plasmids Created by Cello. Visualizations provided in the other tabs.</h5>"
 
     output_directory = os.path.join(scratch_dir, "HTML_Report")
     os.makedirs(output_directory, exist_ok=True)
@@ -165,8 +169,18 @@ def build_html(results_dir, scratch_dir):
         truth_graph_display_name)
 
 
+    #Here add plasmid visualization step:
+    gbk_files = out_files_dict['gbk_files']
+
+    gb_plasmid_divs_str = make_plasmid_divs(gbk_files)
+    gb_plasmid_buttons_str = make_plasmid_buttons(gbk_files)
+
     html_file_str = html_file_str.replace('<p>Visualization_Content</p>', visualization_content)
     html_file_str = html_file_str.replace('<p>Overview_Content</p>',overview_content)
+    html_file_str = html_file_str.replace('{New_Plasmid_Divs}', gb_plasmid_divs_str)
+    html_file_str = html_file_str.replace('{New_Plasmid_Buttons}', gb_plasmid_buttons_str)
+
+    logging.debug(html_file_str)
 
     f = open(result_file_path, "w")
     f.write(html_file_str)
@@ -178,6 +192,50 @@ def build_html(results_dir, scratch_dir):
             }
 
     return html_result_dict
+
+"""
+Inputs:
+    gbk_files: (list) A list of full paths to the gbk files.
+
+Output:
+    plasmid_divs_str: (str) A string to insert into report html.
+"""
+def make_plasmid_divs(gbk_files):
+    plasmid_divs_str = ''
+
+    #We place basic parameters on the design of the plasmid map:
+    base_html_filepath = os.path.join(os.path.dirname(__file__), "plasmid_html_base.html")
+    gb_info = {'name_tag': 'locus_tag'}
+    js_info = {'circle_size': 200, 'line_width': 5, 'center_coordinates':[400,400],'arrow_len':70 ,'arrow_thick':2 }
+    #We set a maximum number of files to be made (6):
+    k = min(len(gbk_files), 6)
+    for i in range(k):
+        gb_file = gbk_files[i]
+        plasmid_map_html = make_plasmid_graph(gb_file, gb_info, js_info, base_html_filepath)
+        plasmid_map_html = plasmid_map_html.replace('id="Plasmid_Div_Id_Here"', 'id="Plasmid_Map_' + str(i+1) + '"')
+        plasmid_map_html = plasmid_map_html.replace('myCanvas','myCanvas_' + str(i+1))
+        plasmid_divs_str += plasmid_map_html + '\n'
+
+    return plasmid_divs_str
+
+
+
+"""
+Inputs:
+    gbk_files: (list) A list of full paths to the gbk files.
+
+Output:
+    plasmid_buttons_str: (str) A string to insert into report html.
+"""
+def make_plasmid_buttons(gbk_files):
+    plasmid_buttons_str = ''
+    k = min(len(gbk_files), 6)
+    for i in range(k):
+        new_id = "Plasmid_Map_" + str(i+1)
+        new_button = '<button class="tablinks" onclick="openTab(event, ' + "'" + new_id + "')" + '">' + new_id.replace("_", " ") + "</button>\n"
+        plasmid_buttons_str += new_button
+
+    return plasmid_buttons_str
 
 
 
