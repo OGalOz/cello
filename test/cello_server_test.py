@@ -78,7 +78,7 @@ class celloTest(unittest.TestCase):
         main_output_name = "Test_12_05_19"
 
         #no or yes
-        kbase_genome_bool = "no"
+        kbase_genome_bool = "yes"
 
         ret = self.serviceImpl.run_cello(self.ctx, {
                                                     'workspace_name': self.wsName,
