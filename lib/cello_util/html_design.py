@@ -145,18 +145,18 @@ def build_html(results_dir, scratch_dir, user_output_name):
     png_display_name = 'Wiring Diagram'
     #We get the wiring link file from the svg file:
     if out_files_dict["wiring_svg_diagram_found"] == True:
-        svg_diagram_name = get_name_from_path(out_files_dict['wiring_svg'])
-        shutil.copy2(os.path.join(results_dir, svg_diagram_name),
-        os.path.join(output_directory, svg_diagram_name))
+        diagram_link = get_name_from_path(out_files_dict['wiring_svg'])
+        shutil.copy2(os.path.join(results_dir, diagram_link),
+        os.path.join(output_directory, diagram_link))
 
     else:
-        svg_diagram_name = png_diagram_name
+        diagram_link = png_diagram_name
     
     shutil.copy2(os.path.join(results_dir, png_diagram_name),
     os.path.join(output_directory, png_diagram_name))
     visualization_content = ''
     visualization_content += '<div class="gallery">'
-    visualization_content += '<a target="_blank" href="{}">'.format(svg_diagram_name)
+    visualization_content += '<a target="_blank" href="{}">'.format(diagram_link)
     visualization_content += '<img src="{}" '.format(png_diagram_name)
     visualization_content += 'alt="{}" width="600" height="400">'.format(
     png_display_name)
