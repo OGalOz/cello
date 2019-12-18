@@ -28,7 +28,7 @@ def make_kbase_genomes(output_files, kb_output_folder, output_folder, gfu, ws_na
                 #Placeholder genome name:
                 g_name = (ape_fp.split('/')[-1])[:-4]
 
-                gbk_file_name = ape_f[:-4] + '.gbk'
+                gbk_file_name = ape_fp[:-4] + '.gbk'
 
                 #Adding user output_name
                 replace_index = g_name.find("plasmid_")
