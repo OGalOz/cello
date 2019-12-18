@@ -146,6 +146,9 @@ def build_html(results_dir, scratch_dir, user_output_name):
     #We get the wiring link file from the svg file:
     if out_files_dict["wiring_svg_diagram_found"] == True:
         svg_diagram_name = get_name_from_path(out_files_dict['wiring_svg'])
+        shutil.copy2(os.path.join(results_dir, svg_diagram_name),
+        os.path.join(output_directory, svg_diagram_name))
+
     else:
         svg_diagram_name = png_diagram_name
     
@@ -153,7 +156,7 @@ def build_html(results_dir, scratch_dir, user_output_name):
     os.path.join(output_directory, png_diagram_name))
     visualization_content = ''
     visualization_content += '<div class="gallery">'
-    visualization_content += '<a target="_blank" href="{}">'.format(png_diagram_name)
+    visualization_content += '<a target="_blank" href="{}">'.format(svg_diagram_name)
     visualization_content += '<img src="{}" '.format(png_diagram_name)
     visualization_content += 'alt="{}" width="600" height="400">'.format(
     png_display_name)
@@ -187,6 +190,8 @@ def build_html(results_dir, scratch_dir, user_output_name):
             pdf_gene = pdf_file_dict['gene_name']
             if truth_gene_name == pdf_gene:
                 truth_graph_link = get_name_from_path(pdf_file_dict['file_path'] , "truth")
+                shutil.copy2(os.path.join(results_dir, truth_graph_link),
+                os.path.join(output_directory, truth_graph_link))
                 break
         visualization_content += '<div class="gallery">'
         visualization_content += '<a target="_blank" href="{}">'.format(truth_graph_link)
