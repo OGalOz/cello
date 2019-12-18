@@ -11,7 +11,8 @@ from installed_clients.GenomeFileUtilClient import GenomeFileUtil
 from cello_util.file_maker import make_verilog_case_file_string, make_input_file_str, make_output_file_str
 from cello_util.truth_table import make_truth_table_from_text, make_truth_table_from_values
 from cello_util.upload import make_kbase_genomes
-from cello_util.html_design import build_html 
+from cello_util.html_design import build_html
+from cello_util.plasmid_map_viewer import make_plasmid_graph
 
 
 #END_HEADER
@@ -74,6 +75,12 @@ class cello:
         for k in params:
             logging.debug(k)
             logging.debug(params[k])
+
+
+        gb_file = "/kb/module/data/test_plasmid_output.gbk"
+        plasmid_map_object = make_plasmid_graph(gb_file)
+
+        raise Exception("Testing Plasmid Viewer - Do Not Continue Program.")
 
 
         #CODE
