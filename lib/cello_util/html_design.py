@@ -39,6 +39,11 @@ Outputs:
                 gene_name: (str) Name of gene
                 file_path: (str) Path to file
         truth_png_files_found: (bool) True if found, False if not.
+        truth_pdf_files: (list) List of dicts, where each contains name of gene and the full path to the pdf files.
+            truth_dict: (dict)
+                gene_name: (str) Name of gene
+                file_path: (str) Path to file
+        truth_pdf_files_found: (bool) True if found, False if not.
         gbk_files: (list) List of all paths to gbk files.
         all_return_files: (list of str) The full paths to all the files.
 
@@ -53,11 +58,13 @@ def extract_files_from_folder(results_dir):
     #Extracting Circuit Diagram - filename should end with 'wiring_grn.svg':
     wiring_svg_files = []
     wiring_png_files = []
+    truth_pdf_files = []
     truth_png_files = []
     gbk_files = []
     wiring_svg_found = False
     wiring_png_files_found = False
     truth_png_files_found = False
+    truth_pdf_files_found = False
     plasmid_ape_files_created = 0
     for f in all_files:
         if "wiring_agrn.svg" in f:
@@ -68,6 +75,11 @@ def extract_files_from_folder(results_dir):
             truth_file_info = {"gene_name" : truth_gene_name, 'file_path': f}
             truth_png_files.append(truth_file_info)
             truth_png_files_found = True
+        elif "truth.pdf" in f:
+            truth_pdf_name = get_gene_name_for_truth_graph(f)
+            truth_file_info = {"gene_name" : truth_pdf_name, 'file_path' : f}
+            truth_pdf_files.append(truth_file_info)
+            truth_pdf_files_found = True
         elif "wiring_agrn.png" in f:
             wiring_png_files.append(os.path.join(results_dir,f))
             wiring_png_files_found = True
@@ -86,7 +98,8 @@ def extract_files_from_folder(results_dir):
 
     out_files_dict['wiring_svg_diagram_found'] = wiring_svg_found
     out_files_dict['png_diagram_found'] = wiring_png_files_found
-
+    out_files_dict['truth_pdf_files_found'] = truth_pdf_files_found
+    out_files_dict['truth_pdf_files'] = truth_pdf_files
     out_files_dict['truth_png_files_found'] = truth_png_files_found
     out_files_dict['truth_png_files'] = truth_png_files
     all_output_files = wiring_svg_files + truth_png_files + wiring_png_files
@@ -130,6 +143,11 @@ def build_html(results_dir, scratch_dir, user_output_name):
 
     png_diagram_name = get_name_from_path(path_to_wiring_png_file,"wiring_png")
     png_display_name = 'Wiring Diagram'
+    #We get the wiring link file from the svg file:
+    if out_files_dict["wiring_svg_diagram_found"] == True:
+        svg_diagram_name = get_name_from_path(out_files_dict['wiring_svg'])
+    else:
+        svg_diagram_name = png_diagram_name
     
     shutil.copy2(os.path.join(results_dir, png_diagram_name),
     os.path.join(output_directory, png_diagram_name))
@@ -144,6 +162,8 @@ def build_html(results_dir, scratch_dir, user_output_name):
 
     #For each truth graph make one of these
     truth_png_files = out_files_dict['truth_png_files']
+    truth_pdf_files = out_files_dict['truth_pdf_files']
+    
 
     #We set the upper limit of different png files to be 10
     k = min(len(truth_png_files), 10)
@@ -160,8 +180,16 @@ def build_html(results_dir, scratch_dir, user_output_name):
         shutil.copy2(os.path.join(results_dir, truth_graph_name),
         os.path.join(output_directory, truth_graph_name))
 
+        truth_graph_link = truth_graph_name
+        #Getting PDF file as a link:
+        for i in range(len(truth_pdf_files)):
+            pdf_file_dict = truth_pdf_files[i]
+            pdf_gene = pdf_file_dict['gene_name']
+            if truth_gene_name == pdf_gene:
+                truth_graph_link = get_name_from_path(pdf_file_dict['file_path'] , "truth")
+                break
         visualization_content += '<div class="gallery">'
-        visualization_content += '<a target="_blank" href="{}">'.format(truth_graph_name)
+        visualization_content += '<a target="_blank" href="{}">'.format(truth_graph_link)
         visualization_content += '<img src="{}" '.format(truth_graph_name)
         visualization_content += 'alt="{}" width="600" height="400">'.format(
         truth_graph_display_name)
@@ -244,7 +272,7 @@ Inputs:
     filepath: (str) Full path to the file
     typ: (str) Type of file: 'wiring_png' or 'truth'
 """
-def get_name_from_path(filepath, typ):
+def get_name_from_path(filepath, typ = None):
 
     #For now we just return the filename
     return filepath.split('/')[-1]
