@@ -239,7 +239,12 @@ def make_plasmid_divs(gbk_files, user_output_name):
     #We place basic parameters on the design of the plasmid map:
     base_html_filepath = os.path.join(os.path.dirname(__file__), "plasmid_html_base.html")
     gb_info = {'name_tag': 'locus_tag'}
-    js_info = {'circle_size': 200, 'line_width': 5, 'center_coordinates':[400,400],'arrow_len':70 ,'arrow_thick':2 }
+    js_info = {'circle_size': 200, 
+            'line_width': 15, 
+            'center_coordinates':[400,400],
+            'arrow_len':70 ,
+            'arrow_thick':2,
+            'text_size' : 13 }
     #We set a maximum number of files to be made (6):
     k = min(len(gbk_files), 6)
     for i in range(k):

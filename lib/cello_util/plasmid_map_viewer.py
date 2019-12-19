@@ -2,7 +2,7 @@
 
 
 """
-Omree Gal-Oz 2019
+Maintainer: ogaloz@lbl.gov
 Takes as an input a genbank file - (representing a plasmid).
 Maximum Features (in the plasmid) = 100
 """
@@ -28,6 +28,7 @@ Inputs:
         center_coordinates: (list) each internal part is an int [x,y]
         arrow_len: (int) Length of arrow
         arrow_thick: (int) thickness of arrow
+        text_size: (int) Size of text for names of features
     base_html_filepath: (str) filepath to the base html to substitute into.
 Outputs:
     html_str: (str) The string for the entire HTML file
@@ -109,6 +110,7 @@ Inputs:
         center_coordinates: (list) each internal part is an int [x,y]
         arrow_len: (int) Length of arrow
         arrow_thick: (int) thickness of arrow
+        text_size: (int) Text size for names of features
 
     js_feat_list: (list) A list of dicts containing important info for the features, js_feat
         js_feat:(dict)
@@ -250,9 +252,10 @@ Inputs:
     js_info: (dict)
         circle_size: (int) Radius size of circle in javascript (eg 200)
         line_width: (int) Thickness of line in plasmid
-        center_coordinates: (list) each internal part is an int [x,y]
+        center_coordinates: (list) Each internal part is an int [x,y]
         arrow_len: (int) Length of arrow
-        arrow_thick: (int) thickness of arrow
+        arrow_thick: (int) Thickness of arrow
+	text_size: (int) Size of text
     js_feat_list: (list) A list of dicts containing important info for the features, js_feat
         js_feat:(dict)
             percentage: (float)
@@ -267,7 +270,11 @@ Inputs:
 def make_js_arrows_and_names(js_feat_list, js_info):
     
     js_str = '<script>var c = document.getElementById("myCanvas");var ctx = c.getContext("2d");ctx.lineWidth = "2";ctx.strokeStyle = "black";'
-    js_str += "ctx.font = '10pt Calibri';ctx.fillStyle = '#333';var maxWidth= 50; var lineHeight= 25;"
+    if "text_size" in js_info:
+        text_size = str(js_info['text_size'])
+    else:
+        text_size = '10'
+    js_str += "ctx.font = '" + text_size + "pt Calibri';ctx.fillStyle = '#333';var maxWidth= 50; var lineHeight= 25;"
     
     #Setting useful variables for later:
     cc = js_info['center_coordinates']
@@ -284,7 +291,7 @@ def make_js_arrows_and_names(js_feat_list, js_info):
     add_js_str += 'ctx.beginPath(); canvas_arrow(ctx, ' + str(arrow_root[0]) + ', ' + str(arrow_root[1]) + ', ' + str(origin_midpoint[0] + 6) + ', '
     add_js_str += str(origin_midpoint[1]) + ');ctx.stroke();'
     #We add the text box with the name
-    add_js_str += 'var text = "' + 'start point' + '";'
+    add_js_str += 'var text = "' + 'start' + '";'
     add_js_str += 'wrapText(ctx, text, ' + str(arrow_root[0] + 5) + ', ' + str(arrow_root[1]) + ', maxWidth, lineHeight);'
     js_str += add_js_str
 
@@ -370,7 +377,12 @@ def test():
     gb_file = ""
     base_html_filepath = ""
     gb_info = {'name_tag': 'locus_tag'}
-    js_info = {'circle_size': 200, 'line_width': 5, 'center_coordinates':[400,400],'arrow_len':70 ,'arrow_thick':2 }
+    js_info = {'circle_size': 200, 
+            'line_width': 5, 
+            'center_coordinates':[400,400],
+            'arrow_len':70 ,
+            'arrow_thick':2,
+            'text_size' : 15}
     final_html_str = make_plasmid_graph(gb_file, gb_info, js_info, base_html_filepath)
     logging.debug(final_html_str)
 
