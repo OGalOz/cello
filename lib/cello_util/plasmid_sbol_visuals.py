@@ -16,8 +16,8 @@ import logging
 Inputs:    
 
     js_info: (dict)
-        circle_radius: (int) Radius size of circle in javascript (eg 200)
-        line_width: (int) Thickness of line in plasmid
+        circle_radius: (int) Radius size of circle in javascript (eg 300)
+        circle_line_width: (int) Thickness of line in plasmid
         center_coordinates: (list) Each internal part is an int [x,y]
         pointer_len: (int) Length of pointer
         pointer_thick: (int) Thickness of pointer
@@ -38,7 +38,7 @@ Inputs:
 Outputs:
     js_str: (An internal javascript string representing the visuals of this object.)
 """
-def make_sbol_visuals_js(js_feat, js_info):
+def make_sbol_visuals_js(js_feat, js_info, gb_info):
 
     js_str = ''
     typ = js_feat['typ']
@@ -63,7 +63,7 @@ Inputs:
 
     js_info: (dict)
         circle_radius: (int) Radius size of circle in javascript (eg 200)
-        line_width: (int) Thickness of line in plasmid
+        circle_line_width: (int) Thickness of line in plasmid
         center_coordinates: (list) Each internal part is an int [x,y]
         pointer_len: (int) Length of pointer
         pointer_thick: (int) Thickness of pointer
@@ -173,7 +173,7 @@ def make_promoter_visual(js_feat, js_info):
 Inputs:    
     js_info: (dict)
         circle_radius: (int) Radius size of circle in javascript (eg 200)
-        line_width: (int) Thickness of line in plasmid
+        circle_line_width: (int) Thickness of line in plasmid
         center_coordinates: (list) Each internal part is an int [x,y]
         pointer_len: (int) Length of pointer
         pointer_thick: (int) Thickness of pointer
@@ -184,9 +184,12 @@ Inputs:
             prcnt: (float) [necessary if no pixels] percent increase from center to outer edge of Terminator Symbol
             pixels: (float) [necessary if no prcnt] pixel length increase from circle point to outer edge of Terminator Symbol
             base_width: (float) [optional] Width of inner part of the "T".
-            inner_length: (float) [optional] Length of inner part of the "T".
-            outer_width: (float) [optional] Width of top part of "T"
-            color: (str) hex symbol that has 6 characters preceded by a '#', like "#EA6062"
+            base_height: (float) Height of inner part of the "T"
+            top_width: (float) width of the top part of the T.
+            top_height: (float) height of the top part of the T.
+            internal_color: (str) [optional] Coloring of the inside of the rbs circle.
+            border_color: (str) Color of the border of the T.
+            border_width: (float) width of the border of the T.
 
     js_feat: (dict)
             percentage: (float)
@@ -305,11 +308,89 @@ def make_terminator_visual(js_feat, js_info):
 
 """
 rbs: 'ribosome binding site', also known as 'ribosome entry site'.
-"""
-def make_rbs_visual(js_feat, js_info):
 
-    return ""
-    #raise Exception("function incomplete.")
+Inputs:    
+    js_info: (dict)
+        circle_radius: (int) Radius size of circle in javascript (eg 200)
+        circle_line_width: (int) Thickness of line in plasmid
+        center_coordinates: (list) Each internal part is an int [x,y]
+        pointer_len: (int) Length of pointer
+        pointer_thick: (int) Thickness of pointer
+	text_size: (int) Size of text
+
+        ribosome_site_info: (dict)
+            percent_center: (float) between [0,100] indicating where center of rbs circle is in region.
+            radius: (float) (less than 25) The radius of the rbs half circle.
+            border_width: (float) [optional] Width of rbs half-circle border.
+            border_color: (str) probably black
+            internal_color: (str) hex symbol that has 6 characters preceded by a '#', like "#EA6062"
+
+    js_feat: (dict)
+            percentage: (float)
+            name: (str)
+            color: (str)
+            start_bp: (int) Start in plasmid in terms of base pairs.
+            end_bp: (int) End in plasmid in terms of base pairs.
+            start_circle: (list) [x,y] for starting point on canvas.
+            end_circle: (list) [x,y] for ending point on canvas.
+            bp_len: (int) Length in base pairs.
+            midpoint: (list) [x,y] midpoint location of feature
+            pointer_direction: (str) 'out' or 'in'.
+            typ: The type of entity
+Outputs:
+    js_str: (An internal javascript string representing the visuals of this object.)
+"""
+
+def make_rbs_visual(js_feat, js_info):
+    """
+    The ribosome binding/entry site symbol will look like a half circle with filled in color light purple.
+    We calculate the center point of the rbs circle. Then we find the angle of the line perpendicular to the center 
+    of the plasmid map circle.
+    """
+    logging.debug("Making rbs")
+    if "ribosome_site_info" in js_info:
+        rbs_info = js_info["ribosome_site_info"]
+    else:
+        logging.critical("Ribosome Site Info not found in design info.")
+        return ""
+
+    radius = js_info['circle_radius']
+    cc = js_info['center_coordinates']
+
+    
+    js_str = "//RBS Symbol: \n"
+    """
+    First, we find the center of the rbs circle we will make.
+    """
+    percent_center = rbs_info["percent_center"]
+    relative_angle_to_t_center = (js_feat['percentage'] * (percent_center/100))*(math.pi * 2)
+
+    starting_angle = get_angle_from_point(js_feat['start_circle'],cc)
+    rbs_symbol_center_angle = starting_angle + relative_angle_to_t_center
+    rbs_circle_center = [cc[0] + radius*(math.cos(rbs_symbol_center_angle)),cc[1] + radius*(math.sin(rbs_symbol_center_angle))]
+    
+    #Notice, here we add some distance from center of plasmid circle to the center of the rbs circle in order
+    #  to get the circle to sit on top of the plasmid visual, and not inside it.
+    extension_length = js_info['circle_line_width']/2
+    rbs_circle_center = line_extension_coordinates(cc,rbs_circle_center,"pixels", extension_length)
+
+    start_angle = get_angle_from_point(rbs_circle_center, cc) + (math.pi/2)
+
+    js_str += make_javascript_rbs_text(rbs_circle_center, start_angle, rbs_info)
+
+    return js_str
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 def make_cds_visual(js_feat, js_info):
@@ -321,6 +402,14 @@ def make_cds_visual(js_feat, js_info):
 def make_scar_visual(js_feat, js_info):
 
     return ""
+
+
+
+
+
+
+
+
 
 """
 Inputs:
@@ -607,7 +696,31 @@ def make_javascript_terminator_text(list_of_coordinates, terminator_info):
     j_str += "ctx.closePath(); ctx.fill(); \n\n"
 
     return j_str
+   
+
+
+"""
+Inputs:
+    rbs_circle_center: (list) [x,y] coordinates for center of the rbs circle.
+    starting_angle: (float) Angle at which the semi circle starts.
+    rbs_info: (dict)
+            radius: (float) (less than 25) The radius of the rbs half circle.
+            border_width: (float) [optional] Width of rbs half-circle border.
+            border_color: (str) probably black
+            internal_color: (str) hex symbol that has 6 characters preceded by a '#', like "#EA6062"
+
+Outputs:
+    js_str: (string) The string that represents the ribosome semi-circle symbol.
+"""
+def make_javascript_rbs_text(rbs_circle_center, starting_angle, rbs_info):
+    js_str = "ctx.beginPath();"
+    js_str += "ctx.arc({}, {}, {}, {}, {}, true); ctx.closePath(); ".format(str(rbs_circle_center[0]), str(rbs_circle_center[1]),str(rbs_info['radius']), str(starting_angle), str(starting_angle - math.pi) )
+    js_str += "ctx.lineWidth = {}; ".format(str(rbs_info['border_width']))
+    js_str += "ctx.fillStyle = '{}'; ".format(rbs_info["internal_color"])
+    js_str += "ctx.fill(); "
+    js_str += "ctx.strokeStyle = '{}';".format(rbs_info["border_color"])
+    js_str += "ctx.stroke(); \n"
+    return js_str
+
+        
     
-
-
-

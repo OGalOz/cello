@@ -53,7 +53,7 @@ def make_plasmid_graph(gb_file, gb_info, js_info, base_html_filepath, user_outpu
     js_plasmid_str = make_js_canvas_plasmid(js_feat_list, js_info)
     js_pointers_and_names_str = make_js_pointers_and_names(js_feat_list, js_info)
     plasmid_name_center_canvas_str = make_plasmid_name_in_center(js_info, plasmid_info)
-    sbol_visuals_js_str = make_sbol_standard_visuals(js_feat_list,js_info, plasmid_info)
+    sbol_visuals_js_str = make_sbol_standard_visuals(js_feat_list,js_info, plasmid_info, gb_info)
     logging.info(js_plasmid_str)
     logging.info(js_pointers_and_names_str )
     logging.info(plasmid_name_center_canvas_str)
@@ -532,13 +532,13 @@ Inputs:
             pointer_direction: (str) 'out' or 'in'.
             typ: The type of entity
 """
-def make_sbol_standard_visuals(js_feat_list,js_info, plasmid_info):
+def make_sbol_standard_visuals(js_feat_list,js_info, plasmid_info, gb_info):
 
     #As a test, we create a black circle for every start point, and a gray line for every end point
     visuals_str = '<script>\nvar c = document.getElementById("myCanvas");var ctx = c.getContext("2d");\n'
 
     for js_feat in js_feat_list:
-        visuals_str += make_sbol_visuals_js(js_feat, js_info)
+        visuals_str += make_sbol_visuals_js(js_feat, js_info, gb_info)
 
 
     '''
