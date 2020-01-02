@@ -17,6 +17,7 @@ Your browser does not support the HTML5 canvas tag.</canvas>
   context.lineTo(tox - headlen * Math.cos(angle + Math.PI / 6), toy - headlen * Math.sin(angle + Math.PI / 6));
 }
 function wrapText(context, text, x, y, maxWidth, lineHeight) {
+    /*
         var words = text.split(' ');
         var line = '';
 
@@ -32,8 +33,11 @@ function wrapText(context, text, x, y, maxWidth, lineHeight) {
           else {
             line = testLine;
           }
-        }
-        context.fillText(line, x, y);
+        } 
+    */
+
+    context.fillText(text, x, y);
+
 }
 
 
