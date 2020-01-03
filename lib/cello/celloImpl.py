@@ -12,7 +12,7 @@ from cello_util.file_maker import make_verilog_case_file_string, make_input_file
 from cello_util.truth_table import make_truth_table_from_text, make_truth_table_from_values
 from cello_util.upload import make_kbase_genomes, turn_ape_to_gbk
 from cello_util.html_design import build_html
-from cello_util.plasmid_map_viewer import make_plasmid_graph
+#from cello_util.plasmid_map_viewer import make_plasmid_graph
 
 
 #END_HEADER

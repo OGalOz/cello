@@ -8,26 +8,30 @@
             "terminator": "terminator",
             "rbs": "rbs",
             "cds": "cds",
-            "scar": "scar"
-        }
+            "scar": "scar",
+            "ribozyme": "ribozyme",
+            "backbone": "backbone"
+        },
+        "max_number_of_features_allowed" : 100
 
     },
     "js_info": {
             "circle_radius": 300, 
-            "circle_line_width": 3, 
+            "circle_line_width": 8, 
             "center_coordinates":[450,450],
             "pointer_len_short": 70,
             "pointer_len_long": 120,
             "pointer_thick":1,
             "text_size" : 9,
-            "title_text_size" : 10,
+            "title_text_size" : 20,
             "max_title_length" : 35,
             "promoter_info" : {
                 "percent_start": 20,
                 "pixels": 20,
                 "line_width": 3,
                 "tiny_arrow_length": 1,
-                "arrow_angle": 35.0
+                "arrow_angle": 35.0,
+                "arrow_color": "black"
             },
             "terminator_info" : {
                 "percent_center": 50,

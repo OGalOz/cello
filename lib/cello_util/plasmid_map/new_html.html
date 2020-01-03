@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html>
+<body>
+<div id="Plasmid_Div_Id_Here" class="tabcontent">
+<canvas id="myCanvas" width="1000" height="1000" style="border:1px solid #d3d3d3;">
+Your browser does not support the HTML5 canvas tag.</canvas>
+
+
+<script>
+function wrapText(context, text, x, y, maxWidth, lineHeight) {
+    /*
+        var words = text.split(' ');
+        var line = '';
+
+        for(var n = 0; n < words.length; n++) {
+          var testLine = line + words[n] + ' ';
+          var metrics = context.measureText(testLine);
+          var testWidth = metrics.width;
+          if (testWidth > maxWidth && n > 0) {
+            context.fillText(line, x, y);
+            line = words[n] + ' ';
+            y += lineHeight;
+          }
+          else {
+            line = testLine;
+          }
+        } 
+    */
+
+    context.fillText(text, x, y);
+
+}
+
+
+</script>
+
+
+<script>var c = document.getElementById("myCanvas");var ctx = c.getContext("2d");ctx.lineWidth = '8';ctx.beginPath();ctx.strokeStyle = 'black';ctx.arc(450, 450, 300, 0 * Math.PI - (Math.PI/2), 0.002 * Math.PI - (Math.PI/2));ctx.stroke();ctx.beginPath();ctx.strokeStyle = '#FAADED';ctx.arc(450, 450, 300, 0.002 * Math.PI - (Math.PI/2), 0.01369332127632089 * Math.PI - (Math.PI/2));ctx.stroke();ctx.beginPath();ctx.strokeStyle = '#279516';ctx.arc(450, 450, 300, 0.01369332127632089 * Math.PI - (Math.PI/2), 0.014726779485854541 * Math.PI - (Math.PI/2));ctx.stroke();ctx.beginPath();ctx.strokeStyle = '#BDCFBD';ctx.arc(450, 450, 300, 0.014726779485854541 * Math.PI - (Math.PI/2), 0.035912672781294404 * Math.PI - (Math.PI/2));ctx.stroke();ctx.beginPath();ctx.strokeStyle = '#320888';ctx.arc(450, 450, 300, 0.035912672781294404 * Math.PI - (Math.PI/2), 0.052189639581449426 * Math.PI - (Math.PI/2));ctx.stroke();ctx.beginPath();ctx.strokeStyle = '#DCBDEB';ctx.arc(450, 450, 300, 0.052189639581449426 * Math.PI - (Math.PI/2), 0.07260043921973905 * Math.PI - (Math.PI/2));ctx.stroke();ctx.beginPath();ctx.strokeStyle = '#980658';ctx.arc(450, 450, 300, 0.07260043921973905 * Math.PI - (Math.PI/2), 0.07725100116264048 * Math.PI - (Math.PI/2));ctx.stroke();ctx.beginPath();ctx.strokeStyle = '#FCEFEE';ctx.arc(450, 450, 300, 0.07725100116264048 * Math.PI - (Math.PI/2), 0.23304482624983852 * Math.PI - (Math.PI/2));ctx.stroke();ctx.beginPath();ctx.strokeStyle = '#070795';ctx.arc(450, 450, 300, 0.23304482624983852 * Math.PI - (Math.PI/2), 0.24777160573569307 * Math.PI - (Math.PI/2));ctx.stroke();ctx.beginPath();ctx.strokeStyle = '#ACADBD';ctx.arc(450, 450, 300, 0.24777160573569307 * Math.PI - (Math.PI/2), 0.24880506394522672 * Math.PI - (Math.PI/2));ctx.stroke();ctx.beginPath();ctx.strokeStyle = '#686275';ctx.arc(450, 450, 300, 0.24880506394522672 * Math.PI - (Math.PI/2), 0.26714894716444904 * Math.PI - (Math.PI/2));ctx.stroke();ctx.beginPath();ctx.strokeStyle = '#FACDEC';ctx.arc(450, 450, 300, 0.26714894716444904 * Math.PI - (Math.PI/2), 0.28755974680273866 * Math.PI - (Math.PI/2));ctx.stroke();ctx.beginPath();ctx.strokeStyle = '#679323';ctx.arc(450, 450, 300, 0.28755974680273866 * Math.PI - (Math.PI/2), 0.29737759979330836 * Math.PI - (Math.PI/2));ctx.stroke();ctx.beginPath();ctx.strokeStyle = '#BDFFBF';ctx.arc(450, 450, 300, 0.29737759979330836 * Math.PI - (Math.PI/2), 0.4632476424234595 * Math.PI - (Math.PI/2));ctx.stroke();ctx.beginPath();ctx.strokeStyle = '#896169';ctx.arc(450, 450, 300, 0.4632476424234595 * Math.PI - (Math.PI/2), 0.48650045213796667 * Math.PI - (Math.PI/2));ctx.stroke();ctx.beginPath();ctx.strokeStyle = '#BFFDDF';ctx.arc(450, 450, 300, 0.48650045213796667 * Math.PI - (Math.PI/2), 0.4875339103475003 * Math.PI - (Math.PI/2));ctx.stroke();ctx.beginPath();ctx.strokeStyle = '#867816';ctx.arc(450, 450, 300, 0.4875339103475003 * Math.PI - (Math.PI/2), 0.5066528872238729 * Math.PI - (Math.PI/2));ctx.stroke();ctx.beginPath();ctx.strokeStyle = '#BBBDFB';ctx.arc(450, 450, 300, 0.5066528872238729 * Math.PI - (Math.PI/2), 0.5273220514145459 * Math.PI - (Math.PI/2));ctx.stroke();ctx.beginPath();ctx.strokeStyle = '#672668';ctx.arc(450, 450, 300, 0.5273220514145459 * Math.PI - (Math.PI/2), 0.536106446195582 * Math.PI - (Math.PI/2));ctx.stroke();ctx.beginPath();ctx.strokeStyle = '#CFBBAE';ctx.arc(450, 450, 300, 0.536106446195582 * Math.PI - (Math.PI/2), 0.7089523317400853 * Math.PI - (Math.PI/2));ctx.stroke();ctx.beginPath();ctx.strokeStyle = '#054611';ctx.arc(450, 450, 300, 0.7089523317400853 * Math.PI - (Math.PI/2), 0.7236791112259399 * Math.PI - (Math.PI/2));ctx.stroke();ctx.beginPath();ctx.strokeStyle = '#ABCBDD';ctx.arc(450, 450, 300, 0.7236791112259399 * Math.PI - (Math.PI/2), 0.7247125694354735 * Math.PI - (Math.PI/2));ctx.stroke();ctx.beginPath();ctx.strokeStyle = '#234456';ctx.arc(450, 450, 300, 0.7247125694354735 * Math.PI - (Math.PI/2), 1.5197002971192353 * Math.PI - (Math.PI/2));ctx.stroke();ctx.beginPath();ctx.strokeStyle = '#BFADDB';ctx.arc(450, 450, 300, 1.5197002971192353 * Math.PI - (Math.PI/2), 2.0 * Math.PI - (Math.PI/2));ctx.stroke();</script>
+<script>var c = document.getElementById("myCanvas");var ctx = c.getContext("2d");ctx.lineWidth = "1";ctx.strokeStyle = "black";ctx.font = '9pt Calibri';ctx.fillStyle = '#333';var maxWidth= 50; var lineHeight= 25;ctx.beginPath();ctx.moveTo(450,80);ctx.lineTo(450,144);ctx.stroke();var text = "0";wrapText(ctx, text, 445, 75, maxWidth, lineHeight);ctx.beginPath();ctx.moveTo(455.3671111148215,219.98095222193436);ctx.lineTo(456.7958888893527,158.7476190277418);ctx.stroke();var text = "backbone";wrapText(ctx, text, 416.5671111148215, 219.98095222193436, maxWidth, lineHeight);ctx.beginPath();ctx.moveTo(466.03048937498556,80.06562980802572);ctx.lineTo(463.37881117187317,141.25820372600322);ctx.stroke();var text = "Escar";wrapText(ctx, text, 471.03048937498556, 80.06562980802572, maxWidth, lineHeight);ctx.beginPath();ctx.moveTo(463.82691916707176,269.64888042949906);ctx.lineTo(471.85336489588394,164.95611005368738);ctx.stroke();var text = "pSrpR";wrapText(ctx, text, 435.82691916707176, 269.64888042949906, maxWidth, lineHeight);ctx.beginPath();ctx.moveTo(507.35598890960216,33.11988548630612);ctx.lineTo(493.0444986137003,137.13998568578828);ctx.stroke();var text = "pAmtR";wrapText(ctx, text, 512.3559889096022, 33.11988548630612, maxWidth, lineHeight);ctx.beginPath();ctx.moveTo(494.49581923476063,223.68505734044152);ctx.lineTo(506.3119774043451,163.5856321675552);ctx.stroke();var text = "RiboJ53";wrapText(ctx, text, 459.29581923476064, 223.68505734044152, maxWidth, lineHeight);ctx.beginPath();ctx.moveTo(535.0977643546375,89.87612765863526);ctx.lineTo(521.0122205443297,149.4845159573294);ctx.stroke();var text = "P3";wrapText(ctx, text, 540.0977643546375, 89.87612765863526, maxWidth, lineHeight);ctx.beginPath();ctx.moveTo(622.6022502982836,122.05572443326123);ctx.lineTo(594.0752812872854,176.25696555415766);ctx.stroke();var text = "PhlF";wrapText(ctx, text, 627.6022502982836, 122.05572443326123, maxWidth, lineHeight);ctx.beginPath();ctx.moveTo(702.8370541378032,179.89602509181026);ctx.lineTo(660.9796317672254,224.6120031364763);ctx.stroke();var text = "ECK120033...";wrapText(ctx, text, 707.8370541378032, 179.89602509181026, maxWidth, lineHeight);ctx.beginPath();ctx.moveTo(610.9716643289412,285.96220873146);ctx.lineTo(653.8714580411176,242.2452760914325);ctx.stroke();var text = "Xscar";wrapText(ctx, text, 582.9716643289412, 285.96220873146, maxWidth, lineHeight);ctx.beginPath();ctx.moveTo(753.8299132338361,160.1714652562024);ctx.lineTo(677.8537391542295,232.64643315702529);ctx.stroke();var text = "pTac";wrapText(ctx, text, 758.8299132338361, 160.1714652562024, maxWidth, lineHeight);ctx.beginPath();ctx.moveTo(587.4391593190055,333.5668257297508);ctx.lineTo(667.5548949148757,265.69585321621884);ctx.stroke();var text = "RiboJ10";wrapText(ctx, text, 552.2391593190055, 333.5668257297508, maxWidth, lineHeight);ctx.beginPath();ctx.moveTo(743.4923457926377,224.33151563003065);ctx.lineTo(694.9365432240797,261.6664394537538);ctx.stroke();var text = "S2";wrapText(ctx, text, 748.4923457926377, 224.33151563003065, maxWidth, lineHeight);ctx.beginPath();ctx.moveTo(794.0414889780418,313.1232785786285);ctx.lineTo(737.1301861222553,335.7654098223286);ctx.stroke();var text = "SrpR";wrapText(ctx, text, 799.0414889780418, 313.1232785786285, maxWidth, lineHeight);ctx.beginPath();ctx.moveTo(818.7755830052976,420.39928430726707);ctx.lineTo(757.7219478756622,425.29991053840837);ctx.stroke();var text = "ECK120029...";wrapText(ctx, text, 823.7755830052976, 420.39928430726707, maxWidth, lineHeight);ctx.beginPath();ctx.moveTo(679.0660689151458,440.0406056993415);ctx.lineTo(740.2582586143932,437.3800757124177);ctx.stroke();var text = "Vscar";wrapText(ctx, text, 651.0660689151458, 440.0406056993415, maxWidth, lineHeight);ctx.beginPath();ctx.moveTo(868.9939602551194,445.79604722152055);ctx.lineTo(763.9992450318899,446.84950590269005);ctx.stroke();var text = "pTet";wrapText(ctx, text, 873.9939602551194, 445.79604722152055, maxWidth, lineHeight);ctx.beginPath();ctx.moveTo(629.1714420528788,459.58776947440157);ctx.lineTo(734.0214302566098,465.1984711843002);ctx.stroke();var text = "BydvJ";wrapText(ctx, text, 601.1714420528788, 459.58776947440157, maxWidth, lineHeight);ctx.beginPath();ctx.moveTo(817.6708755482503,485.7800516473129);ctx.lineTo(756.7088594435313,479.84750645591413);ctx.stroke();var text = "A1";wrapText(ctx, text, 822.6708755482503, 485.7800516473129, maxWidth, lineHeight);ctx.beginPath();ctx.moveTo(792.9287393554072,588.158341035272);ctx.lineTo(736.1160924194259,565.269792629409);ctx.stroke();var text = "AmtR";wrapText(ctx, text, 797.9287393554072, 588.158341035272, maxWidth, lineHeight);ctx.beginPath();ctx.moveTo(737.4778544242746,681.9563803938353);ctx.lineTo(689.8097318030343,643.4945475492294);ctx.stroke();var text = "L3S2P55";wrapText(ctx, text, 742.4778544242746, 681.9563803938353, maxWidth, lineHeight);ctx.beginPath();ctx.moveTo(624.6873319810287,598.6374666856121);ctx.lineTo(671.3359164976285,638.3296833357015);ctx.stroke();var text = "Cscar";wrapText(ctx, text, 596.6873319810287, 598.6374666856121, maxWidth, lineHeight);ctx.beginPath();ctx.moveTo(310.64109342464633,792.8475754685692);ctx.lineTo(333.7051366780808,736.1059469335712);ctx.stroke();var text = "sensor_mo...";wrapText(ctx, text, 253.84109342464632, 792.8475754685692, maxWidth, lineHeight);ctx.beginPath();ctx.moveTo(196.0389975926634,180.01233239220042);ctx.lineTo(238.00487469908293,224.62654154902506);ctx.stroke();var text = "backbone";wrapText(ctx, text, 157.2389975926634, 180.01233239220042, maxWidth, lineHeight);</script>
+<script>var c = document.getElementById("myCanvas");var ctx = c.getContext("2d");ctx.lineWidth = "2";ctx.strokeStyle = "black";ctx.font = 'bold 20pt Calibri';ctx.fillStyle = '#333';var maxWidth= 50; var lineHeight= 25;var text = "plasmid_circuit_P000";wrapText(ctx, text, 300.0, 435, maxWidth, lineHeight);var text = "7741 bp";wrapText(ctx, text, 397.5, 465, maxWidth, lineHeight);</script>
+<script>
+var c = document.getElementById("myCanvas");var ctx = c.getContext("2d");
+//Promoter Symbol:
+ctx.strokeStyle = 'black'; ctx.lineWidth = 3; ctx.beginPath(); ctx.moveTo(466.97624577975205,150.48070666612233); ctx.lineTo(468.1079954984022,130.51275377719716); ctx.stroke(); ctx.beginPath();ctx.arc(450,450,320.0,-1.5141785970528487,-1.460873319879672);ctx.stroke(); 
+ctx.lineWidth = 3;ctx.moveTo(485.1045672850426,131.9313449021895);ctx.lineTo(477.5917098961482,125.3315741596459);ctx.stroke();ctx.moveTo(485.1045672850426,131.9313449021895);ctx.lineTo(476.33326285846067,136.73386701626916);ctx.stroke();
+
+//Promoter Symbol:
+ctx.strokeStyle = 'black'; ctx.lineWidth = 3; ctx.beginPath(); ctx.moveTo(485.95837593078664,152.16280420266474); ctx.lineTo(488.3556009928391,132.30699114950906); ctx.stroke(); ctx.beginPath();ctx.arc(450,450,320.0,-1.4506462000152536,-1.4100335861690618);ctx.stroke(); 
+ctx.lineWidth = 3;ctx.moveTo(501.222770737172,134.1262471207728);ctx.lineTo(494.055006483772,127.15321653087284);ctx.stroke();ctx.moveTo(501.222770737172,134.1262471207728);ctx.lineTo(492.21874559005613,138.47682537545396);ctx.stroke();
+
+//RBS Symbol: 
+ctx.beginPath();ctx.arc(519.9292426102214, 154.1522333564764, 8, 0.23210892384925952, -2.9094837297405336, true); ctx.closePath(); ctx.lineWidth = 1; ctx.fillStyle = '#bb99ff'; ctx.fill(); ctx.strokeStyle = 'black';ctx.stroke(); 
+
+//CDS Symbol: 
+ctx.beginPath(); ctx.moveTo(635.8533112601243,209.42870766933274); ctx.lineTo(641.96690702526,201.51517831635027); ctx.lineTo(652.6640630772354,223.01624935349633); ctx.closePath(); ctx.fillStyle = '#FCEFEE'; ctx.fill(); 
+ctx.beginPath(); ctx.moveTo(630.9624346480158,215.75953115171873); ctx.lineTo(624.8488388828802,223.67306050470123); ctx.lineTo(647.3359369227646,228.9837506465037); ctx.closePath(); ctx.fillStyle = '#FCEFEE'; ctx.fill(); ctx.beginPath(); 
+
+//Terminator Symbol: 
+ctx.strokeStyle = "black"; ctx.lineWidth = 2; ctx.moveTo(656.3881581281055,232.2663825118222); ctx.lineTo(667.3176244102183,220.5810598039053); ctx.lineTo(670.2389550871975,223.31342637443353); ctx.lineTo(672.9713216577258,220.3920956974543); ctx.lineTo(664.207329626788,212.19499598586964); ctx.lineTo(661.4749630562598,215.11632666284888); ctx.lineTo(664.396293733239,217.8486932333771); ctx.lineTo(653.4668274511262,229.534015941294); ctx.stroke(); 
+ctx.beginPath(); ctx.moveTo(656.3881581281055,232.2663825118222); ctx.lineTo(667.3176244102183,220.5810598039053); ctx.lineTo(670.2389550871975,223.31342637443353); ctx.lineTo(672.9713216577258,220.3920956974543); ctx.lineTo(664.207329626788,212.19499598586964); ctx.lineTo(661.4749630562598,215.11632666284888); ctx.lineTo(664.396293733239,217.8486932333771); ctx.lineTo(653.4668274511262,229.534015941294); ctx.fillStyle = "#EA6062"; ctx.closePath(); ctx.fill(); 
+
+//Promoter Symbol:
+ctx.strokeStyle = 'black'; ctx.lineWidth = 3; ctx.beginPath(); ctx.moveTo(663.5714823303261,239.31724813068544); ctx.lineTo(677.8095811523478,225.2717313393978); ctx.stroke(); ctx.beginPath();ctx.arc(450,450,319.99999999999994,-0.7785893077938905,-0.7335578597583586);ctx.stroke(); 
+ctx.lineWidth = 3;ctx.moveTo(687.6950599589791,235.75467689796054);ctx.lineTo(686.4712096787018,225.8298499225687);ctx.stroke();ctx.moveTo(687.6950599589791,235.75467689796054);ctx.lineTo(677.9501918393569,233.51022923067785);ctx.stroke();
+
+//RBS Symbol: 
+ctx.beginPath();ctx.arc(691.2516412127277, 265.0306900803128, 8, 0.9166882322385523, -2.2249044213512406, true); ctx.closePath(); ctx.lineWidth = 1; ctx.fillStyle = '#bb99ff'; ctx.fill(); ctx.strokeStyle = 'black';ctx.stroke(); 
+
+//CDS Symbol: 
+ctx.beginPath(); ctx.moveTo(748.1850074839795,390.8248252070254); ctx.lineTo(757.9937248354262,388.8782734046249); ctx.lineTo(751.9726933398462,414.53340850035363); ctx.closePath(); ctx.fillStyle = '#BDFFBF'; ctx.fill(); 
+ctx.beginPath(); ctx.moveTo(740.3380336028222,392.3820666489458); ctx.lineTo(730.5293162513755,394.3286184513463); ctx.lineTo(744.0273066601538,415.46659149964637); ctx.closePath(); ctx.fillStyle = '#BDFFBF'; ctx.fill(); ctx.beginPath(); 
+
+//Terminator Symbol: 
+ctx.strokeStyle = "black"; ctx.lineWidth = 2; ctx.moveTo(749.19177667237,427.90292391218554); ctx.lineTo(765.140105875434,426.618090992815); ctx.lineTo(765.4613141052766,430.60517329358095); ctx.lineTo(769.4483964060427,430.2839650637383); ctx.lineTo(768.4847717165147,418.3227181614404); ctx.lineTo(764.4976894157487,418.643926391283); ctx.lineTo(764.8188976455914,422.63100869204897); ctx.lineTo(748.8705684425274,423.9158416114195); ctx.stroke(); 
+ctx.beginPath(); ctx.moveTo(749.19177667237,427.90292391218554); ctx.lineTo(765.140105875434,426.618090992815); ctx.lineTo(765.4613141052766,430.60517329358095); ctx.lineTo(769.4483964060427,430.2839650637383); ctx.lineTo(768.4847717165147,418.3227181614404); ctx.lineTo(764.4976894157487,418.643926391283); ctx.lineTo(764.8188976455914,422.63100869204897); ctx.lineTo(748.8705684425274,423.9158416114195); ctx.fillStyle = "#EA6062"; ctx.closePath(); ctx.fill(); 
+
+//Promoter Symbol:
+ctx.strokeStyle = 'black'; ctx.lineWidth = 3; ctx.beginPath(); ctx.moveTo(749.8815709754756,441.57127593993283); ctx.lineTo(769.873675707174,441.009361002595); ctx.stroke(); ctx.beginPath();ctx.arc(450,450,320.0,-0.02809944450843536,0.02006419677059034);ctx.stroke(); 
+ctx.lineWidth = 3;ctx.moveTo(769.9355906420992,456.42011218679795);ctx.lineTo(775.8345457659974,448.34531631035406);ctx.stroke();ctx.moveTo(769.9355906420992,456.42011218679795);ctx.lineTo(764.3653260195998,448.11516474353675);ctx.stroke();
+
+//RBS Symbol: 
+ctx.beginPath();ctx.arc(752.5563384776258, 479.5915874365056, 8, 1.66829145495882, -1.4733011986309732, true); ctx.closePath(); ctx.lineWidth = 1; ctx.fillStyle = '#bb99ff'; ctx.fill(); ctx.strokeStyle = 'black';ctx.stroke(); 
+
+//CDS Symbol: 
+ctx.beginPath(); ctx.moveTo(705.6342070444992,614.5209779594387); ctx.lineTo(714.0432270130683,619.9328522344202); ctx.lineTo(690.1660211657669,635.4446492545795); ctx.closePath(); ctx.fillStyle = '#CFBBAE'; ctx.fill(); 
+ctx.beginPath(); ctx.moveTo(698.906991069644,610.1914785394534); ctx.lineTo(690.497971101075,604.7796042644718); ctx.lineTo(683.8339788342331,630.5553507454205); ctx.closePath(); ctx.fillStyle = '#CFBBAE'; ctx.fill(); ctx.beginPath(); 
+
+//Terminator Symbol: 
+ctx.strokeStyle = "black"; ctx.lineWidth = 2; ctx.moveTo(684.405685753191,637.2377485620254); ctx.lineTo(696.8401962600722,647.3066585553794); ctx.lineTo(699.3574237584106,644.1980309286591); ctx.lineTo(702.4660513851309,646.7152584269976); ctx.lineTo(694.9143688901154,656.0411413071585); ctx.lineTo(691.8057412633951,653.52391380882); ctx.lineTo(694.3229687617336,650.4152861820997); ctx.lineTo(681.8884582548525,640.3463761887458); ctx.stroke(); 
+ctx.beginPath(); ctx.moveTo(684.405685753191,637.2377485620254); ctx.lineTo(696.8401962600722,647.3066585553794); ctx.lineTo(699.3574237584106,644.1980309286591); ctx.lineTo(702.4660513851309,646.7152584269976); ctx.lineTo(694.9143688901154,656.0411413071585); ctx.lineTo(691.8057412633951,653.52391380882); ctx.lineTo(694.3229687617336,650.4152861820997); ctx.lineTo(681.8884582548525,640.3463761887458); ctx.fillStyle = "#EA6062"; ctx.closePath(); ctx.fill(); 
+
+</script>
+
+
+
+</div>
+</body>
+</html>

@@ -1,0 +1,58 @@
+{
+    "file_type": "genbank",
+
+    "genbank_info": {
+        "name_tag": "locus_tag",
+        "types_dict": {
+            "promoter": "promoter",
+            "terminator": "terminator",
+            "rbs": "rbs",
+            "cds": "cds",
+            "scar": "scar"
+        }
+
+    },
+    "js_info": {
+            "circle_radius": 300, 
+            "circle_line_width": 8, 
+            "center_coordinates":[450,450],
+            "pointer_len_short": 70,
+            "pointer_len_long": 120,
+            "pointer_thick":1,
+            "text_size" : 9,
+            "title_text_size" : 20,
+            "max_title_length" : 35,
+            "promoter_info" : {
+                "percent_start": 20,
+                "pixels": 20,
+                "line_width": 3,
+                "tiny_arrow_length": 1,
+                "arrow_angle": 35.0
+            },
+            "terminator_info" : {
+                "percent_center": 50,
+                "base_width": 4,
+                "base_height": 16,
+                "top_width": 12,
+                "top_height": 4,
+                "internal_color": "#EA6062",
+                "border_color": "black",
+                "border_width": 2
+            },
+            "ribosome_site_info": {
+                "percent_center": 50,
+                "radius": 8,
+                "border_width": 1,
+                "border_color": "black",
+                "internal_color": "#bb99ff"
+            },
+            "cds_info": {
+                "percent_start": 85,
+                "arrow_height": 10
+            }
+    }
+}
+
+
+
+

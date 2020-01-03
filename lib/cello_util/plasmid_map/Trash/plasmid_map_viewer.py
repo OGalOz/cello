@@ -56,7 +56,7 @@ def make_plasmid_graph(gb_file, gb_info, js_info, base_html_filepath, user_outpu
     logging.info(js_pointers_and_names_str )
     logging.info(plasmid_name_center_canvas_str)
     logging.info(sbol_visuals_js_str)
-    #return js_plasmid_str + js_pointers_and_names_str + plasmid_name_center_canvas_str + sbol_visuals_js_str
+    return js_plasmid_str + js_pointers_and_names_str + plasmid_name_center_canvas_str + sbol_visuals_js_str
 
     """
     html_str = create_html_file(plasmid_name, js_plasmid_str, js_pointers_and_names_str, base_html_filepath, user_output_name)
@@ -612,7 +612,7 @@ def test():
     logging.basicConfig(level=logging.DEBUG)
     gb_file = "/Users/omreeg/KBase/apps/cello/data/test_2_circuit.gbk"
     base_html_filepath = "/Users/omreeg/KBase/apps/cello/lib/cello_util/plasmid_html_base.html"
-    config_filepath = os.path.join(os.getcwd(),'plasmid_map_config.js')
+    config_filepath = os.path.join(os.getcwd(),'plasmid_map_config.json')
     f = open(config_filepath, "r")
     file_str = f.read()
     f.close()
@@ -622,7 +622,16 @@ def test():
     js_info = config_dict["js_info"]
     user_output_name = "New_Test"
     final_html_str = make_plasmid_graph(gb_file, gb_info, js_info, base_html_filepath, user_output_name)
+    logging.debug(len(final_html_str))
     logging.debug(final_html_str)
+    g = open("test_template.html", "r")
+    template_str = g.read()
+    file_str = template_str.replace("{--Insert Code--}",final_html_str)
+    logging.debug("file_str: " + file_str)
+    g.close()
+    h = open("test.html", "w")
+    h.write(file_str)
+    h.close()
 
     return 0
 
