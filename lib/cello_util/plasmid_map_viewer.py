@@ -7,8 +7,6 @@ Takes as an input a genbank file - (representing a plasmid).
 Maximum Features (in the plasmid) = 100
 To-Do:
     Consider: https://sbolstandard.org/wp-content/uploads/2017/04/SBOL-Visual-2.1.pdf
-    Make terminator regions contain (T) symbol.
-    Make promoter regions contain right angle arrow.
     
 
 
@@ -475,7 +473,11 @@ def make_plasmid_name_in_center(js_info, plasmid_info):
 
     #Getting plasmid name and checking it
     plasmid_name = plasmid_info['plasmid_name']
-    if len(plasmid_name) > 35:
+    if "max_title_length" in js_info:
+        max_t_len = js_info["max_title_length"]
+    else:
+        max_t_len = 45
+    if len(plasmid_name) > max_t_len:
         logging.critical("Plasmid name is too long - using placeholder name: 'Plasmid'")
         plasmid_name = "Plasmid"
 
@@ -617,7 +619,7 @@ def test():
     config_dict = json.loads(file_str)
     
     gb_info = config_dict['genbank_info']
-    js_info = config_dict["design_info"]
+    js_info = config_dict["js_info"]
     user_output_name = "New_Test"
     final_html_str = make_plasmid_graph(gb_file, gb_info, js_info, base_html_filepath, user_output_name)
     logging.debug(final_html_str)

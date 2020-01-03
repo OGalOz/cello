@@ -53,6 +53,7 @@ def make_sbol_visuals_js(js_feat, js_info, gb_info):
     elif typ == "scar":
         js_str += make_scar_visual(js_feat, js_info)
     else:
+        logging.critical("\n Could not recognize typ: " + typ + "\n")
         js_str += ""
 
     return js_str
@@ -217,7 +218,7 @@ def make_terminator_visual(js_feat, js_info):
     if "terminator_info" in js_info:
         terminator_info = js_info["terminator_info"]
     else:
-        logging.critical("Terminator info not found in design info.")
+        logging.critical("Terminator info not found in js_info.")
         return ""
 
     radius = js_info['circle_radius']
@@ -351,7 +352,7 @@ def make_rbs_visual(js_feat, js_info):
     if "ribosome_site_info" in js_info:
         rbs_info = js_info["ribosome_site_info"]
     else:
-        logging.critical("Ribosome Site Info not found in design info.")
+        logging.critical("Ribosome Site Info not found in js_info.")
         return ""
 
     radius = js_info['circle_radius']
@@ -383,20 +384,98 @@ def make_rbs_visual(js_feat, js_info):
 
 
 
+"""
+cds: 'Coding Sequence', also known as ORF or Gene.
 
+Inputs:    
+    js_info: (dict)
+        circle_radius: (int) Radius size of circle in javascript (eg 200)
+        circle_line_width: (int) Thickness of line in plasmid
+        center_coordinates: (list) Each internal part is an int [x,y]
+        pointer_len: (int) Length of pointer
+        pointer_thick: (int) Thickness of pointer
+	text_size: (int) Size of text
 
-
-
-
-
-
-
-
+        cds_info: (dict)
+            percent_start: (float) between [0,100] indicating where the start of the arrow is, normally 85.
+            arrow_height: (float) [1,25] Indicates how far from the plasmid circle the arrow extends.
+    js_feat: (dict)
+            percentage: (float)
+            name: (str)
+            color: (str)
+            start_bp: (int) Start in plasmid in terms of base pairs.
+            end_bp: (int) End in plasmid in terms of base pairs.
+            start_circle: (list) [x,y] for starting point on canvas.
+            end_circle: (list) [x,y] for ending point on canvas.
+            bp_len: (int) Length in base pairs.
+            midpoint: (list) [x,y] midpoint location of feature
+            pointer_direction: (str) 'out' or 'in'.
+            typ: The type of entity
+Outputs:
+    js_str: (An internal javascript string representing the visuals of this object.)
+"""
 
 def make_cds_visual(js_feat, js_info):
+    """
+    The CDS visual will look like an arrow head ending at the end of the CDS.
+    In order to draw this, we need 6 variables. The variables represent:
+        var_a: point on plasmid map that outer arrow starts.
+        var_b: point outside plasmid map that outer arrow has its peak.
+        var_c: point on plasmid map, same as end of cds, where arrow ends.
+        var_d: inner complement to a.
+        var_e: inner complement to b.
+        var_f: inner complement to c.
+    """
+    logging.debug("Making CDS Visual")
+    if "cds_info" in js_info:
+        cds_info = js_info["cds_info"]
+    else:
+        logging.critical("CDS Info not found in js_info.")
+        logging.critical(js_info.keys())
+        return ""
 
-    return ""
-    #raise Exception("function incomplete.")
+    radius = js_info['circle_radius']
+    cc = js_info['center_coordinates']
+
+    
+    js_str = "//CDS Symbol: \n"
+    """
+    First, we find the start of the CDS arrow we will make.
+    """
+    percent_start = cds_info["percent_start"]
+    relative_angle_to_t_center = (js_feat['percentage'] * (percent_start/100))*(math.pi * 2)
+
+    starting_angle = get_angle_from_point(js_feat['start_circle'],cc)
+    cds_symbol_start_angle = starting_angle + relative_angle_to_t_center
+    cds_symbol_start_point = [cc[0] + radius*(math.cos(cds_symbol_start_angle)),cc[1] + radius*(math.sin(cds_symbol_start_angle))]
+    var_a = line_extension_coordinates(cc,cds_symbol_start_point,"pixels", js_info['circle_line_width']/2)
+    var_b = line_extension_coordinates(cc,var_a,"pixels",cds_info["arrow_height"])
+    var_c = line_extension_coordinates(cc,js_feat['end_circle'],"pixels", js_info['circle_line_width']/2)
+    var_d = line_extension_coordinates(var_a, cds_symbol_start_point,"pixels", js_info['circle_line_width']/2)
+    var_e = line_extension_coordinates(var_a,var_d,"pixels",cds_info["arrow_height"])
+    var_f = line_extension_coordinates(var_c, js_feat['end_circle'],"pixels", js_info['circle_line_width']/2)
+
+    #Outer Triangle
+    js_str += "ctx.beginPath(); "
+    js_str += "ctx.moveTo({},{}); ".format(str(var_a[0]),str(var_a[1]))
+    js_str += "ctx.lineTo({},{}); ".format(str(var_b[0]), str(var_b[1]))
+    js_str += "ctx.lineTo({},{}); ".format(str(var_c[0]), str(var_c[1]))
+    js_str += "ctx.closePath(); ctx.fillStyle = '{}'; ctx.fill(); \n".format(js_feat['color'])
+    #Inner Triangle
+    js_str += "ctx.beginPath(); "
+    js_str += "ctx.moveTo({},{}); ".format(str(var_d[0]),str(var_d[1]))
+    js_str += "ctx.lineTo({},{}); ".format(str(var_e[0]), str(var_e[1]))
+    js_str += "ctx.lineTo({},{}); ".format(str(var_f[0]), str(var_f[1]))
+    js_str += "ctx.closePath(); ctx.fillStyle = '{}'; ctx.fill(); ctx.beginPath(); \n\n".format(js_feat['color'])
+
+    return js_str
+
+
+
+
+
+
+
 
 
 def make_scar_visual(js_feat, js_info):
@@ -719,7 +798,7 @@ def make_javascript_rbs_text(rbs_circle_center, starting_angle, rbs_info):
     js_str += "ctx.fillStyle = '{}'; ".format(rbs_info["internal_color"])
     js_str += "ctx.fill(); "
     js_str += "ctx.strokeStyle = '{}';".format(rbs_info["border_color"])
-    js_str += "ctx.stroke(); \n"
+    js_str += "ctx.stroke(); \n\n"
     return js_str
 
         
