@@ -3,6 +3,7 @@
 This file assists plasmid_map_viewer.py by adding detailed functionality, specifically on adding visuals
     to the Plasmid Circle for specific parts (promoter, terminator, CDS, etc).
 Consider: https://sbolstandard.org/wp-content/uploads/2017/04/SBOL-Visual-2.1.pdf
+Ribozyme can be visualized by a couple of dotted lines attached to a circle.
 '''
 
 

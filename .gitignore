@@ -1,2 +1,4 @@
 test_local
 sdk.cfg
+g_script.sh
+set_env_vars.sh
