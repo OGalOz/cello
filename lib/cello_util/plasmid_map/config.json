@@ -17,9 +17,9 @@
 
     },
     "js_info": {
-            "circle_radius": 300, 
+            "circle_radius": 250, 
             "circle_line_width": 8, 
-            "center_coordinates":[450,450],
+            "center_coordinates":[500,500],
             "pointer_len_short": 70,
             "pointer_len_long": 120,
             "pointer_thick":1,
