@@ -243,7 +243,10 @@ def make_plasmid_divs(gbk_files, user_output_name):
     k = min(len(gbk_files), 6)
     for i in range(k):
         gb_file = gbk_files[i]
-        plasmid_map_html = get_cello_plasmid_div(gb_file, base_html_filepath, config_filepath, user_output_name)
+        plasmid_map_dict = get_cello_plasmid_div(gb_file, base_html_filepath, config_filepath, user_output_name)
+        plasmid_map_html = plasmid_map_dict["complete_div_str"]
+        plasmid_map_name = plasmid_map_dict["plasmid_name"]
+        plasmid_map_html = plasmid_map_html.replace("Plasmid_Name_Here", user_output_name + "_" + plasmid_map_name)
         plasmid_map_html = plasmid_map_html.replace('id="Plasmid_Div_Id_Here"', 'id="Plasmid_Map_' + str(i+1) + '"')
         plasmid_map_html = plasmid_map_html.replace('myCanvas','myCanvas_' + str(i+1))
         plasmid_divs_str += plasmid_map_html + '\n'

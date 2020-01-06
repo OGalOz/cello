@@ -34,7 +34,9 @@ Inputs:
         circle_radius: (int) Radius size of circle in javascript (eg 200)
         more ... (in config file)
 Outputs:
-    complete_js_str: (str) The string for the javascript that draws the plasmid map.
+    plasmid_map_dict: (dict)
+        complete_js_str: (str) The string for the javascript that draws the plasmid map.
+        plasmid_name: (str) The (edited) name of the plasmid (if cello bool is True).
 
 """
 def make_plasmid_graph(gb_file, gb_info, js_info, base_html_filepath, user_output_name):
@@ -50,7 +52,11 @@ def make_plasmid_graph(gb_file, gb_info, js_info, base_html_filepath, user_outpu
     logging.info(sbol_visuals_js_str)
     complete_js_str = js_plasmid_str + js_pointers_and_names_str + plasmid_name_center_canvas_str + sbol_visuals_js_str
 
-    return complete_js_str 
+    plasmid_map_dict = {"complete_js_str": complete_js_str, "plasmid_name": plasmid_info["plasmid_name"]}
+    return plasmid_map_dict
+
+
+
 
 
 """
@@ -60,7 +66,9 @@ Inputs:
     config_filepath: (str) Path to the config file.
     user_output_name: (str) Name of the user output.
 Outputs:
-    divs_file_str: (str) The entire html string of the div we are using.
+    plasmid_map_dict: (dict)
+        complete_div_str: (str) The entire html string of the div we are using.
+        plasmid_name: (str) The name of the plasmid (edited if running Cello which is the case here).,
 """
 def get_cello_plasmid_div(gb_file, base_html_filepath, config_filepath, user_output_name):
     f = open(config_filepath, "r")
@@ -69,12 +77,14 @@ def get_cello_plasmid_div(gb_file, base_html_filepath, config_filepath, user_out
     config_dict = json.loads(file_str)
     gb_info = config_dict['genbank_info']
     js_info = config_dict["js_info"]
-    js_html_str = make_plasmid_graph(gb_file, gb_info, js_info, base_html_filepath, user_output_name)
+    plasmid_map_dict = make_plasmid_graph(gb_file, gb_info, js_info, base_html_filepath, user_output_name)
+    js_html_str = plasmid_map_dict["complete_js_str"]
     g = open(base_html_filepath, "r")
     template_str = g.read()
     divs_file_str = template_str.replace("{--Insert Code--}",js_html_str)
     g.close()
-    return divs_file_str
+    plasmid_map_dict["complete_div_str"] = divs_file_str
+    return plasmid_map_dict
 
 """
 Inputs:
@@ -83,6 +93,7 @@ Inputs:
         name_tag: (str) location in file where name of feature exists (e.g. locus_tag)
         color_tag: (str) [optional] location in file where color of feature exists if at all (e.g. ApEinfo_fwdcolor)
         max_number_of_features_allowed: (int) Total number of features allowed in plasmid file.
+        cello_bool: (bool) True if cello, False if not.
 Outputs:
     out_list: (list) contains [plasmid_info, js_feat_list]
       plasmid_info: (dict) 
@@ -111,6 +122,8 @@ def get_js_feat_list(gb_file, gb_info):
     p_len = len(p_seq)
     p_features = gb_record.features
     p_feat_len = len(p_features)
+    if gb_info["cello_bool"] == True:
+        plasmid_name = "_".join(plasmid_name.split('_')[3:])
     plasmid_info = {
         'plasmid_name': plasmid_name,
         'plasmid_length': p_len,

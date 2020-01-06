@@ -43,19 +43,19 @@ def make_sbol_visuals_js(js_feat, js_info, gb_info):
     js_str = ''
     types_dict = gb_info['types_dict']
     typ = js_feat['typ']
-    if typ == types_dict["promoter"]:
+    if typ in types_dict["promoter"]:
         js_str += make_promoter_visual(js_feat, js_info)
-    elif typ == types_dict["terminator"]:
+    elif typ in types_dict["terminator"]:
         js_str += make_terminator_visual(js_feat, js_info)
-    elif typ == types_dict["rbs"]:
+    elif typ in types_dict["rbs"]:
         js_str += make_rbs_visual(js_feat, js_info)
-    elif typ == types_dict["cds"]:
+    elif typ in types_dict["cds"]:
         js_str += make_cds_visual(js_feat, js_info)
-    elif typ == types_dict["scar"]:
+    elif typ in types_dict["scar"]:
         js_str += make_scar_visual(js_feat, js_info)
-    elif typ == types_dict["ribozyme"]:
+    elif typ in types_dict["ribozyme"]:
         js_str += make_ribozyme_visual(js_feat, js_info)
-    elif typ == types_dict["backbone"]:
+    elif typ in types_dict["backbone"]:
         js_str += make_backbone_visual(js_feat, js_info)
     else:
         logging.critical("\n Could not recognize typ: " + typ + "\n")
