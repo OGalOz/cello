@@ -136,7 +136,7 @@ def build_html(results_dir, scratch_dir, user_output_name):
         num_plasmids_created = out_files_dict["num_plasmids_created"]
         overview_content = '<h5> ' + str(num_plasmids_created) + " Plasmids Created by Cello. Visualizations provided in the other tabs.</h5>"
 
-            os.makedirs(output_directory, exist_ok=True)
+        os.makedirs(output_directory, exist_ok=True)
         result_file_path = os.path.join(output_directory, 'report.html')
         
         html_template = open(os.path.join(os.path.dirname(__file__), "report_template.html"), "r")
