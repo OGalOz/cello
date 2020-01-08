@@ -125,99 +125,114 @@ def build_html(results_dir, scratch_dir, user_output_name):
     There is a variable amount of png files we need to return to the user. Should we enforce a limit? (10 currently)
     """
     logging.info("Starting to generate html report.")
-    
-    out_files_dict = extract_files_from_folder(results_dir)
-
-    num_plasmids_created = out_files_dict["num_plasmids_created"]
-    overview_content = '<h5> ' + str(num_plasmids_created) + " Plasmids Created by Cello. Visualizations provided in the other tabs.</h5>"
 
     output_directory = os.path.join(scratch_dir, "HTML_Report")
-    os.makedirs(output_directory, exist_ok=True)
-    result_file_path = os.path.join(output_directory, 'report.html')
+
+
+    try:
     
-    html_template = open(os.path.join(os.path.dirname(__file__), "report_template.html"), "r")
-    html_file_str = html_template.read()
-    html_template.close()
-    
-    path_to_wiring_png_file = out_files_dict['wiring_png_file']
+        out_files_dict = extract_files_from_folder(results_dir)
 
-    png_diagram_name = get_name_from_path(path_to_wiring_png_file,"wiring_png")
-    png_display_name = 'Wiring Diagram'
-    #We get the wiring link file from the svg file:
-    if out_files_dict["wiring_svg_diagram_found"] == True:
-        diagram_link = get_name_from_path(out_files_dict['wiring_svg'])
-        shutil.copy2(os.path.join(results_dir, diagram_link),
-        os.path.join(output_directory, diagram_link))
+        num_plasmids_created = out_files_dict["num_plasmids_created"]
+        overview_content = '<h5> ' + str(num_plasmids_created) + " Plasmids Created by Cello. Visualizations provided in the other tabs.</h5>"
 
-    else:
-        diagram_link = png_diagram_name
-    
-    shutil.copy2(os.path.join(results_dir, png_diagram_name),
-    os.path.join(output_directory, png_diagram_name))
-    visualization_content = ''
-    visualization_content += '<div class="gallery">'
-    visualization_content += '<a target="_blank" href="{}">'.format(diagram_link)
-    visualization_content += '<img src="{}" '.format(png_diagram_name)
-    visualization_content += 'alt="{}" width="600" height="400">'.format(
-    png_display_name)
-    visualization_content += '</a><div class="desc">{}</div></div>'.format(
-    png_display_name)
+            os.makedirs(output_directory, exist_ok=True)
+        result_file_path = os.path.join(output_directory, 'report.html')
+        
+        html_template = open(os.path.join(os.path.dirname(__file__), "report_template.html"), "r")
+        html_file_str = html_template.read()
+        html_template.close()
+        
+        path_to_wiring_png_file = out_files_dict['wiring_png_file']
 
-    #For each truth graph make one of these
-    truth_png_files = out_files_dict['truth_png_files']
-    truth_pdf_files = out_files_dict['truth_pdf_files']
-    
+        png_diagram_name = get_name_from_path(path_to_wiring_png_file,"wiring_png")
+        png_display_name = 'Wiring Diagram'
+        #We get the wiring link file from the svg file:
+        if out_files_dict["wiring_svg_diagram_found"] == True:
+            diagram_link = get_name_from_path(out_files_dict['wiring_svg'])
+            shutil.copy2(os.path.join(results_dir, diagram_link),
+            os.path.join(output_directory, diagram_link))
 
-    #We set the upper limit of different png files to be 10
-    k = min(len(truth_png_files), 10)
-
-    for i in range(k):
-        truth_graph_dict = truth_png_files[i]
-
-        truth_graph_path = truth_graph_dict['file_path']
-        truth_gene_name = truth_graph_dict['gene_name']
-
-        truth_graph_name = get_name_from_path(truth_graph_path,"truth")
-        truth_graph_display_name = 'RPU Graph for ' + truth_gene_name
-
-        shutil.copy2(os.path.join(results_dir, truth_graph_name),
-        os.path.join(output_directory, truth_graph_name))
-
-        truth_graph_link = truth_graph_name
-        #Getting PDF file as a link:
-        for i in range(len(truth_pdf_files)):
-            pdf_file_dict = truth_pdf_files[i]
-            pdf_gene = pdf_file_dict['gene_name']
-            if truth_gene_name == pdf_gene:
-                truth_graph_link = get_name_from_path(pdf_file_dict['file_path'] , "truth")
-                shutil.copy2(os.path.join(results_dir, truth_graph_link),
-                os.path.join(output_directory, truth_graph_link))
-                break
+        else:
+            diagram_link = png_diagram_name
+        
+        shutil.copy2(os.path.join(results_dir, png_diagram_name),
+        os.path.join(output_directory, png_diagram_name))
+        visualization_content = ''
         visualization_content += '<div class="gallery">'
-        visualization_content += '<a target="_blank" href="{}">'.format(truth_graph_link)
-        visualization_content += '<img src="{}" '.format(truth_graph_name)
+        visualization_content += '<a target="_blank" href="{}">'.format(diagram_link)
+        visualization_content += '<img src="{}" '.format(png_diagram_name)
         visualization_content += 'alt="{}" width="600" height="400">'.format(
-        truth_graph_display_name)
+        png_display_name)
         visualization_content += '</a><div class="desc">{}</div></div>'.format(
-        truth_graph_display_name)
+        png_display_name)
+
+        #For each truth graph make one of these
+        truth_png_files = out_files_dict['truth_png_files']
+        truth_pdf_files = out_files_dict['truth_pdf_files']
+        
+
+        #We set the upper limit of different png files to be 10
+        k = min(len(truth_png_files), 10)
+
+        for i in range(k):
+            truth_graph_dict = truth_png_files[i]
+
+            truth_graph_path = truth_graph_dict['file_path']
+            truth_gene_name = truth_graph_dict['gene_name']
+
+            truth_graph_name = get_name_from_path(truth_graph_path,"truth")
+            truth_graph_display_name = 'RPU Graph for ' + truth_gene_name
+
+            shutil.copy2(os.path.join(results_dir, truth_graph_name),
+            os.path.join(output_directory, truth_graph_name))
+
+            truth_graph_link = truth_graph_name
+            #Getting PDF file as a link:
+            for i in range(len(truth_pdf_files)):
+                pdf_file_dict = truth_pdf_files[i]
+                pdf_gene = pdf_file_dict['gene_name']
+                if truth_gene_name == pdf_gene:
+                    truth_graph_link = get_name_from_path(pdf_file_dict['file_path'] , "truth")
+                    shutil.copy2(os.path.join(results_dir, truth_graph_link),
+                    os.path.join(output_directory, truth_graph_link))
+                    break
+            visualization_content += '<div class="gallery">'
+            visualization_content += '<a target="_blank" href="{}">'.format(truth_graph_link)
+            visualization_content += '<img src="{}" '.format(truth_graph_name)
+            visualization_content += 'alt="{}" width="600" height="400">'.format(
+            truth_graph_display_name)
+            visualization_content += '</a><div class="desc">{}</div></div>'.format(
+            truth_graph_display_name)
 
 
-    #Here add plasmid visualization step:
-    gbk_files = out_files_dict['gbk_files']
+        #Here add plasmid visualization step:
+        gbk_files = out_files_dict['gbk_files']
+        
+        try:
+            gb_plasmid_divs_str = make_plasmid_divs(gbk_files, user_output_name)
+        except:
+            gb_plasmid_divs_str = ""
+        try:
+            gb_plasmid_buttons_str = make_plasmid_buttons(gbk_files)
+        except:
+            gb_plasmid_buttons_str = ""
 
-    gb_plasmid_divs_str = make_plasmid_divs(gbk_files, user_output_name)
-    gb_plasmid_buttons_str = make_plasmid_buttons(gbk_files)
+        html_file_str = html_file_str.replace('<p>Visualization_Content</p>', visualization_content)
+        html_file_str = html_file_str.replace('<p>Overview_Content</p>',overview_content)
+        html_file_str = html_file_str.replace('{New_Plasmid_Divs}', gb_plasmid_divs_str)
+        html_file_str = html_file_str.replace('{New_Plasmid_Buttons}', gb_plasmid_buttons_str)
 
-    html_file_str = html_file_str.replace('<p>Visualization_Content</p>', visualization_content)
-    html_file_str = html_file_str.replace('<p>Overview_Content</p>',overview_content)
-    html_file_str = html_file_str.replace('{New_Plasmid_Divs}', gb_plasmid_divs_str)
-    html_file_str = html_file_str.replace('{New_Plasmid_Buttons}', gb_plasmid_buttons_str)
+        logging.debug(html_file_str)
 
-    logging.debug(html_file_str)
+        f = open(result_file_path, "w")
+        f.write(html_file_str)
+        f.close()
 
-    f = open(result_file_path, "w")
-    f.write(html_file_str)
-    f.close()
+
+    except:
+        logging.critical("Creation of HTML file failed at some point in the function build_html (html_design) .")
+        result_file_path = os.path.join(os.path.dirname(os.path.realpath(__file__)),"error.html")
 
     html_result_dict = {
         "result_file_path" : result_file_path, 
