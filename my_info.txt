@@ -1,0 +1,15 @@
+
+
+
+
+
+Two plasmids as inputs:
+    Circuit_Plasmid_Base
+    Output_Plasmid_Base
+
+Each requires location requirements:
+    bp_start
+    bp_end
+
+
+What is sensor module??

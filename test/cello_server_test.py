@@ -75,7 +75,25 @@ class celloTest(unittest.TestCase):
        
         truth_table_text =    ' pTac, pTet, YFP & 0, 0, 1 & 0, 1, 0 & 1,0,1 & 1,1,0'
 
-        main_output_name = "Test_12_05_19"
+        #base_plasmid_info can be one of "none", "e_coli", "tetrlaci", "custom"
+        base_plasmid_info = "custom"
+
+        plasmid_output_genome_base = "33901/141/1"  #pAN4020
+        plasmid_output_insertion_bp = "953"
+
+        plasmid_circuit_genome_base = "33901/139/1" #pAN1201 
+        plasmid_circuit_insertion_bp = "54"
+
+        sensor_module_base = "33901/139/1" #pAN1201
+        sensor_insertion_bp = "150"
+
+        plasmid_output_base = {"plasmid_output_genome_base": plasmid_output_genome_base,"plasmid_output_insertion_bp": plasmid_output_insertion_bp}
+        plasmid_circuit_base =  {"plasmid_circuit_genome_base": plasmid_circuit_genome_base,"plasmid_circuit_insertion_bp": plasmid_circuit_insertion_bp} 
+        
+        sensor_module_info = {"sensor_module_base": sensor_module_base, "sensor_insertion_bp": sensor_insertion_bp}
+        
+
+        main_output_name = "Test_2_1_19"
 
         #no or yes
         kbase_genome_bool = "no"
@@ -87,4 +105,16 @@ class celloTest(unittest.TestCase):
                                                     'promoter_inputs' : gene_inputs,
                                                     'gene_outputs' : gene_outputs,
                                                     'truth_table_text' : truth_table_text,
-                                                             })
+                                                    'base_plasmid_info': base_plasmid_info,
+                                                    'plasmid_output_base': plasmid_output_base,
+                                                    'plasmid_circuit_base': plasmid_circuit_base,
+                                                    'sensor_module_info': sensor_module_info,
+                                                    })
+
+'''
+'plasmid_output_genome_base': plasmid_output_genome_base,
+'plasmid_output_insertion_bp': plasmid_output_insertion_bp,
+'plasmid_circuit_genome_base': plasmid_circuit_genome_base,
+'plasmid_circuit_insertion_bp':  plasmid_circuit_insertion_bp 
+'''
+                                                            

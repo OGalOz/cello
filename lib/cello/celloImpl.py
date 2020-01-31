@@ -8,7 +8,7 @@ from biokbase.workspace.client import Workspace
 from installed_clients.KBaseReportClient import KBaseReport
 from installed_clients.DataFileUtilClient import DataFileUtil
 from installed_clients.GenomeFileUtilClient import GenomeFileUtil
-from cello_util.file_maker import make_verilog_case_file_string, make_input_file_str, make_output_file_str
+from cello_util.file_maker import make_verilog_case_file_string, make_input_file_str, make_output_file_str, make_ucf_file
 from cello_util.truth_table import make_truth_table_from_text, make_truth_table_from_values
 from cello_util.upload import make_kbase_genomes, turn_ape_to_gbk
 from cello_util.html_design import build_html
@@ -66,8 +66,8 @@ class cello:
         report = KBaseReport(self.callback_url)
         ext_report_params = dict()
         ext_report_params["workspace_name"] = params['workspace_name']
-
         logging.basicConfig(level=logging.DEBUG)
+        gfu = GenomeFileUtil(self.callback_url)
 
         #DEBUGGING
         logging.debug("PARAMS")
@@ -75,6 +75,10 @@ class cello:
         for k in params:
             logging.debug(k)
             logging.debug(params[k])
+
+
+        #Deciding if we use UCF in program or not
+        new_ucf_bool = True
 
 
         #CODE
@@ -132,6 +136,56 @@ class cello:
             truth_table_text = params["truth_table_text"]
         else:
             raise Exception("Truth Table Text not supplied")
+
+        #UCF info - 
+        if "base_plasmid_info" in params:
+            base_plasmid_info = params["base_plasmid_info"]
+            #Initializing the additional info dict as False values to be updated later.
+            additional_info_dict = {"msd_gb_bool": False, "op_gb_bool": False, "cr_gb_bool": False, "sn_gb_bool": False}
+            #We only change things if the "custom" - meaning the user is altering an existing UCF file 
+            if base_plasmid_info == "custom":
+                if "plasmid_output_base" in params:
+                    plasmid_output_base = params["plasmid_output_base"]
+                    plasmid_output_genome_base_ref = plasmid_output_base["plasmid_output_genome_base"]
+                    plasmid_output_insertion_bp = plasmid_output_base["plasmid_output_insertion_bp"]
+                    additional_info_dict["op_gb_bool"] = True
+                    additional_info_dict["op_mod_loc"] = plasmid_output_insertion_bp 
+                    #Downloading_genbank file
+                    genome_info = gfu.genome_to_genbank({"genome_ref": plasmid_output_genome_base_ref})
+                    output_genome_genbank_fn = genome_info['genbank_file']['file_path']
+                    op_gb_fp = os.path.join(self.shared_folder, output_genome_genbank_fn)
+                else:
+                    logging.critical("No plasmid output base given.")
+                if "plasmid_circuit_base" in params:
+                    plasmid_circuit_base = params["plasmid_circuit_base"]
+                    plasmid_circuit_genome_base_ref = plasmid_circuit_base["plasmid_circuit_genome_base"]
+                    plasmid_circuit_insertion_bp = plasmid_circuit_base["plasmid_circuit_insertion_bp"]
+                    additional_info_dict["cr_gb_bool"] = True
+                    additional_info_dict["cr_mod_loc"] = plasmid_circuit_insertion_bp 
+
+                    genome_info = gfu.genome_to_genbank({"genome_ref": plasmid_circuit_genome_base_ref})
+                    circuit_genome_genbank_fn = genome_info['genbank_file']['file_path']
+                    cr_gb_fp = os.path.join(self.shared_folder, circuit_genome_genbank_fn)
+                else:
+                    raise Exception("custom base circuit plasmid indicated, but none given")
+
+                if "sensor_module_info" in params:
+                    sensor_module_base = params["sensor_module_info"]
+                    sensor_module_genome_base_ref = sensor_module_base["sensor_module_base"]
+                    sensor_insertion_bp = sensor_module_base["sensor_insertion_bp"]
+                    additional_info_dict["sn_gb_bool"] = True
+                    additional_info_dict["sn_mod_loc"] = sensor_insertion_bp 
+                    genome_info = gfu.genome_to_genbank({"genome_ref": sensor_module_genome_base_ref})
+                    circuit_genome_genbank_fn = genome_info['genbank_file']['file_path']
+                    sn_gb_fp = os.path.join(self.shared_folder, circuit_genome_genbank_fn)
+                else:
+                    raise Exception("sensor module info indicated, but none given")
+
+        else:
+            raise Exception("base_plasmid_info not passed as a parameter - contact Help-Desk.")
+
+        
+        #Output info
         if "kbase_genome_bool" in params:
             kb_str = params["kbase_genome_bool"]
             if kb_str == "yes":
@@ -148,6 +202,7 @@ class cello:
                 raise Exception("Output name contains illegal characters.")
         else:
             raise Exception("Output Name not supplied (not in params).")
+
         #Done extracting parameters
         num_inputs = len(gene_inputs_list)
         num_outputs = len(gene_outputs_list)
@@ -161,6 +216,22 @@ class cello:
         logging.debug(truth_table)
 
 
+
+        #Preparing new UCF (if necessary)
+        if new_ucf_bool:
+            #naming the filepath belonging to the new UCF which is to be created
+            ucf_filepath = os.path.join(self.shared_folder, "tmp_kbase_ucf.json")
+            logging.critical("Creating New UCF file: {}".format(ucf_filepath))
+            additional_info_dict['output_fp'] = ucf_filepath
+            if base_plasmid_info != "none":
+                if 'op_gb_fp' in locals():
+                    additional_info_dict["op_gb_fp"] = op_gb_fp
+                if 'cr_gb_fp' in locals():
+                    additional_info_dict["cr_gb_fp"] = cr_gb_fp
+                if 'sn_gb_fp' in locals():
+                    additional_info_dict["sn_gb_fp"] = sn_gb_fp
+            ucfs_params_fp = "/kb/module/lib/cello_util/util_params.json"
+            ucf_filepath = make_ucf_file(base_plasmid_info, ucfs_params_fp, additional_info_dict) 
     
 
         #CODE
@@ -195,30 +266,41 @@ class cello:
         outputs_filestring = make_output_file_str(gene_outputs_list)
 
         #WRITING THE INPUT FILES TO CELLO AND STORING OUTPUT
-        f = open(os.path.join(cello_kb, "test_verilog.v"), "w")
+        f = open(os.path.join(cello_kb, "new_verilog.v"), "w")
         f.write(vlog_case_filestring)
         f.close()
-        #shutil.copyfile(os.path.join(cello_kb, "test_verilog.v"), os.path.join(kb_output_folder,"VERILOG_INPUT.v" ))
-        g = open(os.path.join(cello_kb, "test_inputs.txt"),"w")
+        #shutil.copyfile(os.path.join(cello_kb, "new_verilog.v"), os.path.join(kb_output_folder,"VERILOG_INPUT.v" ))
+        g = open(os.path.join(cello_kb, "new_inputs.txt"),"w")
         g.write(inputs_filestring)
         g.close()
-        #shutil.copyfile(os.path.join(cello_kb, "test_inputs.txt"), os.path.join(kb_output_folder,"PROMOTERS_INPUT.txt" ))
-        h = open(os.path.join(cello_kb, "test_outputs.txt"),"w")
+        #shutil.copyfile(os.path.join(cello_kb, "new_inputs.txt"), os.path.join(kb_output_folder,"PROMOTERS_INPUT.txt" ))
+        h = open(os.path.join(cello_kb, "new_outputs.txt"),"w")
         h.write(outputs_filestring)
         h.close()
-        #shutil.copyfile(os.path.join(cello_kb, "test_outputs.txt"), os.path.join(kb_output_folder,"OUTPUTS_INPUT.txt" ))
+        #shutil.copyfile(os.path.join(cello_kb, "new_outputs.txt"), os.path.join(kb_output_folder,"OUTPUTS_INPUT.txt" ))
 
+
+        '''
+        #TEST UCF FILES:
+        ucf_filepath = "/kb/module/lib/cello/test_data/minimized_Eco1_with_g_loc.json"
+        if not os.path.exists(ucf_filepath):
+            raise Exception("UCF filepath does not exist")
+        '''
 
         #RUNNING CELLO:
         os.chdir(cello_kb)
-        op = os.system('mvn -e -f /cello/pom.xml -DskipTests=true -PCelloMain -Dexec.args="-verilog test_verilog.v -input_promoters test_inputs.txt -output_genes test_outputs.txt"')
+        ucf_command = ""
+        if new_ucf_bool:
+            ucf_command = "-UCF " + ucf_filepath
+        dexec_args = "-verilog new_verilog.v -input_promoters new_inputs.txt -output_genes new_outputs.txt " + ucf_command
+        op = os.system('mvn -e -f /cello/pom.xml -DskipTests=true -PCelloMain -Dexec.args="{}"'.format(dexec_args))
         logging.debug("Response from Cello: ")
         logging.debug(op)
         dir_list = os.listdir(cello_kb)
         logging.debug(dir_list)
         output_dirpath = 'placeholder'
         for f in dir_list:
-            if f not in ['0xFE_verilog.v', 'test_inputs.txt', 'test_outputs.txt', 'test_verilog.v', 'exports']:
+            if f not in ['0xFE_verilog.v', 'new_inputs.txt', 'new_outputs.txt', 'new_verilog.v', 'exports']:
                 output_dirpath = os.path.join(cello_kb, f)
                 dir_name = f
                 logging.debug(output_dirpath)
@@ -241,9 +323,9 @@ class cello:
         full_path_output_folder = os.path.join(kb_output_folder,output_folder)
 
         #Copying input files to output folder.
-        shutil.copyfile(os.path.join(cello_kb, "test_verilog.v"), os.path.join(full_path_output_folder,"VERILOG_INPUT.v" ))
-        shutil.copyfile(os.path.join(cello_kb, "test_inputs.txt"), os.path.join(full_path_output_folder,"PROMOTERS_INPUT.txt" ))
-        shutil.copyfile(os.path.join(cello_kb, "test_outputs.txt"), os.path.join(full_path_output_folder,"OUTPUTS_INPUT.txt" ))
+        shutil.copyfile(os.path.join(cello_kb, "new_verilog.v"), os.path.join(full_path_output_folder,"VERILOG_INPUT.v" ))
+        shutil.copyfile(os.path.join(cello_kb, "new_inputs.txt"), os.path.join(full_path_output_folder,"PROMOTERS_INPUT.txt" ))
+        shutil.copyfile(os.path.join(cello_kb, "new_outputs.txt"), os.path.join(full_path_output_folder,"OUTPUTS_INPUT.txt" ))
         output_files = os.listdir(full_path_output_folder)
         logging.debug("CELLO OUTPUT FOLDER:")
         logging.debug(output_files)
@@ -251,7 +333,6 @@ class cello:
         
 
         if kb_genome_bool == True:
-            gfu = GenomeFileUtil(self.callback_url)
             genome_ref_list = make_kbase_genomes(output_files, kb_output_folder, output_folder, gfu, ws_name, main_output_name)
             ext_report_params['objects_created'] = genome_ref_list
         else:

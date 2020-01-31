@@ -92,53 +92,6 @@ parameters :
             Enter your truth table in the format in description
         long-hint : |
             First row is name of genes; Comma separated; Every value in double quotations. Like in the app description page.
-    base_plasmid_info : 
-        ui-name : |
-            Plasmid Base
-        short-hint : |
-            What is the base for the plasmid
-        long-hint : |
-            Choose None to get just the circuit and output. E-Coli to have the full
-            program run on an E-Coli based setting. If you choose Custom, make sure 
-            to include a circuit base and an output base in the optional parameters.
-    output_genome_base: 
-        ui-name: |
-            Output Plasmid Base
-        short-hint : |
-            The plasmid into which you want to insert the output sequence.
-        long-hint : |
-            This should be a Genome Object into which the output genes are inserted. 
-    output_insertion_bp: 
-        ui-name: |
-            Output Location (bp)
-        short-hint: |
-            The base-pair value of where to insert the output genes in the output plasmid.
-        long-hint: |
-            An integer representing the location (base-pair) into which the outputs are inserted.
-    circuit_genome_base: 
-        ui-name: |
-            Circuit Plasmid Base
-        short-hint : |
-            The plasmid into which you want to insert the genetic circuit sequence.
-        long-hint : |
-            This should be a Genome Object into which the gene circuit will be inserted. 
-    circuit_insertion_bp: 
-        ui-name: |
-            Circuit Location (bp)
-        short-hint: |
-            The base-pair value of where to insert the gene circuit sequence in the circuit plasmid.
-        long-hint: |
-            An integer representing the location (base-pair) into which the circuits are inserted.
-    sensor_module_base:
-        ui-name: |
-            Sensor Module Plasmid
-        short-hint: |
-            The plasmid into which the sensor module will be inserted
-    sensor_insertion_bp:
-        ui-name: |
-            Sensor Module Location (bp)
-        short-hint: |
-            Where to insert the Sensor Module
     kbase_genome_bool :
         ui-name : |
             Create Plasmids (Genome Objects)?
@@ -153,6 +106,38 @@ parameters :
             The name of your output genomes and output folder.
         long-hint : |
             Don't use spaces or special characters.
+    circuit_genome_base :
+        ui-name: |
+            Circuit Genome Base
+        short-hint : |
+            The plasmid into which the program will insert the circuit
+    circuit_insertion_bp :
+        ui-name: |
+            Circuit Insertion Location
+        short-hint: |
+            Where to insert your circuit in the Circuit Base Plasmid.
+    output_genome_base :
+        ui-name: |
+            Output Genome Base
+        short-hint : |
+            The plasmid into which the program will insert the output
+    output_insertion_bp :
+        ui-name: |
+            Circuit Insertion Location
+        short-hint: |
+            Where to insert your circuit in the Circuit Base Plasmid.
+    output_name :
+        ui-name: |
+            Dud
+        short-hint: |
+            Bust
+    base_plasmid_info:
+        ui-name: |
+            Base Plasmids
+        short-hint: |
+            In which plasmids do you want your circuit to be inserted
+        long-hint: |
+            Decide what will serve as your base for the plasmids. E Coli uses a plasmid that was tested on E Coli. 
 parameter-groups : 
     promoter_inputs :
         ui-name : |
@@ -174,22 +159,17 @@ parameter-groups :
             Custom Output Genes
         short-hint : |
             An output gene - (currently only 1 allowed).
-    plasmid_circuit_base : 
-        ui-name : |
-            Circuit Plasmid 
+    circuit_base :
+        ui-name: |
+            Circuit Base
         short-hint : |
-            The base plasmid and location of insertion for the genetic circuit. Required if Custom Base
-            Plasmids are used.
-    sensor_module_info :
-        ui-name : |
-            Sensor Module Info
+            The information regarding the Plasmid into which the circuit will be inserted.
+    output_base :
+        ui-name: |
+            Output Base
         short-hint : |
-            Required Information regarding location of Sensor Module if Custom Base Plasmid Used.
-    plasmid_output_base :
-        ui-name : |
-            Output Plasmid
-        short-hint : |
-            The base plasmid and location of insertion for the output genes.
+            The information regarding the Plasmid into which the output will be inserted.
+
 description : |
     <h1> CIDAR Lab's Cello - cellocad.org </h1>
     <p> Truth Table Input should look like the following-</p>
@@ -210,13 +190,6 @@ description : |
     
     <p></p>
     <p> Please don't use special characters in any of the custom input entries. Only use A,C,T,G in the DNA sequence inputs. </p>
-
-
-    <h3> Custom Plasmid Inputs </h3>
-    <p> If you don't want the circuits inserted into a plasmid, choose "None".</p>
-    <p> If you want to use custom plasmids into which the program inserts the circuit, output, and sensor module, then under Plasmid Base, choose "Custom". </p>
-    <p>When using Custom plasmids, it is required that you use provide inputs for Circuit Plasmid and Sensor Module (including location) and optionally you can use Output Module (with the location).  </p>
-
 
     <p></p>
     <p> If you have any questions or suggestions, email ogaloz@lbl.gov </p>
@@ -263,9 +236,5 @@ description : |
     <h4>sigmaT7 - </h4><p></p>
 
     <p>ATGAGCATCGCGGCGACCCT</p><p>GGAGAACGATCTGGCGCGTC</p><p>TGGAAAACGAAAACGCTCGT</p><p>CTCGAAAAAGACATCGCGAA</p><p>CCTGGAACGTGACCTGGCGA</p><p>AACTGGAGCGTGAAGAAGCG</p><p>TACTTCGGAGGTTCAGGTGG</p><p>TAAGAACACTGGTGAAATCT</p><p>CTGAGAAAGTCAAGCTGGGC</p><p>ACTAAGGCACTGGCTGGTCA</p><p>ATGGCTGGCTTACGGTGTTA</p><p>CTCGCAGTGTGACTAAGAGT</p><p>TCAGTCATGACGCTGGCTTA</p><p>CGGGTCCAAAGAGTTCGGCT</p><p>TCCGTCAACAAGTGCTGGAA</p><p>GATACCATTCAGCCAGCTAT</p><p>TGATTCCGGCAAGGGTCTGA</p><p>TGTTCACTCAGCCGAATCAG</p><p>GCTGCTGGATACATGGCTAA</p><p>GCTGATTTGGGAATCTGTGA</p><p>GCGTGACGGTGGTAGCTGCG</p><p>GTTGAAGCAATGAACTGGCT</p><p>TAAGTCTGCTGCTAAGCTGC</p><p>TGGCTGCTGAGGTCAAAGAT</p><p>AAGAAGACTGGAGAGATTCT</p><p>TCGCAAGCGTTGCGCTGTGC</p><p>ATTGGGTAACTCCTGATGGT</p><p>TTCCCTGTGTGGCAGGAATA</p><p>CAAGAAGCCTATTCAGACGC</p><p>GCTTGAACCTGATGTTCCTC</p><p>GGTCAGTTCCGCTTACAGCC</p><p>TACCATTAACACCAACAAAG</p><p>ATAGCGAGATTGATGCACAC</p><p>AAACAGGAGTCTGGTATCGC</p><p>TCCTAACTTTGTACACAGCC</p><p>AAGACGGTAGCCACCTTCGT</p><p>AAGACTGTAGTGTGGGCACA</p><p>CGAGAAGTACGGAATCGAAT</p><p>CTTTTGCACTGATTCACGAC</p><p>TCCTTCGGTACGATTCCGGC</p><p>TGACGCTGCGAACCTGTTCA</p><p>AAGCAGTGCGCGAAACTATG</p><p>GTTGACACATATGAGTCTTG</p><p>TGATGTACTGGCTGATTTCT</p><p>ACGACCAGTTCGCTGACCAG</p><p>TTGCACGAGTCTCAATTGGA</p><p>CAAAATGCCAGCACTTCCGG</p><p>CTAAAGGTAACTTGAACCTC</p><p>CGTGACATCTTAGAGTCGGA</p><p>CTTCGCGTTCGCG</p>
-
-
-
-
 
     

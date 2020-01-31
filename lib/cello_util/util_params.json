@@ -1,0 +1,14 @@
+{
+    "UCF_file_info": {
+    "none_ucf_fp": "/kb/module/lib/cello_util/UCF/complete_UCF/Eco1_no_data_no_gen_loc.json",
+    "e_coli_ucf_fp": "/kb/module/lib/cello_util/UCF/complete_UCF/Eco1C1G1T0.UCF.json",
+    "tetrlaci_ucf_fp": "/kb/module/lib/cello_util/UCF/complete_UCF/TetRLacI.UCF.json",
+    "custom_base_ucf_fp": "/kb/module/lib/cello_util/UCF/complete_UCF/Eco1C1G1T0.UCF.json"
+    },
+    "UCF_make_config_dict": {
+
+            "genetic_loc_folder_path": "/kb/module/lib/cello_util/UCF/genetic_locations",
+            "use_existing_genetic_loc": "no"
+
+    }
+}

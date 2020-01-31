@@ -1,0 +1,54 @@
+       {
+            "id": "base_plasmid_info",
+            "optional": false,
+            "advanced": false,
+            "allow_multiple": false,
+            "default_values": [""],
+            "field_type": "dropdown",
+            "dropdown_options": {
+                "options": [ 
+                    {
+                        "value" : "none",
+                        "display" : "None"
+                    },
+                    {
+                        "value" : "e_coli",
+                        "display": "E Coli"
+                    },
+                    {
+                        "value" : "tetrlaci",
+                        "display": "TetRLacI"
+                    },
+                    {
+                        "value" : "custom",
+                        "display" : "Custom"
+                    }
+                ]
+            }
+
+        },
+
+
+
+            "field_type": "dropdown",
+            "dropdown_options": {
+                "options": [ 
+                    {
+                        "value" : "none",
+                        "display" : "None"
+                    },
+                    {
+                        "value" : "e_coli",
+                        "display": "E Coli"
+                    },
+                    {
+                        "value" : "tetrlaci",
+                        "display": "TetRLacI"
+                    },
+                    {
+                        "value" : "custom",
+                        "display" : "Custom"
+                    }
+                ]
+            }
+

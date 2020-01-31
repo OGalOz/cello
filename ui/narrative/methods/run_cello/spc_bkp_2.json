@@ -56,45 +56,8 @@
             "advanced": false,
             "allow_multiple": true,
             "with_border": true
-        },
-        {
-            "id": "plasmid_circuit_base",
-            "parameters": [
-                "circuit_genome_base",
-                "circuit_insertion_bp"
-            ],
-            "optional":true,
-            "advanced": false,
-            "allow_multiple": false,
-            "with_border": true
-
-
-        },
-        {
-            "id": "plasmid_output_base",
-            "parameters": [
-                "output_genome_base",
-                "output_insertion_bp"
-            ],
-            "optional":true,
-            "advanced": false,
-            "allow_multiple": false,
-            "with_border": true
-
-        },
-        {
-            "id": "sensor_module_info",
-            "parameters": [
-                "sensor_module_base",
-                "sensor_insertion_bp"
-            ],
-            "optional":true,
-            "advanced": false,
-            "allow_multiple": false,
-            "with_border": true
-
         }
-    ],
+     ],
     "parameters": [ 
                 {
             "id": "inp_promoter_name",
@@ -295,7 +258,7 @@
 
         },
         {
-            "id": "output_genome_base",
+            "id": "plasmid_output_genome_base",
             "optional": true,
             "advanced": false,
             "allow_multiple": false,
@@ -306,18 +269,18 @@
                 }
         },
         {
-           "id": "output_insertion_bp",
+           "id": "plasmid_output_insertion_bp",
             "text_options" : {
                 "validate_as" : "float"
             },
             "optional": true,
             "advanced": false,
             "allow_multiple": false,
-            "default_values": ["0"],
+            "default_values": [0],
             "field_type": "text"
         },
         {
-            "id": "circuit_genome_base",
+            "id": "plasmid_circuit_genome_base",
             "optional": true,
             "advanced": false,
             "allow_multiple": false,
@@ -330,39 +293,14 @@
 
         {
 
-           "id": "circuit_insertion_bp",
+           "id": "plasmid_circuit_insertion_bp",
             "text_options" : {
                 "validate_as" : "float"
             },
             "optional": true,
             "advanced": false,
             "allow_multiple": false,
-            "default_values": ["0"],
-            "field_type": "text"
-
-        },
-        {
-            "id": "sensor_module_base",
-            "optional": true,
-            "advanced": false,
-            "allow_multiple": false,
-            "default_values": [""],
-            "field_type": "text" ,
-            "text_options": {
-                "valid_ws_types": ["KBaseGenomes.Genome"]
-                }
-
-        },
-        {
-
-           "id": "sensor_insertion_bp",
-            "text_options" : {
-                "validate_as" : "float"
-            },
-            "optional": true,
-            "advanced": false,
-            "allow_multiple": false,
-            "default_values": ["0"],
+            "default_values": [0],
             "field_type": "text"
 
         },
@@ -427,14 +365,27 @@
                     "input_parameter" : "main_output_name",
                     "target_property" : "main_output_name"
                 },
+
                 {
-                    "input_parameter" : "plasmid_output_base",
-                    "target_property" : "plasmid_output_base"
+                    "input_parameter" : "plasmid_output_genome_base",
+                    "target_property" : "plasmid_output_genome_base",
+                    "target_type_transform": "resolved-ref"
 
                 },
                 {
-                    "input_parameter" : "plasmid_circuit_base",
-                    "target_property" : "plasmid_circuit_base"
+                    "input_parameter" : "plasmid_output_insertion_bp",
+                    "target_property" : "plasmid_output_insertion_bp"
+
+                },
+                {
+                    "input_parameter" : "plasmid_circuit_genome_base",
+                    "target_property" : "plasmid_circuit_genome_base",
+                    "target_type_transform": "resolved-ref"
+
+                },
+                {
+                    "input_parameter" : "plasmid_circuit_insertion_bp",
+                    "target_property" : "plasmid_circuit_insertion_bp"
 
                 },
                 {
@@ -449,10 +400,6 @@
                     "input_parameter" : "base_plasmid_info",
                     "target_property" : "base_plasmid_info"
 
-                },
-                {
-                    "input_parameter" : "sensor_module_info",
-                    "target_property" : "sensor_module_info"
                 }
             ],
             "output_mapping": [

@@ -1,9 +1,10 @@
 #!python
 #This file creates the necessary cello files from the inputs.
 
-#Functions to send to impl: make_verilog_case_file_string, make_input_file_str, make_output_file_str.
+#Functions sent to impl: make_verilog_case_file_string, make_input_file_str, make_output_file_str, make_ucf_file  
 import re
 import logging
+import json 
 
 """
 Inputs: 
@@ -351,5 +352,135 @@ def dict_of_out_gene_relations():
 
     return DNA_Out_Genes_dict
 
+"""
+Inputs:
+    base_plasmid_info: (str) One of "none", "e_coli", "tetrlaci", "custom"
+    ucfs_params_fp: (str) Filepath to ucf json file
+    additional_info_dict: (dict)
+        output_fp: (str) Output UCF Filepath
+        msd_gb_bool: (bool)
+        op_gb_bool: (bool) If true:
+            op_mod_loc: (int) Output module location
+            op_gb_fp: (str) Output genbank filepath
+        cr_gb_bool: (bool) If true:
+            cr_mod_loc: (int) Output module location
+            cr_gb_fp: (str) Output genbank filepath
+        sn_gb_bool: (bool) If true:
+            sn_mod_loc: (int) Sesnor module location
+            sn_gb_fp: (str) Sensor genbank filepath
 
+Output:
+    ucf_fp: (str) File path to the UCF file the program will be using.
+"""
+def make_ucf_file(base_plasmid_info, ucfs_params_fp, additional_info_dict):
+   
+    with open(ucfs_params_fp, "r") as f:
+        file_str = f.read()
+        ucfs_info_dict = json.loads(file_str)
+
+    file_info_dict = ucfs_info_dict["UCF_file_info"]
+
+    if base_plasmid_info == "none":
+        #Regular Eco1 without genetic_locations
+        ucf_fp = file_info_dict["none_ucf_fp"]
+
+
+    elif base_plasmid_info == "e_coli":
+        #Regular Eco1 UCF file
+        ucf_fp = file_info_dict["e_coli_ucf_fp"]
+
+    elif base_plasmid_info == "tetrlaci":
+        #TetRLacI UCF file
+        ucf_fp = file_info_dict["terlaci_ucf_fp"]
+
+
+    elif base_plasmid_info == "custom":
+        #Use the additional info dict
+
+        base_config_dict = ucfs_info_dict["UCF_make_config_dict"]
+
+        config_dict = update_config_dict(base_config_dict, additional_info_dict)
+
+        input_dict = {
+
+                "bs_ucf_fp": file_info_dict["custom_base_ucf_fp"],
+                "output_fp": additional_info_dict["output_fp"],
+                "config_dict": config_dict,
+                "op_gb_fp": config_dict["op_gb_fp"],
+                "cr_gb_fp": config_dict["cr_gb_fp"],
+                "msd_gb_fp": config_dict["msd_gb_fp"],
+                "sn_gb_fp": config_dict["sn_gb_fp"],
+
+                }
+
+        from cello_util.genbank_to_ucf import convert_gb_to_ucf
+
+        ucf_fp = convert_gb_to_ucf(input_dict)
+
+    else:
+        raise Exception("Did not recognize base_plasmid_info")
+
+    return ucf_fp
+
+"""
+Inputs:
+    base_config_dict: (dict)
+    additional_info_dict: (dict)
+        msd_gb_bool: (bool)
+        op_gb_bool: (bool) If true:
+            op_mod_loc: (int) Output module location
+            op_gb_fp: (str) Output genbank filepath
+        cr_gb_bool: (bool) If true:
+            cr_mod_loc: (int) Circuit module location
+            cr_gb_fp: (str) Circuit genbank filepath
+        sn_gb_bool: (bool) If true:
+            sn_mod_loc: (int) Sensor module location
+            sn_gb_fp: (str) Sensor genbank filepath
+
+
+"""
+def update_config_dict(base_config_dict, additional_info_dict):
+    msd_gb_fp = ""
+    op_gb_fp = ""
+    cr_gb_fp = ""
+    sn_gb_fp = ""
+    config_dict = base_config_dict
+    #measurement standard info
+    if additional_info_dict["msd_gb_bool"]:
+        config_dict["msd_gb_bool"] = True
+        #config_dict[""] = 
+    else:
+        config_dict["msd_gb_bool"] = False
+
+    #output info
+    if additional_info_dict["op_gb_bool"]:
+        config_dict["op_gb_bool"] = True
+        config_dict["op_mod_loc"] = additional_info_dict["op_mod_loc"]
+        op_gb_fp = additional_info_dict["op_gb_fp"]
+    else:
+        config_dict["op_gb_bool"] = False
+
+    #circuit info
+    if additional_info_dict["cr_gb_bool"]:
+        config_dict["cr_gb_bool"] = True
+        config_dict["cr_mod_loc"] = additional_info_dict["cr_mod_loc"]
+        cr_gb_fp = additional_info_dict["cr_gb_fp"]
+    else:
+        config_dict["cr_gb_bool"] = False
+
+    #sensor info
+    if additional_info_dict["sn_gb_bool"]:
+        config_dict["sn_gb_bool"] = True
+        config_dict["sn_mod_loc"] = additional_info_dict["sn_mod_loc"]
+        sn_gb_fp = additional_info_dict["sn_gb_fp"]
+    else:
+        config_dict["sn_gb_bool"] = False
+
+    config_dict["op_gb_fp"] = op_gb_fp
+    config_dict["cr_gb_fp"] = cr_gb_fp
+    config_dict["sn_gb_fp"] = sn_gb_fp
+    config_dict["msd_gb_fp"] = msd_gb_fp 
+
+
+    return config_dict
 

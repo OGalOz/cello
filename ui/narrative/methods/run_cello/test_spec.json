@@ -58,7 +58,7 @@
             "with_border": true
         },
         {
-            "id": "plasmid_circuit_base",
+            "id": "circuit_base",
             "parameters": [
                 "circuit_genome_base",
                 "circuit_insertion_bp"
@@ -71,7 +71,7 @@
 
         },
         {
-            "id": "plasmid_output_base",
+            "id": "output_base",
             "parameters": [
                 "output_genome_base",
                 "output_insertion_bp"
@@ -81,19 +81,8 @@
             "allow_multiple": false,
             "with_border": true
 
-        },
-        {
-            "id": "sensor_module_info",
-            "parameters": [
-                "sensor_module_base",
-                "sensor_insertion_bp"
-            ],
-            "optional":true,
-            "advanced": false,
-            "allow_multiple": false,
-            "with_border": true
-
         }
+
     ],
     "parameters": [ 
                 {
@@ -265,108 +254,6 @@
             }
         },
         {
-            "id": "base_plasmid_info",
-            "optional": false,
-            "advanced": false,
-            "allow_multiple": false,
-            "default_values": ["none"],
-            "field_type": "dropdown",
-            "dropdown_options": {
-                "options": [ 
-                    {
-                        "value" : "none",
-                        "display" : "None"
-                    },
-                    {
-                        "value" : "e_coli",
-                        "display": "E-Coli"
-                    },
-                    {
-                        "value" : "tetrlaci",
-                        "display": "TetRLacI"
-                    },
-                    {
-                        "value" : "custom",
-                        "display" : "Custom"
-                    }
-                ]
-            }
-
-
-        },
-        {
-            "id": "output_genome_base",
-            "optional": true,
-            "advanced": false,
-            "allow_multiple": false,
-            "default_values": [""],
-            "field_type": "text" ,
-            "text_options": {
-                "valid_ws_types": ["KBaseGenomes.Genome"]
-                }
-        },
-        {
-           "id": "output_insertion_bp",
-            "text_options" : {
-                "validate_as" : "float"
-            },
-            "optional": true,
-            "advanced": false,
-            "allow_multiple": false,
-            "default_values": ["0"],
-            "field_type": "text"
-        },
-        {
-            "id": "circuit_genome_base",
-            "optional": true,
-            "advanced": false,
-            "allow_multiple": false,
-            "default_values": [""],
-            "field_type": "text" ,
-            "text_options": {
-                "valid_ws_types": ["KBaseGenomes.Genome"]
-                }
-        },
-
-        {
-
-           "id": "circuit_insertion_bp",
-            "text_options" : {
-                "validate_as" : "float"
-            },
-            "optional": true,
-            "advanced": false,
-            "allow_multiple": false,
-            "default_values": ["0"],
-            "field_type": "text"
-
-        },
-        {
-            "id": "sensor_module_base",
-            "optional": true,
-            "advanced": false,
-            "allow_multiple": false,
-            "default_values": [""],
-            "field_type": "text" ,
-            "text_options": {
-                "valid_ws_types": ["KBaseGenomes.Genome"]
-                }
-
-        },
-        {
-
-           "id": "sensor_insertion_bp",
-            "text_options" : {
-                "validate_as" : "float"
-            },
-            "optional": true,
-            "advanced": false,
-            "allow_multiple": false,
-            "default_values": ["0"],
-            "field_type": "text"
-
-        },
-        {
             "id": "kbase_genome_bool",
             "optional": false,
             "advanced": false,
@@ -384,6 +271,88 @@
                 }
 
         },
+        {
+            "id": "circuit_genome_base",
+            "optional": true,
+            "advanced": false,
+            "allow_multiple": false,
+            "default_values": [""],
+            "field_type": "text" ,
+            "text_options": {
+                "valid_ws_types": ["KBaseGenomes.Genome"]
+                }
+        },
+
+
+        {
+
+           "id": "circuit_insertion_bp",
+            "text_options" : {
+                "validate_as" : "float"
+            },
+            "optional": true,
+            "advanced": false,
+            "allow_multiple": false,
+            "default_values": ["0"],
+            "field_type": "text"
+
+        },
+        {
+            "id": "output_genome_base",
+            "optional": true,
+            "advanced": false,
+            "allow_multiple": false,
+            "default_values": [""],
+            "field_type": "text" ,
+            "text_options": {
+                "valid_ws_types": ["KBaseGenomes.Genome"]
+                }
+        },
+
+        {
+
+           "id": "output_insertion_bp",
+            "text_options" : {
+                "validate_as" : "float"
+            },
+            "optional": true,
+            "advanced": false,
+            "allow_multiple": false,
+            "default_values": ["0"],
+            "field_type": "text"
+
+        },
+        {
+            "id": "base_plasmid_info",
+            "optional": false,
+            "advanced": false,
+            "allow_multiple": false,
+            "default_values": [""],
+            "field_type": "dropdown",
+            "dropdown_options": {
+                "options": [ 
+                    {
+                        "value" : "none",
+                        "display" : "None"
+                    },
+                    {
+                        "value" : "e_coli",
+                        "display": "E Coli"
+                    },
+                    {
+                        "value" : "tetrlaci",
+                        "display": "TetRLacI"
+                    },
+                    {
+                        "value" : "custom",
+                        "display" : "Custom"
+                    }
+                ]
+            }
+
+        },
+
+
         {
             "id": "main_output_name",
             "optional": false,
@@ -428,31 +397,12 @@
                     "target_property" : "main_output_name"
                 },
                 {
-                    "input_parameter" : "plasmid_output_base",
-                    "target_property" : "plasmid_output_base"
-
-                },
-                {
-                    "input_parameter" : "plasmid_circuit_base",
-                    "target_property" : "plasmid_circuit_base"
-
-                },
-                {
                     "input_parameter" : "kbase_genome_bool",
                     "target_property" : "kbase_genome_bool"
                 },
                 {
                     "input_parameter" : "truth_table_text",
                     "target_property" : "truth_table_text"
-                },
-                {
-                    "input_parameter" : "base_plasmid_info",
-                    "target_property" : "base_plasmid_info"
-
-                },
-                {
-                    "input_parameter" : "sensor_module_info",
-                    "target_property" : "sensor_module_info"
                 }
             ],
             "output_mapping": [
