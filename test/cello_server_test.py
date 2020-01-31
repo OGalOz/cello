@@ -87,8 +87,8 @@ class celloTest(unittest.TestCase):
         sensor_module_base = "33901/139/1" #pAN1201
         sensor_insertion_bp = "150"
 
-        plasmid_output_base = {"plasmid_output_genome_base": plasmid_output_genome_base,"plasmid_output_insertion_bp": plasmid_output_insertion_bp}
-        plasmid_circuit_base =  {"plasmid_circuit_genome_base": plasmid_circuit_genome_base,"plasmid_circuit_insertion_bp": plasmid_circuit_insertion_bp} 
+        plasmid_output_base = {"output_genome_base": plasmid_output_genome_base,"output_insertion_bp": plasmid_output_insertion_bp}
+        plasmid_circuit_base =  {"circuit_genome_base": plasmid_circuit_genome_base,"circuit_insertion_bp": plasmid_circuit_insertion_bp} 
         
         sensor_module_info = {"sensor_module_base": sensor_module_base, "sensor_insertion_bp": sensor_insertion_bp}
         
