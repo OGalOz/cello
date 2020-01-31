@@ -187,7 +187,7 @@ parameter-groups :
             Required Information regarding location of Sensor Module if Custom Base Plasmid Used.
     plasmid_output_base :
         ui-name : |
-            Output Plasmid
+            Output Plasmid (Optional)
         short-hint : |
             The base plasmid and location of insertion for the output genes.
 description : |

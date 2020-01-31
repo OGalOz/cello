@@ -146,8 +146,8 @@ class cello:
             if base_plasmid_info == "custom":
                 if "plasmid_output_base" in params:
                     plasmid_output_base = params["plasmid_output_base"]
-                    plasmid_output_genome_base_ref = plasmid_output_base["plasmid_output_genome_base"]
-                    plasmid_output_insertion_bp = plasmid_output_base["plasmid_output_insertion_bp"]
+                    plasmid_output_genome_base_ref = plasmid_output_base["output_genome_base"]
+                    plasmid_output_insertion_bp = plasmid_output_base["output_insertion_bp"]
                     additional_info_dict["op_gb_bool"] = True
                     additional_info_dict["op_mod_loc"] = plasmid_output_insertion_bp 
                     #Downloading_genbank file
@@ -158,8 +158,8 @@ class cello:
                     logging.critical("No plasmid output base given.")
                 if "plasmid_circuit_base" in params:
                     plasmid_circuit_base = params["plasmid_circuit_base"]
-                    plasmid_circuit_genome_base_ref = plasmid_circuit_base["plasmid_circuit_genome_base"]
-                    plasmid_circuit_insertion_bp = plasmid_circuit_base["plasmid_circuit_insertion_bp"]
+                    plasmid_circuit_genome_base_ref = plasmid_circuit_base["circuit_genome_base"]
+                    plasmid_circuit_insertion_bp = plasmid_circuit_base["circuit_insertion_bp"]
                     additional_info_dict["cr_gb_bool"] = True
                     additional_info_dict["cr_mod_loc"] = plasmid_circuit_insertion_bp 
 
