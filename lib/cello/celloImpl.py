@@ -77,9 +77,9 @@ class cello:
             logging.debug(params[k])
 
 
-        #Deciding if we use UCF in program or not
+        #Deciding if we use UCF in program or not- for now true
         new_ucf_bool = True
-
+        #UCF filepath ucf_filepath variable decided later in the program
 
         #CODE
         # Extracting Values from params
@@ -326,6 +326,7 @@ class cello:
         shutil.copyfile(os.path.join(cello_kb, "new_verilog.v"), os.path.join(full_path_output_folder,"VERILOG_INPUT.v" ))
         shutil.copyfile(os.path.join(cello_kb, "new_inputs.txt"), os.path.join(full_path_output_folder,"PROMOTERS_INPUT.txt" ))
         shutil.copyfile(os.path.join(cello_kb, "new_outputs.txt"), os.path.join(full_path_output_folder,"OUTPUTS_INPUT.txt" ))
+        shutil.copyfile(ucf_filepath, os.path.join(full_path_output_folder, "UCF.json"))
         output_files = os.listdir(full_path_output_folder)
         logging.debug("CELLO OUTPUT FOLDER:")
         logging.debug(output_files)

@@ -54,22 +54,26 @@ def make_kbase_genomes(output_files, kb_output_folder, output_folder, gfu, ws_na
 def turn_ape_to_gbk(output_files, kb_output_folder, output_folder):
             #Locating the '.ape' files. List ape_files will contain full paths to files.
             # ape files are like genbank files.
-            plasmid_ape_files = []
+            circuit_ape_files = []
             output_ape_files = []
+            sensor_ape_files = []
             extra_ape_files = []
             for out_f in output_files:
                 if out_f[-4:] == ".ape":
                     if "plasmid_circuit" in out_f:
                         logging.info("Recognized plasmid_circuit .ape file: " + out_f)
-                        plasmid_ape_files.append(os.path.join(kb_output_folder, os.path.join(output_folder, out_f)))
+                        circuit_ape_files.append(os.path.join(kb_output_folder, os.path.join(output_folder, out_f)))
                     elif "plasmid_output" in out_f:
                         logging.info("Recognized plasmid_output .ape file: " + out_f)
                         output_ape_files.append(os.path.join(kb_output_folder, os.path.join(output_folder, out_f)))
+                    elif "sensor" in out_f:
+                        logging.info("Recognized sensor .ape file: " + out_f)
+                        sensor_ape_files.append(os.path.join(kb_output_folder, os.path.join(output_folder, out_f)))
                     else:
                         logging.info("Other .ape file: " + out_f)
                         extra_ape_files.append(os.path.join(kb_output_folder, os.path.join(output_folder, out_f)))
                         
-            ape_files = plasmid_ape_files + output_ape_files
+            ape_files = circuit_ape_files + output_ape_files + sensor_ape_files
             logging.debug("Unused ape files: ")
             logging.debug(extra_ape_files)
 
