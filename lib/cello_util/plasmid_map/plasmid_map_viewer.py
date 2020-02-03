@@ -40,7 +40,7 @@ Outputs:
 
 """
 def make_plasmid_graph(gb_file, gb_info, js_info, base_html_filepath, user_output_name):
-
+    logging.info("Starting to make plasmid graph for {}".format(gb_file))
     plasmid_info, js_feat_list = get_js_feat_list(gb_file, gb_info)
     js_plasmid_str = make_js_canvas_plasmid(js_feat_list, js_info)
     js_pointers_and_names_str = make_js_pointers_and_names(js_feat_list, js_info)
@@ -63,18 +63,14 @@ def make_plasmid_graph(gb_file, gb_info, js_info, base_html_filepath, user_outpu
 Inputs:
     gb_file: (str) filepath to the genbank file to open.
     base_html_filepath: (str) filepath to the html template file.
-    config_filepath: (str) Path to the config file.
+    config_dicg: (dict) Entire config file
     user_output_name: (str) Name of the user output.
 Outputs:
     plasmid_map_dict: (dict)
         complete_div_str: (str) The entire html string of the div we are using.
         plasmid_name: (str) The name of the plasmid (edited if running Cello which is the case here).,
 """
-def get_cello_plasmid_div(gb_file, base_html_filepath, config_filepath, user_output_name):
-    f = open(config_filepath, "r")
-    file_str = f.read()
-    f.close()
-    config_dict = json.loads(file_str)
+def get_cello_plasmid_div(gb_file, base_html_filepath, config_dict, user_output_name):
     gb_info = config_dict['genbank_info']
     js_info = config_dict["js_info"]
     plasmid_map_dict = make_plasmid_graph(gb_file, gb_info, js_info, base_html_filepath, user_output_name)
@@ -322,15 +318,19 @@ def make_js_canvas_plasmid(js_feat_list, js_info):
             else:
                 js_feat['pointer_len'] = pl_short
         elif i == len(js_feat_list) - 1:
-            two_prev_mid = js_feat_list[0]['midpoint']
-            double_midpoint_distance = math.sqrt(((new_midpoint_list[0] - two_prev_mid[0])**2) + ((new_midpoint_list[1] - two_prev_mid[1])**2))
-            if double_midpoint_distance < 60:
-                if js_feat_list[i-2]['pointer_len'] == pl_short:
-                    js_feat['pointer_len'] = pl_long
+            if len(js_feat_list) != 1:
+                two_prev_mid = js_feat_list[0]['midpoint']
+                double_midpoint_distance = math.sqrt(((new_midpoint_list[0] - two_prev_mid[0])**2) + ((new_midpoint_list[1] - two_prev_mid[1])**2))
+                if double_midpoint_distance < 60:
+                    if js_feat_list[i-2]['pointer_len'] == pl_short:
+                        js_feat['pointer_len'] = pl_long
+                    else:
+                        js_feat['pointer_len'] = pl_short
                 else:
                     js_feat['pointer_len'] = pl_short
             else:
                 js_feat['pointer_len'] = pl_short
+
         else:
             logging.debug(js_feat_list[i-2].keys())
             js_feat['pointer_len'] = pl_short 

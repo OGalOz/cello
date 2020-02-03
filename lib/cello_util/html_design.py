@@ -22,6 +22,8 @@ The PDF and the png files are replicates, you can leave out one and keep the oth
 import os
 import logging
 import shutil
+import traceback
+import json
 from cello_util.plasmid_map.plasmid_map_viewer import get_cello_plasmid_div 
 
 
@@ -114,13 +116,16 @@ def extract_files_from_folder(results_dir):
 Inputs:
     results_dir: (str) The path to the folder containing all the output files from Cello.
     scratch_dir: (str) The path to the scratch directory
+    user_output_name: (str) The user's output name
+    config_info: (dict) Information regarding the html
+        base_plasmid_info: (str) fixed vocab - "none", "custom" etc.
 Outputs:
     html_result_dict: (dict) 
         "result_file_path" : (str) file path to resulting html file. 
         "output_directory": (str) path to resulting output_directory in scratch dir.
 
 """
-def build_html(results_dir, scratch_dir, user_output_name):
+def build_html(results_dir, scratch_dir, user_output_name, config_info):
     """
     There is a variable amount of png files we need to return to the user. Should we enforce a limit? (10 currently)
     """
@@ -210,7 +215,8 @@ def build_html(results_dir, scratch_dir, user_output_name):
         gbk_files = out_files_dict['gbk_files']
         
         try:
-            gb_plasmid_divs_str = make_plasmid_divs(gbk_files, user_output_name)
+            plasmid_vis_info = config_info
+            gb_plasmid_divs_str = make_plasmid_divs(gbk_files, user_output_name, plasmid_vis_info)
         except:
             gb_plasmid_divs_str = ""
         try:
@@ -244,23 +250,36 @@ def build_html(results_dir, scratch_dir, user_output_name):
 """
 Inputs:
     gbk_files: (list) A list of full paths to the gbk files.
-
+    user_output_name: (str)
+    plasmid_vis_info: (dict)
+        base_plasmid_info: (str) none, custom, etc
 Output:
     plasmid_divs_str: (str) A string to insert into report html.
 """
-def make_plasmid_divs(gbk_files, user_output_name):
+def make_plasmid_divs(gbk_files, user_output_name, plasmid_vis_info):
     plasmid_divs_str = ''
 
     #We place basic parameters on the design of the plasmid map:
     base_html_filepath = os.path.join(os.path.dirname(__file__), "plasmid_html_base.html")
     config_filepath = os.path.join(os.path.dirname(__file__), "plasmid_map/config.json")
+    with open(config_filepath, "r") as f:
+        config_file_str = f.read()
+        config_dict = json.loads(config_file_str)
+
+    if plasmid_vis_info["base_plasmid_info"] == "none":
+        #If there are expected to be big CDs, we make the arrow smaller.
+        #Instead of 85 percent, it will be 96 percent
+        config_dict['js_info']['cds_info']['percent_start'] = 96 
+
     #We set a maximum number of files to be made (6):
     k = min(len(gbk_files), 6)
     for i in range(k):
         gb_file = gbk_files[i]
         try:
-            plasmid_map_dict = get_cello_plasmid_div(gb_file, base_html_filepath, config_filepath, user_output_name)
+            plasmid_map_dict = get_cello_plasmid_div(gb_file, base_html_filepath, config_dict, user_output_name)
         except:
+            logging.critical("FAILED TO MAKE VISUALIZATION: {}".format(gb_file))
+            logging.critical(traceback.print_exc())
             break
         plasmid_map_html = plasmid_map_dict["complete_div_str"]
         plasmid_map_name = plasmid_map_dict["plasmid_name"]

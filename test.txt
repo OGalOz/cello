@@ -1,0 +1,3164 @@
+
+Validating module in (/Users/omreeg/KBase/apps/cello)
+
+Validating method in (/Users/omreeg/KBase/apps/cello/ui/narrative/methods/run_cello)
+
+
+Congrats- this module is valid.
+
+
+Delete old Docker containers
+eacf2a3ec00e
+
+Build Docker image
+bSending build context to Docker daemon 557.1 kB
+Sending build context to Docker daemon 1.114 MB
+Sending build context to Docker daemon 1.671 MB
+Sending build context to Docker daemon 2.228 MB
+Sending build context to Docker daemon 2.785 MB
+Sending build context to Docker daemon 3.342 MB
+Sending build context to Docker daemon 3.899 MB
+Sending build context to Docker daemon 4.456 MB
+Sending build context to Docker daemon 5.014 MB
+Sending build context to Docker daemon 5.571 MB
+Sending build context to Docker daemon 6.128 MB
+Sending build context to Docker daemon 6.298 MB
+
+Step 1/27 : FROM kbase/sdkbase2:python
+ ---> 1475f4fb2c91
+Step 2/27 : MAINTAINER KBase Developer
+ ---> Using cache
+ ---> 377ccd1d7ce6
+Step 3/27 : RUN apt-get -y update && apt-get install -y aptitude
+ ---> Using cache
+ ---> 098d05283847
+Step 4/27 : RUN apt-get -y check
+ ---> Using cache
+ ---> 2bab10b21e0a
+Step 5/27 : RUN apt-get -y dist-upgrade
+ ---> Using cache
+ ---> 5929fdd10d08
+Step 6/27 : RUN apt-get -y update
+ ---> Using cache
+ ---> aae403797a4d
+Step 7/27 : RUN apt-get -f install
+ ---> Using cache
+ ---> 43d9d7a3b73f
+Step 8/27 : RUN apt-get install  -y libxss1
+ ---> Using cache
+ ---> 9e4dd46454b7
+Step 9/27 : RUN apt-get install -y aptitude
+ ---> Using cache
+ ---> 04389361e47a
+Step 10/27 : RUN aptitude search libxmu
+ ---> Using cache
+ ---> 5ba0bea731b7
+Step 11/27 : RUN aptitude search gcc-multilib
+ ---> Using cache
+ ---> daef27884192
+Step 12/27 : RUN aptitude install -y gcc-multilib
+ ---> Using cache
+ ---> 94a116a041a6
+Step 13/27 : RUN apt-get install -y git openjdk-8-jdk openjdk-8-jre-headless maven gnuplot ghostscript graphviz imagemagick python-matplotlib
+ ---> Using cache
+ ---> 27d816771abf
+Step 14/27 : RUN export DEBIAN_FRONTEND=noninteractive && ln -fs /usr/share/zoneinfo/America/New_York /etc/localtime && apt-get install -y tzdata && dpkg-reconfigure --frontend noninteractive tzdata
+ ---> Using cache
+ ---> 1aaa6f818d12
+Step 15/27 : RUN apt-get install wget
+ ---> Using cache
+ ---> c5e33b808acb
+Step 16/27 : RUN wget https://github.com/CIDARLAB/cello/archive/develop.zip
+ ---> Using cache
+ ---> 134d15e1f139
+Step 17/27 : RUN unzip develop.zip
+ ---> Using cache
+ ---> 72daa944ca20
+Step 18/27 : RUN mv cello-develop cello
+ ---> Using cache
+ ---> ec3756b177be
+Step 19/27 : RUN cd ./cello/resources/library && bash install_local_jars.sh
+ ---> Using cache
+ ---> 7bfa442a8602
+Step 20/27 : RUN cd ./cello && mvn -e clean compile
+ ---> Using cache
+ ---> c089d4959fe3
+Step 21/27 : COPY ./ /kb/module
+ ---> 6198d1853dc4
+Step 22/27 : RUN mkdir -p /kb/module/work
+ ---> Running in df86cdf5b7a2
+Removing intermediate container df86cdf5b7a2
+ ---> 23408018732f
+Step 23/27 : RUN chmod -R a+rw /kb/module
+ ---> Running in 7ffbcda0cfe6
+Removing intermediate container 7ffbcda0cfe6
+ ---> 441840c3141d
+Step 24/27 : WORKDIR /kb/module
+ ---> Running in ca7564ae06f6
+Removing intermediate container ca7564ae06f6
+ ---> 1a07efbf8176
+Step 25/27 : RUN make all
+ ---> Running in 83ca699a36f7
+kb-sdk compile cello.spec \
+	--out lib \
+	--pysrvname cello.celloServer \
+	--pyimplname cello.celloImpl;
+KBase SDK version 1.1.0 (commit aa2b6f2eb5d7b28cfd1ce2197764076a09050972)
+chmod +x scripts/entrypoint.sh
+mkdir -p bin
+echo '#!/bin/bash' > scripts/start_server.sh
+echo 'script_dir=$(dirname "$(readlink -f "$0")")' >> scripts/start_server.sh
+echo 'export KB_DEPLOYMENT_CONFIG=$script_dir/../deploy.cfg' >> scripts/start_server.sh
+echo 'export PYTHONPATH=$script_dir/../lib:$PATH:$PYTHONPATH' >> scripts/start_server.sh
+echo 'uwsgi --master --processes 5 --threads 5 --http :5000 --wsgi-file $script_dir/../lib/cello/celloServer.py' >> scripts/start_server.sh
+chmod +x scripts/start_server.sh
+mkdir -p bin
+echo '#!/bin/bash' > bin/run_cello_async_job.sh
+echo 'script_dir=$(dirname "$(readlink -f "$0")")' >> bin/run_cello_async_job.sh
+echo 'export PYTHONPATH=$script_dir/../lib:$PATH:$PYTHONPATH' >> bin/run_cello_async_job.sh
+echo 'python -u $script_dir/../lib/cello/celloServer.py $1 $2 $3' >> bin/run_cello_async_job.sh
+chmod +x bin/run_cello_async_job.sh
+echo '#!/bin/bash' > test/run_tests.sh
+echo 'script_dir=$(dirname "$(readlink -f "$0")")' >> test/run_tests.sh
+echo 'export KB_DEPLOYMENT_CONFIG=$script_dir/../deploy.cfg' >> test/run_tests.sh
+echo 'export KB_AUTH_TOKEN=`cat /kb/module/work/token`' >> test/run_tests.sh
+echo 'echo "Removing temp files..."' >> test/run_tests.sh
+echo 'rm -rf /kb/module/work/tmp/*' >> test/run_tests.sh
+echo 'echo "...done removing temp files."' >> test/run_tests.sh
+echo 'export PYTHONPATH=$script_dir/../lib:$PATH:$PYTHONPATH' >> test/run_tests.sh
+echo 'cd $script_dir/../test' >> test/run_tests.sh
+echo 'python -m nose --with-coverage --cover-package=cello --cover-html --cover-html-dir=/kb/module/work/test_coverage --nocapture  --nologcapture .' >> test/run_tests.sh
+chmod +x test/run_tests.sh
+Removing intermediate container 83ca699a36f7
+ ---> 21d2cd35a18c
+Step 26/27 : ENTRYPOINT [ "./scripts/entrypoint.sh" ]
+ ---> Running in 0cec6137cc65
+Removing intermediate container 0cec6137cc65
+ ---> e08e0ddc0f81
+Step 27/27 : CMD [ ]
+ ---> Running in 0e8c510b10f0
+Removing intermediate container 0e8c510b10f0
+ ---> 2349beaae34a
+Successfully built 2349beaae34a
+Successfully tagged test/cello:latest
+Delete old Docker image
+Deleted: sha256:4f84fe0813fa70d369675ec3b2d112a6539cdd2e04112d1ac07366a827c15e71
+Deleted: sha256:200b7c15d3cc5ce878bf0a1c454588bfc56932beda7df2b7f79d70b475b426e6
+Deleted: sha256:d183dee8c33ca2b77fc90ff55e30f0b776e19ad6e0a567fd8d2e6a007a15dc09
+Deleted: sha256:1a6618daef4cb80dc818f87b90331766e8cae1e9324d89d9aea7cb2222f093b7
+Deleted: sha256:41d04a0d4eb5325fd7b1ccfdf94337a467b70f83c513751bb4b251e9c9e56ea3
+Deleted: sha256:6449a0d545cbf0d32ecfbc8ca6e4bdc24fc6c46e11c9942f0e79e61ff57178f3
+Deleted: sha256:bb60d1876187db593d2491263d8ba1baf0701cf68e3eeec27bd95888f4ef1687
+Deleted: sha256:7fc223241cb33b32e05dbb2e1a896e456472b31a51d9347e9cb598bb70b8b078
+Deleted: sha256:1c9d6f56fa1a5efa313bc9910394ddc86fc0dc8e9f4cbacd2c3664a3b7ee1557
+Deleted: sha256:e91894f4160d1e60aa0c039d3bcd37bf3abaa773e0bba40338f33cb13e5500b6
+Deleted: sha256:f7ad213022d76d23860d94700312f6f2bb25f95d20e631679e9c5ed01b44bbdf
+
+Run Tests
+if [ ! -f /kb/module/work/token ]; then echo -e '\nOutside a docker container please run "kb-sdk test" rather than "make test"\n' && exit 1; fi
+bash test/run_tests.sh
+Removing temp files...
+...done removing temp files.
+1580756205.993558 DEBUG: Starting new HTTPS connection (1): appdev.kbase.us:443
+1580756206.1749713 DEBUG: https://appdev.kbase.us:443 "POST /services/auth/api/legacy/KBase/Sessions/Login HTTP/1.1" 200 None
+1580756206.1788807 DEBUG: Starting new HTTPS connection (1): appdev.kbase.us:443
+1580756206.213034 DEBUG: https://appdev.kbase.us:443 "POST /services/ws HTTP/1.1" 200 None
+1580756206.2153633 DEBUG: PARAMS
+1580756206.2154562 DEBUG: {'workspace_name': 'test_CelloTest_1580756206177', 'main_output_name': 'Test_2_1_19', 'kbase_genome_bool': 'no', 'promoter_inputs': [{'inp_promoter_name': 'pTac', 'low_RPU': '0.1', 'high_RPU': '3.0'}, {'inp_promoter_name': 'pTet', 'low_RPU': '0.02', 'high_RPU': '2.0'}], 'gene_outputs': [{'out_gene_name': 'YFP'}], 'truth_table_text': ' pTac, pTet, YFP & 0, 0, 1 & 0, 1, 0 & 1,0,1 & 1,1,0', 'base_plasmid_info': 'none', 'plasmid_output_base': {'output_genome_base': '33901/141/1', 'output_insertion_bp': '953'}, 'plasmid_circuit_base': {'circuit_genome_base': '33901/139/1', 'circuit_insertion_bp': '54'}, 'sensor_module_info': {'sensor_module_base': '33901/139/1', 'sensor_insertion_bp': '150'}}
+1580756206.2155373 DEBUG: workspace_name
+1580756206.2155988 DEBUG: test_CelloTest_1580756206177
+1580756206.2156775 DEBUG: main_output_name
+1580756206.215742 DEBUG: Test_2_1_19
+1580756206.2158039 DEBUG: kbase_genome_bool
+1580756206.2158794 DEBUG: no
+1580756206.2159488 DEBUG: promoter_inputs
+1580756206.2160249 DEBUG: [{'inp_promoter_name': 'pTac', 'low_RPU': '0.1', 'high_RPU': '3.0'}, {'inp_promoter_name': 'pTet', 'low_RPU': '0.02', 'high_RPU': '2.0'}]
+1580756206.2161107 DEBUG: gene_outputs
+1580756206.2161794 DEBUG: [{'out_gene_name': 'YFP'}]
+1580756206.2164242 DEBUG: truth_table_text
+1580756206.216504 DEBUG:  pTac, pTet, YFP & 0, 0, 1 & 0, 1, 0 & 1,0,1 & 1,1,0
+1580756206.216599 DEBUG: base_plasmid_info
+1580756206.2166717 DEBUG: none
+1580756206.216725 DEBUG: plasmid_output_base
+1580756206.2167714 DEBUG: {'output_genome_base': '33901/141/1', 'output_insertion_bp': '953'}
+1580756206.2168612 DEBUG: plasmid_circuit_base
+1580756206.2169213 DEBUG: {'circuit_genome_base': '33901/139/1', 'circuit_insertion_bp': '54'}
+1580756206.2171657 DEBUG: sensor_module_info
+1580756206.217275 DEBUG: {'sensor_module_base': '33901/139/1', 'sensor_insertion_bp': '150'}
+1580756206.2178855 DEBUG: TRUTH TABLE FUNCTIONS: Gene Inputs List:
+1580756206.217969 DEBUG: [{'inp_promoter_name': 'pTac', 'low_RPU': '0.1', 'high_RPU': '3.0', 'custom_var': False}, {'inp_promoter_name': 'pTet', 'low_RPU': '0.02', 'high_RPU': '2.0', 'custom_var': False}]
+1580756206.2181103 DEBUG: TRUTH TABLE FUNCTIONS: Gene Outputs List:
+1580756206.218182 DEBUG: [{'out_gene_name': 'YFP', 'custom_var': False}]
+1580756206.2182934 DEBUG: Original Gene Names - Truth Table Function
+1580756206.2184224 DEBUG: ['pTac', 'pTet', 'YFP']
+1580756206.218599 DEBUG: [' pTac, pTet, YFP ', ' 0, 0, 1 ', ' 0, 1, 0 ', ' 1,0,1 ', ' 1,1,0']
+1580756206.2186787 DEBUG: Gene names rough list: 
+1580756206.2187495 DEBUG: [' pTac', ' pTet', ' YFP ']
+1580756206.2190113 DEBUG: [['pTac', 'pTet', 'YFP'], ['0', '0', '1'], ['0', '1', '0'], ['1', '0', '1'], ['1', '1', '0']]
+1580756206.219151 CRITICAL: Creating New UCF file: /kb/module/work/tmp/tmp_kbase_ucf.json
+1580756206.2219203 DEBUG: Input Names (verilog creation): 
+1580756206.222037 DEBUG: ['pTac', 'pTet']
+1580756206.222496 DEBUG: Output Names (verilog creation): 
+1580756206.2230608 DEBUG: ['YFP']
+1580756206.223193 DEBUG: Verilog File:
+1580756206.223261 DEBUG: module testname(output YFP, input pTac, pTet);
+	always@(pTac,pTet)
+		begin
+			case({pTac,pTet})
+				2'b00: {YFP} = 1'b1;
+				2'b01: {YFP} = 1'b0;
+				2'b10: {YFP} = 1'b1;
+				2'b11: {YFP} = 1'b0;
+			endcase
+		end
+endmodule
+1580756206.2239847 INFO: Input name pTac found in list of promoters.
+1580756206.224129 INFO: Input name pTet found in list of promoters.
+1580756206.224854 INFO: Output name YFP found in list of promoters.
+[INFO] Error stacktraces are turned on.
+[INFO] Scanning for projects...
+[INFO]                                                                         
+[INFO] ------------------------------------------------------------------------
+[INFO] Building Cello 1.0-SNAPSHOT
+[INFO] ------------------------------------------------------------------------
+Downloading: https://repo.maven.apache.org/maven2/org/apache/maven/plugins/maven-surefire-plugin/2.17/maven-surefire-plugin-2.17.pom
+3/5 KB   
+5/5 KB   
+5/5 KB   
+         
+Downloaded: https://repo.maven.apache.org/maven2/org/apache/maven/plugins/maven-surefire-plugin/2.17/maven-surefire-plugin-2.17.pom (5 KB at 6.1 KB/sec)
+Downloading: https://repo.maven.apache.org/maven2/org/apache/maven/surefire/surefire/2.17/surefire-2.17.pom
+3/17 KB   
+5/17 KB   
+8/17 KB   
+11/17 KB   
+13/17 KB   
+16/17 KB   
+17/17 KB   
+           
+Downloaded: https://repo.maven.apache.org/maven2/org/apache/maven/surefire/surefire/2.17/surefire-2.17.pom (17 KB at 111.2 KB/sec)
+Downloading: https://repo.maven.apache.org/maven2/org/apache/maven/plugins/maven-surefire-plugin/2.17/maven-surefire-plugin-2.17.jar
+3/34 KB    
+5/34 KB   
+8/34 KB   
+11/34 KB   
+13/34 KB   
+16/34 KB   
+19/34 KB   
+21/34 KB   
+24/34 KB   
+27/34 KB   
+29/34 KB   
+32/34 KB   
+34/34 KB   
+           
+Downloaded: https://repo.maven.apache.org/maven2/org/apache/maven/plugins/maven-surefire-plugin/2.17/maven-surefire-plugin-2.17.jar (34 KB at 227.4 KB/sec)
+Downloading: https://repo.maven.apache.org/maven2/org/codehaus/mojo/exec-maven-plugin/1.4.0/exec-maven-plugin-1.4.0.pom
+3/12 KB    
+5/12 KB   
+8/12 KB   
+11/12 KB   
+12/12 KB   
+           
+Downloaded: https://repo.maven.apache.org/maven2/org/codehaus/mojo/exec-maven-plugin/1.4.0/exec-maven-plugin-1.4.0.pom (12 KB at 106.0 KB/sec)
+Downloading: https://repo.maven.apache.org/maven2/org/codehaus/mojo/mojo-parent/34/mojo-parent-34.pom
+3/24 KB    
+5/24 KB   
+8/24 KB   
+11/24 KB   
+13/24 KB   
+16/24 KB   
+19/24 KB   
+21/24 KB   
+24/24 KB   
+24/24 KB   
+           
+Downloaded: https://repo.maven.apache.org/maven2/org/codehaus/mojo/mojo-parent/34/mojo-parent-34.pom (24 KB at 214.1 KB/sec)
+Downloading: https://repo.maven.apache.org/maven2/org/codehaus/codehaus-parent/4/codehaus-parent-4.pom
+3/5 KB     
+5/5 KB   
+         
+Downloaded: https://repo.maven.apache.org/maven2/org/codehaus/codehaus-parent/4/codehaus-parent-4.pom (5 KB at 46.2 KB/sec)
+Downloading: https://repo.maven.apache.org/maven2/org/codehaus/mojo/exec-maven-plugin/1.4.0/exec-maven-plugin-1.4.0.jar
+3/46 KB   
+5/46 KB   
+8/46 KB   
+11/46 KB   
+13/46 KB   
+16/46 KB   
+19/46 KB   
+21/46 KB   
+24/46 KB   
+27/46 KB   
+29/46 KB   
+32/46 KB   
+36/46 KB   
+40/46 KB   
+44/46 KB   
+46/46 KB   
+           
+Downloaded: https://repo.maven.apache.org/maven2/org/codehaus/mojo/exec-maven-plugin/1.4.0/exec-maven-plugin-1.4.0.jar (46 KB at 379.3 KB/sec)
+Downloading: http://repo1.maven.org/maven2/org/eugene/2.0.1-SNAPSHOT/maven-metadata.xml
+Downloading: https://repo.spring.io/libs-release/org/eugene/2.0.1-SNAPSHOT/maven-metadata.xml
+           
+           
+[WARNING] Could not transfer metadata org:eugene:2.0.1-SNAPSHOT/maven-metadata.xml from/to central (http://repo1.maven.org/maven2): Failed to transfer file: http://repo1.maven.org/maven2/org/eugene/2.0.1-SNAPSHOT/maven-metadata.xml. Return code is: 501 , ReasonPhrase:HTTPS Required.
+[WARNING] Failure to transfer org:eugene:2.0.1-SNAPSHOT/maven-metadata.xml from http://repo1.maven.org/maven2 was cached in the local repository, resolution will not be reattempted until the update interval of central has elapsed or updates are forced. Original error: Could not transfer metadata org:eugene:2.0.1-SNAPSHOT/maven-metadata.xml from/to central (http://repo1.maven.org/maven2): Failed to transfer file: http://repo1.maven.org/maven2/org/eugene/2.0.1-SNAPSHOT/maven-metadata.xml. Return code is: 501 , ReasonPhrase:HTTPS Required.
+Downloading: http://repo1.maven.org/maven2/junit/junit/4.10/junit-4.10.jar
+Downloading: http://repo1.maven.org/maven2/org/hamcrest/hamcrest-core/1.3/hamcrest-core-1.3.jar
+           
+           
+Downloading: https://repo.spring.io/libs-release/junit/junit/4.10/junit-4.10.jar
+Downloading: https://repo.spring.io/libs-release/org/hamcrest/hamcrest-core/1.3/hamcrest-core-1.3.jar
+1/44 KB    
+2/44 KB   
+4/44 KB   
+4/44 KB   
+4/44 KB   1/248 KB   
+4/44 KB   2/248 KB   
+5/44 KB   2/248 KB   
+6/44 KB   2/248 KB   
+6/44 KB   4/248 KB   
+8/44 KB   4/248 KB   
+8/44 KB   4/248 KB   
+9/44 KB   4/248 KB   
+8/44 KB   4/248 KB   
+10/44 KB   4/248 KB   
+12/44 KB   4/248 KB   
+12/44 KB   5/248 KB   
+12/44 KB   5/248 KB   
+12/44 KB   6/248 KB   
+12/44 KB   8/248 KB   
+13/44 KB   8/248 KB   
+13/44 KB   8/248 KB   
+13/44 KB   9/248 KB   
+14/44 KB   10/248 KB   
+14/44 KB   10/248 KB   
+14/44 KB   12/248 KB   
+14/44 KB   12/248 KB   
+14/44 KB   13/248 KB   
+14/44 KB   14/248 KB   
+16/44 KB   14/248 KB   
+16/44 KB   14/248 KB   
+16/44 KB   16/248 KB   
+16/44 KB   16/248 KB   
+16/44 KB   17/248 KB   
+17/44 KB   17/248 KB   
+17/44 KB   18/248 KB   
+18/44 KB   18/248 KB   
+18/44 KB   20/248 KB   
+20/44 KB   20/248 KB   
+18/44 KB   20/248 KB   
+20/44 KB   20/248 KB   
+20/44 KB   21/248 KB   
+21/44 KB   21/248 KB   
+21/44 KB   22/248 KB   
+22/44 KB   22/248 KB   
+22/44 KB   24/248 KB   
+22/44 KB   24/248 KB   
+24/44 KB   24/248 KB   
+24/44 KB   25/248 KB   
+24/44 KB   25/248 KB   
+24/44 KB   26/248 KB   
+25/44 KB   26/248 KB   
+25/44 KB   28/248 KB   
+26/44 KB   28/248 KB   
+26/44 KB   28/248 KB   
+28/44 KB   28/248 KB   
+28/44 KB   29/248 KB   
+28/44 KB   29/248 KB   
+29/44 KB   29/248 KB   
+30/44 KB   30/248 KB   
+29/44 KB   30/248 KB   
+32/44 KB   30/248 KB   
+32/44 KB   30/248 KB   
+32/44 KB   32/248 KB   
+33/44 KB   32/248 KB   
+33/44 KB   32/248 KB   
+34/44 KB   32/248 KB   
+34/44 KB   33/248 KB   
+36/44 KB   33/248 KB   
+36/44 KB   34/248 KB   
+36/44 KB   34/248 KB   
+37/44 KB   34/248 KB   
+37/44 KB   36/248 KB   
+38/44 KB   36/248 KB   
+40/44 KB   36/248 KB   
+40/44 KB   36/248 KB   
+40/44 KB   36/248 KB   
+41/44 KB   36/248 KB   
+41/44 KB   37/248 KB   
+42/44 KB   37/248 KB   
+42/44 KB   38/248 KB   
+44/44 KB   38/248 KB   
+44/44 KB   38/248 KB   
+44/44 KB   40/248 KB   
+44/44 KB   40/248 KB   
+44/44 KB   40/248 KB   
+44/44 KB   41/248 KB   
+44/44 KB   42/248 KB   
+44/44 KB   44/248 KB   
+44/44 KB   44/248 KB   
+44/44 KB   45/248 KB   
+44/44 KB   46/248 KB   
+44/44 KB   48/248 KB   
+44/44 KB   48/248 KB   
+44/44 KB   49/248 KB   
+44/44 KB   50/248 KB   
+44/44 KB   52/248 KB   
+44/44 KB   52/248 KB   
+44/44 KB   53/248 KB   
+44/44 KB   54/248 KB   
+44/44 KB   56/248 KB   
+44/44 KB   56/248 KB   
+44/44 KB   57/248 KB   
+44/44 KB   58/248 KB   
+44/44 KB   60/248 KB   
+44/44 KB   60/248 KB   
+44/44 KB   61/248 KB   
+44/44 KB   62/248 KB   
+44/44 KB   63/248 KB   
+44/44 KB   64/248 KB   
+44/44 KB   65/248 KB   
+44/44 KB   66/248 KB   
+44/44 KB   68/248 KB   
+44/44 KB   68/248 KB   
+44/44 KB   69/248 KB   
+44/44 KB   70/248 KB   
+44/44 KB   72/248 KB   
+44/44 KB   72/248 KB   
+44/44 KB   73/248 KB   
+44/44 KB   74/248 KB   
+44/44 KB   76/248 KB   
+44/44 KB   76/248 KB   
+44/44 KB   77/248 KB   
+44/44 KB   78/248 KB   
+44/44 KB   80/248 KB   
+44/44 KB   80/248 KB   
+44/44 KB   81/248 KB   
+44/44 KB   82/248 KB   
+44/44 KB   84/248 KB   
+44/44 KB   84/248 KB   
+44/44 KB   85/248 KB   
+44/44 KB   86/248 KB   
+44/44 KB   88/248 KB   
+44/44 KB   88/248 KB   
+44/44 KB   89/248 KB   
+44/44 KB   90/248 KB   
+44/44 KB   92/248 KB   
+44/44 KB   92/248 KB   
+44/44 KB   93/248 KB   
+44/44 KB   94/248 KB   
+44/44 KB   96/248 KB   
+44/44 KB   96/248 KB   
+44/44 KB   97/248 KB   
+44/44 KB   98/248 KB   
+44/44 KB   100/248 KB   
+44/44 KB   100/248 KB   
+44/44 KB   101/248 KB   
+44/44 KB   102/248 KB   
+44/44 KB   104/248 KB   
+44/44 KB   104/248 KB   
+44/44 KB   105/248 KB   
+44/44 KB   106/248 KB   
+44/44 KB   108/248 KB   
+44/44 KB   108/248 KB   
+44/44 KB   109/248 KB   
+44/44 KB   110/248 KB   
+44/44 KB   112/248 KB   
+44/44 KB   112/248 KB   
+44/44 KB   113/248 KB   
+44/44 KB   114/248 KB   
+44/44 KB   116/248 KB   
+44/44 KB   116/248 KB   
+44/44 KB   117/248 KB   
+44/44 KB   118/248 KB   
+44/44 KB   120/248 KB   
+44/44 KB   120/248 KB   
+44/44 KB   121/248 KB   
+44/44 KB   122/248 KB   
+44/44 KB   124/248 KB   
+44/44 KB   124/248 KB   
+44/44 KB   125/248 KB   
+44/44 KB   126/248 KB   
+44/44 KB   128/248 KB   
+44/44 KB   128/248 KB   
+44/44 KB   129/248 KB   
+44/44 KB   130/248 KB   
+44/44 KB   132/248 KB   
+44/44 KB   132/248 KB   
+44/44 KB   133/248 KB   
+44/44 KB   134/248 KB   
+44/44 KB   136/248 KB   
+44/44 KB   136/248 KB   
+44/44 KB   137/248 KB   
+44/44 KB   138/248 KB   
+44/44 KB   140/248 KB   
+44/44 KB   140/248 KB   
+44/44 KB   141/248 KB   
+44/44 KB   142/248 KB   
+44/44 KB   144/248 KB   
+44/44 KB   144/248 KB   
+44/44 KB   145/248 KB   
+44/44 KB   146/248 KB   
+44/44 KB   148/248 KB   
+44/44 KB   148/248 KB   
+44/44 KB   149/248 KB   
+44/44 KB   150/248 KB   
+44/44 KB   152/248 KB   
+                        
+Downloaded: https://repo.spring.io/libs-release/org/hamcrest/hamcrest-core/1.3/hamcrest-core-1.3.jar (44 KB at 132.4 KB/sec)
+152/248 KB              
+153/248 KB   
+154/248 KB   
+156/248 KB   
+156/248 KB   
+157/248 KB   
+158/248 KB   
+160/248 KB   
+160/248 KB   
+161/248 KB   
+162/248 KB   
+164/248 KB   
+164/248 KB   
+165/248 KB   
+166/248 KB   
+168/248 KB   
+168/248 KB   
+169/248 KB   
+170/248 KB   
+172/248 KB   
+172/248 KB   
+173/248 KB   
+174/248 KB   
+176/248 KB   
+176/248 KB   
+177/248 KB   
+178/248 KB   
+180/248 KB   
+180/248 KB   
+181/248 KB   
+182/248 KB   
+184/248 KB   
+184/248 KB   
+185/248 KB   
+186/248 KB   
+188/248 KB   
+188/248 KB   
+189/248 KB   
+190/248 KB   
+192/248 KB   
+192/248 KB   
+193/248 KB   
+194/248 KB   
+196/248 KB   
+196/248 KB   
+197/248 KB   
+198/248 KB   
+200/248 KB   
+200/248 KB   
+201/248 KB   
+202/248 KB   
+204/248 KB   
+204/248 KB   
+205/248 KB   
+206/248 KB   
+208/248 KB   
+208/248 KB   
+209/248 KB   
+210/248 KB   
+212/248 KB   
+212/248 KB   
+213/248 KB   
+214/248 KB   
+216/248 KB   
+216/248 KB   
+217/248 KB   
+218/248 KB   
+220/248 KB   
+220/248 KB   
+221/248 KB   
+222/248 KB   
+224/248 KB   
+224/248 KB   
+225/248 KB   
+226/248 KB   
+228/248 KB   
+228/248 KB   
+229/248 KB   
+230/248 KB   
+232/248 KB   
+232/248 KB   
+233/248 KB   
+234/248 KB   
+236/248 KB   
+236/248 KB   
+237/248 KB   
+238/248 KB   
+240/248 KB   
+240/248 KB   
+241/248 KB   
+242/248 KB   
+244/248 KB   
+244/248 KB   
+245/248 KB   
+246/248 KB   
+248/248 KB   
+             
+Downloaded: https://repo.spring.io/libs-release/junit/junit/4.10/junit-4.10.jar (248 KB at 493.5 KB/sec)
+[INFO] 
+[INFO] --- maven-resources-plugin:2.6:resources (default-resources) @ cellocad ---
+[INFO] Using 'UTF-8' encoding to copy filtered resources.
+[INFO] Copying 0 resource
+[INFO] Copying 3 resources
+[INFO] 
+[INFO] --- maven-compiler-plugin:3.5.1:compile (default-compile) @ cellocad ---
+[INFO] Changes detected - recompiling the module!
+[INFO] Compiling 168 source files to /cello/target/classes
+[INFO] /cello/src/main/java/org/cellocad/MIT/dnacompiler/DNACompiler.java: /cello/src/main/java/org/cellocad/MIT/dnacompiler/DNACompiler.java uses or overrides a deprecated API.
+[INFO] /cello/src/main/java/org/cellocad/MIT/dnacompiler/DNACompiler.java: Recompile with -Xlint:deprecation for details.
+[INFO] /cello/src/main/java/org/cellocad/MIT/dnacompiler/BuildCircuitsUtil.java: Some input files use unchecked or unsafe operations.
+[INFO] /cello/src/main/java/org/cellocad/MIT/dnacompiler/BuildCircuitsUtil.java: Recompile with -Xlint:unchecked for details.
+[INFO] 
+[INFO] --- maven-resources-plugin:2.6:testResources (default-testResources) @ cellocad ---
+[INFO] Using 'UTF-8' encoding to copy filtered resources.
+[INFO] skip non existing resourceDirectory /cello/src/test/resources
+[INFO] 
+[INFO] --- maven-compiler-plugin:3.5.1:testCompile (default-testCompile) @ cellocad ---
+[INFO] Changes detected - recompiling the module!
+[INFO] Compiling 3 source files to /cello/target/test-classes
+[INFO] 
+[INFO] --- maven-surefire-plugin:2.17:test (default-test) @ cellocad ---
+Downloading: https://repo.maven.apache.org/maven2/org/apache/maven/maven-plugin-api/2.0.9/maven-plugin-api-2.0.9.pom
+2/2 KB       
+         
+Downloaded: https://repo.maven.apache.org/maven2/org/apache/maven/maven-plugin-api/2.0.9/maven-plugin-api-2.0.9.pom (2 KB at 14.2 KB/sec)
+Downloading: https://repo.maven.apache.org/maven2/org/apache/maven/maven/2.0.9/maven-2.0.9.pom
+3/19 KB   
+5/19 KB   
+8/19 KB   
+11/19 KB   
+13/19 KB   
+16/19 KB   
+19/19 KB   
+19/19 KB   
+           
+Downloaded: https://repo.maven.apache.org/maven2/org/apache/maven/maven/2.0.9/maven-2.0.9.pom (19 KB at 162.0 KB/sec)
+Downloading: https://repo.maven.apache.org/maven2/org/apache/maven/maven-parent/8/maven-parent-8.pom
+3/24 KB    
+5/24 KB   
+8/24 KB   
+11/24 KB   
+13/24 KB   
+16/24 KB   
+19/24 KB   
+21/24 KB   
+24/24 KB   
+           
+Downloaded: https://repo.maven.apache.org/maven2/org/apache/maven/maven-parent/8/maven-parent-8.pom (24 KB at 212.3 KB/sec)
+Downloading: https://repo.maven.apache.org/maven2/org/apache/maven/surefire/maven-surefire-common/2.17/maven-surefire-common-2.17.pom
+3/6 KB     
+5/6 KB   
+6/6 KB   
+         
+Downloaded: https://repo.maven.apache.org/maven2/org/apache/maven/surefire/maven-surefire-common/2.17/maven-surefire-common-2.17.pom (6 KB at 57.3 KB/sec)
+Downloading: https://repo.maven.apache.org/maven2/org/apache/maven/plugin-tools/maven-plugin-annotations/3.2/maven-plugin-annotations-3.2.pom
+2/2 KB   
+         
+Downloaded: https://repo.maven.apache.org/maven2/org/apache/maven/plugin-tools/maven-plugin-annotations/3.2/maven-plugin-annotations-3.2.pom (2 KB at 14.3 KB/sec)
+Downloading: https://repo.maven.apache.org/maven2/org/apache/maven/plugin-tools/maven-plugin-tools/3.2/maven-plugin-tools-3.2.pom
+3/17 KB   
+5/17 KB   
+8/17 KB   
+11/17 KB   
+13/17 KB   
+16/17 KB   
+17/17 KB   
+           
+Downloaded: https://repo.maven.apache.org/maven2/org/apache/maven/plugin-tools/maven-plugin-tools/3.2/maven-plugin-tools-3.2.pom (17 KB at 145.4 KB/sec)
+Downloading: https://repo.maven.apache.org/maven2/org/apache/maven/maven-artifact/2.0.9/maven-artifact-2.0.9.pom
+2/2 KB     
+         
+Downloaded: https://repo.maven.apache.org/maven2/org/apache/maven/maven-artifact/2.0.9/maven-artifact-2.0.9.pom (2 KB at 15.2 KB/sec)
+Downloading: https://repo.maven.apache.org/maven2/org/codehaus/plexus/plexus-utils/1.5.1/plexus-utils-1.5.1.pom
+3/3 KB   
+3/3 KB   
+         
+Downloaded: https://repo.maven.apache.org/maven2/org/codehaus/plexus/plexus-utils/1.5.1/plexus-utils-1.5.1.pom (3 KB at 21.0 KB/sec)
+Downloading: https://repo.maven.apache.org/maven2/org/apache/maven/surefire/surefire-api/2.17/surefire-api-2.17.pom
+3/3 KB   
+3/3 KB   
+         
+Downloaded: https://repo.maven.apache.org/maven2/org/apache/maven/surefire/surefire-api/2.17/surefire-api-2.17.pom (3 KB at 20.9 KB/sec)
+Downloading: https://repo.maven.apache.org/maven2/org/apache/maven/surefire/surefire-booter/2.17/surefire-booter-2.17.pom
+3/3 KB   
+3/3 KB   
+         
+Downloaded: https://repo.maven.apache.org/maven2/org/apache/maven/surefire/surefire-booter/2.17/surefire-booter-2.17.pom (3 KB at 25.1 KB/sec)
+Downloading: https://repo.maven.apache.org/maven2/org/apache/maven/maven-plugin-descriptor/2.0.9/maven-plugin-descriptor-2.0.9.pom
+3/3 KB   
+         
+Downloaded: https://repo.maven.apache.org/maven2/org/apache/maven/maven-plugin-descriptor/2.0.9/maven-plugin-descriptor-2.0.9.pom (3 KB at 17.9 KB/sec)
+Downloading: https://repo.maven.apache.org/maven2/org/apache/maven/maven-project/2.0.9/maven-project-2.0.9.pom
+3/3 KB   
+3/3 KB   
+         
+Downloaded: https://repo.maven.apache.org/maven2/org/apache/maven/maven-project/2.0.9/maven-project-2.0.9.pom (3 KB at 25.7 KB/sec)
+Downloading: https://repo.maven.apache.org/maven2/org/apache/maven/maven-settings/2.0.9/maven-settings-2.0.9.pom
+3/3 KB   
+         
+Downloaded: https://repo.maven.apache.org/maven2/org/apache/maven/maven-settings/2.0.9/maven-settings-2.0.9.pom (3 KB at 19.7 KB/sec)
+Downloading: https://repo.maven.apache.org/maven2/org/apache/maven/maven-model/2.0.9/maven-model-2.0.9.pom
+3/4 KB   
+4/4 KB   
+         
+Downloaded: https://repo.maven.apache.org/maven2/org/apache/maven/maven-model/2.0.9/maven-model-2.0.9.pom (4 KB at 29.5 KB/sec)
+Downloading: https://repo.maven.apache.org/maven2/org/apache/maven/maven-profile/2.0.9/maven-profile-2.0.9.pom
+3/3 KB   
+         
+Downloaded: https://repo.maven.apache.org/maven2/org/apache/maven/maven-profile/2.0.9/maven-profile-2.0.9.pom (3 KB at 19.4 KB/sec)
+Downloading: https://repo.maven.apache.org/maven2/org/apache/maven/maven-artifact-manager/2.0.9/maven-artifact-manager-2.0.9.pom
+3/3 KB   
+3/3 KB   
+         
+Downloaded: https://repo.maven.apache.org/maven2/org/apache/maven/maven-artifact-manager/2.0.9/maven-artifact-manager-2.0.9.pom (3 KB at 25.6 KB/sec)
+Downloading: https://repo.maven.apache.org/maven2/org/apache/maven/maven-repository-metadata/2.0.9/maven-repository-metadata-2.0.9.pom
+2/2 KB   
+         
+Downloaded: https://repo.maven.apache.org/maven2/org/apache/maven/maven-repository-metadata/2.0.9/maven-repository-metadata-2.0.9.pom (2 KB at 18.2 KB/sec)
+Downloading: https://repo.maven.apache.org/maven2/org/apache/maven/maven-plugin-registry/2.0.9/maven-plugin-registry-2.0.9.pom
+2/2 KB   
+         
+Downloaded: https://repo.maven.apache.org/maven2/org/apache/maven/maven-plugin-registry/2.0.9/maven-plugin-registry-2.0.9.pom (2 KB at 17.8 KB/sec)
+Downloading: https://repo.maven.apache.org/maven2/org/apache/maven/maven-core/2.0.9/maven-core-2.0.9.pom
+3/8 KB   
+5/8 KB   
+8/8 KB   
+8/8 KB   
+         
+Downloaded: https://repo.maven.apache.org/maven2/org/apache/maven/maven-core/2.0.9/maven-core-2.0.9.pom (8 KB at 73.1 KB/sec)
+Downloading: https://repo.maven.apache.org/maven2/org/apache/maven/maven-plugin-parameter-documenter/2.0.9/maven-plugin-parameter-documenter-2.0.9.pom
+2/2 KB   
+         
+Downloaded: https://repo.maven.apache.org/maven2/org/apache/maven/maven-plugin-parameter-documenter/2.0.9/maven-plugin-parameter-documenter-2.0.9.pom (2 KB at 18.8 KB/sec)
+Downloading: https://repo.maven.apache.org/maven2/org/apache/maven/reporting/maven-reporting-api/2.0.9/maven-reporting-api-2.0.9.pom
+2/2 KB   
+         
+Downloaded: https://repo.maven.apache.org/maven2/org/apache/maven/reporting/maven-reporting-api/2.0.9/maven-reporting-api-2.0.9.pom (2 KB at 16.9 KB/sec)
+Downloading: https://repo.maven.apache.org/maven2/org/apache/maven/reporting/maven-reporting/2.0.9/maven-reporting-2.0.9.pom
+2/2 KB   
+         
+Downloaded: https://repo.maven.apache.org/maven2/org/apache/maven/reporting/maven-reporting/2.0.9/maven-reporting-2.0.9.pom (2 KB at 14.0 KB/sec)
+Downloading: https://repo.maven.apache.org/maven2/org/apache/maven/maven-error-diagnostics/2.0.9/maven-error-diagnostics-2.0.9.pom
+2/2 KB   
+         
+Downloaded: https://repo.maven.apache.org/maven2/org/apache/maven/maven-error-diagnostics/2.0.9/maven-error-diagnostics-2.0.9.pom (2 KB at 16.7 KB/sec)
+Downloading: https://repo.maven.apache.org/maven2/org/apache/maven/maven-monitor/2.0.9/maven-monitor-2.0.9.pom
+2/2 KB   
+         
+Downloaded: https://repo.maven.apache.org/maven2/org/apache/maven/maven-monitor/2.0.9/maven-monitor-2.0.9.pom (2 KB at 12.3 KB/sec)
+Downloading: https://repo.maven.apache.org/maven2/org/apache/maven/maven-toolchain/2.0.9/maven-toolchain-2.0.9.pom
+3/4 KB   
+4/4 KB   
+         
+Downloaded: https://repo.maven.apache.org/maven2/org/apache/maven/maven-toolchain/2.0.9/maven-toolchain-2.0.9.pom (4 KB at 33.6 KB/sec)
+Downloading: https://repo.maven.apache.org/maven2/org/apache/commons/commons-lang3/3.1/commons-lang3-3.1.pom
+3/17 KB   
+5/17 KB   
+8/17 KB   
+11/17 KB   
+13/17 KB   
+16/17 KB   
+17/17 KB   
+           
+Downloaded: https://repo.maven.apache.org/maven2/org/apache/commons/commons-lang3/3.1/commons-lang3-3.1.pom (17 KB at 132.7 KB/sec)
+Downloading: https://repo.maven.apache.org/maven2/org/apache/maven/maven-plugin-api/2.0.9/maven-plugin-api-2.0.9.jar
+Downloading: https://repo.maven.apache.org/maven2/org/apache/maven/surefire/maven-surefire-common/2.17/maven-surefire-common-2.17.jar
+Downloading: https://repo.maven.apache.org/maven2/org/apache/maven/maven-artifact/2.0.9/maven-artifact-2.0.9.jar
+Downloading: https://repo.maven.apache.org/maven2/org/codehaus/plexus/plexus-utils/1.5.1/plexus-utils-1.5.1.jar
+Downloading: https://repo.maven.apache.org/maven2/org/apache/maven/surefire/surefire-booter/2.17/surefire-booter-2.17.jar
+3/13 KB    
+5/13 KB   
+8/13 KB   
+11/13 KB   
+13/13 KB   
+13/13 KB   3/260 KB   
+13/13 KB   3/260 KB   3/206 KB   
+13/13 KB   3/87 KB   3/260 KB   3/206 KB   
+13/13 KB   3/87 KB   5/260 KB   3/206 KB   
+13/13 KB   3/87 KB   5/260 KB   5/206 KB   
+                                           
+Downloaded: https://repo.maven.apache.org/maven2/org/apache/maven/maven-plugin-api/2.0.9/maven-plugin-api-2.0.9.jar (13 KB at 41.8 KB/sec)
+5/87 KB   5/260 KB   5/206 KB              
+5/87 KB   8/260 KB   5/206 KB   
+5/87 KB   8/260 KB   5/206 KB   3/39 KB   
+5/87 KB   8/260 KB   8/206 KB   3/39 KB   
+Downloading: https://repo.maven.apache.org/maven2/org/apache/maven/maven-plugin-descriptor/2.0.9/maven-plugin-descriptor-2.0.9.jar
+5/87 KB   8/260 KB   8/206 KB   5/39 KB   
+5/87 KB   8/260 KB   8/206 KB   8/39 KB   
+5/87 KB   8/260 KB   11/206 KB   8/39 KB   
+5/87 KB   11/260 KB   11/206 KB   8/39 KB   
+8/87 KB   11/260 KB   11/206 KB   8/39 KB   
+11/87 KB   11/260 KB   11/206 KB   8/39 KB   
+11/87 KB   13/260 KB   11/206 KB   8/39 KB   
+11/87 KB   16/260 KB   11/206 KB   8/39 KB   
+11/87 KB   19/260 KB   11/206 KB   8/39 KB   
+13/87 KB   19/260 KB   11/206 KB   8/39 KB   
+13/87 KB   21/260 KB   11/206 KB   8/39 KB   
+13/87 KB   21/260 KB   11/206 KB   11/39 KB   
+13/87 KB   24/260 KB   11/206 KB   11/39 KB   
+16/87 KB   24/260 KB   11/206 KB   11/39 KB   
+16/87 KB   24/260 KB   11/206 KB   13/39 KB   
+16/87 KB   27/260 KB   11/206 KB   13/39 KB   
+16/87 KB   27/260 KB   11/206 KB   16/39 KB   
+19/87 KB   27/260 KB   11/206 KB   16/39 KB   
+21/87 KB   27/260 KB   11/206 KB   16/39 KB   
+24/87 KB   27/260 KB   11/206 KB   16/39 KB   
+27/87 KB   27/260 KB   11/206 KB   16/39 KB   
+27/87 KB   27/260 KB   11/206 KB   19/39 KB   
+27/87 KB   27/260 KB   11/206 KB   21/39 KB   
+27/87 KB   27/260 KB   11/206 KB   24/39 KB   
+27/87 KB   27/260 KB   13/206 KB   24/39 KB   
+27/87 KB   27/260 KB   13/206 KB   27/39 KB   
+27/87 KB   27/260 KB   13/206 KB   29/39 KB   
+27/87 KB   27/260 KB   16/206 KB   29/39 KB   
+27/87 KB   27/260 KB   16/206 KB   32/39 KB   
+27/87 KB   27/260 KB   19/206 KB   32/39 KB   
+27/87 KB   27/260 KB   19/206 KB   35/39 KB   
+27/87 KB   27/260 KB   21/206 KB   35/39 KB   
+27/87 KB   27/260 KB   24/206 KB   35/39 KB   
+27/87 KB   27/260 KB   27/206 KB   35/39 KB   
+27/87 KB   29/260 KB   27/206 KB   35/39 KB   
+29/87 KB   29/260 KB   27/206 KB   35/39 KB   
+29/87 KB   29/260 KB   29/206 KB   35/39 KB   
+29/87 KB   32/260 KB   29/206 KB   35/39 KB   
+29/87 KB   32/260 KB   32/206 KB   35/39 KB   
+32/87 KB   32/260 KB   32/206 KB   35/39 KB   
+32/87 KB   32/260 KB   32/206 KB   3/37 KB   35/39 KB   
+32/87 KB   32/260 KB   32/206 KB   5/37 KB   35/39 KB   
+32/87 KB   32/260 KB   32/206 KB   8/37 KB   35/39 KB   
+32/87 KB   32/260 KB   32/206 KB   11/37 KB   35/39 KB   
+32/87 KB   32/260 KB   32/206 KB   13/37 KB   35/39 KB   
+32/87 KB   32/260 KB   32/206 KB   16/37 KB   35/39 KB   
+32/87 KB   32/260 KB   32/206 KB   19/37 KB   35/39 KB   
+32/87 KB   32/260 KB   32/206 KB   21/37 KB   35/39 KB   
+32/87 KB   32/260 KB   32/206 KB   24/37 KB   35/39 KB   
+32/87 KB   32/260 KB   32/206 KB   27/37 KB   35/39 KB   
+32/87 KB   32/260 KB   32/206 KB   29/37 KB   35/39 KB   
+32/87 KB   32/260 KB   32/206 KB   32/37 KB   35/39 KB   
+32/87 KB   32/260 KB   32/206 KB   35/37 KB   35/39 KB   
+32/87 KB   32/260 KB   32/206 KB   37/37 KB   35/39 KB   
+32/87 KB   32/260 KB   32/206 KB   37/37 KB   37/39 KB   
+32/87 KB   32/260 KB   32/206 KB   37/37 KB   39/39 KB   
+32/87 KB   36/260 KB   32/206 KB   37/37 KB   39/39 KB   
+32/87 KB   40/260 KB   32/206 KB   37/37 KB   39/39 KB   
+36/87 KB   44/260 KB   32/206 KB   37/37 KB   39/39 KB   
+36/87 KB   44/260 KB   32/206 KB   37/37 KB   39/39 KB   
+36/87 KB   48/260 KB   32/206 KB   37/37 KB   39/39 KB   
+40/87 KB   48/260 KB   32/206 KB   37/37 KB   39/39 KB   
+44/87 KB   48/260 KB   32/206 KB   37/37 KB   39/39 KB   
+48/87 KB   48/260 KB   32/206 KB   37/37 KB   39/39 KB   
+48/87 KB   48/260 KB   36/206 KB   37/37 KB   39/39 KB   
+48/87 KB   48/260 KB   40/206 KB   37/37 KB   39/39 KB   
+48/87 KB   48/260 KB   44/206 KB   37/37 KB   39/39 KB   
+48/87 KB   48/260 KB   48/206 KB   37/37 KB   39/39 KB   
+48/87 KB   52/260 KB   48/206 KB   37/37 KB   39/39 KB   
+48/87 KB   56/260 KB   48/206 KB   37/37 KB   39/39 KB   
+48/87 KB   60/260 KB   48/206 KB   37/37 KB   39/39 KB   
+48/87 KB   64/260 KB   48/206 KB   37/37 KB   39/39 KB   
+52/87 KB   64/260 KB   48/206 KB   37/37 KB   39/39 KB   
+56/87 KB   64/260 KB   48/206 KB   37/37 KB   39/39 KB   
+60/87 KB   64/260 KB   48/206 KB   37/37 KB   39/39 KB   
+64/87 KB   64/260 KB   48/206 KB   37/37 KB   39/39 KB   
+                                                         
+Downloaded: https://repo.maven.apache.org/maven2/org/apache/maven/maven-plugin-descriptor/2.0.9/maven-plugin-descriptor-2.0.9.jar (37 KB at 86.3 KB/sec)
+Downloading: https://repo.maven.apache.org/maven2/org/apache/maven/maven-project/2.0.9/maven-project-2.0.9.jar
+64/87 KB   64/260 KB   52/206 KB   39/39 KB              
+64/87 KB   64/260 KB   56/206 KB   39/39 KB   
+64/87 KB   64/260 KB   60/206 KB   39/39 KB   
+64/87 KB   64/260 KB   64/206 KB   39/39 KB   
+64/87 KB   68/260 KB   64/206 KB   39/39 KB   
+68/87 KB   68/260 KB   64/206 KB   39/39 KB   
+68/87 KB   72/260 KB   64/206 KB   39/39 KB   
+72/87 KB   72/260 KB   64/206 KB   39/39 KB   
+76/87 KB   72/260 KB   64/206 KB   39/39 KB   
+76/87 KB   76/260 KB   64/206 KB   39/39 KB   
+80/87 KB   76/260 KB   64/206 KB   39/39 KB   
+80/87 KB   80/260 KB   64/206 KB   39/39 KB   
+84/87 KB   80/260 KB   64/206 KB   39/39 KB   
+87/87 KB   80/260 KB   64/206 KB   39/39 KB   
+87/87 KB   80/260 KB   68/206 KB   39/39 KB   
+87/87 KB   80/260 KB   72/206 KB   39/39 KB   
+87/87 KB   80/260 KB   76/206 KB   39/39 KB   
+87/87 KB   80/260 KB   80/206 KB   39/39 KB   
+87/87 KB   84/260 KB   80/206 KB   39/39 KB   
+87/87 KB   88/260 KB   80/206 KB   39/39 KB   
+87/87 KB   92/260 KB   80/206 KB   39/39 KB   
+87/87 KB   96/260 KB   80/206 KB   39/39 KB   
+                                              
+Downloaded: https://repo.maven.apache.org/maven2/org/apache/maven/surefire/surefire-booter/2.17/surefire-booter-2.17.jar (39 KB at 84.8 KB/sec)
+Downloading: https://repo.maven.apache.org/maven2/org/apache/maven/maven-settings/2.0.9/maven-settings-2.0.9.jar
+87/87 KB   100/260 KB   80/206 KB             
+87/87 KB   104/260 KB   80/206 KB   
+87/87 KB   108/260 KB   80/206 KB   
+87/87 KB   112/260 KB   80/206 KB   
+87/87 KB   116/260 KB   80/206 KB   
+87/87 KB   120/260 KB   80/206 KB   
+87/87 KB   124/260 KB   80/206 KB   
+87/87 KB   128/260 KB   80/206 KB   
+87/87 KB   128/260 KB   84/206 KB   
+87/87 KB   128/260 KB   88/206 KB   
+87/87 KB   128/260 KB   92/206 KB   
+87/87 KB   128/260 KB   96/206 KB   
+87/87 KB   132/260 KB   96/206 KB   
+87/87 KB   136/260 KB   96/206 KB   
+87/87 KB   140/260 KB   96/206 KB   
+87/87 KB   144/260 KB   96/206 KB   
+87/87 KB   144/260 KB   96/206 KB   3/119 KB   
+87/87 KB   144/260 KB   96/206 KB   5/119 KB   
+87/87 KB   144/260 KB   96/206 KB   8/119 KB   
+87/87 KB   144/260 KB   96/206 KB   11/119 KB   
+87/87 KB   144/260 KB   96/206 KB   13/119 KB   
+87/87 KB   144/260 KB   96/206 KB   16/119 KB   
+87/87 KB   144/260 KB   96/206 KB   19/119 KB   
+87/87 KB   144/260 KB   96/206 KB   21/119 KB   
+87/87 KB   144/260 KB   96/206 KB   24/119 KB   
+87/87 KB   144/260 KB   96/206 KB   27/119 KB   
+87/87 KB   144/260 KB   96/206 KB   29/119 KB   
+87/87 KB   148/260 KB   96/206 KB   29/119 KB   
+87/87 KB   152/260 KB   96/206 KB   29/119 KB   
+87/87 KB   156/260 KB   96/206 KB   29/119 KB   
+87/87 KB   160/260 KB   96/206 KB   29/119 KB   
+87/87 KB   160/260 KB   96/206 KB   32/119 KB   
+87/87 KB   164/260 KB   96/206 KB   32/119 KB   
+87/87 KB   168/260 KB   96/206 KB   32/119 KB   
+87/87 KB   172/260 KB   96/206 KB   32/119 KB   
+87/87 KB   176/260 KB   96/206 KB   32/119 KB   
+87/87 KB   176/260 KB   96/206 KB   36/119 KB   
+87/87 KB   176/260 KB   100/206 KB   36/119 KB   
+87/87 KB   176/260 KB   100/206 KB   40/119 KB   
+87/87 KB   176/260 KB   100/206 KB   44/119 KB   
+87/87 KB   176/260 KB   104/206 KB   44/119 KB   
+87/87 KB   176/260 KB   104/206 KB   48/119 KB   
+87/87 KB   176/260 KB   108/206 KB   48/119 KB   
+87/87 KB   176/260 KB   112/206 KB   48/119 KB   
+87/87 KB   176/260 KB   112/206 KB   52/119 KB   
+87/87 KB   180/260 KB   112/206 KB   52/119 KB   
+87/87 KB   180/260 KB   112/206 KB   56/119 KB   
+87/87 KB   184/260 KB   112/206 KB   60/119 KB   
+87/87 KB   184/260 KB   112/206 KB   56/119 KB   
+87/87 KB   188/260 KB   112/206 KB   60/119 KB   
+87/87 KB   192/260 KB   112/206 KB   60/119 KB   
+87/87 KB   192/260 KB   112/206 KB   64/119 KB   
+                                                 
+Downloaded: https://repo.maven.apache.org/maven2/org/apache/maven/maven-artifact/2.0.9/maven-artifact-2.0.9.jar (87 KB at 174.7 KB/sec)
+Downloading: https://repo.maven.apache.org/maven2/org/apache/maven/maven-profile/2.0.9/maven-profile-2.0.9.jar
+192/260 KB   112/206 KB   68/119 KB              
+192/260 KB   112/206 KB   72/119 KB   
+192/260 KB   112/206 KB   76/119 KB   
+192/260 KB   112/206 KB   80/119 KB   
+196/260 KB   112/206 KB   80/119 KB   
+200/260 KB   112/206 KB   80/119 KB   
+204/260 KB   112/206 KB   80/119 KB   
+208/260 KB   112/206 KB   80/119 KB   
+208/260 KB   116/206 KB   80/119 KB   
+208/260 KB   120/206 KB   80/119 KB   
+208/260 KB   124/206 KB   80/119 KB   
+208/260 KB   128/206 KB   80/119 KB   
+212/260 KB   128/206 KB   80/119 KB   
+216/260 KB   128/206 KB   80/119 KB   
+220/260 KB   128/206 KB   80/119 KB   
+224/260 KB   128/206 KB   80/119 KB   
+228/260 KB   128/206 KB   80/119 KB   
+232/260 KB   128/206 KB   80/119 KB   
+236/260 KB   128/206 KB   80/119 KB   
+240/260 KB   128/206 KB   80/119 KB   
+240/260 KB   128/206 KB   80/119 KB   3/48 KB   
+240/260 KB   128/206 KB   80/119 KB   5/48 KB   
+240/260 KB   128/206 KB   80/119 KB   8/48 KB   
+240/260 KB   128/206 KB   80/119 KB   11/48 KB   
+240/260 KB   128/206 KB   80/119 KB   13/48 KB   
+240/260 KB   128/206 KB   80/119 KB   16/48 KB   
+240/260 KB   128/206 KB   80/119 KB   19/48 KB   
+240/260 KB   128/206 KB   80/119 KB   21/48 KB   
+240/260 KB   128/206 KB   80/119 KB   24/48 KB   
+240/260 KB   128/206 KB   80/119 KB   27/48 KB   
+240/260 KB   128/206 KB   80/119 KB   29/48 KB   
+240/260 KB   128/206 KB   80/119 KB   32/48 KB   
+240/260 KB   132/206 KB   80/119 KB   32/48 KB   
+240/260 KB   136/206 KB   80/119 KB   32/48 KB   
+240/260 KB   140/206 KB   80/119 KB   32/48 KB   
+240/260 KB   144/206 KB   80/119 KB   32/48 KB   
+244/260 KB   144/206 KB   80/119 KB   32/48 KB   
+248/260 KB   144/206 KB   80/119 KB   32/48 KB   
+252/260 KB   144/206 KB   80/119 KB   32/48 KB   
+256/260 KB   144/206 KB   80/119 KB   32/48 KB   
+260/260 KB   144/206 KB   80/119 KB   32/48 KB   
+260/260 KB   144/206 KB   84/119 KB   32/48 KB   
+260/260 KB   144/206 KB   88/119 KB   32/48 KB   
+260/260 KB   144/206 KB   92/119 KB   32/48 KB   
+260/260 KB   144/206 KB   96/119 KB   32/48 KB   
+260/260 KB   148/206 KB   100/119 KB   32/48 KB   
+260/260 KB   148/206 KB   100/119 KB   32/48 KB   
+260/260 KB   152/206 KB   100/119 KB   32/48 KB   
+260/260 KB   152/206 KB   104/119 KB   32/48 KB   
+260/260 KB   156/206 KB   104/119 KB   32/48 KB   
+260/260 KB   156/206 KB   108/119 KB   32/48 KB   
+260/260 KB   160/206 KB   108/119 KB   32/48 KB   
+260/260 KB   160/206 KB   112/119 KB   32/48 KB   
+260/260 KB   160/206 KB   116/119 KB   32/48 KB   
+260/260 KB   160/206 KB   119/119 KB   32/48 KB   
+260/260 KB   164/206 KB   119/119 KB   32/48 KB   
+260/260 KB   168/206 KB   119/119 KB   32/48 KB   
+260/260 KB   172/206 KB   119/119 KB   32/48 KB   
+260/260 KB   176/206 KB   119/119 KB   32/48 KB   
+4/35 KB   260/260 KB   176/206 KB   119/119 KB   32/48 KB   
+8/35 KB   260/260 KB   176/206 KB   119/119 KB   32/48 KB   
+12/35 KB   260/260 KB   176/206 KB   119/119 KB   32/48 KB   
+16/35 KB   260/260 KB   176/206 KB   119/119 KB   32/48 KB   
+20/35 KB   260/260 KB   176/206 KB   119/119 KB   32/48 KB   
+20/35 KB   260/260 KB   176/206 KB   119/119 KB   36/48 KB   
+24/35 KB   260/260 KB   176/206 KB   119/119 KB   36/48 KB   
+24/35 KB   260/260 KB   176/206 KB   119/119 KB   40/48 KB   
+28/35 KB   260/260 KB   176/206 KB   119/119 KB   40/48 KB   
+28/35 KB   260/260 KB   176/206 KB   119/119 KB   44/48 KB   
+32/35 KB   260/260 KB   176/206 KB   119/119 KB   44/48 KB   
+32/35 KB   260/260 KB   176/206 KB   119/119 KB   48/48 KB   
+35/35 KB   260/260 KB   176/206 KB   119/119 KB   48/48 KB   
+35/35 KB   260/260 KB   176/206 KB   119/119 KB   48/48 KB   
+                                                             
+Downloaded: https://repo.maven.apache.org/maven2/org/apache/maven/surefire/maven-surefire-common/2.17/maven-surefire-common-2.17.jar (260 KB at 458.7 KB/sec)
+Downloading: https://repo.maven.apache.org/maven2/org/apache/maven/maven-artifact-manager/2.0.9/maven-artifact-manager-2.0.9.jar
+35/35 KB   180/206 KB   119/119 KB   48/48 KB                
+35/35 KB   184/206 KB   119/119 KB   48/48 KB   
+35/35 KB   188/206 KB   119/119 KB   48/48 KB   
+35/35 KB   192/206 KB   119/119 KB   48/48 KB   
+35/35 KB   196/206 KB   119/119 KB   48/48 KB   
+35/35 KB   200/206 KB   119/119 KB   48/48 KB   
+35/35 KB   204/206 KB   119/119 KB   48/48 KB   
+35/35 KB   206/206 KB   119/119 KB   48/48 KB   
+                                                
+Downloaded: https://repo.maven.apache.org/maven2/org/apache/maven/maven-project/2.0.9/maven-project-2.0.9.jar (119 KB at 201.2 KB/sec)
+Downloading: https://repo.maven.apache.org/maven2/org/apache/maven/maven-plugin-registry/2.0.9/maven-plugin-registry-2.0.9.jar
+                                                
+                                                
+Downloaded: https://repo.maven.apache.org/maven2/org/apache/maven/maven-profile/2.0.9/maven-profile-2.0.9.jar (35 KB at 56.9 KB/sec)
+Downloading: https://repo.maven.apache.org/maven2/org/apache/maven/maven-model/2.0.9/maven-model-2.0.9.jar
+Downloaded: https://repo.maven.apache.org/maven2/org/apache/maven/maven-settings/2.0.9/maven-settings-2.0.9.jar (48 KB at 79.0 KB/sec)
+Downloading: https://repo.maven.apache.org/maven2/org/apache/maven/maven-core/2.0.9/maven-core-2.0.9.jar
+4/57 KB   206/206 KB                            
+8/57 KB   206/206 KB   
+12/57 KB   206/206 KB   
+16/57 KB   206/206 KB   
+20/57 KB   206/206 KB   
+24/57 KB   206/206 KB   
+28/57 KB   206/206 KB   
+32/57 KB   206/206 KB   
+36/57 KB   206/206 KB   
+40/57 KB   206/206 KB   
+44/57 KB   206/206 KB   
+48/57 KB   206/206 KB   
+52/57 KB   206/206 KB   
+56/57 KB   206/206 KB   
+57/57 KB   206/206 KB   
+                        
+Downloaded: https://repo.maven.apache.org/maven2/org/codehaus/plexus/plexus-utils/1.5.1/plexus-utils-1.5.1.jar (206 KB at 324.5 KB/sec)
+Downloading: https://repo.maven.apache.org/maven2/org/apache/maven/maven-plugin-parameter-documenter/2.0.9/maven-plugin-parameter-documenter-2.0.9.jar
+57/57 KB   4/29 KB      
+57/57 KB   8/29 KB   
+57/57 KB   12/29 KB   
+57/57 KB   16/29 KB   
+57/57 KB   20/29 KB   
+57/57 KB   24/29 KB   
+57/57 KB   28/29 KB   
+57/57 KB   29/29 KB   
+57/57 KB   29/29 KB   4/156 KB   
+57/57 KB   29/29 KB   8/156 KB   
+57/57 KB   29/29 KB   12/156 KB   
+57/57 KB   29/29 KB   16/156 KB   
+57/57 KB   29/29 KB   20/156 KB   
+57/57 KB   29/29 KB   24/156 KB   
+57/57 KB   29/29 KB   28/156 KB   
+57/57 KB   29/29 KB   32/156 KB   
+57/57 KB   29/29 KB   4/86 KB   32/156 KB   
+57/57 KB   29/29 KB   8/86 KB   32/156 KB   
+57/57 KB   29/29 KB   12/86 KB   32/156 KB   
+57/57 KB   29/29 KB   16/86 KB   32/156 KB   
+57/57 KB   29/29 KB   20/86 KB   32/156 KB   
+57/57 KB   29/29 KB   24/86 KB   32/156 KB   
+57/57 KB   29/29 KB   28/86 KB   32/156 KB   
+57/57 KB   29/29 KB   32/86 KB   32/156 KB   
+57/57 KB   29/29 KB   36/86 KB   32/156 KB   
+57/57 KB   29/29 KB   40/86 KB   32/156 KB   
+57/57 KB   29/29 KB   44/86 KB   32/156 KB   
+57/57 KB   29/29 KB   44/86 KB   36/156 KB   
+57/57 KB   29/29 KB   48/86 KB   36/156 KB   
+57/57 KB   29/29 KB   48/86 KB   40/156 KB   
+57/57 KB   29/29 KB   48/86 KB   44/156 KB   
+57/57 KB   29/29 KB   48/86 KB   48/156 KB   
+                                             
+29/29 KB   52/86 KB   48/156 KB              
+Downloaded: https://repo.maven.apache.org/maven2/org/apache/maven/maven-artifact-manager/2.0.9/maven-artifact-manager-2.0.9.jar (57 KB at 83.5 KB/sec)
+29/29 KB   56/86 KB   48/156 KB   
+Downloading: https://repo.maven.apache.org/maven2/org/apache/maven/reporting/maven-reporting-api/2.0.9/maven-reporting-api-2.0.9.jar
+29/29 KB   56/86 KB   52/156 KB   
+29/29 KB   60/86 KB   56/156 KB   
+29/29 KB   60/86 KB   60/156 KB   
+29/29 KB   60/86 KB   64/156 KB   
+29/29 KB   60/86 KB   52/156 KB   
+29/29 KB   64/86 KB   64/156 KB   
+29/29 KB   64/86 KB   68/156 KB   
+29/29 KB   64/86 KB   72/156 KB   
+29/29 KB   64/86 KB   76/156 KB   
+29/29 KB   64/86 KB   80/156 KB   
+29/29 KB   64/86 KB   4/21 KB   80/156 KB   
+29/29 KB   64/86 KB   8/21 KB   80/156 KB   
+29/29 KB   64/86 KB   12/21 KB   80/156 KB   
+29/29 KB   64/86 KB   16/21 KB   80/156 KB   
+29/29 KB   64/86 KB   20/21 KB   80/156 KB   
+29/29 KB   64/86 KB   21/21 KB   80/156 KB   
+29/29 KB   64/86 KB   21/21 KB   84/156 KB   
+29/29 KB   64/86 KB   21/21 KB   88/156 KB   
+29/29 KB   64/86 KB   21/21 KB   92/156 KB   
+29/29 KB   64/86 KB   21/21 KB   96/156 KB   
+                                             
+Downloaded: https://repo.maven.apache.org/maven2/org/apache/maven/maven-plugin-registry/2.0.9/maven-plugin-registry-2.0.9.jar (29 KB at 40.4 KB/sec)
+Downloading: https://repo.maven.apache.org/maven2/org/apache/maven/maven-repository-metadata/2.0.9/maven-repository-metadata-2.0.9.jar
+64/86 KB   21/21 KB   100/156 KB             
+64/86 KB   21/21 KB   104/156 KB   
+64/86 KB   21/21 KB   108/156 KB   
+64/86 KB   21/21 KB   112/156 KB   
+64/86 KB   21/21 KB   116/156 KB   
+64/86 KB   21/21 KB   120/156 KB   
+64/86 KB   21/21 KB   124/156 KB   
+64/86 KB   21/21 KB   128/156 KB   
+68/86 KB   21/21 KB   128/156 KB   
+72/86 KB   21/21 KB   128/156 KB   
+76/86 KB   21/21 KB   128/156 KB   
+80/86 KB   21/21 KB   128/156 KB   
+84/86 KB   21/21 KB   128/156 KB   
+86/86 KB   21/21 KB   128/156 KB   
+86/86 KB   21/21 KB   132/156 KB   
+86/86 KB   21/21 KB   136/156 KB   
+86/86 KB   21/21 KB   140/156 KB   
+86/86 KB   21/21 KB   144/156 KB   
+4/10 KB   86/86 KB   21/21 KB   144/156 KB   
+8/10 KB   86/86 KB   21/21 KB   144/156 KB   
+10/10 KB   86/86 KB   21/21 KB   144/156 KB   
+10/10 KB   86/86 KB   21/21 KB   148/156 KB   
+10/10 KB   86/86 KB   21/21 KB   152/156 KB   
+10/10 KB   86/86 KB   21/21 KB   156/156 KB   
+10/10 KB   86/86 KB   21/21 KB   156/156 KB   
+                                              
+Downloaded: https://repo.maven.apache.org/maven2/org/apache/maven/maven-plugin-parameter-documenter/2.0.9/maven-plugin-parameter-documenter-2.0.9.jar (21 KB at 27.4 KB/sec)
+Downloading: https://repo.maven.apache.org/maven2/org/apache/maven/maven-error-diagnostics/2.0.9/maven-error-diagnostics-2.0.9.jar
+10/10 KB   4/24 KB   86/86 KB   156/156 KB    
+10/10 KB   8/24 KB   86/86 KB   156/156 KB   
+10/10 KB   12/24 KB   86/86 KB   156/156 KB   
+10/10 KB   16/24 KB   86/86 KB   156/156 KB   
+10/10 KB   20/24 KB   86/86 KB   156/156 KB   
+10/10 KB   24/24 KB   86/86 KB   156/156 KB   
+10/10 KB   24/24 KB   86/86 KB   156/156 KB   
+                                              
+Downloaded: https://repo.maven.apache.org/maven2/org/apache/maven/maven-model/2.0.9/maven-model-2.0.9.jar (86 KB at 109.5 KB/sec)
+Downloading: https://repo.maven.apache.org/maven2/org/apache/maven/maven-monitor/2.0.9/maven-monitor-2.0.9.jar
+                                              
+Downloaded: https://repo.maven.apache.org/maven2/org/apache/maven/reporting/maven-reporting-api/2.0.9/maven-reporting-api-2.0.9.jar (10 KB at 12.7 KB/sec)
+Downloading: https://repo.maven.apache.org/maven2/org/apache/commons/commons-lang3/3.1/commons-lang3-3.1.jar
+                                              
+Downloaded: https://repo.maven.apache.org/maven2/org/apache/maven/maven-core/2.0.9/maven-core-2.0.9.jar (156 KB at 199.6 KB/sec)
+Downloading: https://repo.maven.apache.org/maven2/org/apache/maven/surefire/surefire-api/2.17/surefire-api-2.17.jar
+24/24 KB   4/14 KB                            
+24/24 KB   8/14 KB   
+24/24 KB   12/14 KB   
+24/24 KB   14/14 KB   
+                      
+Downloaded: https://repo.maven.apache.org/maven2/org/apache/maven/maven-repository-metadata/2.0.9/maven-repository-metadata-2.0.9.jar (24 KB at 29.9 KB/sec)
+Downloading: https://repo.maven.apache.org/maven2/org/apache/maven/maven-toolchain/2.0.9/maven-toolchain-2.0.9.jar
+14/14 KB   4/11 KB    
+14/14 KB   8/11 KB   
+14/14 KB   11/11 KB   
+14/14 KB   4/144 KB   11/11 KB   
+14/14 KB   8/144 KB   11/11 KB   
+14/14 KB   12/144 KB   11/11 KB   
+14/14 KB   16/144 KB   11/11 KB   
+14/14 KB   20/144 KB   11/11 KB   4/309 KB   
+14/14 KB   20/144 KB   11/11 KB   4/309 KB   
+14/14 KB   24/144 KB   11/11 KB   4/309 KB   
+14/14 KB   28/144 KB   11/11 KB   4/309 KB   
+14/14 KB   28/144 KB   11/11 KB   8/309 KB   
+14/14 KB   32/144 KB   11/11 KB   8/309 KB   
+14/14 KB   32/144 KB   11/11 KB   12/309 KB   
+14/14 KB   32/144 KB   11/11 KB   16/309 KB   
+14/14 KB   32/144 KB   11/11 KB   20/309 KB   
+14/14 KB   36/144 KB   11/11 KB   24/309 KB   
+14/14 KB   36/144 KB   11/11 KB   28/309 KB   
+14/14 KB   36/144 KB   11/11 KB   32/309 KB   
+14/14 KB   36/144 KB   11/11 KB   20/309 KB   
+14/14 KB   40/144 KB   11/11 KB   32/309 KB   
+14/14 KB   44/144 KB   11/11 KB   32/309 KB   
+14/14 KB   48/144 KB   11/11 KB   32/309 KB   
+14/14 KB   48/144 KB   11/11 KB   36/309 KB   
+14/14 KB   48/144 KB   11/11 KB   40/309 KB   
+14/14 KB   48/144 KB   11/11 KB   44/309 KB   
+14/14 KB   48/144 KB   11/11 KB   48/309 KB   
+14/14 KB   52/144 KB   11/11 KB   48/309 KB   
+14/14 KB   56/144 KB   11/11 KB   48/309 KB   
+14/14 KB   60/144 KB   11/11 KB   48/309 KB   
+14/14 KB   64/144 KB   11/11 KB   48/309 KB   
+14/14 KB   68/144 KB   11/11 KB   48/309 KB   
+14/14 KB   72/144 KB   11/11 KB   48/309 KB   
+14/14 KB   76/144 KB   11/11 KB   48/309 KB   
+14/14 KB   80/144 KB   11/11 KB   48/309 KB   
+14/14 KB   80/144 KB   11/11 KB   52/309 KB   
+14/14 KB   80/144 KB   11/11 KB   56/309 KB   
+14/14 KB   80/144 KB   11/11 KB   60/309 KB   
+14/14 KB   80/144 KB   11/11 KB   64/309 KB   
+14/14 KB   84/144 KB   11/11 KB   64/309 KB   
+14/14 KB   88/144 KB   11/11 KB   64/309 KB   
+14/14 KB   92/144 KB   11/11 KB   64/309 KB   
+14/14 KB   96/144 KB   11/11 KB   64/309 KB   
+14/14 KB   100/144 KB   11/11 KB   64/309 KB   
+14/14 KB   104/144 KB   11/11 KB   64/309 KB   
+14/14 KB   108/144 KB   11/11 KB   64/309 KB   
+14/14 KB   112/144 KB   11/11 KB   64/309 KB   
+14/14 KB   112/144 KB   11/11 KB   68/309 KB   
+14/14 KB   112/144 KB   11/11 KB   72/309 KB   
+14/14 KB   112/144 KB   11/11 KB   76/309 KB   
+14/14 KB   112/144 KB   11/11 KB   80/309 KB   
+14/14 KB   116/144 KB   11/11 KB   80/309 KB   
+14/14 KB   120/144 KB   11/11 KB   80/309 KB   
+14/14 KB   124/144 KB   11/11 KB   80/309 KB   
+14/14 KB   128/144 KB   11/11 KB   80/309 KB   
+14/14 KB   128/144 KB   11/11 KB   84/309 KB   
+14/14 KB   128/144 KB   11/11 KB   88/309 KB   
+14/14 KB   128/144 KB   11/11 KB   92/309 KB   
+14/14 KB   128/144 KB   11/11 KB   96/309 KB   
+14/14 KB   132/144 KB   11/11 KB   96/309 KB   
+14/14 KB   136/144 KB   11/11 KB   96/309 KB   
+14/14 KB   140/144 KB   11/11 KB   96/309 KB   
+14/14 KB   144/144 KB   11/11 KB   96/309 KB   
+14/14 KB   144/144 KB   11/11 KB   96/309 KB   
+                                               
+Downloaded: https://repo.maven.apache.org/maven2/org/apache/maven/maven-error-diagnostics/2.0.9/maven-error-diagnostics-2.0.9.jar (14 KB at 15.6 KB/sec)
+Downloading: https://repo.maven.apache.org/maven2/org/apache/maven/plugin-tools/maven-plugin-annotations/3.2/maven-plugin-annotations-3.2.jar
+144/144 KB   11/11 KB   100/309 KB             
+144/144 KB   11/11 KB   104/309 KB   
+144/144 KB   11/11 KB   108/309 KB   
+144/144 KB   11/11 KB   112/309 KB   
+144/144 KB   11/11 KB   4/38 KB   112/309 KB   
+144/144 KB   11/11 KB   8/38 KB   112/309 KB   
+144/144 KB   11/11 KB   12/38 KB   112/309 KB   
+144/144 KB   11/11 KB   16/38 KB   112/309 KB   
+144/144 KB   11/11 KB   16/38 KB   116/309 KB   
+144/144 KB   11/11 KB   20/38 KB   120/309 KB   
+144/144 KB   11/11 KB   20/38 KB   120/309 KB   
+144/144 KB   11/11 KB   24/38 KB   120/309 KB   
+144/144 KB   11/11 KB   28/38 KB   120/309 KB   
+144/144 KB   11/11 KB   28/38 KB   124/309 KB   
+144/144 KB   11/11 KB   28/38 KB   128/309 KB   
+144/144 KB   11/11 KB   32/38 KB   128/309 KB   
+144/144 KB   11/11 KB   36/38 KB   128/309 KB   
+144/144 KB   11/11 KB   38/38 KB   128/309 KB   
+144/144 KB   11/11 KB   38/38 KB   132/309 KB   
+144/144 KB   11/11 KB   38/38 KB   136/309 KB   
+144/144 KB   11/11 KB   38/38 KB   140/309 KB   
+144/144 KB   11/11 KB   38/38 KB   144/309 KB   
+144/144 KB   11/11 KB   38/38 KB   148/309 KB   
+144/144 KB   11/11 KB   38/38 KB   152/309 KB   
+144/144 KB   11/11 KB   38/38 KB   156/309 KB   
+144/144 KB   11/11 KB   38/38 KB   160/309 KB   
+144/144 KB   11/11 KB   38/38 KB   164/309 KB   
+144/144 KB   11/11 KB   38/38 KB   168/309 KB   
+144/144 KB   11/11 KB   38/38 KB   172/309 KB   
+144/144 KB   11/11 KB   38/38 KB   176/309 KB   
+144/144 KB   11/11 KB   38/38 KB   180/309 KB   
+144/144 KB   11/11 KB   38/38 KB   184/309 KB   
+144/144 KB   11/11 KB   38/38 KB   188/309 KB   
+144/144 KB   11/11 KB   38/38 KB   192/309 KB   
+                                                
+Downloaded: https://repo.maven.apache.org/maven2/org/apache/maven/maven-monitor/2.0.9/maven-monitor-2.0.9.jar (11 KB at 11.4 KB/sec)
+144/144 KB   38/38 KB   196/309 KB              
+144/144 KB   38/38 KB   200/309 KB   
+144/144 KB   38/38 KB   204/309 KB   
+144/144 KB   38/38 KB   208/309 KB   
+144/144 KB   38/38 KB   212/309 KB   
+144/144 KB   38/38 KB   216/309 KB   
+144/144 KB   38/38 KB   220/309 KB   
+144/144 KB   38/38 KB   224/309 KB   
+144/144 KB   38/38 KB   228/309 KB   
+144/144 KB   38/38 KB   232/309 KB   
+144/144 KB   38/38 KB   236/309 KB   
+144/144 KB   38/38 KB   240/309 KB   
+144/144 KB   38/38 KB   244/309 KB   
+144/144 KB   38/38 KB   248/309 KB   
+144/144 KB   38/38 KB   252/309 KB   
+144/144 KB   38/38 KB   256/309 KB   
+144/144 KB   38/38 KB   260/309 KB   
+144/144 KB   38/38 KB   264/309 KB   
+144/144 KB   38/38 KB   268/309 KB   
+144/144 KB   38/38 KB   272/309 KB   
+144/144 KB   38/38 KB   276/309 KB   
+144/144 KB   38/38 KB   280/309 KB   
+144/144 KB   38/38 KB   284/309 KB   
+144/144 KB   38/38 KB   288/309 KB   
+4/15 KB   144/144 KB   38/38 KB   288/309 KB   
+8/15 KB   144/144 KB   38/38 KB   288/309 KB   
+12/15 KB   144/144 KB   38/38 KB   288/309 KB   
+15/15 KB   144/144 KB   38/38 KB   288/309 KB   
+                                                
+Downloaded: https://repo.maven.apache.org/maven2/org/apache/maven/surefire/surefire-api/2.17/surefire-api-2.17.jar (144 KB at 156.2 KB/sec)
+15/15 KB   38/38 KB   292/309 KB                
+15/15 KB   38/38 KB   296/309 KB   
+15/15 KB   38/38 KB   300/309 KB   
+15/15 KB   38/38 KB   304/309 KB   
+15/15 KB   38/38 KB   308/309 KB   
+15/15 KB   38/38 KB   309/309 KB   
+                                   
+Downloaded: https://repo.maven.apache.org/maven2/org/apache/maven/maven-toolchain/2.0.9/maven-toolchain-2.0.9.jar (38 KB at 40.1 KB/sec)
+                                   
+Downloaded: https://repo.maven.apache.org/maven2/org/apache/maven/plugin-tools/maven-plugin-annotations/3.2/maven-plugin-annotations-3.2.jar (15 KB at 15.1 KB/sec)
+                                   
+Downloaded: https://repo.maven.apache.org/maven2/org/apache/commons/commons-lang3/3.1/commons-lang3-3.1.jar (309 KB at 315.3 KB/sec)
+[INFO] Tests are skipped.
+[INFO] 
+[INFO] --- exec-maven-plugin:1.4.0:java (default) @ cellocad ---
+Downloading: https://repo.maven.apache.org/maven2/org/apache/maven/maven-toolchain/1.0/maven-toolchain-1.0.pom
+3/4 KB                             
+4/4 KB   
+         
+Downloaded: https://repo.maven.apache.org/maven2/org/apache/maven/maven-toolchain/1.0/maven-toolchain-1.0.pom (4 KB at 31.8 KB/sec)
+Downloading: https://repo.maven.apache.org/maven2/junit/junit/4.11/junit-4.11.pom
+3/3 KB   
+3/3 KB   
+         
+Downloaded: https://repo.maven.apache.org/maven2/junit/junit/4.11/junit-4.11.pom (3 KB at 22.0 KB/sec)
+Downloading: https://repo.maven.apache.org/maven2/org/codehaus/plexus/plexus-utils/3.0.20/plexus-utils-3.0.20.pom
+3/4 KB   
+4/4 KB   
+         
+Downloaded: https://repo.maven.apache.org/maven2/org/codehaus/plexus/plexus-utils/3.0.20/plexus-utils-3.0.20.pom (4 KB at 36.1 KB/sec)
+Downloading: https://repo.maven.apache.org/maven2/org/apache/commons/commons-exec/1.3/commons-exec-1.3.pom
+3/11 KB   
+5/11 KB   
+8/11 KB   
+11/11 KB   
+11/11 KB   
+           
+Downloaded: https://repo.maven.apache.org/maven2/org/apache/commons/commons-exec/1.3/commons-exec-1.3.pom (11 KB at 103.2 KB/sec)
+Downloading: https://repo.maven.apache.org/maven2/org/apache/commons/commons-parent/35/commons-parent-35.pom
+3/57 KB    
+5/57 KB   
+8/57 KB   
+11/57 KB   
+13/57 KB   
+16/57 KB   
+19/57 KB   
+21/57 KB   
+24/57 KB   
+27/57 KB   
+29/57 KB   
+32/57 KB   
+36/57 KB   
+40/57 KB   
+44/57 KB   
+48/57 KB   
+52/57 KB   
+56/57 KB   
+57/57 KB   
+           
+Downloaded: https://repo.maven.apache.org/maven2/org/apache/commons/commons-parent/35/commons-parent-35.pom (57 KB at 499.3 KB/sec)
+Downloading: https://repo.maven.apache.org/maven2/org/apache/maven/maven-toolchain/1.0/maven-toolchain-1.0.jar
+Downloading: https://repo.maven.apache.org/maven2/org/apache/maven/maven-plugin-parameter-documenter/2.2.1/maven-plugin-parameter-documenter-2.2.1.jar
+Downloading: https://repo.maven.apache.org/maven2/org/apache/maven/maven-core/2.2.1/maven-core-2.2.1.jar
+Downloading: https://repo.maven.apache.org/maven2/org/slf4j/slf4j-jdk14/1.5.6/slf4j-jdk14-1.5.6.jar
+Downloading: https://repo.maven.apache.org/maven2/org/slf4j/slf4j-api/1.5.6/slf4j-api-1.5.6.jar
+4/33 KB    
+8/33 KB   
+12/33 KB   
+16/33 KB   
+20/33 KB   
+24/33 KB   
+28/33 KB   
+32/33 KB   
+33/33 KB   
+4/22 KB   33/33 KB   
+8/22 KB   33/33 KB   
+12/22 KB   33/33 KB   
+16/22 KB   33/33 KB   
+20/22 KB   33/33 KB   
+22/22 KB   33/33 KB   
+22/22 KB   33/33 KB   4/174 KB   
+22/22 KB   33/33 KB   8/174 KB   
+22/22 KB   33/33 KB   12/174 KB   
+22/22 KB   33/33 KB   16/174 KB   
+22/22 KB   33/33 KB   4/9 KB   16/174 KB   
+4/22 KB   22/22 KB   33/33 KB   4/9 KB   16/174 KB   
+4/22 KB   22/22 KB   33/33 KB   8/9 KB   16/174 KB   
+4/22 KB   22/22 KB   33/33 KB   9/9 KB   16/174 KB   
+8/22 KB   22/22 KB   33/33 KB   9/9 KB   16/174 KB   
+12/22 KB   22/22 KB   33/33 KB   9/9 KB   16/174 KB   
+16/22 KB   22/22 KB   33/33 KB   9/9 KB   16/174 KB   
+16/22 KB   22/22 KB   33/33 KB   9/9 KB   20/174 KB   
+16/22 KB   22/22 KB   33/33 KB   9/9 KB   24/174 KB   
+16/22 KB   22/22 KB   33/33 KB   9/9 KB   28/174 KB   
+16/22 KB   22/22 KB   33/33 KB   9/9 KB   32/174 KB   
+20/22 KB   22/22 KB   33/33 KB   9/9 KB   32/174 KB   
+22/22 KB   22/22 KB   33/33 KB   9/9 KB   32/174 KB   
+22/22 KB   22/22 KB   33/33 KB   9/9 KB   36/174 KB   
+22/22 KB   22/22 KB   33/33 KB   9/9 KB   40/174 KB   
+22/22 KB   22/22 KB   33/33 KB   9/9 KB   44/174 KB   
+22/22 KB   22/22 KB   33/33 KB   9/9 KB   48/174 KB   
+                                                      
+Downloaded: https://repo.maven.apache.org/maven2/org/apache/maven/maven-toolchain/1.0/maven-toolchain-1.0.jar (33 KB at 297.6 KB/sec)
+Downloading: https://repo.maven.apache.org/maven2/org/slf4j/jcl-over-slf4j/1.5.6/jcl-over-slf4j-1.5.6.jar
+                                                      
+Downloaded: https://repo.maven.apache.org/maven2/org/apache/maven/maven-plugin-parameter-documenter/2.2.1/maven-plugin-parameter-documenter-2.2.1.jar (22 KB at 191.8 KB/sec)
+Downloading: https://repo.maven.apache.org/maven2/org/apache/maven/reporting/maven-reporting-api/2.2.1/maven-reporting-api-2.2.1.jar
+22/22 KB   9/9 KB   52/174 KB                         
+22/22 KB   9/9 KB   56/174 KB   
+22/22 KB   9/9 KB   60/174 KB   
+22/22 KB   9/9 KB   64/174 KB   
+22/22 KB   9/9 KB   68/174 KB   
+22/22 KB   9/9 KB   72/174 KB   
+22/22 KB   9/9 KB   76/174 KB   
+22/22 KB   9/9 KB   80/174 KB   
+                                
+Downloaded: https://repo.maven.apache.org/maven2/org/slf4j/slf4j-api/1.5.6/slf4j-api-1.5.6.jar (22 KB at 145.4 KB/sec)
+Downloading: https://repo.maven.apache.org/maven2/org/apache/maven/doxia/doxia-sink-api/1.1/doxia-sink-api-1.1.jar
+                                
+Downloaded: https://repo.maven.apache.org/maven2/org/slf4j/slf4j-jdk14/1.5.6/slf4j-jdk14-1.5.6.jar (9 KB at 56.6 KB/sec)
+Downloading: https://repo.maven.apache.org/maven2/org/apache/maven/doxia/doxia-logging-api/1.1/doxia-logging-api-1.1.jar
+80/174 KB   4/17 KB             
+80/174 KB   8/17 KB   
+80/174 KB   12/17 KB   
+84/174 KB   12/17 KB   
+84/174 KB   16/17 KB   
+88/174 KB   16/17 KB   
+92/174 KB   16/17 KB   
+92/174 KB   17/17 KB   
+96/174 KB   17/17 KB   
+4/10 KB   96/174 KB   17/17 KB   
+8/10 KB   96/174 KB   17/17 KB   
+10/10 KB   96/174 KB   17/17 KB   
+10/10 KB   100/174 KB   17/17 KB   
+10/10 KB   104/174 KB   17/17 KB   
+10/10 KB   108/174 KB   17/17 KB   
+10/10 KB   112/174 KB   17/17 KB   
+10/10 KB   116/174 KB   17/17 KB   
+10/10 KB   120/174 KB   17/17 KB   
+10/10 KB   124/174 KB   17/17 KB   
+10/10 KB   128/174 KB   17/17 KB   
+10/10 KB   132/174 KB   17/17 KB   
+10/10 KB   136/174 KB   17/17 KB   
+10/10 KB   140/174 KB   17/17 KB   
+10/10 KB   144/174 KB   17/17 KB   
+10/10 KB   4/13 KB   144/174 KB   17/17 KB   
+10/10 KB   4/13 KB   144/174 KB   4/12 KB   17/17 KB   
+10/10 KB   8/13 KB   144/174 KB   4/12 KB   17/17 KB   
+10/10 KB   12/13 KB   144/174 KB   4/12 KB   17/17 KB   
+10/10 KB   12/13 KB   144/174 KB   8/12 KB   17/17 KB   
+10/10 KB   13/13 KB   144/174 KB   8/12 KB   17/17 KB   
+10/10 KB   13/13 KB   144/174 KB   12/12 KB   17/17 KB   
+                                                         
+Downloaded: https://repo.maven.apache.org/maven2/org/slf4j/jcl-over-slf4j/1.5.6/jcl-over-slf4j-1.5.6.jar (17 KB at 78.9 KB/sec)
+Downloading: https://repo.maven.apache.org/maven2/org/apache/maven/maven-error-diagnostics/2.2.1/maven-error-diagnostics-2.2.1.jar
+10/10 KB   13/13 KB   148/174 KB   12/12 KB              
+10/10 KB   13/13 KB   152/174 KB   12/12 KB   
+10/10 KB   13/13 KB   156/174 KB   12/12 KB   
+10/10 KB   13/13 KB   160/174 KB   12/12 KB   
+                                              
+Downloaded: https://repo.maven.apache.org/maven2/org/apache/maven/reporting/maven-reporting-api/2.2.1/maven-reporting-api-2.2.1.jar (10 KB at 46.2 KB/sec)
+Downloading: https://repo.maven.apache.org/maven2/commons-cli/commons-cli/1.2/commons-cli-1.2.jar
+13/13 KB   164/174 KB   12/12 KB              
+13/13 KB   168/174 KB   12/12 KB   
+13/13 KB   172/174 KB   12/12 KB   
+13/13 KB   174/174 KB   12/12 KB   
+                                   
+Downloaded: https://repo.maven.apache.org/maven2/org/apache/maven/doxia/doxia-logging-api/1.1/doxia-logging-api-1.1.jar (12 KB at 43.9 KB/sec)
+Downloading: https://repo.maven.apache.org/maven2/org/apache/maven/maven-plugin-descriptor/2.2.1/maven-plugin-descriptor-2.2.1.jar
+                                   
+Downloaded: https://repo.maven.apache.org/maven2/org/apache/maven/doxia/doxia-sink-api/1.1/doxia-sink-api-1.1.jar (13 KB at 49.3 KB/sec)
+Downloading: https://repo.maven.apache.org/maven2/org/apache/maven/maven-monitor/2.2.1/maven-monitor-2.2.1.jar
+4/13 KB   174/174 KB               
+8/13 KB   174/174 KB   
+12/13 KB   174/174 KB   
+13/13 KB   174/174 KB   
+4/41 KB   13/13 KB   174/174 KB   
+8/41 KB   13/13 KB   174/174 KB   
+12/41 KB   13/13 KB   174/174 KB   
+16/41 KB   13/13 KB   174/174 KB   
+20/41 KB   13/13 KB   174/174 KB   
+24/41 KB   13/13 KB   174/174 KB   
+28/41 KB   13/13 KB   174/174 KB   
+32/41 KB   13/13 KB   174/174 KB   
+36/41 KB   13/13 KB   174/174 KB   
+40/41 KB   13/13 KB   174/174 KB   
+41/41 KB   13/13 KB   174/174 KB   
+                                   
+Downloaded: https://repo.maven.apache.org/maven2/org/apache/maven/maven-core/2.2.1/maven-core-2.2.1.jar (174 KB at 629.4 KB/sec)
+Downloading: https://repo.maven.apache.org/maven2/org/codehaus/plexus/plexus-utils/3.0.20/plexus-utils-3.0.20.jar
+41/41 KB   13/13 KB   4/39 KB      
+41/41 KB   13/13 KB   8/39 KB   
+41/41 KB   13/13 KB   12/39 KB   
+41/41 KB   13/13 KB   16/39 KB   
+41/41 KB   13/13 KB   20/39 KB   
+41/41 KB   13/13 KB   24/39 KB   
+41/41 KB   13/13 KB   28/39 KB   
+41/41 KB   13/13 KB   32/39 KB   
+41/41 KB   13/13 KB   4/11 KB   32/39 KB   
+41/41 KB   13/13 KB   4/11 KB   36/39 KB   
+41/41 KB   13/13 KB   8/11 KB   36/39 KB   
+41/41 KB   13/13 KB   8/11 KB   39/39 KB   
+                                           
+41/41 KB   11/11 KB   39/39 KB             
+Downloaded: https://repo.maven.apache.org/maven2/org/apache/maven/maven-error-diagnostics/2.2.1/maven-error-diagnostics-2.2.1.jar (13 KB at 40.6 KB/sec)
+Downloading: https://repo.maven.apache.org/maven2/org/apache/commons/commons-exec/1.3/commons-exec-1.3.jar
+                                 
+Downloaded: https://repo.maven.apache.org/maven2/commons-cli/commons-cli/1.2/commons-cli-1.2.jar (41 KB at 127.9 KB/sec)
+11/11 KB   4/238 KB   39/39 KB   
+11/11 KB   8/238 KB   39/39 KB   
+11/11 KB   12/238 KB   39/39 KB   
+11/11 KB   16/238 KB   39/39 KB   
+11/11 KB   20/238 KB   39/39 KB   
+11/11 KB   24/238 KB   39/39 KB   
+11/11 KB   28/238 KB   39/39 KB   
+11/11 KB   32/238 KB   39/39 KB   
+11/11 KB   36/238 KB   39/39 KB   
+11/11 KB   40/238 KB   39/39 KB   
+11/11 KB   44/238 KB   39/39 KB   
+11/11 KB   48/238 KB   39/39 KB   
+11/11 KB   52/238 KB   39/39 KB   
+11/11 KB   56/238 KB   39/39 KB   
+11/11 KB   60/238 KB   39/39 KB   
+11/11 KB   64/238 KB   39/39 KB   
+11/11 KB   68/238 KB   39/39 KB   
+11/11 KB   72/238 KB   39/39 KB   
+11/11 KB   76/238 KB   39/39 KB   
+11/11 KB   80/238 KB   39/39 KB   
+11/11 KB   84/238 KB   39/39 KB   
+11/11 KB   88/238 KB   39/39 KB   
+11/11 KB   92/238 KB   39/39 KB   
+11/11 KB   96/238 KB   39/39 KB   
+11/11 KB   100/238 KB   39/39 KB   
+11/11 KB   104/238 KB   39/39 KB   
+11/11 KB   108/238 KB   39/39 KB   
+11/11 KB   112/238 KB   39/39 KB   
+11/11 KB   116/238 KB   39/39 KB   
+11/11 KB   120/238 KB   39/39 KB   
+11/11 KB   124/238 KB   39/39 KB   
+11/11 KB   128/238 KB   39/39 KB   
+11/11 KB   132/238 KB   39/39 KB   
+11/11 KB   136/238 KB   39/39 KB   
+11/11 KB   140/238 KB   39/39 KB   
+11/11 KB   144/238 KB   39/39 KB   
+11/11 KB   148/238 KB   39/39 KB   
+11/11 KB   152/238 KB   39/39 KB   
+11/11 KB   156/238 KB   39/39 KB   
+11/11 KB   160/238 KB   39/39 KB   
+11/11 KB   160/238 KB   4/54 KB   39/39 KB   
+11/11 KB   160/238 KB   8/54 KB   39/39 KB   
+11/11 KB   160/238 KB   12/54 KB   39/39 KB   
+11/11 KB   160/238 KB   16/54 KB   39/39 KB   
+11/11 KB   160/238 KB   20/54 KB   39/39 KB   
+11/11 KB   160/238 KB   24/54 KB   39/39 KB   
+                                              
+160/238 KB   28/54 KB   39/39 KB              
+160/238 KB   32/54 KB   39/39 KB   
+Downloaded: https://repo.maven.apache.org/maven2/org/apache/maven/maven-monitor/2.2.1/maven-monitor-2.2.1.jar (11 KB at 27.4 KB/sec)
+160/238 KB   36/54 KB              
+                                   
+160/238 KB   40/54 KB   
+Downloaded: https://repo.maven.apache.org/maven2/org/apache/maven/maven-plugin-descriptor/2.2.1/maven-plugin-descriptor-2.2.1.jar (39 KB at 102.6 KB/sec)
+160/238 KB   44/54 KB   
+160/238 KB   48/54 KB   
+160/238 KB   52/54 KB   
+160/238 KB   54/54 KB   
+164/238 KB   54/54 KB   
+168/238 KB   54/54 KB   
+172/238 KB   54/54 KB   
+176/238 KB   54/54 KB   
+180/238 KB   54/54 KB   
+184/238 KB   54/54 KB   
+188/238 KB   54/54 KB   
+192/238 KB   54/54 KB   
+196/238 KB   54/54 KB   
+200/238 KB   54/54 KB   
+204/238 KB   54/54 KB   
+208/238 KB   54/54 KB   
+212/238 KB   54/54 KB   
+216/238 KB   54/54 KB   
+220/238 KB   54/54 KB   
+224/238 KB   54/54 KB   
+228/238 KB   54/54 KB   
+232/238 KB   54/54 KB   
+236/238 KB   54/54 KB   
+238/238 KB   54/54 KB   
+                        
+Downloaded: https://repo.maven.apache.org/maven2/org/apache/commons/commons-exec/1.3/commons-exec-1.3.jar (54 KB at 124.5 KB/sec)
+                        
+Downloaded: https://repo.maven.apache.org/maven2/org/codehaus/plexus/plexus-utils/3.0.20/plexus-utils-3.0.20.jar (238 KB at 544.6 KB/sec)
+
+
+
+
+///////////////////////////////////////////////////////////
+///////////////////////////////////////////////////////////
+///////////////   Welcome to Cello   //////////////////////
+///////////////   Welcome to Cello   //////////////////////
+///////////////////////////////////////////////////////////
+
+///////////////////////////////////////////////////////////
+
+
+
+
+
+///////////////////////////////////////////////////////////
+///////////////////////////////////////////////////////////
+///////////////   Options   ///////////////////////////////
+///////////////   Options   ///////////////////////////////
+///////////////////////////////////////////////////////////
+
+///////////////////////////////////////////////////////////
+
+
+
+
+
+///////////////////////////////////////////////////////////
+///////////////////////////////////////////////////////////
+///////////////   UCF Validation   ////////////////////////
+///////////////   UCF Validation   ////////////////////////
+///////////////////////////////////////////////////////////
+
+///////////////////////////////////////////////////////////
+
+header is valid
+measurement_std is valid
+logic_constraints are valid
+gates are valid
+parts are valid
+response_functions are valid
+gate_parts are valid
+{
+  "gate_parts": true,
+  "response_functions": true,
+  "eugene_rules": false,
+  "tandem_promoters": false,
+  "genetic_locations": true,
+  "logic_constraints": true,
+  "gates": true,
+  "measurement_std": true,
+  "gate_cytometry": false,
+  "gate_toxicity": false,
+  "is_valid": true,
+  "parts": true,
+  "header": true
+}
+{
+  "gate_parts": true,
+  "response_functions": true,
+  "eugene_rules": false,
+  "tandem_promoters": false,
+  "genetic_locations": true,
+  "logic_constraints": true,
+  "gates": true,
+  "measurement_std": true,
+  "gate_cytometry": false,
+  "gate_toxicity": false,
+  "is_valid": true,
+  "parts": true,
+  "header": true
+}
+
+
+
+
+///////////////////////////////////////////////////////////
+///////////////////////////////////////////////////////////
+///////////////   Logic synthesis, Wiring diagram   ///////
+///////////////   Logic synthesis, Wiring diagram   ///////
+///////////////////////////////////////////////////////////
+
+///////////////////////////////////////////////////////////
+
+Start Clean Directory
+results file path :: job_1580756220949/netSynth/
+  YFP: OUTPUT(w1);
+   g1: NOT(w1, pTet);
+ pTac: INPUT();
+ pTet: INPUT(pTet);
+
+  YFP: OUTPUT(w1);
+   g1: NOT(w1, pTet);
+ pTac: INPUT();
+ pTet: INPUT(pTet);
+
+Circuit has 1 OUTPUT gates.
+Circuit has 1 OUTPUT gates.
+Circuit has 2 INPUT gates.
+Circuit has 2 INPUT gates.
+Circuit has 1 NOT gates.
+Circuit has 1 NOT gates.
+N logic gates: 1
+N logic gates: 1
+
+----- Logic Circuit #0 -----
+OUTPUT      1010              YFP               0  (1)         P                             
+NOT         1010              g1                1  (2)         P                             
+INPUT       0011              pTac              -1             P                             
+INPUT       0101              pTet              2              P                             
+
+
+
+----- Logic Circuit #0 -----
+OUTPUT      1010              YFP               0  (1)         P                             
+NOT         1010              g1                1  (2)         P                             
+INPUT       0011              pTac              -1             P                             
+INPUT       0101              pTet              2              P                             
+
+
+=========== Graphviz wiring diagram ==========
+=========== Graphviz wiring diagram ==========
+
+
+
+
+///////////////////////////////////////////////////////////
+///////////////////////////////////////////////////////////
+///////////////   Loading parts   /////////////////////////
+///////////////   Loading parts   /////////////////////////
+///////////////////////////////////////////////////////////
+
+///////////////////////////////////////////////////////////
+
+Part: promoter pAmeR
+Part: promoter pAmeR
+Part: ribozyme RiboJ53
+Part: ribozyme RiboJ53
+Part: ribozyme RiboJ54
+Part: ribozyme RiboJ54
+Part: ribozyme RiboJ10
+Part: ribozyme RiboJ10
+Part: ribozyme RiboJ51
+Part: ribozyme RiboJ51
+Part: cds SrpR
+Part: cds SrpR
+Part: scar Q_scar
+Part: scar Q_scar
+Part: ribozyme RiboJ57
+Part: ribozyme RiboJ57
+Part: rbs E1
+Part: rbs E1
+Part: rbs A1
+Part: rbs A1
+Part: scar X_scar
+Part: scar X_scar
+Part: promoter pBM3R1
+Part: promoter pBM3R1
+Part: scar R_scar
+Part: scar R_scar
+Part: scar E_scar
+Part: scar E_scar
+Part: ribozyme SarJ
+Part: ribozyme SarJ
+Part: promoter pBetI
+Part: promoter pBetI
+Part: cds BM3R1
+Part: cds BM3R1
+Part: terminator ECK120033736
+Part: terminator ECK120033736
+Part: terminator L3S3P11
+Part: terminator L3S3P11
+Part: terminator ECK120033737
+Part: terminator ECK120033737
+Part: rbs F1
+Part: rbs F1
+Part: rbs B1
+Part: rbs B1
+Part: rbs B2
+Part: rbs B2
+Part: rbs B3
+Part: rbs B3
+Part: promoter pPhlF
+Part: promoter pPhlF
+Part: cds AmtR
+Part: cds AmtR
+Part: terminator ECK120019600
+Part: terminator ECK120019600
+Part: scar C_scar
+Part: scar C_scar
+Part: scar F_scar
+Part: scar F_scar
+Part: cds HlyIIR
+Part: cds HlyIIR
+Part: rbs S1
+Part: rbs S1
+Part: rbs S2
+Part: rbs S2
+Part: terminator L3S2P55
+Part: terminator L3S2P55
+Part: terminator L3S2P11
+Part: terminator L3S2P11
+Part: promoter pSrpR
+Part: promoter pSrpR
+Part: rbs S3
+Part: rbs S3
+Part: rbs S4
+Part: rbs S4
+Part: terminator ECK120029600
+Part: terminator ECK120029600
+Part: cds AmeR
+Part: cds AmeR
+Part: scar B_scar
+Part: scar B_scar
+Part: scar O_scar
+Part: scar O_scar
+Part: promoter pAmtR
+Part: promoter pAmtR
+Part: cds PhlF
+Part: cds PhlF
+Part: scar U_scar
+Part: scar U_scar
+Part: rbs P1
+Part: rbs P1
+Part: scar G_scar
+Part: scar G_scar
+Part: rbs P2
+Part: rbs P2
+Part: rbs P3
+Part: rbs P3
+Part: scar A_scar
+Part: scar A_scar
+Part: scar P_scar
+Part: scar P_scar
+Part: scar D_scar
+Part: scar D_scar
+Part: cds BetI
+Part: cds BetI
+Part: scar Y_scar
+Part: scar Y_scar
+Part: rbs H1
+Part: rbs H1
+Part: terminator L3S3P31
+Part: terminator L3S3P31
+Part: promoter pHlyIIR
+Part: promoter pHlyIIR
+Part: ribozyme BydvJ
+Part: ribozyme BydvJ
+Part: scar V_scar
+Part: scar V_scar
+
+
+
+
+///////////////////////////////////////////////////////////
+///////////////////////////////////////////////////////////
+///////////////   Loading Gate Library   //////////////////
+///////////////   Loading Gate Library   //////////////////
+///////////////////////////////////////////////////////////
+
+///////////////////////////////////////////////////////////
+
+loading gate from UCF gates collection: A1_AmtR
+loading gate from UCF gates collection: A1_AmtR
+loading gate from UCF gates collection: B1_BM3R1
+loading gate from UCF gates collection: B1_BM3R1
+loading gate from UCF gates collection: B2_BM3R1
+loading gate from UCF gates collection: B2_BM3R1
+loading gate from UCF gates collection: B3_BM3R1
+loading gate from UCF gates collection: B3_BM3R1
+loading gate from UCF gates collection: E1_BetI
+loading gate from UCF gates collection: E1_BetI
+loading gate from UCF gates collection: F1_AmeR
+loading gate from UCF gates collection: F1_AmeR
+loading gate from UCF gates collection: H1_HlyIIR
+loading gate from UCF gates collection: H1_HlyIIR
+loading gate from UCF gates collection: P1_PhlF
+loading gate from UCF gates collection: P1_PhlF
+loading gate from UCF gates collection: P2_PhlF
+loading gate from UCF gates collection: P2_PhlF
+loading gate from UCF gates collection: P3_PhlF
+loading gate from UCF gates collection: P3_PhlF
+loading gate from UCF gates collection: S1_SrpR
+loading gate from UCF gates collection: S1_SrpR
+loading gate from UCF gates collection: S2_SrpR
+loading gate from UCF gates collection: S2_SrpR
+loading gate from UCF gates collection: S3_SrpR
+loading gate from UCF gates collection: S3_SrpR
+loading gate from UCF gates collection: S4_SrpR
+loading gate from UCF gates collection: S4_SrpR
+
+
+
+
+///////////////////////////////////////////////////////////
+///////////////////////////////////////////////////////////
+///////////////   Loading input and output gates   ////////
+///////////////   Loading input and output gates   ////////
+///////////////////////////////////////////////////////////
+
+///////////////////////////////////////////////////////////
+
+
+
+
+
+///////////////////////////////////////////////////////////
+///////////////////////////////////////////////////////////
+///////////////   Loading Gate Parts   ////////////////////
+///////////////   Loading Gate Parts   ////////////////////
+///////////////////////////////////////////////////////////
+
+///////////////////////////////////////////////////////////
+
+
+
+
+
+///////////////////////////////////////////////////////////
+///////////////////////////////////////////////////////////
+///////////////   Loading Response Functions   ////////////
+///////////////   Loading Response Functions   ////////////
+///////////////////////////////////////////////////////////
+
+///////////////////////////////////////////////////////////
+
+A1_AmtR ymin+(ymax-ymin)/(1.0+(x/K)^n) {ymin=0.06, ymax=3.8, K=0.07, n=1.6}
+A1_AmtR ymin+(ymax-ymin)/(1.0+(x/K)^n) {ymin=0.06, ymax=3.8, K=0.07, n=1.6}
+B1_BM3R1 ymin+(ymax-ymin)/(1.0+(x/K)^n) {ymin=0.004, ymax=0.5, K=0.04, n=3.4}
+B1_BM3R1 ymin+(ymax-ymin)/(1.0+(x/K)^n) {ymin=0.004, ymax=0.5, K=0.04, n=3.4}
+B2_BM3R1 ymin+(ymax-ymin)/(1.0+(x/K)^n) {ymin=0.005, ymax=0.5, K=0.15, n=2.9}
+B2_BM3R1 ymin+(ymax-ymin)/(1.0+(x/K)^n) {ymin=0.005, ymax=0.5, K=0.15, n=2.9}
+B3_BM3R1 ymin+(ymax-ymin)/(1.0+(x/K)^n) {ymin=0.01, ymax=0.8, K=0.26, n=3.4}
+B3_BM3R1 ymin+(ymax-ymin)/(1.0+(x/K)^n) {ymin=0.01, ymax=0.8, K=0.26, n=3.4}
+E1_BetI ymin+(ymax-ymin)/(1.0+(x/K)^n) {ymin=0.07, ymax=3.8, K=0.41, n=2.4}
+E1_BetI ymin+(ymax-ymin)/(1.0+(x/K)^n) {ymin=0.07, ymax=3.8, K=0.41, n=2.4}
+F1_AmeR ymin+(ymax-ymin)/(1.0+(x/K)^n) {ymin=0.2, ymax=3.8, K=0.09, n=1.4}
+F1_AmeR ymin+(ymax-ymin)/(1.0+(x/K)^n) {ymin=0.2, ymax=3.8, K=0.09, n=1.4}
+H1_HlyIIR ymin+(ymax-ymin)/(1.0+(x/K)^n) {ymin=0.07, ymax=2.5, K=0.19, n=2.6}
+H1_HlyIIR ymin+(ymax-ymin)/(1.0+(x/K)^n) {ymin=0.07, ymax=2.5, K=0.19, n=2.6}
+P1_PhlF ymin+(ymax-ymin)/(1.0+(x/K)^n) {ymin=0.01, ymax=3.9, K=0.03, n=4.0}
+P1_PhlF ymin+(ymax-ymin)/(1.0+(x/K)^n) {ymin=0.01, ymax=3.9, K=0.03, n=4.0}
+P2_PhlF ymin+(ymax-ymin)/(1.0+(x/K)^n) {ymin=0.02, ymax=4.1, K=0.13, n=3.9}
+P2_PhlF ymin+(ymax-ymin)/(1.0+(x/K)^n) {ymin=0.02, ymax=4.1, K=0.13, n=3.9}
+P3_PhlF ymin+(ymax-ymin)/(1.0+(x/K)^n) {ymin=0.02, ymax=6.8, K=0.23, n=4.2}
+P3_PhlF ymin+(ymax-ymin)/(1.0+(x/K)^n) {ymin=0.02, ymax=6.8, K=0.23, n=4.2}
+S1_SrpR ymin+(ymax-ymin)/(1.0+(x/K)^n) {ymin=0.003, ymax=1.3, K=0.01, n=2.9}
+S1_SrpR ymin+(ymax-ymin)/(1.0+(x/K)^n) {ymin=0.003, ymax=1.3, K=0.01, n=2.9}
+S2_SrpR ymin+(ymax-ymin)/(1.0+(x/K)^n) {ymin=0.003, ymax=2.1, K=0.04, n=2.6}
+S2_SrpR ymin+(ymax-ymin)/(1.0+(x/K)^n) {ymin=0.003, ymax=2.1, K=0.04, n=2.6}
+S3_SrpR ymin+(ymax-ymin)/(1.0+(x/K)^n) {ymin=0.004, ymax=2.1, K=0.06, n=2.8}
+S3_SrpR ymin+(ymax-ymin)/(1.0+(x/K)^n) {ymin=0.004, ymax=2.1, K=0.06, n=2.8}
+S4_SrpR ymin+(ymax-ymin)/(1.0+(x/K)^n) {ymin=0.007, ymax=2.1, K=0.1, n=2.8}
+S4_SrpR ymin+(ymax-ymin)/(1.0+(x/K)^n) {ymin=0.007, ymax=2.1, K=0.1, n=2.8}
+
+
+
+
+///////////////////////////////////////////////////////////
+///////////////////////////////////////////////////////////
+///////////////   Loading Toxicity Data   /////////////////
+///////////////   Loading Toxicity Data   /////////////////
+///////////////////////////////////////////////////////////
+
+///////////////////////////////////////////////////////////
+
+
+
+
+
+///////////////////////////////////////////////////////////
+///////////////////////////////////////////////////////////
+///////////////   Loading Cytometry Data   ////////////////
+///////////////   Loading Cytometry Data   ////////////////
+///////////////////////////////////////////////////////////
+
+///////////////////////////////////////////////////////////
+
+input:    pTet               off_rpu=0.0200   on_rpu=2.0000
+input:    pTet               off_rpu=0.0200   on_rpu=2.0000
+input:    pTac               off_rpu=0.1000   on_rpu=3.0000
+input:    pTac               off_rpu=0.1000   on_rpu=3.0000
+output:   YFP             
+output:   YFP             
+Gate: TetR NOR A1_AmtR AmtR
+Gate: TetR NOR A1_AmtR AmtR
+Gate: TetR NOR B1_BM3R1 BM3R1
+Gate: TetR NOR B1_BM3R1 BM3R1
+Gate: TetR NOR B2_BM3R1 BM3R1
+Gate: TetR NOR B2_BM3R1 BM3R1
+Gate: TetR NOR B3_BM3R1 BM3R1
+Gate: TetR NOR B3_BM3R1 BM3R1
+Gate: TetR NOR E1_BetI BetI
+Gate: TetR NOR E1_BetI BetI
+Gate: TetR NOR F1_AmeR AmeR
+Gate: TetR NOR F1_AmeR AmeR
+Gate: TetR NOR H1_HlyIIR HlyIIR
+Gate: TetR NOR H1_HlyIIR HlyIIR
+Gate: TetR NOR P1_PhlF PhlF
+Gate: TetR NOR P1_PhlF PhlF
+Gate: TetR NOR P2_PhlF PhlF
+Gate: TetR NOR P2_PhlF PhlF
+Gate: TetR NOR P3_PhlF PhlF
+Gate: TetR NOR P3_PhlF PhlF
+Gate: TetR NOR S1_SrpR SrpR
+Gate: TetR NOR S1_SrpR SrpR
+Gate: TetR NOR S2_SrpR SrpR
+Gate: TetR NOR S2_SrpR SrpR
+Gate: TetR NOR S3_SrpR SrpR
+Gate: TetR NOR S3_SrpR SrpR
+Gate: TetR NOR S4_SrpR SrpR
+Gate: TetR NOR S4_SrpR SrpR
+GateLibrary groups: NOT 7
+GateLibrary groups: NOT 7
+GateLibrary groups: NOR 7
+GateLibrary groups: NOR 7
+NOT: group name: AmtR A1_AmtR
+NOT: group name: AmtR A1_AmtR
+NOT: group name: BM3R1 B1_BM3R1 B2_BM3R1 B3_BM3R1
+NOT: group name: BM3R1 B1_BM3R1 B2_BM3R1 B3_BM3R1
+NOT: group name: BetI E1_BetI
+NOT: group name: BetI E1_BetI
+NOT: group name: AmeR F1_AmeR
+NOT: group name: AmeR F1_AmeR
+NOT: group name: HlyIIR H1_HlyIIR
+NOT: group name: HlyIIR H1_HlyIIR
+NOT: group name: PhlF P1_PhlF P2_PhlF P3_PhlF
+NOT: group name: PhlF P1_PhlF P2_PhlF P3_PhlF
+NOT: group name: SrpR S1_SrpR S2_SrpR S3_SrpR S4_SrpR
+NOT: group name: SrpR S1_SrpR S2_SrpR S3_SrpR S4_SrpR
+NOR: group name: AmtR A1_AmtR
+NOR: group name: AmtR A1_AmtR
+NOR: group name: BM3R1 B1_BM3R1 B2_BM3R1 B3_BM3R1
+NOR: group name: BM3R1 B1_BM3R1 B2_BM3R1 B3_BM3R1
+NOR: group name: BetI E1_BetI
+NOR: group name: BetI E1_BetI
+NOR: group name: AmeR F1_AmeR
+NOR: group name: AmeR F1_AmeR
+NOR: group name: HlyIIR H1_HlyIIR
+NOR: group name: HlyIIR H1_HlyIIR
+NOR: group name: PhlF P1_PhlF P2_PhlF P3_PhlF
+NOR: group name: PhlF P1_PhlF P2_PhlF P3_PhlF
+NOR: group name: SrpR S1_SrpR S2_SrpR S3_SrpR S4_SrpR
+NOR: group name: SrpR S1_SrpR S2_SrpR S3_SrpR S4_SrpR
+NOT
+NOT
+The gates library can cover the circuit.
+The gates library can cover the circuit.
+Roadblocking input promoters: []
+Roadblocking input promoters: []
+Roadblocking logic promoters: []
+Roadblocking logic promoters: []
+
+
+
+
+///////////////////////////////////////////////////////////
+///////////////////////////////////////////////////////////
+///////////////   Assignment algorithm   //////////////////
+///////////////   Assignment algorithm   //////////////////
+///////////////////////////////////////////////////////////
+
+///////////////////////////////////////////////////////////
+
+assignment algorithm:  sim_annealing
+assignment algorithm:  sim_annealing
+=========== Assignment algorithm =============
+=========== Assignment algorithm =============
+1
+1
+Enumerating logic circuits using simulated annealing...
+  iteration    1: score =  36.36
+  iteration    1: score =  36.36
+  iteration    3: score = 327.75
+  iteration    3: score = 327.75
+Trajectory 1 of 1
+Trajectory 1 of 1
+=========== Assigned circuits ================
+=========== Assigned circuits ================
+assigned lcs: 2
+assigned lcs: 2
+Total elapsed time for assignment algorithm: 117 milliseconds
+Total elapsed time for assignment algorithm: 117 milliseconds
+best assignment score: 327.7494
+best assignment score: 327.7494
+
+
+
+
+///////////////////////////////////////////////////////////
+///////////////////////////////////////////////////////////
+///////////////   Processing best circuits   //////////////
+///////////////   Processing best circuits   //////////////
+///////////////////////////////////////////////////////////
+
+///////////////////////////////////////////////////////////
+
+all lcs 2
+all lcs 2
+unique lcs 2
+unique lcs 2
+=========== Circuit assignment details =======
+=========== Circuit assignment details =======
+
+----- Logic Circuit #0 -----
+OUTPUT      1010              YFP               0  (1)         P-P3_PhlF                     327.75  tox:1.00
+NOT         1010              P3_PhlF           1  (2)         P-pTac                        327.75  tox:1.00
+INPUT       0011              pTet              -1             P                             100.00
+INPUT       0101              pTac              2              P                              30.00
+
+Circuit_score = 327.74938    Cell_growth = 1.00000 
+
+YFP  Gate=327.74938
+     OUTPUT          [ 0 0 ]: 1          6.601   6.601:  6.601    multiplied_tox: 1.00
+     OUTPUT          [ 0 1 ]: 0          0.020   0.020:  0.020    multiplied_tox: 1.00
+     OUTPUT          [ 1 0 ]: 1          6.601   6.601:  6.601    multiplied_tox: 1.00
+     OUTPUT          [ 1 1 ]: 0          0.020   0.020:  0.020    multiplied_tox: 1.00
+
+P3_PhlF  Gate=327.74938
+        NOT    1     [ 0 0 ]: 1          0.100   0.100:  6.601    individual_tox: 1.00
+        NOT    1     [ 0 1 ]: 0          3.000   3.000:  0.020    individual_tox: 1.00
+        NOT    1     [ 1 0 ]: 1          0.100   0.100:  6.601    individual_tox: 1.00
+        NOT    1     [ 1 1 ]: 0          3.000   3.000:  0.020    individual_tox: 1.00
+
+pTet  Gate=100.00000
+      INPUT          [ 0 0 ]: 0                       :  0.020
+      INPUT          [ 0 1 ]: 0                       :  0.020
+      INPUT          [ 1 0 ]: 1                       :  2.000
+      INPUT          [ 1 1 ]: 1                       :  2.000
+
+pTac  Gate=30.00000
+      INPUT          [ 0 0 ]: 0                       :  0.100
+      INPUT          [ 0 1 ]: 1                       :  3.000
+      INPUT          [ 1 0 ]: 0                       :  0.100
+      INPUT          [ 1 1 ]: 1                       :  3.000
+
+
+
+
+----- Logic Circuit #0 -----
+OUTPUT      1010              YFP               0  (1)         P-P3_PhlF                     327.75  tox:1.00
+NOT         1010              P3_PhlF           1  (2)         P-pTac                        327.75  tox:1.00
+INPUT       0011              pTet              -1             P                             100.00
+INPUT       0101              pTac              2              P                              30.00
+
+Circuit_score = 327.74938    Cell_growth = 1.00000 
+
+YFP  Gate=327.74938
+     OUTPUT          [ 0 0 ]: 1          6.601   6.601:  6.601    multiplied_tox: 1.00
+     OUTPUT          [ 0 1 ]: 0          0.020   0.020:  0.020    multiplied_tox: 1.00
+     OUTPUT          [ 1 0 ]: 1          6.601   6.601:  6.601    multiplied_tox: 1.00
+     OUTPUT          [ 1 1 ]: 0          0.020   0.020:  0.020    multiplied_tox: 1.00
+
+P3_PhlF  Gate=327.74938
+        NOT    1     [ 0 0 ]: 1          0.100   0.100:  6.601    individual_tox: 1.00
+        NOT    1     [ 0 1 ]: 0          3.000   3.000:  0.020    individual_tox: 1.00
+        NOT    1     [ 1 0 ]: 1          0.100   0.100:  6.601    individual_tox: 1.00
+        NOT    1     [ 1 1 ]: 0          3.000   3.000:  0.020    individual_tox: 1.00
+
+pTet  Gate=100.00000
+      INPUT          [ 0 0 ]: 0                       :  0.020
+      INPUT          [ 0 1 ]: 0                       :  0.020
+      INPUT          [ 1 0 ]: 1                       :  2.000
+      INPUT          [ 1 1 ]: 1                       :  2.000
+
+pTac  Gate=30.00000
+      INPUT          [ 0 0 ]: 0                       :  0.100
+      INPUT          [ 0 1 ]: 1                       :  3.000
+      INPUT          [ 1 0 ]: 0                       :  0.100
+      INPUT          [ 1 1 ]: 1                       :  3.000
+
+
+
+=========== Circuit bionetlist ===============
+=========== Circuit bionetlist ===============
+pTac            0101
+pTet            0011
+P3_PhlF         pTac      
+YFP             pPhlF     
+
+pTac            0101
+pTet            0011
+P3_PhlF         pTac      
+YFP             pPhlF     
+
+
+
+
+
+///////////////////////////////////////////////////////////
+///////////////////////////////////////////////////////////
+////////////////////////   Figures   //////////////////////
+////////////////////////   Figures   //////////////////////
+///////////////////////////////////////////////////////////
+
+///////////////////////////////////////////////////////////
+
+=========== Graphviz wiring diagram ==========
+=========== Graphviz wiring diagram ==========
+=========== Graphviz Xfer figures ============
+=========== Graphviz Xfer figures ============
+=========== Truth table figure(s) ============
+=========== Truth table figure(s) ============
+=========== bargraph multiplots ==============
+=========== bargraph multiplots ==============
+=========== Table of predicted expression levels (RPU)
+=========== Table of predicted expression levels (RPU)
+
+   truth table	   pTac	   pTet	   PhlF	    YFP	
+       [ 0 0 ]	   0.10	   0.02	   6.60	   6.60	
+       [ 0 1 ]	   3.00	   0.02	   0.02	   0.02	
+       [ 1 0 ]	   0.10	   2.00	   6.60	   6.60	
+       [ 1 1 ]	   3.00	   2.00	   0.02	   0.02	
+
+
+   truth table	   pTac	   pTet	   PhlF	    YFP	
+       [ 0 0 ]	   0.10	   0.02	   6.60	   6.60	
+       [ 0 1 ]	   3.00	   0.02	   0.02	   0.02	
+       [ 1 0 ]	   0.10	   2.00	   6.60	   6.60	
+       [ 1 1 ]	   3.00	   2.00	   0.02	   0.02	
+
+
+
+
+
+///////////////////////////////////////////////////////////
+///////////////////////////////////////////////////////////
+///////////////   Plasmid DNA sequences   /////////////////
+///////////////   Plasmid DNA sequences   /////////////////
+///////////////////////////////////////////////////////////
+
+///////////////////////////////////////////////////////////
+
+=========== Setting gate parts according to assigned gate names
+=========== Setting gate parts according to assigned gate names
+=========== Eugene: circuit module and output module combined ===========
+=========== Eugene: circuit module and output module combined ===========
+PartType output;
+PartType rbs;
+PartType cds;
+PartType scar;
+PartType promoter;
+PartType terminator;
+PartType ribozyme;
+
+cds PhlF(.SEQUENCE("ATGGCACGTACCCCGAGCCGTAGCAGCATTGGTAGCCTGCGTAGTCCGCATACCCATAAAGCAATTCTGACCAGCACCATTGAAATCCTGAAAGAATGTGGTTATAGCGGTCTGAGCATTGAAAGCGTTGCACGTCGTGCCGGTGCAAGCAAACCGACCATTTATCGTTGGTGGACCAATAAAGCAGCACTGATTGCCGAAGTGTATGAAAATGAAAGCGAACAGGTGCGTAAATTTCCGGATCTGGGTAGCTTTAAAGCCGATCTGGATTTTCTGCTGCGTAATCTGTGGAAAGTTTGGCGTGAAACCATTTGTGGTGAAGCATTTCGTTGTGTTATTGCAGAAGCACAGCTGGACCCTGCAACCCTGACCCAGCTGAAAGATCAGTTTATGGAACGTCGTCGTGAGATGCCGAAAAAACTGGTTGAAAATGCCATTAGCAATGGTGAACTGCCGAAAGATACCAATCGTGAACTGCTGCTGGATATGATTTTTGGTTTTTGTTGGTATCGCCTGCTGACCGAACAGCTGACCGTTGAACAGGATATTGAAGAATTTACCTTCCTGCTGATTAATGGTGTTTGTCCGGGTACACAGCGTTAATAA"));
+output YFP(.SEQUENCE("CTGAAGCTGTCACCGGATGTGCTTTCCGGTCTGATGAGTCCGTGAGGACGAAACAGCCTCTACAAATAATTTTGTTTAATACTAGAGAAAGAGGGGAAATACTAGATGGTGAGCAAGGGCGAGGAGCTGTTCACCGGGGTGGTGCCCATCCTGGTCGAGCTGGACGGCGACGTAAACGGCCACAAGTTCAGCGTGTCCGGCGAGGGCGAGGGCGATGCCACCTACGGCAAGCTGACCCTGAAGTTCATCTGCACCACAGGCAAGCTGCCCGTGCCCTGGCCCACCCTCGTGACCACCTTCGGCTACGGCCTGCAATGCTTCGCCCGCTACCCCGACCACATGAAGCTGCACGACTTCTTCAAGTCCGCCATGCCCGAAGGCTACGTCCAGGAGCGCACCATCTTCTTCAAGGACGACGGCAACTACAAGACCCGCGCCGAGGTGAAGTTCGAGGGCGACACCCTGGTGAACCGCATCGAGCTGAAGGGCATCGACTTCAAGGAGGACGGCAACATCCTGGGGCACAAGCTGGAGTACAACTACAACAGCCACAACGTCTATATCATGGCCGACAAGCAGAAGAACGGCATCAAGGTGAACTTCAAGATCCGCCACAACATCGAGGACGGCAGCGTGCAGCTCGCCGACCACTACCAGCAGAACACCCCAATCGGCGACGGCCCCGTGCTGCTGCCCGACAACCACTACCTTAGCTACCAGTCCGCCCTGAGCAAAGACCCCAACGAGAAGCGCGATCACATGGTCCTGCTGGAGTTCGTGACCGCCGCCGGGATCACTCTCGGCATGGACGAGCTGTACAAGTAACTCGGTACCAAATTCCAGAAAAGAGGCCTCCCGAAAGGGGGGCCTTTTTTCGTTTTGGTCC"));
+promoter pPhlF(.SEQUENCE("CGACGTACGGTGGAAtctgattcgttaccaattgacATGATACGAAACGTACCGTATCGTTAAGGT"));
+promoter pTac(.SEQUENCE("AACGATCGTTGGCTGTGTTGACAATTAATCATCGGCTCGTATAATGTGTGGAATTGTGAGCGCTCACAATT"));
+rbs P3(.SEQUENCE("CTTTACGAGGGCGATCCT"));
+ribozyme RiboJ53(.SEQUENCE("CTGAAGCGGTCAACGCATGTGCTTTGCGTTCTGATGAGACAGTGATGTCGAAACCGCCTCTACAAATAATTTTGTTTAA"));
+scar Cscar(.SEQUENCE("aatg"));
+scar Escar(.SEQUENCE("gctt"));
+scar Xscar(.SEQUENCE("tgtc"));
+terminator ECK120033737(.SEQUENCE("ggaaacacagAAAAAAGCCCGCACCTGACAGTGCGGGCTTTTTTTTTcgaccaaagg"));
+
+Device YFP_device(
+   promoter,
+   YFP
+);
+Device PhlF_device(
+   promoter,
+   RiboJ53,
+   P3,
+   PhlF,
+   ECK120033737
+);
+
+Rule YFP_rules ( ON YFP_device:
+   CONTAINS pPhlF AND
+   ALL_FORWARD
+);
+Rule PhlF_rules ( ON PhlF_device:
+   CONTAINS pTac AND
+   ALL_FORWARD
+);
+
+
+YFP_devices     = product(YFP_device);
+PhlF_devices    = product(PhlF_device);
+
+Device gate_YFP();
+Device gate_PhlF();
+
+Device circuit();
+
+Rule allRules( ON circuit:
+   gate_YFP     EXACTLY 1 AND 
+   gate_PhlF    EXACTLY 1 AND 
+   ALL_FORWARD AND 
+   Escar        EXACTLY 1 AND 
+   Xscar        EXACTLY 1 AND 
+   Cscar        EXACTLY 1 AND 
+   FORWARD Escar AND 
+   FORWARD Xscar AND 
+   FORWARD Cscar AND 
+   [0] EQUALS Escar AND 
+   [2] EQUALS Xscar AND 
+   [4] EQUALS Cscar
+);
+
+Array allResults;
+
+for(num i1=0;  i1<sizeof(YFP_devices);     i1=i1+1) {
+for(num i2=0;  i2<sizeof(PhlF_devices);    i2=i2+1) {
+
+gate_YFP     = YFP_devices[i1];
+gate_PhlF    = PhlF_devices[i2];
+
+Device circuit(
+   gate_YFP,
+   gate_PhlF,
+   Escar,
+   Xscar,
+   Cscar
+);
+
+result = permute(circuit);
+
+allResults = allResults + result;
+
+}
+}
+
+Eugene: combinatorial design of plasmid layouts...
+
+Eugene: combinatorial design of plasmid layouts...
+
+SLF4J: Class path contains multiple SLF4J bindings.
+SLF4J: Found binding in [jar:file:/root/.m2/repository/org/slf4j/slf4j-log4j12/1.7.12/slf4j-log4j12-1.7.12.jar!/org/slf4j/impl/StaticLoggerBinder.class]
+SLF4J: Found binding in [jar:file:/root/.m2/repository/org/eugene/2.0.1-SNAPSHOT/eugene-2.0.1-SNAPSHOT.jar!/org/slf4j/impl/StaticLoggerBinder.class]
+SLF4J: See http://www.slf4j.org/codes.html#multiple_bindings for an explanation.
+SLF4J: Actual binding is of type [org.slf4j.impl.Log4jLoggerFactory]
+Number of Eugene solutions 2
+Number of circuit module layouts: 2
+Number of circuit module layouts: 2
+
+=========== Writing plasmid files ============
+
+=========== Writing plasmid files ============
+
+=========== Writing plasmid files ============
+Write file: job_1580756220949_A000_plasmid_sensor_P000.ape
+
+=========== Writing plasmid files ============
+Write file: job_1580756220949_A000_plasmid_circuit_P000.ape
+Write file: job_1580756220949_A000_plasmid_circuit_P001.ape
+
+=========== SBOL for circuit plasmids ========
+
+=========== SBOL for circuit plasmids ========
+org.sbolstandard.core2.SBOLValidationException: sbol-12003: The FunctionalComponent referenced by the participant property of a Participation MUST be contained by the ModuleDefinition that contains the Interaction which contains the Participation.
+Reference: SBOL Version 2.1.0 Section 7.9.4 on page 44
+: http://cellocad.org/job_1580756220949_A000_P000_module/pPhlF_produces_YFP_protein/pPhlF
+	at org.sbolstandard.core2.Interaction.addParticipation(Interaction.java:315)
+	at org.sbolstandard.core2.Interaction.createParticipation(Interaction.java:170)
+	at org.sbolstandard.core2.Interaction.createParticipation(Interaction.java:295)
+	at org.sbolstandard.core2.Interaction.createParticipation(Interaction.java:249)
+	at org.sbolstandard.core2.Interaction.createParticipation(Interaction.java:191)
+	at org.cellocad.adaptors.sboladaptor.SBOLCircuitWriter.setProductionInteractions(SBOLCircuitWriter.java:307)
+	at org.cellocad.adaptors.sboladaptor.SBOLCircuitWriter.writeSBOLCircuit(SBOLCircuitWriter.java:66)
+	at org.cellocad.MIT.dnacompiler.DNACompiler.generatePlasmids(DNACompiler.java:1319)
+	at org.cellocad.MIT.dnacompiler.DNACompiler.run(DNACompiler.java:1068)
+	at org.cellocad.MIT.dnacompiler.CelloMain.main(CelloMain.java:15)
+	at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+	at sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62)
+	at sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+	at java.lang.reflect.Method.invoke(Method.java:498)
+	at org.codehaus.mojo.exec.ExecJavaMojo$1.run(ExecJavaMojo.java:293)
+	at java.lang.Thread.run(Thread.java:748)
+org.sbolstandard.core2.SBOLValidationException: sbol-12003: The FunctionalComponent referenced by the participant property of a Participation MUST be contained by the ModuleDefinition that contains the Interaction which contains the Participation.
+Reference: SBOL Version 2.1.0 Section 7.9.4 on page 44
+: http://cellocad.org/job_1580756220949_A000_P001_module/pPhlF_produces_YFP_protein/pPhlF
+	at org.sbolstandard.core2.Interaction.addParticipation(Interaction.java:315)
+	at org.sbolstandard.core2.Interaction.createParticipation(Interaction.java:170)
+	at org.sbolstandard.core2.Interaction.createParticipation(Interaction.java:295)
+	at org.sbolstandard.core2.Interaction.createParticipation(Interaction.java:249)
+	at org.sbolstandard.core2.Interaction.createParticipation(Interaction.java:191)
+	at org.cellocad.adaptors.sboladaptor.SBOLCircuitWriter.setProductionInteractions(SBOLCircuitWriter.java:307)
+	at org.cellocad.adaptors.sboladaptor.SBOLCircuitWriter.writeSBOLCircuit(SBOLCircuitWriter.java:66)
+	at org.cellocad.MIT.dnacompiler.DNACompiler.generatePlasmids(DNACompiler.java:1319)
+	at org.cellocad.MIT.dnacompiler.DNACompiler.run(DNACompiler.java:1068)
+	at org.cellocad.MIT.dnacompiler.CelloMain.main(CelloMain.java:15)
+	at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+	at sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62)
+	at sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+	at java.lang.reflect.Method.invoke(Method.java:498)
+	at org.codehaus.mojo.exec.ExecJavaMojo$1.run(ExecJavaMojo.java:293)
+	at java.lang.Thread.run(Thread.java:748)
+
+
+
+
+=========== DNAPlotLib =======================
+=========== DNAPlotLib =======================
+rendering genetic diagram image...
+rendering genetic diagram image...
+
+
+
+
+
+
+///////////////////////////////////////////////////////////
+///////////////////////////////////////////////////////////
+///////////////   Cello finished playing   ////////////////
+///////////////   Cello finished playing   ////////////////
+///////////////////////////////////////////////////////////
+
+///////////////////////////////////////////////////////////
+
+[INFO] ------------------------------------------------------------------------
+[INFO] BUILD SUCCESS
+[INFO] ------------------------------------------------------------------------
+[INFO] Total time: 18.210 s
+[INFO] Finished at: 2020-02-03T13:57:06-05:00
+[INFO] Final Memory: 53M/221M
+[INFO] ------------------------------------------------------------------------
+1580756226.2590134 DEBUG: Response from Cello: 
+1580756226.2592402 DEBUG: 0
+1580756226.2593563 DEBUG: ['job_1580756220949', 'new_inputs.txt', 'new_verilog.v', 'exports', 'new_outputs.txt']
+1580756226.25947 DEBUG: /cello/kb_run/job_1580756220949
+1580756226.2595794 INFO: Succesfully produced directory: /cello/kb_run/job_1580756220949
+1580756226.2596912 INFO: Directory name begins with job
+1580756226.4930224 DEBUG: CELLO OUTPUT FOLDER:
+1580756226.4933813 DEBUG: ['job_1580756220949_A000_sbol_circuit_P001.sbol', 'UCF.json', 'job_1580756220949_A000_dnaplotlib_Eu_plot_parameters.csv', 'job_1580756220949_A000_dnaplotlib_Eu_dna_designs.csv', 'job_1580756220949_A000_YFP_gate.png', 'job_1580756220949_A000_P3_PhlF_gate.gp', 'OUTPUTS_INPUT.txt', 'job_1580756220949_A000_YFP_truth.gp', 'job_1580756220949_A000_wiring_grn.png', 'job_1580756220949_A000_xfer_model_P3_PhlF.gp', 'job_1580756220949_A000_YFP_gate.pdf', 'job_1580756220949_A000_rputable.txt', 'job_1580756220949_A000_YFP_gate.dat', 'job_1580756220949_A000_Eugene_circuit_module_gate_list.txt', 'job_1580756220949_A000_plasmid_circuit_P001.ape', 'job_1580756220949_A000_YFP_truth.txt', 'job_1580756220949_A000_sbol_circuit_P000.sbol', 'VERILOG_INPUT.v', 'job_1580756220949_A000_plasmid_circuit_P000.ape', 'job_1580756220949_A000_YFP_gate.txt', 'job_1580756220949_A000_wiring_grn.dot', 'job_1580756220949_A000_Eugene_circuit_module_part_list.txt', 'job_1580756220949_A000_dnaplotlib_Eu_part_information.csv', 'job_1580756220949_A000_dnaplotlib_Eu_reg_information.csv', 'job_1580756220949_A000_plasmid_sensor_P000.ape', 'job_1580756220949_A000_YFP_truth.dat', 'job_1580756220949_A000_YFP_truth.pdf', 'job_1580756220949_A000_wiring_grn.svg', 'job_1580756220949_A000_YFP_truth.png', 'job_1580756220949_A000_P3_PhlF_gate.txt', 'job_1580756220949_A000_bionetlist.txt', 'job_1580756220949_A000_wiring_rpu.dot', 'job_1580756220949_wiring_agrn.png', 'job_1580756220949_A000_Eugene_circuit_module_rules.eug', 'job_1580756220949_A000_wiring_rpu.svg', 'PROMOTERS_INPUT.txt', 'job_1580756220949_A000_wiring_xfer.png', 'job_1580756220949_A000_xfer_model_P3_PhlF.png', 'job_1580756220949_A000_wiring_xfer.svg', 'job_1580756220949_A000_logic_circuit.txt', 'job_1580756220949_A000_wiring_rpu.png', 'job_1580756220949_wiring_agrn.dot', 'job_1580756220949_A000_P3_PhlF_gate.png', 'job_1580756220949_A000_P3_PhlF_gate.pdf', 'job_1580756220949_A000_xfer_model_P3_PhlF.pdf', 'job_1580756220949_wiring_agrn.svg', 'job_1580756220949_A000_P3_PhlF_gate.dat', 'job_1580756220949_A000_YFP_gate.gp', 'job_1580756220949_A000_wiring_xfer.dot', 'job_1580756220949_dnacompiler_output.txt']
+1580756226.4935052 INFO: Recognized plasmid_circuit .ape file: job_1580756220949_A000_plasmid_circuit_P001.ape
+1580756226.4935696 INFO: Recognized plasmid_circuit .ape file: job_1580756220949_A000_plasmid_circuit_P000.ape
+1580756226.4936168 INFO: Recognized sensor .ape file: job_1580756220949_A000_plasmid_sensor_P000.ape
+1580756226.493684 DEBUG: Unused ape files: 
+1580756226.4937272 DEBUG: []
+1580756226.493783 DEBUG: PARSED APE FILES:
+1580756226.4938538 DEBUG: ['/kb/module/work/tmp/cello_output/job_1580756220949/job_1580756220949_A000_plasmid_circuit_P001.ape', '/kb/module/work/tmp/cello_output/job_1580756220949/job_1580756220949_A000_plasmid_circuit_P000.ape', '/kb/module/work/tmp/cello_output/job_1580756220949/job_1580756220949_A000_plasmid_sensor_P000.ape']
+1580756226.5497024 DEBUG: Starting new HTTP connection (1): 172.17.0.2:41751
+1580756226.61 - CallbackServer: Subjob method: DataFileUtil.file_to_shock JobID: 0c375b3b-9208-4953-839d-e036569d8ef9
+1580756226.89 - CallbackServer: Running module DataFileUtil:
+url: https://github.com/kbaseapps/DataFileUtil
+commit: df0bb6568008983c1daf6966cf8cebf54f0a0d80
+version: 0.1.2
+release: release
+
+1580756226.906078 DEBUG: http://172.17.0.2:41751 "POST / HTTP/1.1" 200 91
+1580756227.0089676 DEBUG: Starting new HTTP connection (1): 172.17.0.2:41751
+1580756227.0222642 DEBUG: http://172.17.0.2:41751 "POST / HTTP/1.1" 200 67
+1580756227.1745276 DEBUG: Starting new HTTP connection (1): 172.17.0.2:41751
+1580756227.1802807 DEBUG: http://172.17.0.2:41751 "POST / HTTP/1.1" 200 68
+1580756227.4074914 DEBUG: Starting new HTTP connection (1): 172.17.0.2:41751
+1580756227.4116857 DEBUG: http://172.17.0.2:41751 "POST / HTTP/1.1" 200 67
+1580756227.6279485: Shock url: https://appdev.kbase.us/services/shock-api
+1580756227.7533789 DEBUG: Starting new HTTP connection (1): 172.17.0.2:41751
+1580756227.7582858 DEBUG: http://172.17.0.2:41751 "POST / HTTP/1.1" 200 67
+1580756227.839624: Packing /kb/module/work/tmp/cello_output to zip
+1580756228.181219: uploading file /kb/module/work/tmp/cello_output/cello_output.zip into shock node
+1580756228.2670348 DEBUG: Starting new HTTP connection (1): 172.17.0.2:41751
+1580756228.2728066 DEBUG: http://172.17.0.2:41751 "POST / HTTP/1.1" 200 67
+1580756228.6701787: uploading done into shock node: 4ca9fa18-cf01-45f4-a67e-c2e274c76ce6
+1580756229.037609 DEBUG: Starting new HTTP connection (1): 172.17.0.2:41751
+1580756229.0487428 DEBUG: http://172.17.0.2:41751 "POST / HTTP/1.1" 200 194
+1580756229.0500724 INFO: Starting to generate html report.
+1580756229.103771 INFO: Starting to make plasmid graph for /kb/module/work/tmp/cello_output/job_1580756220949/job_1580756220949_A000_plasmid_circuit_P000.gbk
+1580756229.1172833 DEBUG: dict_keys(['start_bp', 'end_bp', 'bp_len', 'typ', 'percentage', 'name', 'pointer_direction', 'midpoint'])
+1580756229.1178398 DEBUG: dict_keys(['start_bp', 'end_bp', 'bp_len', 'typ', 'percentage', 'name', 'pointer_direction', 'midpoint'])
+1580756229.119333 DEBUG: dict_keys(['start_bp', 'end_bp', 'bp_len', 'typ', 'percentage', 'name', 'pointer_direction', 'midpoint', 'color', 'start_circle', 'end_circle', 'pointer_len'])
+1580756229.1202443 DEBUG: Making Promoter.
+1580756229.1204054 DEBUG: Calculating Slope: 
+1580756229.120786 DEBUG: Start Point: (500,500)
+1580756229.1212509 DEBUG: End Point: (515.416424033134,250.47578500267633)
+1580756229.1217508 DEBUG: Slope: -16.18560922176434
+1580756229.1224196 DEBUG: Calculating Slope: 
+1580756229.1230478 DEBUG: Start Point: (500,500)
+1580756229.123463 DEBUG: End Point: (569.031695907734,238.97389984888076)
+1580756229.1238914 DEBUG: Slope: -3.7812499999999982
+1580756229.1241844 DEBUG: original slope: -3.7812499999999982
+1580756229.1242428 DEBUG: Slope: 0.2644628099173555
+1580756229.1242898 DEBUG: Rotation angle: 
+1580756229.1252108 DEBUG: 0.25854372249918206
+1580756229.1254838 DEBUG: 1st quadrant.
+1580756229.1256227 DEBUG: Making rbs
+1580756229.125715 DEBUG: Calculating Slope: 
+1580756229.126253 DEBUG: Start Point: (500,500)
+1580756229.1265006 DEBUG: End Point: (634.5912933603963,289.322085278082)
+1580756229.126702 DEBUG: Slope: -1.5653160725470097
+1580756229.126845 DEBUG: Making CDS Visual
+1580756229.127366 DEBUG: Calculating Slope: 
+1580756229.1275494 DEBUG: Start Point: (500,500)
+1580756229.128025 DEBUG: End Point: (668.6784636501702,684.5198523211478)
+1580756229.1281335 DEBUG: Slope: 1.093914708067485
+1580756229.1282039 DEBUG: Calculating Slope: 
+1580756229.128566 DEBUG: Start Point: (500,500)
+1580756229.128615 DEBUG: End Point: (671.3773190685729,687.4721699582861)
+1580756229.1288042 DEBUG: Slope: 1.093914708067485
+1580756229.1290276 DEBUG: Calculating Slope: 
+1580756229.1291246 DEBUG: Start Point: (500,500)
+1580756229.1292808 DEBUG: End Point: (601,728)
+1580756229.1294296 DEBUG: Slope: 2.257425742574257
+1580756229.1297746 DEBUG: Calculating Slope: 
+1580756229.1298275 DEBUG: Start Point: (671.3773190685729,687.4721699582861)
+1580756229.1300256 DEBUG: End Point: (668.6784636501702,684.5198523211478)
+1580756229.1304812 DEBUG: Slope: 1.0939147080674894
+1580756229.1305366 DEBUG: Calculating Slope: 
+1580756229.1305735 DEBUG: Start Point: (671.3773190685729,687.4721699582861)
+1580756229.1306217 DEBUG: End Point: (665.9796082317675,681.5675346840095)
+1580756229.1307416 DEBUG: Slope: 1.0939147080674894
+1580756229.131089 DEBUG: Calculating Slope: 
+1580756229.131219 DEBUG: Start Point: (602.6200877783082,731.6572278559828)
+1580756229.13136 DEBUG: End Point: (601,728)
+1580756229.1316109 DEBUG: Slope: 2.2574257425742483
+1580756229.1318202 DEBUG: Making terminator
+1580756229.1320226 DEBUG: ALPHA:
+1580756229.1322892 DEBUG: [577.9868324028766, 737.5248491669148]
+1580756229.1325235 DEBUG: Calculating Slope: 
+1580756229.1328516 DEBUG: Start Point: (500,500)
+1580756229.1333134 DEBUG: End Point: (577.9868324028766,737.5248491669148)
+1580756229.1334987 DEBUG: Slope: 3.0457045356050823
+1580756229.1336882 DEBUG: BETA:
+1580756229.1337419 DEBUG: [582.9779896766607, 752.7264395135974]
+1580756229.1342766 DEBUG: Calculating Slope: 
+1580756229.134762 DEBUG: Start Point: (500,500)
+1580756229.1349168 DEBUG: End Point: (582.9779896766607,752.7264395135974)
+1580756229.135013 DEBUG: Slope: 3.045704535605083
+1580756229.1354373 DEBUG: GAMMA:
+1580756229.1360059 DEBUG: [584.2257789951068, 756.526837100268]
+1580756229.1364222 DEBUG: Calculating Slope: 
+1580756229.136526 DEBUG: Start Point: (500,500)
+1580756229.1366823 DEBUG: End Point: (577.9868324028766,737.5248491669148)
+1580756229.1374376 DEBUG: Slope: 3.0457045356050823
+1580756229.1377773 DEBUG: original slope: 3.0457045356050823
+1580756229.138115 DEBUG: Vars A through H:
+1580756229.1384702 DEBUG: [579.887031196212, 736.9009545076918] [584.8781884699961, 752.1025448543744] [588.6785860566667, 750.8547555359283] [589.9263753751128, 754.655153122599] [578.5251826151008, 758.3985210779371] [577.2773932966547, 754.5981234912664] [581.0777908833254, 753.3503341728203] [576.0866336095413, 738.1487438261378]
+1580756229.138597 DEBUG: Making Promoter.
+1580756229.1389344 DEBUG: Calculating Slope: 
+1580756229.1391547 DEBUG: Start Point: (500,500)
+1580756229.139203 DEBUG: End Point: (538.8209902334572,746.9674689453933)
+1580756229.1392787 DEBUG: Slope: 6.3616993657351
+1580756229.139602 DEBUG: Calculating Slope: 
+1580756229.139723 DEBUG: Start Point: (500,500)
+1580756229.1400054 DEBUG: End Point: (492.41263614621005,769.8933713705289)
+1580756229.1401224 DEBUG: Slope: -35.571428571428655
+1580756229.1404116 DEBUG: original slope: -35.571428571428655
+1580756229.1405182 DEBUG: Slope: 0.02811244979919672
+1580756229.1408231 DEBUG: Rotation angle: 
+1580756229.140988 DEBUG: 0.02810504746045579
+1580756229.141398 DEBUG: 3rd quadrant.
+1580756229.1414888 DEBUG: Making CDS Visual
+1580756229.142014 DEBUG: Calculating Slope: 
+1580756229.1427152 DEBUG: Start Point: (500,500)
+1580756229.1430125 DEBUG: End Point: (385.1432265894307,277.9461290548775)
+1580756229.143121 DEBUG: Slope: 1.9333110651764902
+1580756229.1434011 DEBUG: Calculating Slope: 
+1580756229.1435766 DEBUG: Start Point: (500,500)
+1580756229.1440506 DEBUG: End Point: (383.3055182148616,274.39326711975554)
+1580756229.1447818 DEBUG: Slope: 1.9333110651764902
+1580756229.1449509 DEBUG: Calculating Slope: 
+1580756229.1449962 DEBUG: Start Point: (500,500)
+1580756229.1453195 DEBUG: End Point: (496,250)
+1580756229.1453805 DEBUG: Slope: 62.5
+1580756229.1454887 DEBUG: Calculating Slope: 
+1580756229.1459136 DEBUG: Start Point: (383.3055182148616,274.39326711975554)
+1580756229.1461525 DEBUG: End Point: (385.1432265894307,277.9461290548775)
+1580756229.1462548 DEBUG: Slope: 1.933311065176484
+1580756229.146662 DEBUG: Calculating Slope: 
+1580756229.1471941 DEBUG: Start Point: (383.3055182148616,274.39326711975554)
+1580756229.1472754 DEBUG: End Point: (386.9809349639998,281.4989909899994)
+1580756229.1476867 DEBUG: Slope: 1.933311065176484
+1580756229.148248 DEBUG: Calculating Slope: 
+1580756229.1484811 DEBUG: Start Point: (495.93600819042746,246.00051190171698)
+1580756229.1485944 DEBUG: End Point: (496,250)
+1580756229.1488352 DEBUG: Slope: 62.49999999998668
+1580756229.1493728 INFO: <script>var c = document.getElementById("myCanvas");var ctx = c.getContext("2d");ctx.lineWidth = '8';ctx.beginPath();ctx.strokeStyle = 'black';ctx.arc(500, 500, 250, 0 * Math.PI - (Math.PI/2), 0.002 * Math.PI - (Math.PI/2));ctx.stroke();ctx.beginPath();ctx.strokeStyle = '#EBDEDA';ctx.arc(500, 500, 250, 0.002 * Math.PI - (Math.PI/2), 0.004456824512534819 * Math.PI - (Math.PI/2));ctx.stroke();ctx.beginPath();ctx.strokeStyle = '#330367';ctx.arc(500, 500, 250, 0.004456824512534819 * Math.PI - (Math.PI/2), 0.08356545961002786 * Math.PI - (Math.PI/2));ctx.stroke();ctx.beginPath();ctx.strokeStyle = '#FFDDFA';ctx.arc(500, 500, 250, 0.08356545961002786 * Math.PI - (Math.PI/2), 0.17158774373259053 * Math.PI - (Math.PI/2));ctx.stroke();ctx.beginPath();ctx.strokeStyle = '#885680';ctx.arc(500, 500, 250, 0.17158774373259053 * Math.PI - (Math.PI/2), 0.1916434540389972 * Math.PI - (Math.PI/2));ctx.stroke();ctx.beginPath();ctx.strokeStyle = '#AFBFBC';ctx.arc(500, 500, 250, 0.1916434540389972 * Math.PI - (Math.PI/2), 0.8668523676880222 * Math.PI - (Math.PI/2));ctx.stroke();ctx.beginPath();ctx.strokeStyle = '#691513';ctx.arc(500, 500, 250, 0.8668523676880222 * Math.PI - (Math.PI/2), 0.9303621169916434 * Math.PI - (Math.PI/2));ctx.stroke();ctx.beginPath();ctx.strokeStyle = '#ECBCDC';ctx.arc(500, 500, 250, 0.9303621169916434 * Math.PI - (Math.PI/2), 0.9348189415041782 * Math.PI - (Math.PI/2));ctx.stroke();ctx.beginPath();ctx.strokeStyle = '#285706';ctx.arc(500, 500, 250, 0.9348189415041782 * Math.PI - (Math.PI/2), 1.0083565459610027 * Math.PI - (Math.PI/2));ctx.stroke();ctx.beginPath();ctx.strokeStyle = '#CDCFAA';ctx.arc(500, 500, 250, 1.0083565459610027 * Math.PI - (Math.PI/2), 1.995543175487465 * Math.PI - (Math.PI/2));ctx.stroke();ctx.beginPath();ctx.strokeStyle = '#610784';ctx.arc(500, 500, 250, 1.995543175487465 * Math.PI - (Math.PI/2), 2.0 * Math.PI - (Math.PI/2));ctx.stroke();</script>
+
+1580756229.149622 INFO: <script>var c = document.getElementById("myCanvas");var ctx = c.getContext("2d");ctx.lineWidth = "1";ctx.strokeStyle = "black";ctx.font = '9pt Calibri';ctx.fillStyle = '#333';var maxWidth= 50; var lineHeight= 25;ctx.beginPath();ctx.moveTo(500,180);ctx.lineTo(500,244);ctx.stroke();var text = "0";wrapText(ctx, text, 495, 175, maxWidth, lineHeight);ctx.beginPath();ctx.moveTo(501.4400179191399,319.9977601075143);ctx.lineTo(501.9300022398925,258.7497200134393);ctx.stroke();var text = "Escar";wrapText(ctx, text, 473.4400179191399, 319.9977601075143, maxWidth, lineHeight);ctx.beginPath();ctx.moveTo(543.5078377465513,182.64871290750796);ctx.lineTo(535.188479718319,243.3310891134385);ctx.stroke();var text = "pTac";wrapText(ctx, text, 548.5078377465513, 182.64871290750796, maxWidth, lineHeight);ctx.beginPath();ctx.moveTo(624.101523794845,204.45925776691553);ctx.lineTo(600.3876904743556,260.93240722086443);ctx.stroke();var text = "RiboJ53";wrapText(ctx, text, 629.101523794845, 204.45925776691553, maxWidth, lineHeight);ctx.beginPath();ctx.moveTo(597.2741715173568,347.9640726654646);ctx.lineTo(630.2842714396696,296.3705090831831);ctx.stroke();var text = "P3";wrapText(ctx, text, 580.0741715173567, 347.9640726654646, maxWidth, lineHeight);ctx.beginPath();ctx.moveTo(817.726185770667,528.1853874473978);ctx.lineTo(756.7157732213334,522.7731734309248);ctx.stroke();var text = "PhlF";wrapText(ctx, text, 822.726185770667, 528.1853874473978, maxWidth, lineHeight);ctx.beginPath();ctx.moveTo(599.8832841766348,803.4915173059289);ctx.lineTo(580.7354105220794,745.3114396632411);ctx.stroke();var text = "ECK120033...";wrapText(ctx, text, 604.8832841766348, 803.4915173059289, maxWidth, lineHeight);ctx.beginPath();ctx.moveTo(537.4096203826668,675.5374494878981);ctx.lineTo(550.1762025478333,735.4421811859872);ctx.stroke();var text = "Xscar";wrapText(ctx, text, 509.40962038266684, 675.5374494878981, maxWidth, lineHeight);ctx.beginPath();ctx.moveTo(532.5612674281416,868.5343449821485);ctx.lineTo(523.3201584285177,763.9417931227686);ctx.stroke();var text = "pPhlF";wrapText(ctx, text, 537.5612674281416, 868.5343449821485, maxWidth, lineHeight);ctx.beginPath();ctx.moveTo(180.00223989248573,497.4400179191399);ctx.lineTo(241.2502799865607,497.9300022398925);ctx.stroke();var text = "YFP";wrapText(ctx, text, 159.20223989248572, 497.4400179191399, maxWidth, lineHeight);ctx.beginPath();ctx.moveTo(497.4400179191399,180.00223989248573);ctx.lineTo(497.9300022398925,241.2502799865607);ctx.stroke();var text = "Cscar";wrapText(ctx, text, 469.4400179191399, 180.00223989248573, maxWidth, lineHeight);</script>
+
+1580756229.1497588 INFO: <script>var c = document.getElementById("myCanvas");var ctx = c.getContext("2d");ctx.lineWidth = "2";ctx.strokeStyle = "black";ctx.font = 'bold 20pt Calibri';ctx.fillStyle = '#333';var maxWidth= 50; var lineHeight= 25;var text = "plasmid_circuit_P000";wrapText(ctx, text, 350.0, 485, maxWidth, lineHeight);var text = "1795 bp";wrapText(ctx, text, 447.5, 515, maxWidth, lineHeight);</script>
+
+1580756229.1501112 INFO: <script>
+var c = document.getElementById("myCanvas");var ctx = c.getContext("2d");
+//Promoter Symbol:
+ctx.strokeStyle = 'black'; ctx.lineWidth = 3; ctx.beginPath(); ctx.moveTo(515.416424033134,250.47578500267633); ctx.lineTo(516.6497379557848,230.51384780289044); ctx.stroke(); ctx.beginPath();ctx.arc(500,500,270.0,-1.5090914813735754,-1.3122526042957146);ctx.stroke(); 
+ctx.lineWidth = 3;ctx.moveTo(569.031695907734,238.97389984888076);ctx.lineTo(562.5789140774546,231.3344229917383);ctx.stroke();ctx.moveTo(569.031695907734,238.97389984888076);ctx.lineTo(559.6459545119711,242.42467634872276);ctx.stroke();
+
+//RBS Symbol: 
+ctx.beginPath();ctx.arc(636.7447540541626, 285.95123864253134, 8, 0.5684959449692439, -2.5730967086205494, true); ctx.closePath(); ctx.lineWidth = 1; ctx.fillStyle = '#bb99ff'; ctx.fill(); ctx.strokeStyle = 'black';ctx.stroke(); 
+
+//CDS Symbol: 
+ctx.beginPath(); ctx.moveTo(671.3773190685729,687.4721699582861); ctx.lineTo(679.473885323781,696.3291228697012); ctx.lineTo(602.6200877783082,731.6572278559828); ctx.closePath(); ctx.fillStyle = '#AFBFBC'; ctx.fill(); 
+ctx.beginPath(); ctx.moveTo(665.9796082317675,681.5675346840095); ctx.lineTo(657.8830419765594,672.7105817725944); ctx.lineTo(599.3799122216918,724.3427721440172); ctx.closePath(); ctx.fillStyle = '#AFBFBC'; ctx.fill(); ctx.beginPath(); 
+
+//Terminator Symbol: 
+ctx.strokeStyle = "black"; ctx.lineWidth = 2; ctx.moveTo(579.887031196212,736.9009545076918); ctx.lineTo(584.8781884699961,752.1025448543744); ctx.lineTo(588.6785860566667,750.8547555359283); ctx.lineTo(589.9263753751128,754.655153122599); ctx.lineTo(578.5251826151008,758.3985210779371); ctx.lineTo(577.2773932966547,754.5981234912664); ctx.lineTo(581.0777908833254,753.3503341728203); ctx.lineTo(576.0866336095413,738.1487438261378); ctx.stroke(); 
+ctx.beginPath(); ctx.moveTo(579.887031196212,736.9009545076918); ctx.lineTo(584.8781884699961,752.1025448543744); ctx.lineTo(588.6785860566667,750.8547555359283); ctx.lineTo(589.9263753751128,754.655153122599); ctx.lineTo(578.5251826151008,758.3985210779371); ctx.lineTo(577.2773932966547,754.5981234912664); ctx.lineTo(581.0777908833254,753.3503341728203); ctx.lineTo(576.0866336095413,738.1487438261378); ctx.fillStyle = "#EA6062"; ctx.closePath(); ctx.fill(); 
+
+//Promoter Symbol:
+ctx.strokeStyle = 'black'; ctx.lineWidth = 3; ctx.beginPath(); ctx.moveTo(538.8209902334572,746.9674689453933); ctx.lineTo(541.9266694521338,766.7248664610248); ctx.stroke(); ctx.beginPath();ctx.arc(500,500,270.0,1.4148814322302332,1.5989013742553524);ctx.stroke(); 
+ctx.lineWidth = 3;ctx.moveTo(492.41263614621005,769.8933713705289);ctx.lineTo(500.439738878716,775.8570633244947);ctx.stroke();ctx.moveTo(492.41263614621005,769.8933713705289);ctx.lineTo(500.76210429505346,764.3900649433482);ctx.stroke();
+
+//CDS Symbol: 
+ctx.beginPath(); ctx.moveTo(383.3055182148616,274.39326711975554); ctx.lineTo(377.7923930911543,263.73468131438966); ctx.lineTo(495.93600819042746,246.00051190171698); ctx.closePath(); ctx.fillStyle = '#CDCFAA'; ctx.fill(); 
+ctx.beginPath(); ctx.moveTo(386.9809349639998,281.4989909899994); ctx.lineTo(392.49406008770717,292.1575767953653); ctx.lineTo(496.06399180957254,253.99948809828302); ctx.closePath(); ctx.fillStyle = '#CDCFAA'; ctx.fill(); ctx.beginPath(); 
+
+</script>
+
+1580756229.1509311 INFO: Starting to make plasmid graph for /kb/module/work/tmp/cello_output/job_1580756220949/job_1580756220949_A000_plasmid_circuit_P001.gbk
+1580756229.1590283 DEBUG: dict_keys(['start_bp', 'end_bp', 'bp_len', 'typ', 'percentage', 'name', 'pointer_direction', 'midpoint'])
+1580756229.1591644 DEBUG: dict_keys(['start_bp', 'end_bp', 'bp_len', 'typ', 'percentage', 'name', 'pointer_direction', 'midpoint'])
+1580756229.1600425 DEBUG: Making Promoter.
+1580756229.160416 DEBUG: Calculating Slope: 
+1580756229.1606247 DEBUG: Start Point: (500,500)
+1580756229.1609414 DEBUG: End Point: (514.5429013531482,250.42335041067523)
+1580756229.161146 DEBUG: Slope: -17.161407034869114
+1580756229.161816 DEBUG: Calculating Slope: 
+1580756229.1620321 DEBUG: Start Point: (500,500)
+1580756229.162222 DEBUG: End Point: (564.7228962341774,237.87227025158154)
+1580756229.1625006 DEBUG: Slope: -4.050000000000002
+1580756229.163424 DEBUG: original slope: -4.050000000000002
+1580756229.164004 DEBUG: Slope: 0.24691358024691348
+1580756229.164092 DEBUG: Rotation angle: 
+1580756229.1641269 DEBUG: 0.24207169457111885
+1580756229.1645415 DEBUG: 1st quadrant.
+1580756229.164934 DEBUG: Making CDS Visual
+1580756229.1651378 DEBUG: Calculating Slope: 
+1580756229.16527 DEBUG: Start Point: (500,500)
+1580756229.1654322 DEBUG: End Point: (565.087198066674,741.3786582277512)
+1580756229.1655722 DEBUG: Slope: 3.708542776422606
+1580756229.1657438 DEBUG: Calculating Slope: 
+1580756229.1658926 DEBUG: Start Point: (500,500)
+1580756229.166186 DEBUG: End Point: (566.1285932357407,745.2407167593952)
+1580756229.1662743 DEBUG: Slope: 3.7085427764226093
+1580756229.166322 DEBUG: Calculating Slope: 
+1580756229.1667504 DEBUG: Start Point: (500,500)
+1580756229.166814 DEBUG: End Point: (449,744)
+1580756229.166947 DEBUG: Slope: -4.784313725490196
+1580756229.1671913 DEBUG: Calculating Slope: 
+1580756229.1682196 DEBUG: Start Point: (566.1285932357407,745.2407167593952)
+1580756229.1685371 DEBUG: End Point: (565.087198066674,741.3786582277512)
+1580756229.1686122 DEBUG: Slope: 3.708542776422809
+1580756229.1687744 DEBUG: Calculating Slope: 
+1580756229.1691897 DEBUG: Start Point: (566.1285932357407,745.2407167593952)
+1580756229.1694505 DEBUG: End Point: (564.0458028976072,737.5165996961072)
+1580756229.1696548 DEBUG: Slope: 3.708542776422809
+1580756229.1699338 DEBUG: Calculating Slope: 
+1580756229.1705694 DEBUG: Start Point: (448.18161996352865,747.915386841157)
+1580756229.1708398 DEBUG: End Point: (449,744)
+1580756229.1712873 DEBUG: Slope: -4.784313725490104
+1580756229.171587 DEBUG: Making Promoter.
+1580756229.172041 DEBUG: Calculating Slope: 
+1580756229.1723118 DEBUG: Start Point: (500,500)
+1580756229.1727116 DEBUG: End Point: (432.9774978959519,740.8484673227398)
+1580756229.1730554 DEBUG: Slope: -3.5935463428213725
+1580756229.173138 DEBUG: Calculating Slope: 
+1580756229.173595 DEBUG: Start Point: (500,500)
+1580756229.1739733 DEBUG: End Point: (377.9580473131354,740.843853532485)
+1580756229.174123 DEBUG: Slope: -1.9734513274336285
+1580756229.1747994 DEBUG: original slope: -1.9734513274336285
+1580756229.1753314 DEBUG: Slope: 0.506726457399103
+1580756229.1754043 DEBUG: Rotation angle: 
+1580756229.1754453 DEBUG: 0.4690142837749502
+1580756229.175533 DEBUG: 3rd quadrant.
+1580756229.1764154 DEBUG: Making rbs
+1580756229.1770253 DEBUG: Calculating Slope: 
+1580756229.177142 DEBUG: Start Point: (500,500)
+1580756229.1775715 DEBUG: End Point: (324.1639656532016,677.7123772425307)
+1580756229.1779816 DEBUG: Slope: -1.0106709805114897
+1580756229.1781452 DEBUG: Making CDS Visual
+1580756229.1784105 DEBUG: Calculating Slope: 
+1580756229.178679 DEBUG: Start Point: (500,500)
+1580756229.1790843 DEBUG: End Point: (374.12227005624413,284.0027844989504)
+1580756229.1794102 DEBUG: Slope: 1.7159287476629943
+1580756229.1798377 DEBUG: Calculating Slope: 
+1580756229.1803594 DEBUG: Start Point: (500,500)
+1580756229.180516 DEBUG: End Point: (372.10822637714404,280.54682905093364)
+1580756229.1805782 DEBUG: Slope: 1.715928747662994
+1580756229.1809316 DEBUG: Calculating Slope: 
+1580756229.181134 DEBUG: Start Point: (500,500)
+1580756229.181507 DEBUG: End Point: (447,255)
+1580756229.1819701 DEBUG: Slope: 4.622641509433962
+1580756229.182512 DEBUG: Calculating Slope: 
+1580756229.1826491 DEBUG: Start Point: (372.10822637714404,280.54682905093364)
+1580756229.1830366 DEBUG: End Point: (374.12227005624413,284.0027844989504)
+1580756229.183092 DEBUG: Slope: 1.7159287476629772
+1580756229.1832852 DEBUG: Calculating Slope: 
+1580756229.184021 DEBUG: Start Point: (372.10822637714404,280.54682905093364)
+1580756229.1841419 DEBUG: End Point: (376.13631373534423,287.45873994696717)
+1580756229.184389 DEBUG: Slope: 1.7159287476629772
+1580756229.184768 DEBUG: Calculating Slope: 
+1580756229.18498 DEBUG: Start Point: (446.1542568147041,251.09043244533035)
+1580756229.1851768 DEBUG: End Point: (447,255)
+1580756229.1852243 DEBUG: Slope: 4.6226415094340165
+1580756229.1856883 DEBUG: Making terminator
+1580756229.185886 DEBUG: ALPHA:
+1580756229.1867177 DEBUG: [471.7398209944308, 251.60241087608523]
+1580756229.1867776 DEBUG: Calculating Slope: 
+1580756229.187169 DEBUG: Start Point: (500,500)
+1580756229.1872454 DEBUG: End Point: (471.7398209944308,251.60241087608523)
+1580756229.1873038 DEBUG: Slope: 8.78966793079984
+1580756229.1873722 DEBUG: BETA:
+1580756229.187693 DEBUG: [469.93116953807436, 235.7049651721547]
+1580756229.1878355 DEBUG: Calculating Slope: 
+1580756229.1880817 DEBUG: Start Point: (500,500)
+1580756229.1884575 DEBUG: End Point: (469.93116953807436,235.7049651721547)
+1580756229.1885734 DEBUG: Slope: 8.789667930799846
+1580756229.1887064 DEBUG: GAMMA:
+1580756229.1888337 DEBUG: [469.4790066739852, 231.73060374617205]
+1580756229.1892333 DEBUG: Calculating Slope: 
+1580756229.189448 DEBUG: Start Point: (500,500)
+1580756229.1896183 DEBUG: End Point: (471.7398209944308,251.60241087608523)
+1580756229.1896732 DEBUG: Slope: 8.78966793079984
+1580756229.1897283 DEBUG: original slope: 8.78966793079984
+1580756229.1900613 DEBUG: Vars A through H:
+1580756229.190138 DEBUG: [473.7270017074221, 251.37632944404066] [471.9183502510657, 235.47888374011012] [475.89271167704834, 235.02672087602102] [475.4405488129592, 231.05235945003838] [463.51746453501124, 232.40884804230572] [463.9696273991004, 236.38320946828836] [467.943988825083, 235.93104660419925] [469.7526402814394, 251.8284923081298]
+1580756229.1905847 INFO: <script>var c = document.getElementById("myCanvas");var ctx = c.getContext("2d");ctx.lineWidth = '8';ctx.beginPath();ctx.strokeStyle = 'black';ctx.arc(500, 500, 250, 0 * Math.PI - (Math.PI/2), 0.002 * Math.PI - (Math.PI/2));ctx.stroke();ctx.beginPath();ctx.strokeStyle = '#CECBAA';ctx.arc(500, 500, 250, 0.002 * Math.PI - (Math.PI/2), 0.004456824512534819 * Math.PI - (Math.PI/2));ctx.stroke();ctx.beginPath();ctx.strokeStyle = '#117712';ctx.arc(500, 500, 250, 0.004456824512534819 * Math.PI - (Math.PI/2), 0.07799442896935933 * Math.PI - (Math.PI/2));ctx.stroke();ctx.beginPath();ctx.strokeStyle = '#EBFBEF';ctx.arc(500, 500, 250, 0.07799442896935933 * Math.PI - (Math.PI/2), 1.0651810584958217 * Math.PI - (Math.PI/2));ctx.stroke();ctx.beginPath();ctx.strokeStyle = '#236378';ctx.arc(500, 500, 250, 1.0651810584958217 * Math.PI - (Math.PI/2), 1.0696378830083566 * Math.PI - (Math.PI/2));ctx.stroke();ctx.beginPath();ctx.strokeStyle = '#EECBBE';ctx.arc(500, 500, 250, 1.0696378830083566 * Math.PI - (Math.PI/2), 1.1487465181058496 * Math.PI - (Math.PI/2));ctx.stroke();ctx.beginPath();ctx.strokeStyle = '#452499';ctx.arc(500, 500, 250, 1.1487465181058496 * Math.PI - (Math.PI/2), 1.2367688022284122 * Math.PI - (Math.PI/2));ctx.stroke();ctx.beginPath();ctx.strokeStyle = '#DCCDBC';ctx.arc(500, 500, 250, 1.2367688022284122 * Math.PI - (Math.PI/2), 1.256824512534819 * Math.PI - (Math.PI/2));ctx.stroke();ctx.beginPath();ctx.strokeStyle = '#459570';ctx.arc(500, 500, 250, 1.256824512534819 * Math.PI - (Math.PI/2), 1.9320334261838439 * Math.PI - (Math.PI/2));ctx.stroke();ctx.beginPath();ctx.strokeStyle = '#FBBFAC';ctx.arc(500, 500, 250, 1.9320334261838439 * Math.PI - (Math.PI/2), 1.995543175487465 * Math.PI - (Math.PI/2));ctx.stroke();ctx.beginPath();ctx.strokeStyle = '#468272';ctx.arc(500, 500, 250, 1.995543175487465 * Math.PI - (Math.PI/2), 2.0 * Math.PI - (Math.PI/2));ctx.stroke();</script>
+
+1580756229.1913474 INFO: <script>var c = document.getElementById("myCanvas");var ctx = c.getContext("2d");ctx.lineWidth = "1";ctx.strokeStyle = "black";ctx.font = '9pt Calibri';ctx.fillStyle = '#333';var maxWidth= 50; var lineHeight= 25;ctx.beginPath();ctx.moveTo(500,180);ctx.lineTo(500,244);ctx.stroke();var text = "0";wrapText(ctx, text, 495, 175, maxWidth, lineHeight);ctx.beginPath();ctx.moveTo(501.4400179191399,319.9977601075143);ctx.lineTo(501.9300022398925,258.7497200134393);ctx.stroke();var text = "Escar";wrapText(ctx, text, 473.4400179191399, 319.9977601075143, maxWidth, lineHeight);ctx.beginPath();ctx.moveTo(540.9579936341138,182.57554933561823);ctx.lineTo(533.1197492042642,243.32194366695228);ctx.stroke();var text = "pPhlF";wrapText(ctx, text, 545.9579936341138, 182.57554933561823, maxWidth, lineHeight);ctx.beginPath();ctx.moveTo(811.2730724655129,570.4527530271737);ctx.lineTo(751.5341340581891,556.9315941283967);ctx.stroke();var text = "YFP";wrapText(ctx, text, 816.2730724655129, 570.4527530271737, maxWidth, lineHeight);ctx.beginPath();ctx.moveTo(432.1415641021344,812.4048746996076);ctx.lineTo(445.1426955127668,752.550609337451);ctx.stroke();var text = "Xscar";wrapText(ctx, text, 404.1415641021344, 812.4048746996076, maxWidth, lineHeight);ctx.beginPath();ctx.moveTo(438.80952571581065,669.1736641974646);ctx.lineTo(417.97619071447633,726.7717080246831);ctx.stroke();var text = "pTac";wrapText(ctx, text, 443.80952571581065, 669.1736641974646, maxWidth, lineHeight);ctx.beginPath();ctx.moveTo(316.95166908066307,762.4119429263222);ctx.lineTo(351.9939586350829,712.1764928657902);ctx.stroke();var text = "RiboJ53";wrapText(ctx, text, 281.7516690806631, 762.4119429263222, maxWidth, lineHeight);ctx.beginPath();ctx.moveTo(374.0750440448207,628.0836694858396);ctx.lineTo(331.13438050560256,671.76045868573);ctx.stroke();var text = "P3";wrapText(ctx, text, 379.0750440448207, 628.0836694858396, maxWidth, lineHeight);ctx.beginPath();ctx.moveTo(193.10753355311732,405.3748228455445);ctx.lineTo(251.63844169413966,423.4218528556931);ctx.stroke();var text = "PhlF";wrapText(ctx, text, 168.70753355311732, 405.3748228455445, maxWidth, lineHeight);ctx.beginPath();ctx.moveTo(462.9021255580034,181.46997461871845);ctx.lineTo(469.9877656947504,242.3087468273398);ctx.stroke();var text = "ECK120033...";wrapText(ctx, text, 409.7021255580034, 181.46997461871845, maxWidth, lineHeight);ctx.beginPath();ctx.moveTo(498.5599820808601,319.9977601075143);ctx.lineTo(498.0699977601075,258.7497200134393);ctx.stroke();var text = "Cscar";wrapText(ctx, text, 503.5599820808601, 319.9977601075143, maxWidth, lineHeight);</script>
+
+1580756229.1915805 INFO: <script>var c = document.getElementById("myCanvas");var ctx = c.getContext("2d");ctx.lineWidth = "2";ctx.strokeStyle = "black";ctx.font = 'bold 20pt Calibri';ctx.fillStyle = '#333';var maxWidth= 50; var lineHeight= 25;var text = "plasmid_circuit_P001";wrapText(ctx, text, 350.0, 485, maxWidth, lineHeight);var text = "1795 bp";wrapText(ctx, text, 447.5, 515, maxWidth, lineHeight);</script>
+
+1580756229.192043 INFO: <script>
+var c = document.getElementById("myCanvas");var ctx = c.getContext("2d");
+//Promoter Symbol:
+ctx.strokeStyle = 'black'; ctx.lineWidth = 3; ctx.beginPath(); ctx.moveTo(514.5429013531482,250.42335041067523); ctx.lineTo(515.7063334614,230.45721844352926); ctx.stroke(); ctx.beginPath();ctx.arc(500,500,270.0,-1.512591863160305,-1.3287246322237776);ctx.stroke(); 
+ctx.lineWidth = 3;ctx.moveTo(564.7228962341774,237.87227025158154);ctx.lineTo(558.1451578076613,230.34011536786232);ctx.stroke();ctx.moveTo(564.7228962341774,237.87227025158154);ctx.lineTo(555.3952668319341,241.47717381955772);ctx.stroke();
+
+//CDS Symbol: 
+ctx.beginPath(); ctx.moveTo(566.1285932357407,745.2407167593952); ctx.lineTo(569.252778742941,756.8268923543274); ctx.lineTo(448.18161996352865,747.915386841157); ctx.closePath(); ctx.fillStyle = '#EBFBEF'; ctx.fill(); 
+ctx.beginPath(); ctx.moveTo(564.0458028976072,737.5165996961072); ctx.lineTo(560.921617390407,725.930424101175); ctx.lineTo(449.81838003647135,740.084613158843); ctx.closePath(); ctx.fillStyle = '#EBFBEF'; ctx.fill(); ctx.beginPath(); 
+
+//Promoter Symbol:
+ctx.strokeStyle = 'black'; ctx.lineWidth = 3; ctx.beginPath(); ctx.moveTo(432.9774978959519,740.8484673227398); ctx.lineTo(427.61569772762806,760.1163447085589); ctx.stroke(); ctx.beginPath();ctx.arc(500,500,269.99999999999994,1.8422062441268412,2.039810610569847);ctx.stroke(); 
+ctx.lineWidth = 3;ctx.moveTo(377.9580473131354,740.843853532485);ctx.lineTo(382.6723934860287,749.662863690214);ctx.stroke();ctx.moveTo(377.9580473131354,740.843853532485);ctx.lineTo(387.85760743472906,739.4300963401239);ctx.stroke();
+
+//RBS Symbol: 
+ctx.beginPath();ctx.arc(321.35058910365285, 680.5557752784111, 8, 3.9216836929326373, 0.7800910393428442, true); ctx.closePath(); ctx.lineWidth = 1; ctx.fillStyle = '#bb99ff'; ctx.fill(); ctx.strokeStyle = 'black';ctx.stroke(); 
+
+//CDS Symbol: 
+ctx.beginPath(); ctx.moveTo(372.10822637714404,280.54682905093364); ctx.lineTo(366.06609533984374,270.1789627068833); ctx.lineTo(446.1542568147041,251.09043244533035); ctx.closePath(); ctx.fillStyle = '#459570'; ctx.fill(); 
+ctx.beginPath(); ctx.moveTo(376.13631373534423,287.45873994696717); ctx.lineTo(382.1784447726446,297.8266062910175); ctx.lineTo(447.8457431852959,258.90956755466965); ctx.closePath(); ctx.fillStyle = '#459570'; ctx.fill(); ctx.beginPath(); 
+
+//Terminator Symbol: 
+ctx.strokeStyle = "black"; ctx.lineWidth = 2; ctx.moveTo(473.7270017074221,251.37632944404066); ctx.lineTo(471.9183502510657,235.47888374011012); ctx.lineTo(475.89271167704834,235.02672087602102); ctx.lineTo(475.4405488129592,231.05235945003838); ctx.lineTo(463.51746453501124,232.40884804230572); ctx.lineTo(463.9696273991004,236.38320946828836); ctx.lineTo(467.943988825083,235.93104660419925); ctx.lineTo(469.7526402814394,251.8284923081298); ctx.stroke(); 
+ctx.beginPath(); ctx.moveTo(473.7270017074221,251.37632944404066); ctx.lineTo(471.9183502510657,235.47888374011012); ctx.lineTo(475.89271167704834,235.02672087602102); ctx.lineTo(475.4405488129592,231.05235945003838); ctx.lineTo(463.51746453501124,232.40884804230572); ctx.lineTo(463.9696273991004,236.38320946828836); ctx.lineTo(467.943988825083,235.93104660419925); ctx.lineTo(469.7526402814394,251.8284923081298); ctx.fillStyle = "#EA6062"; ctx.closePath(); ctx.fill(); 
+
+</script>
+
+1580756229.1926484 INFO: Starting to make plasmid graph for /kb/module/work/tmp/cello_output/job_1580756220949/job_1580756220949_A000_plasmid_sensor_P000.gbk
+1580756229.200484 INFO: <script>var c = document.getElementById("myCanvas");var ctx = c.getContext("2d");ctx.lineWidth = '8';ctx.beginPath();ctx.strokeStyle = 'black';ctx.arc(500, 500, 250, 0 * Math.PI - (Math.PI/2), 0.002 * Math.PI - (Math.PI/2));ctx.stroke();ctx.beginPath();ctx.strokeStyle = '#DFEFCE';ctx.arc(500, 500, 250, 0.002 * Math.PI - (Math.PI/2), 2.0 * Math.PI - (Math.PI/2));ctx.stroke();</script>
+
+1580756229.2005615 INFO: <script>var c = document.getElementById("myCanvas");var ctx = c.getContext("2d");ctx.lineWidth = "1";ctx.strokeStyle = "black";ctx.font = '9pt Calibri';ctx.fillStyle = '#333';var maxWidth= 50; var lineHeight= 25;ctx.beginPath();ctx.moveTo(500,180);ctx.lineTo(500,244);ctx.stroke();var text = "0";wrapText(ctx, text, 495, 175, maxWidth, lineHeight);ctx.beginPath();ctx.moveTo(498.7188777690771,818.9994354998045);ctx.lineTo(498.96485972113464,757.7499294374755);ctx.stroke();var text = "sensor_mo...";wrapText(ctx, text, 441.9188777690771, 818.9994354998045, maxWidth, lineHeight);</script>
+
+1580756229.200665 INFO: <script>var c = document.getElementById("myCanvas");var ctx = c.getContext("2d");ctx.lineWidth = "2";ctx.strokeStyle = "black";ctx.font = 'bold 20pt Calibri';ctx.fillStyle = '#333';var maxWidth= 50; var lineHeight= 25;var text = "plasmid_sensor_P000";wrapText(ctx, text, 357.5, 485, maxWidth, lineHeight);var text = "3077 bp";wrapText(ctx, text, 447.5, 515, maxWidth, lineHeight);</script>
+
+1580756229.2007372 INFO: <script>
+var c = document.getElementById("myCanvas");var ctx = c.getContext("2d");
+</script>
+
+1580756229.2009742 DEBUG: <!DOCTYPE html>
+<html>
+<head>
+<style>
+body {font-family: "Lato", sans-serif;}
+/* Style the tab */
+div.tab {
+    overflow: hidden;
+    border: 1px solid #ccc;
+    background-color: #f1f1f1;
+}
+/* Style the buttons inside the tab */
+div.tab button {
+    background-color: inherit;
+    float: left;
+    border: none;
+    outline: none;
+    cursor: pointer;
+    padding: 14px 16px;
+    transition: 0.3s;
+    font-size: 17px;
+}
+/* Change background color of buttons on hover */
+div.tab button:hover {
+    background-color: #ddd;
+}
+/* Create an active/current tablink class */
+div.tab button.active {
+    background-color: #ccc;
+}
+/* Style the tab content */
+.tabcontent {
+    display: none;
+    padding: 6px 12px;
+    border: 1px solid #ccc;
+    -webkit-animation: fadeEffect 1s;
+    animation: fadeEffect 1s;
+    border-top: none;
+}
+/* Fade in tabs */
+@-webkit-keyframes fadeEffect {
+    from {opacity: 0;}
+    to {opacity: 1;}
+}
+@keyframes fadeEffect {
+    from {opacity: 0;}
+    to {opacity: 1;}
+}
+table {
+    font-family: arial, sans-serif;
+    border-collapse: collapse;
+    width: 100%;
+}
+td, th {
+    border: 1px solid #dddddd;
+    text-align: left;
+    padding: 8px;
+}
+tr:nth-child(odd) {
+    background-color: #dddddd;
+}
+div.gallery {
+    margin: 5px;
+    border: 1px solid #ccc;
+    float: left;
+    width: 180px;
+}
+div.gallery:hover {
+    border: 1px solid #777;
+}
+div.gallery img {
+    width: 100%;
+    height: auto;
+}
+div.desc {
+    padding: 15px;
+    text-align: center;
+}
+</style>
+</head>
+<body>
+
+<p></p>
+
+<div class="tab">
+  <button class="tablinks" onclick="openTab(event, 'Overview')" id="defaultOpen">Overview</button>
+  <button class="tablinks" onclick="openTab(event, 'Visualization')">Visualization</button>
+  <button class="tablinks" onclick="openTab(event, 'Plasmid_Map_1')">Plasmid Map 1</button>
+<button class="tablinks" onclick="openTab(event, 'Plasmid_Map_2')">Plasmid Map 2</button>
+<button class="tablinks" onclick="openTab(event, 'Plasmid_Map_3')">Plasmid Map 3</button>
+
+</div>
+
+<div id="Overview" class="tabcontent">
+  <h5> 3 Plasmids Created by Cello. Visualizations provided in the other tabs.</h5>
+</div>
+
+<div id="Visualization" class="tabcontent">
+  <div class="gallery"><a target="_blank" href="job_1580756220949_wiring_agrn.svg"><img src="job_1580756220949_wiring_agrn.png" alt="Wiring Diagram" width="600" height="400"></a><div class="desc">Wiring Diagram</div></div><div class="gallery"><a target="_blank" href="job_1580756220949_A000_YFP_truth.pdf"><img src="job_1580756220949_A000_YFP_truth.png" alt="RPU Graph for YFP" width="600" height="400"></a><div class="desc">RPU Graph for YFP</div></div>
+</div>
+
+<div id="Plasmid_Map_1" class="tabcontent">
+<canvas id="myCanvas_1" width="1000" height="1000" style="border:1px solid #d3d3d3;">
+Your browser does not support the HTML5 canvas tag.</canvas>
+<h1>Test_2_1_19_plasmid_circuit_P000</h1>
+
+
+<script>
+function wrapText(context, text, x, y, maxWidth, lineHeight) {
+    /*
+        var words = text.split(' ');
+        var line = '';
+
+        for(var n = 0; n < words.length; n++) {
+          var testLine = line + words[n] + ' ';
+          var metrics = context.measureText(testLine);
+          var testWidth = metrics.width;
+          if (testWidth > maxWidth && n > 0) {
+            context.fillText(line, x, y);
+            line = words[n] + ' ';
+            y += lineHeight;
+          }
+          else {
+            line = testLine;
+          }
+        } 
+    */
+
+    context.fillText(text, x, y);
+
+}
+
+
+</script>
+
+
+<script>var c = document.getElementById("myCanvas_1");var ctx = c.getContext("2d");ctx.lineWidth = '8';ctx.beginPath();ctx.strokeStyle = 'black';ctx.arc(500, 500, 250, 0 * Math.PI - (Math.PI/2), 0.002 * Math.PI - (Math.PI/2));ctx.stroke();ctx.beginPath();ctx.strokeStyle = '#EBDEDA';ctx.arc(500, 500, 250, 0.002 * Math.PI - (Math.PI/2), 0.004456824512534819 * Math.PI - (Math.PI/2));ctx.stroke();ctx.beginPath();ctx.strokeStyle = '#330367';ctx.arc(500, 500, 250, 0.004456824512534819 * Math.PI - (Math.PI/2), 0.08356545961002786 * Math.PI - (Math.PI/2));ctx.stroke();ctx.beginPath();ctx.strokeStyle = '#FFDDFA';ctx.arc(500, 500, 250, 0.08356545961002786 * Math.PI - (Math.PI/2), 0.17158774373259053 * Math.PI - (Math.PI/2));ctx.stroke();ctx.beginPath();ctx.strokeStyle = '#885680';ctx.arc(500, 500, 250, 0.17158774373259053 * Math.PI - (Math.PI/2), 0.1916434540389972 * Math.PI - (Math.PI/2));ctx.stroke();ctx.beginPath();ctx.strokeStyle = '#AFBFBC';ctx.arc(500, 500, 250, 0.1916434540389972 * Math.PI - (Math.PI/2), 0.8668523676880222 * Math.PI - (Math.PI/2));ctx.stroke();ctx.beginPath();ctx.strokeStyle = '#691513';ctx.arc(500, 500, 250, 0.8668523676880222 * Math.PI - (Math.PI/2), 0.9303621169916434 * Math.PI - (Math.PI/2));ctx.stroke();ctx.beginPath();ctx.strokeStyle = '#ECBCDC';ctx.arc(500, 500, 250, 0.9303621169916434 * Math.PI - (Math.PI/2), 0.9348189415041782 * Math.PI - (Math.PI/2));ctx.stroke();ctx.beginPath();ctx.strokeStyle = '#285706';ctx.arc(500, 500, 250, 0.9348189415041782 * Math.PI - (Math.PI/2), 1.0083565459610027 * Math.PI - (Math.PI/2));ctx.stroke();ctx.beginPath();ctx.strokeStyle = '#CDCFAA';ctx.arc(500, 500, 250, 1.0083565459610027 * Math.PI - (Math.PI/2), 1.995543175487465 * Math.PI - (Math.PI/2));ctx.stroke();ctx.beginPath();ctx.strokeStyle = '#610784';ctx.arc(500, 500, 250, 1.995543175487465 * Math.PI - (Math.PI/2), 2.0 * Math.PI - (Math.PI/2));ctx.stroke();</script>
+<script>var c = document.getElementById("myCanvas_1");var ctx = c.getContext("2d");ctx.lineWidth = "1";ctx.strokeStyle = "black";ctx.font = '9pt Calibri';ctx.fillStyle = '#333';var maxWidth= 50; var lineHeight= 25;ctx.beginPath();ctx.moveTo(500,180);ctx.lineTo(500,244);ctx.stroke();var text = "0";wrapText(ctx, text, 495, 175, maxWidth, lineHeight);ctx.beginPath();ctx.moveTo(501.4400179191399,319.9977601075143);ctx.lineTo(501.9300022398925,258.7497200134393);ctx.stroke();var text = "Escar";wrapText(ctx, text, 473.4400179191399, 319.9977601075143, maxWidth, lineHeight);ctx.beginPath();ctx.moveTo(543.5078377465513,182.64871290750796);ctx.lineTo(535.188479718319,243.3310891134385);ctx.stroke();var text = "pTac";wrapText(ctx, text, 548.5078377465513, 182.64871290750796, maxWidth, lineHeight);ctx.beginPath();ctx.moveTo(624.101523794845,204.45925776691553);ctx.lineTo(600.3876904743556,260.93240722086443);ctx.stroke();var text = "RiboJ53";wrapText(ctx, text, 629.101523794845, 204.45925776691553, maxWidth, lineHeight);ctx.beginPath();ctx.moveTo(597.2741715173568,347.9640726654646);ctx.lineTo(630.2842714396696,296.3705090831831);ctx.stroke();var text = "P3";wrapText(ctx, text, 580.0741715173567, 347.9640726654646, maxWidth, lineHeight);ctx.beginPath();ctx.moveTo(817.726185770667,528.1853874473978);ctx.lineTo(756.7157732213334,522.7731734309248);ctx.stroke();var text = "PhlF";wrapText(ctx, text, 822.726185770667, 528.1853874473978, maxWidth, lineHeight);ctx.beginPath();ctx.moveTo(599.8832841766348,803.4915173059289);ctx.lineTo(580.7354105220794,745.3114396632411);ctx.stroke();var text = "ECK120033...";wrapText(ctx, text, 604.8832841766348, 803.4915173059289, maxWidth, lineHeight);ctx.beginPath();ctx.moveTo(537.4096203826668,675.5374494878981);ctx.lineTo(550.1762025478333,735.4421811859872);ctx.stroke();var text = "Xscar";wrapText(ctx, text, 509.40962038266684, 675.5374494878981, maxWidth, lineHeight);ctx.beginPath();ctx.moveTo(532.5612674281416,868.5343449821485);ctx.lineTo(523.3201584285177,763.9417931227686);ctx.stroke();var text = "pPhlF";wrapText(ctx, text, 537.5612674281416, 868.5343449821485, maxWidth, lineHeight);ctx.beginPath();ctx.moveTo(180.00223989248573,497.4400179191399);ctx.lineTo(241.2502799865607,497.9300022398925);ctx.stroke();var text = "YFP";wrapText(ctx, text, 159.20223989248572, 497.4400179191399, maxWidth, lineHeight);ctx.beginPath();ctx.moveTo(497.4400179191399,180.00223989248573);ctx.lineTo(497.9300022398925,241.2502799865607);ctx.stroke();var text = "Cscar";wrapText(ctx, text, 469.4400179191399, 180.00223989248573, maxWidth, lineHeight);</script>
+1580756229.21 - CallbackServer: Subjob method: DataFileUtil.file_to_shock JobID: c7a02475-127b-40f3-a039-9e6bc1a93614
+1580756229.22 - CallbackServer: WARNING: Module DataFileUtil was already used once for this job. Using cached version:
+url: https://github.com/kbaseapps/DataFileUtil
+commit: df0bb6568008983c1daf6966cf8cebf54f0a0d80
+version: 0.1.2
+release: release
+
+<script>var c = document.getElementById("myCanvas_1");var ctx = c.getContext("2d");ctx.lineWidth = "2";ctx.strokeStyle = "black";ctx.font = 'bold 20pt Calibri';ctx.fillStyle = '#333';var maxWidth= 50; var lineHeight= 25;var text = "plasmid_circuit_P000";wrapText(ctx, text, 350.0, 485, maxWidth, lineHeight);var text = "1795 bp";wrapText(ctx, text, 447.5, 515, maxWidth, lineHeight);</script>
+<script>
+var c = document.getElementById("myCanvas_1");var ctx = c.getContext("2d");
+//Promoter Symbol:
+ctx.strokeStyle = 'black'; ctx.lineWidth = 3; ctx.beginPath(); ctx.moveTo(515.416424033134,250.47578500267633); ctx.lineTo(516.6497379557848,230.51384780289044); ctx.stroke(); ctx.beginPath();ctx.arc(500,500,270.0,-1.5090914813735754,-1.3122526042957146);ctx.stroke(); 
+ctx.lineWidth = 3;ctx.moveTo(569.031695907734,238.97389984888076);ctx.lineTo(562.5789140774546,231.3344229917383);ctx.stroke();ctx.moveTo(569.031695907734,238.97389984888076);ctx.lineTo(559.6459545119711,242.42467634872276);ctx.stroke();
+
+//RBS Symbol: 
+ctx.beginPath();ctx.arc(636.7447540541626, 285.95123864253134, 8, 0.5684959449692439, -2.5730967086205494, true); ctx.closePath(); ctx.lineWidth = 1; ctx.fillStyle = '#bb99ff'; ctx.fill(); ctx.strokeStyle = 'black';ctx.stroke(); 
+
+//CDS Symbol: 
+ctx.beginPath(); ctx.moveTo(671.3773190685729,687.4721699582861); ctx.lineTo(679.473885323781,696.3291228697012); ctx.lineTo(602.6200877783082,731.6572278559828); ctx.closePath(); ctx.fillStyle = '#AFBFBC'; ctx.fill(); 
+ctx.beginPath(); ctx.moveTo(665.9796082317675,681.5675346840095); ctx.lineTo(657.8830419765594,672.7105817725944); ctx.lineTo(599.3799122216918,724.3427721440172); ctx.closePath(); ctx.fillStyle = '#AFBFBC'; ctx.fill(); ctx.beginPath(); 
+
+//Terminator Symbol: 
+ctx.strokeStyle = "black"; ctx.lineWidth = 2; ctx.moveTo(579.887031196212,736.9009545076918); ctx.lineTo(584.8781884699961,752.1025448543744); ctx.lineTo(588.6785860566667,750.8547555359283); ctx.lineTo(589.9263753751128,754.655153122599); ctx.lineTo(578.5251826151008,758.3985210779371); ctx.lineTo(577.2773932966547,754.5981234912664); ctx.lineTo(581.0777908833254,753.3503341728203); ctx.lineTo(576.0866336095413,738.1487438261378); ctx.stroke(); 
+ctx.beginPath(); ctx.moveTo(579.887031196212,736.9009545076918); ctx.lineTo(584.8781884699961,752.1025448543744); ctx.lineTo(588.6785860566667,750.8547555359283); ctx.lineTo(589.9263753751128,754.655153122599); ctx.lineTo(578.5251826151008,758.3985210779371); ctx.lineTo(577.2773932966547,754.5981234912664); ctx.lineTo(581.0777908833254,753.3503341728203); ctx.lineTo(576.0866336095413,738.1487438261378); ctx.fillStyle = "#EA6062"; ctx.closePath(); ctx.fill(); 
+
+//Promoter Symbol:
+ctx.strokeStyle = 'black'; ctx.lineWidth = 3; ctx.beginPath(); ctx.moveTo(538.8209902334572,746.9674689453933); ctx.lineTo(541.9266694521338,766.7248664610248); ctx.stroke(); ctx.beginPath();ctx.arc(500,500,270.0,1.4148814322302332,1.5989013742553524);ctx.stroke(); 
+ctx.lineWidth = 3;ctx.moveTo(492.41263614621005,769.8933713705289);ctx.lineTo(500.439738878716,775.8570633244947);ctx.stroke();ctx.moveTo(492.41263614621005,769.8933713705289);ctx.lineTo(500.76210429505346,764.3900649433482);ctx.stroke();
+
+//CDS Symbol: 
+ctx.beginPath(); ctx.moveTo(383.3055182148616,274.39326711975554); ctx.lineTo(377.7923930911543,263.73468131438966); ctx.lineTo(495.93600819042746,246.00051190171698); ctx.closePath(); ctx.fillStyle = '#CDCFAA'; ctx.fill(); 
+ctx.beginPath(); ctx.moveTo(386.9809349639998,281.4989909899994); ctx.lineTo(392.49406008770717,292.1575767953653); ctx.lineTo(496.06399180957254,253.99948809828302); ctx.closePath(); ctx.fillStyle = '#CDCFAA'; ctx.fill(); ctx.beginPath(); 
+
+</script>
+
+
+
+</div>
+
+<div id="Plasmid_Map_2" class="tabcontent">
+<canvas id="myCanvas_2" width="1000" height="1000" style="border:1px solid #d3d3d3;">
+Your browser does not support the HTML5 canvas tag.</canvas>
+<h1>Test_2_1_19_plasmid_circuit_P001</h1>
+
+
+<script>
+function wrapText(context, text, x, y, maxWidth, lineHeight) {
+    /*
+        var words = text.split(' ');
+        var line = '';
+
+        for(var n = 0; n < words.length; n++) {
+          var testLine = line + words[n] + ' ';
+          var metrics = context.measureText(testLine);
+          var testWidth = metrics.width;
+          if (testWidth > maxWidth && n > 0) {
+            context.fillText(line, x, y);
+            line = words[n] + ' ';
+            y += lineHeight;
+          }
+          else {
+            line = testLine;
+          }
+        } 
+    */
+
+    context.fillText(text, x, y);
+
+}
+
+
+</script>
+
+
+<script>var c = document.getElementById("myCanvas_2");var ctx = c.getContext("2d");ctx.lineWidth = '8';ctx.beginPath();ctx.strokeStyle = 'black';ctx.arc(500, 500, 250, 0 * Math.PI - (Math.PI/2), 0.002 * Math.PI - (Math.PI/2));ctx.stroke();ctx.beginPath();ctx.strokeStyle = '#CECBAA';ctx.arc(500, 500, 250, 0.002 * Math.PI - (Math.PI/2), 0.004456824512534819 * Math.PI - (Math.PI/2));ctx.stroke();ctx.beginPath();ctx.strokeStyle = '#117712';ctx.arc(500, 500, 250, 0.004456824512534819 * Math.PI - (Math.PI/2), 0.07799442896935933 * Math.PI - (Math.PI/2));ctx.stroke();ctx.beginPath();ctx.strokeStyle = '#EBFBEF';ctx.arc(500, 500, 250, 0.07799442896935933 * Math.PI - (Math.PI/2), 1.0651810584958217 * Math.PI - (Math.PI/2));ctx.stroke();ctx.beginPath();ctx.strokeStyle = '#236378';ctx.arc(500, 500, 250, 1.0651810584958217 * Math.PI - (Math.PI/2), 1.0696378830083566 * Math.PI - (Math.PI/2));ctx.stroke();ctx.beginPath();ctx.strokeStyle = '#EECBBE';ctx.arc(500, 500, 250, 1.0696378830083566 * Math.PI - (Math.PI/2), 1.1487465181058496 * Math.PI - (Math.PI/2));ctx.stroke();ctx.beginPath();ctx.strokeStyle = '#452499';ctx.arc(500, 500, 250, 1.1487465181058496 * Math.PI - (Math.PI/2), 1.2367688022284122 * Math.PI - (Math.PI/2));ctx.stroke();ctx.beginPath();ctx.strokeStyle = '#DCCDBC';ctx.arc(500, 500, 250, 1.2367688022284122 * Math.PI - (Math.PI/2), 1.256824512534819 * Math.PI - (Math.PI/2));ctx.stroke();ctx.beginPath();ctx.strokeStyle = '#459570';ctx.arc(500, 500, 250, 1.256824512534819 * Math.PI - (Math.PI/2), 1.9320334261838439 * Math.PI - (Math.PI/2));ctx.stroke();ctx.beginPath();ctx.strokeStyle = '#FBBFAC';ctx.arc(500, 500, 250, 1.9320334261838439 * Math.PI - (Math.PI/2), 1.995543175487465 * Math.PI - (Math.PI/2));ctx.stroke();ctx.beginPath();ctx.strokeStyle = '#468272';ctx.arc(500, 500, 250, 1.995543175487465 * Math.PI - (Math.PI/2), 2.0 * Math.PI - (Math.PI/2));ctx.stroke();</script>
+<script>var c = document.getElementById("myCanvas_2");var ctx = c.getContext("2d");ctx.lineWidth = "1";ctx.strokeStyle = "black";ctx.font = '9pt Calibri';ctx.fillStyle = '#333';var maxWidth= 50; var lineHeight= 25;ctx.beginPath();ctx.moveTo(500,180);ctx.lineTo(500,244);ctx.stroke();var text = "0";wrapText(ctx, text, 495, 175, maxWidth, lineHeight);ctx.beginPath();ctx.moveTo(501.4400179191399,319.9977601075143);ctx.lineTo(501.9300022398925,258.7497200134393);ctx.stroke();var text = "Escar";wrapText(ctx, text, 473.4400179191399, 319.9977601075143, maxWidth, lineHeight);ctx.beginPath();ctx.moveTo(540.9579936341138,182.57554933561823);ctx.lineTo(533.1197492042642,243.32194366695228);ctx.stroke();var text = "pPhlF";wrapText(ctx, text, 545.9579936341138, 182.57554933561823, maxWidth, lineHeight);ctx.beginPath();ctx.moveTo(811.2730724655129,570.4527530271737);ctx.lineTo(751.5341340581891,556.9315941283967);ctx.stroke();var text = "YFP";wrapText(ctx, text, 816.2730724655129, 570.4527530271737, maxWidth, lineHeight);ctx.beginPath();ctx.moveTo(432.1415641021344,812.4048746996076);ctx.lineTo(445.1426955127668,752.550609337451);ctx.stroke();var text = "Xscar";wrapText(ctx, text, 404.1415641021344, 812.4048746996076, maxWidth, lineHeight);ctx.beginPath();ctx.moveTo(438.80952571581065,669.1736641974646);ctx.lineTo(417.97619071447633,726.7717080246831);ctx.stroke();var text = "pTac";wrapText(ctx, text, 443.80952571581065, 669.1736641974646, maxWidth, lineHeight);ctx.beginPath();ctx.moveTo(316.95166908066307,762.4119429263222);ctx.lineTo(351.9939586350829,712.1764928657902);ctx.stroke();var text = "RiboJ53";wrapText(ctx, text, 281.7516690806631, 762.4119429263222, maxWidth, lineHeight);ctx.beginPath();ctx.moveTo(374.0750440448207,628.0836694858396);ctx.lineTo(331.13438050560256,671.76045868573);ctx.stroke();var text = "P3";wrapText(ctx, text, 379.0750440448207, 628.0836694858396, maxWidth, lineHeight);ctx.beginPath();ctx.moveTo(193.10753355311732,405.3748228455445);ctx.lineTo(251.63844169413966,423.4218528556931);ctx.stroke();var text = "PhlF";wrapText(ctx, text, 168.70753355311732, 405.3748228455445, maxWidth, lineHeight);ctx.beginPath();ctx.moveTo(462.9021255580034,181.46997461871845);ctx.lineTo(469.9877656947504,242.3087468273398);ctx.stroke();var text = "ECK120033...";wrapText(ctx, text, 409.7021255580034, 181.46997461871845, maxWidth, lineHeight);ctx.beginPath();ctx.moveTo(498.5599820808601,319.9977601075143);ctx.lineTo(498.0699977601075,258.7497200134393);ctx.stroke();var text = "Cscar";wrapText(ctx, text, 503.5599820808601, 319.9977601075143, maxWidth, lineHeight);</script>
+<script>var c = document.getElementById("myCanvas_2");var ctx = c.getContext("2d");ctx.lineWidth = "2";ctx.strokeStyle = "black";ctx.font = 'bold 20pt Calibri';ctx.fillStyle = '#333';var maxWidth= 50; var lineHeight= 25;var text = "plasmid_circuit_P001";wrapText(ctx, text, 350.0, 485, maxWidth, lineHeight);var text = "1795 bp";wrapText(ctx, text, 447.5, 515, maxWidth, lineHeight);</script>
+<script>
+var c = document.getElementById("myCanvas_2");var ctx = c.getContext("2d");
+//Promoter Symbol:
+ctx.strokeStyle = 'black'; ctx.lineWidth = 3; ctx.beginPath(); ctx.moveTo(514.5429013531482,250.42335041067523); ctx.lineTo(515.7063334614,230.45721844352926); ctx.stroke(); ctx.beginPath();ctx.arc(500,500,270.0,-1.512591863160305,-1.3287246322237776);ctx.stroke(); 
+ctx.lineWidth = 3;ctx.moveTo(564.7228962341774,237.87227025158154);ctx.lineTo(558.1451578076613,230.34011536786232);ctx.stroke();ctx.moveTo(564.7228962341774,237.87227025158154);ctx.lineTo(555.3952668319341,241.47717381955772);ctx.stroke();
+
+//CDS Symbol: 
+ctx.beginPath(); ctx.moveTo(566.1285932357407,745.2407167593952); ctx.lineTo(569.252778742941,756.8268923543274); ctx.lineTo(448.18161996352865,747.915386841157); ctx.closePath(); ctx.fillStyle = '#EBFBEF'; ctx.fill(); 
+ctx.beginPath(); ctx.moveTo(564.0458028976072,737.5165996961072); ctx.lineTo(560.921617390407,725.930424101175); ctx.lineTo(449.81838003647135,740.084613158843); ctx.closePath(); ctx.fillStyle = '#EBFBEF'; ctx.fill(); ctx.beginPath(); 
+
+//Promoter Symbol:
+ctx.strokeStyle = 'black'; ctx.lineWidth = 3; ctx.beginPath(); ctx.moveTo(432.9774978959519,740.8484673227398); ctx.lineTo(427.61569772762806,760.1163447085589); ctx.stroke(); ctx.beginPath();ctx.arc(500,500,269.99999999999994,1.8422062441268412,2.039810610569847);ctx.stroke(); 
+ctx.lineWidth = 3;ctx.moveTo(377.9580473131354,740.843853532485);ctx.lineTo(382.6723934860287,749.662863690214);ctx.stroke();ctx.moveTo(377.9580473131354,740.843853532485);ctx.lineTo(387.85760743472906,739.4300963401239);ctx.stroke();
+
+//RBS Symbol: 
+ctx.beginPath();ctx.arc(321.35058910365285, 680.5557752784111, 8, 3.9216836929326373, 0.7800910393428442, true); ctx.closePath(); ctx.lineWidth = 1; ctx.fillStyle = '#bb99ff'; ctx.fill(); ctx.strokeStyle = 'black';ctx.stroke(); 
+
+//CDS Symbol: 
+ctx.beginPath(); ctx.moveTo(372.10822637714404,280.54682905093364); ctx.lineTo(366.06609533984374,270.1789627068833); ctx.lineTo(446.1542568147041,251.09043244533035); ctx.closePath(); ctx.fillStyle = '#459570'; ctx.fill(); 
+ctx.beginPath(); ctx.moveTo(376.13631373534423,287.45873994696717); ctx.lineTo(382.1784447726446,297.8266062910175); ctx.lineTo(447.8457431852959,258.90956755466965); ctx.closePath(); ctx.fillStyle = '#459570'; ctx.fill(); ctx.beginPath(); 
+
+//Terminator Symbol: 
+ctx.strokeStyle = "black"; ctx.lineWidth = 2; ctx.moveTo(473.7270017074221,251.37632944404066); ctx.lineTo(471.9183502510657,235.47888374011012); ctx.lineTo(475.89271167704834,235.02672087602102); ctx.lineTo(475.4405488129592,231.05235945003838); ctx.lineTo(463.51746453501124,232.40884804230572); ctx.lineTo(463.9696273991004,236.38320946828836); ctx.lineTo(467.943988825083,235.93104660419925); ctx.lineTo(469.7526402814394,251.8284923081298); ctx.stroke(); 
+ctx.beginPath(); ctx.moveTo(473.7270017074221,251.37632944404066); ctx.lineTo(471.9183502510657,235.47888374011012); ctx.lineTo(475.89271167704834,235.02672087602102); ctx.lineTo(475.4405488129592,231.05235945003838); ctx.lineTo(463.51746453501124,232.40884804230572); ctx.lineTo(463.9696273991004,236.38320946828836); ctx.lineTo(467.943988825083,235.93104660419925); ctx.lineTo(469.7526402814394,251.8284923081298); ctx.fillStyle = "#EA6062"; ctx.closePath(); ctx.fill(); 
+
+</script>
+
+
+
+</div>
+
+<div id="Plasmid_Map_3" class="tabcontent">
+<canvas id="myCanvas_3" width="1000" height="1000" style="border:1px solid #d3d3d3;">
+Your browser does not support the HTML5 canvas tag.</canvas>
+<h1>Test_2_1_19_plasmid_sensor_P000</h1>
+
+
+<script>
+function wrapText(context, text, x, y, maxWidth, lineHeight) {
+    /*
+        var words = text.split(' ');
+        var line = '';
+
+        for(var n = 0; n < words.length; n++) {
+          var testLine = line + words[n] + ' ';
+          var metrics = context.measureText(testLine);
+          var testWidth = metrics.width;
+          if (testWidth > maxWidth && n > 0) {
+            context.fillText(line, x, y);
+            line = words[n] + ' ';
+            y += lineHeight;
+          }
+          else {
+            line = testLine;
+          }
+        } 
+    */
+
+    context.fillText(text, x, y);
+
+}
+
+
+</script>
+
+
+<script>var c = document.getElementById("myCanvas_3");var ctx = c.getContext("2d");ctx.lineWidth = '8';ctx.beginPath();ctx.strokeStyle = 'black';ctx.arc(500, 500, 250, 0 * Math.PI - (Math.PI/2), 0.002 * Math.PI - (Math.PI/2));ctx.stroke();ctx.beginPath();ctx.strokeStyle = '#DFEFCE';ctx.arc(500, 500, 250, 0.002 * Math.PI - (Math.PI/2), 2.0 * Math.PI - (Math.PI/2));ctx.stroke();</script>
+<script>var c = document.getElementById("myCanvas_3");var ctx = c.getContext("2d");ctx.lineWidth = "1";ctx.strokeStyle = "black";ctx.font = '9pt Calibri';ctx.fillStyle = '#333';var maxWidth= 50; var lineHeight= 25;ctx.beginPath();ctx.moveTo(500,180);ctx.lineTo(500,244);ctx.stroke();var text = "0";wrapText(ctx, text, 495, 175, maxWidth, lineHeight);ctx.beginPath();ctx.moveTo(498.7188777690771,818.9994354998045);ctx.lineTo(498.96485972113464,757.7499294374755);ctx.stroke();var text = "sensor_mo...";wrapText(ctx, text, 441.9188777690771, 818.9994354998045, maxWidth, lineHeight);</script>
+<script>var c = document.getElementById("myCanvas_3");var ctx = c.getContext("2d");ctx.lineWidth = "2";ctx.strokeStyle = "black";ctx.font = 'bold 20pt Calibri';ctx.fillStyle = '#333';var maxWidth= 50; var lineHeight= 25;var text = "plasmid_sensor_P000";wrapText(ctx, text, 357.5, 485, maxWidth, lineHeight);var text = "3077 bp";wrapText(ctx, text, 447.5, 515, maxWidth, lineHeight);</script>
+<script>
+var c = document.getElementById("myCanvas_3");var ctx = c.getContext("2d");
+</script>
+
+
+
+</div>
+
+
+
+<script>
+function openTab(evt, tabName) {
+    var i, tabcontent, tablinks;
+    tabcontent = document.getElementsByClassName("tabcontent");
+    for (i = 0; i < tabcontent.length; i++) {
+        tabcontent[i].style.display = "none";
+    }
+    tablinks = document.getElementsByClassName("tablinks");
+    for (i = 0; i < tablinks.length; i++) {
+        tablinks[i].className = tablinks[i].className.replace(" active", "");
+    }
+    document.getElementById(tabName).style.display = "block";
+    evt.currentTarget.className += " active";
+}
+// Get the element with id="defaultOpen" and click on it
+document.getElementById("defaultOpen").click();
+</script>
+     
+</body>
+</html> 
+
+1580756229.2120144 DEBUG: Starting new HTTP connection (1): 172.17.0.2:41751
+1580756229.3884118 DEBUG: http://172.17.0.2:41751 "POST / HTTP/1.1" 200 92
+1580756229.4920576 DEBUG: Starting new HTTP connection (1): 172.17.0.2:41751
+1580756229.508686 DEBUG: http://172.17.0.2:41751 "POST / HTTP/1.1" 200 67
+1580756229.6626353 DEBUG: Starting new HTTP connection (1): 172.17.0.2:41751
+1580756229.665821 DEBUG: http://172.17.0.2:41751 "POST / HTTP/1.1" 200 67
+1580756229.8930523 DEBUG: Starting new HTTP connection (1): 172.17.0.2:41751
+1580756229.8974452 DEBUG: http://172.17.0.2:41751 "POST / HTTP/1.1" 200 68
+1580756230.0712771: Shock url: https://appdev.kbase.us/services/shock-api
+1580756230.243421 DEBUG: Starting new HTTP connection (1): 172.17.0.2:41751
+1580756230.2476747 DEBUG: http://172.17.0.2:41751 "POST / HTTP/1.1" 200 67
+1580756230.2757225: Packing /kb/module/work/tmp/HTML_Report to zip
+1580756230.3198462: uploading file /kb/module/work/tmp/HTML_Report/HTML_Report.zip into shock node
+1580756230.4724941: uploading done into shock node: 50f24b68-fce4-4f28-a97e-6269de19631e
+1580756230.758834 DEBUG: Starting new HTTP connection (1): 172.17.0.2:41751
+1580756230.7645543 DEBUG: http://172.17.0.2:41751 "POST / HTTP/1.1" 200 193
+1580756230.7671866 DEBUG: Starting new HTTP connection (1): 172.17.0.2:41751
+1580756230.77 - CallbackServer: Subjob method: KBaseReport.create_extended_report JobID: af49a6f7-603f-46cf-8db6-d2c8684cb1c7
+1580756230.95 - CallbackServer: Running module KBaseReport:
+url: https://github.com/kbaseapps/KBaseReport
+commit: b2a10f82aadad8937f84144815fb4dafc1e6ffaf
+version: 3.0.3
+release: release
+
+1580756230.9523387 DEBUG: http://172.17.0.2:41751 "POST / HTTP/1.1" 200 91
+1580756231.0560768 DEBUG: Starting new HTTP connection (1): 172.17.0.2:41751
+1580756231.0598025 DEBUG: http://172.17.0.2:41751 "POST / HTTP/1.1" 200 67
+1580756231.2121701 DEBUG: Starting new HTTP connection (1): 172.17.0.2:41751
+1580756231.2224514 DEBUG: http://172.17.0.2:41751 "POST / HTTP/1.1" 200 67
+1580756231.4502769 DEBUG: Starting new HTTP connection (1): 172.17.0.2:41751
+1580756231.455079 DEBUG: http://172.17.0.2:41751 "POST / HTTP/1.1" 200 67
+1580756231.798214 DEBUG: Starting new HTTP connection (1): 172.17.0.2:41751
+1580756231.803441 DEBUG: http://172.17.0.2:41751 "POST / HTTP/1.1" 200 68
+1580756231.87 - CallbackServer: Subjob method: DataFileUtil.own_shock_node JobID: 24d9af80-13c7-4911-b41f-bef46067e829
+1580756231.87 - CallbackServer: WARNING: Module DataFileUtil was already used once for this job. Using cached version:
+url: https://github.com/kbaseapps/DataFileUtil
+commit: df0bb6568008983c1daf6966cf8cebf54f0a0d80
+version: 0.1.2
+release: release
+
+1580756232.3124533 DEBUG: Starting new HTTP connection (1): 172.17.0.2:41751
+1580756232.3157928 DEBUG: http://172.17.0.2:41751 "POST / HTTP/1.1" 200 68
+1580756232.7165368: Shock url: https://appdev.kbase.us/services/shock-api
+1580756233.0807145 DEBUG: Starting new HTTP connection (1): 172.17.0.2:41751
+1580756233.0853925 DEBUG: http://172.17.0.2:41751 "POST / HTTP/1.1" 200 68
+1580756234.16 - CallbackServer: Subjob method: DataFileUtil.own_shock_node JobID: 5b806e1d-8fbe-48d7-acc9-e83cee3a5e3f
+1580756234.16 - CallbackServer: WARNING: Module DataFileUtil was already used once for this job. Using cached version:
+url: https://github.com/kbaseapps/DataFileUtil
+commit: df0bb6568008983c1daf6966cf8cebf54f0a0d80
+version: 0.1.2
+release: release
+
+1580756234.2284915 DEBUG: Starting new HTTP connection (1): 172.17.0.2:41751
+1580756234.232326 DEBUG: http://172.17.0.2:41751 "POST / HTTP/1.1" 200 67
+1580756235.0077798: Shock url: https://appdev.kbase.us/services/shock-api
+1580756235.9455485 DEBUG: Starting new HTTP connection (1): 172.17.0.2:41751
+1580756235.9497228 DEBUG: http://172.17.0.2:41751 "POST / HTTP/1.1" 200 68
+1580756236.46 - CallbackServer: Subjob method: DataFileUtil.ws_name_to_id JobID: 95132d85-d97e-4e46-bafc-5cdc15b29a04
+1580756236.46 - CallbackServer: WARNING: Module DataFileUtil was already used once for this job. Using cached version:
+url: https://github.com/kbaseapps/DataFileUtil
+commit: df0bb6568008983c1daf6966cf8cebf54f0a0d80
+version: 0.1.2
+release: release
+
+1580756237.304193: Shock url: https://appdev.kbase.us/services/shock-api
+1580756238.00 - CallbackServer: Subjob method: DataFileUtil.save_objects JobID: 812fd0ec-c909-4797-b095-1788660c0a1e
+1580756238.00 - CallbackServer: WARNING: Module DataFileUtil was already used once for this job. Using cached version:
+url: https://github.com/kbaseapps/DataFileUtil
+commit: df0bb6568008983c1daf6966cf8cebf54f0a0d80
+version: 0.1.2
+release: release
+
+1580756238.5174627 DEBUG: Starting new HTTP connection (1): 172.17.0.2:41751
+1580756238.5211945 DEBUG: http://172.17.0.2:41751 "POST / HTTP/1.1" 200 67
+1580756238.8641438: Shock url: https://appdev.kbase.us/services/shock-api
+1580756242.3743625 DEBUG: Starting new HTTP connection (1): 172.17.0.2:41751
+1580756242.3789682 DEBUG: http://172.17.0.2:41751 "POST / HTTP/1.1" 200 123
+.1580756242.3815918 DEBUG: Starting new HTTPS connection (1): appdev.kbase.us:443
+1580756242.4210255 DEBUG: https://appdev.kbase.us:443 "POST /services/ws HTTP/1.1" 200 None
+Test workspace was deleted
+
+Name                   Stmts   Miss  Cover
+------------------------------------------
+cello/__init__.py          0      0   100%
+cello/authclient.py       59     19    68%
+cello/celloImpl.py       225     73    68%
+cello/celloServer.py     372    275    26%
+------------------------------------------
+TOTAL                    656    367    44%
+----------------------------------------------------------------------
+Ran 1 test in 36.705s
+
+OK
+Shutting down callback server...
+1580756242.79 - CallbackServer: Shutting down executor service

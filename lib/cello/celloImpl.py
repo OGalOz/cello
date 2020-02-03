@@ -345,7 +345,10 @@ class cello:
                                               'pack': 'zip'})['shock_id']
        
         #Creating HTML to return to the user
-        html_result_dict = build_html(full_path_output_folder, self.shared_folder, main_output_name)
+        config_info = {
+                'base_plasmid_info': base_plasmid_info
+                }
+        html_result_dict = build_html(full_path_output_folder, self.shared_folder, main_output_name, config_info)
         
         report_shock_id = dfu.file_to_shock({'file_path': html_result_dict['output_directory'],
                                                   'pack': 'zip'})['shock_id']
