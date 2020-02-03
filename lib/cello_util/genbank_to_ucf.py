@@ -466,6 +466,10 @@ def genetic_locations(config_dict, gb_ucf_params, new_json_ucf_list, bs_ucf_list
             sensor_module_location_list = [sensor_module_loc_dict]
             genetic_locations_dict["sensor_module_location"] = sensor_module_location_list
 
+
+        #Removing duplicates from locations_list:
+        locations_list = remove_duplicates_from_locations_list(locations_list)
+
         genetic_locations_dict["locations"] = locations_list
     else:
         genetic_locations_json_fp = os.path.join(config_dict["genetic_loc_folder_path"], config_dict["use_existing_genetic_loc"])
@@ -477,7 +481,32 @@ def genetic_locations(config_dict, gb_ucf_params, new_json_ucf_list, bs_ucf_list
 
     return genetic_locations_dict
         
-            
+"""   
+#locations_list: (list)
+    file_dict: (dict)
+        file: (list) List of genbank file
+        name: (str) Name of genbank file
+""" 
+def remove_duplicates_from_locations_list(locations_list):
+    logging.info("locations_list before removal of duplicates: ")
+    logging.info([x["name"] for x in locations_list])
+    names_list = []
+    duplicates = []
+    for i in range(len(locations_list)):
+        crnt_name = locations_list[i]["name"]
+        if crnt_name in names_list:
+            duplicates.append(i)
+        else:
+            names_list.append(crnt_name)
+    sorted(duplicates, reverse=True)
+    for dup in duplicates:
+        del locations_list[dup]
+
+    logging.info("locations_list after removal of duplicates: ")
+    logging.info([x["name"] for x in locations_list])
+
+    return locations_list
+
 
 
 

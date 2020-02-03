@@ -76,7 +76,7 @@ class celloTest(unittest.TestCase):
         truth_table_text =    ' pTac, pTet, YFP & 0, 0, 1 & 0, 1, 0 & 1,0,1 & 1,1,0'
 
         #base_plasmid_info can be one of "none", "e_coli", "tetrlaci", "custom"
-        base_plasmid_info = "none" #custom
+        base_plasmid_info = "custom" #info
 
         plasmid_output_genome_base = "33901/141/1"  #pAN4020
         plasmid_output_insertion_bp = "953"
