@@ -4,12 +4,11 @@ This is a KBase wrapper for CIDAR LAB's program Cello.
 
 Information regarding base plasmid choices:
 
-If you choose "None" as your Base Plasmid, the program will only return a circuit, and it will not
-perform any simulations. 
+If you choose "None" as your Base Plasmid, the program will only return a circuit.
 
 If you choose "E-Coli" as your Base Plasmid, then the program will run using Eco1C1G1T0 as its UCF, and it will perform all the simulations.
 
-If you choose "Custom" as your base plasmid, be sure to give both the output plasmid, and the circuit plasmid as inputs to the program.
+If you choose "Custom" as your base plasmid, be sure to give both the sensor and the circuit plasmid as inputs to the program; the output plasmid is optional.
 
 
 
