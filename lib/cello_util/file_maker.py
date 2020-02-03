@@ -391,7 +391,7 @@ def make_ucf_file(base_plasmid_info, ucfs_params_fp, additional_info_dict):
 
     elif base_plasmid_info == "tetrlaci":
         #TetRLacI UCF file
-        ucf_fp = file_info_dict["terlaci_ucf_fp"]
+        ucf_fp = file_info_dict["tetrlaci_ucf_fp"]
 
 
     elif base_plasmid_info == "custom":
