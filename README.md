@@ -1,5 +1,9 @@
 # cello
 
+This is a KBase wrapper for CIDAR LAB's program Cello.
+
+Information regarding base plasmid choices:
+
 If you choose "None" as your Base Plasmid, the program will only return a circuit, and it will not
 perform any simulations. 
 
