@@ -14,7 +14,7 @@ base_fp: (str) Filepath to base plasmid
 insertion_point: (int) Point at which new material was inserted.
 
 """
-def merge_plasmids(new_fp, base_fp, insertion_point):
+def merge_plasmids(new_fp, base_fp, insertion_point, out_fp):
     """
     Usually, in the new plasmid, everything borrowed from
     the base plasmid is called "backbone" in the features.
@@ -25,16 +25,100 @@ def merge_plasmids(new_fp, base_fp, insertion_point):
     the new_fp to include those labels.
     SENSOR MODULE LENGTH NORMALLY: 3076 bp
     """
+
+    logging.info("\n\n---MERGING PLASMID GENBANKS---\n\nNew: {} \nBase: {}\nOut: {}\n\n-------------------------\n".format(new_fp, base_fp, out_fp))
+
     SENSOR_MOD_LENGTH = 3076
+
+    #We start off assuming the sensor module is not in the new plasmid.
     sensor_mod_bool = False
+
     #Getting features from new gbk file
     new_gb_record = SeqIO.read(open(new_fp,"r"), "genbank")
     new_features = new_gb_record.features
 
     #Getting features from base gbk file
-
     base_gb_record = SeqIO.read(open(base_fp,"r"), "genbank")
     base_features = base_gb_record.features
+
+    #Marking backbone locations in new_fp:
+    backbone_dicts_list, backbone_loc_list, SENSOR_MOD_LENGTH, sensor_mod_bool, sensor_mod_dict = find_backbones(new_features, SENSOR_MOD_LENGTH, sensor_mod_bool)
+
+    #Debugging checking lengths:
+    check_lengths(backbone_loc_list, base_gb_record, sensor_mod_bool)
+
+
+    #Creating a difference space list (difference between each consecutive backbone piece)
+    bb_space = make_diff_list(backbone_loc_list)
+
+
+    #Create features to replace backbone with
+    replace_backbone_dict_list = make_backbone_replacement_features(backbone_dicts_list, new_features, base_gb_record, bb_space)
+
+    
+    #Replace the features of the new plasmid with the base features.
+    combined_gb_record = replace_backbone_features(new_gb_record, replace_backbone_dict_list)
+
+    SeqIO.write(combined_gb_record, out_fp, "genbank")
+
+
+
+
+
+"""
+Inputs:
+    gb_record: A bio Python record object - Bio.SeqRecord.SeqRecord:
+        https://biopython.org/DIST/docs/api/Bio.SeqRecord.SeqRecord-class.html
+    new_feature_list: (list) A list of dicts containing new_feature_dicts:
+        new_feature_dict:
+            "SeqIO_feat": The newly minted bioPython feature (new length and location)
+            "sequence": ACTCG...
+            "feature_type": the type of feature
+            "new_plasmid_start": ?
+            "new_plasmid_end": ?
+Outputs:
+    gb_record: Modified version of gb_record in the input
+"""
+def replace_backbone_features(gb_record, new_feature_list):
+    
+    gb_record.features += [x["SeqIO_feat"] for x in new_feature_list]
+
+    feats_to_remove = []
+    for i in range(len(gb_record.features)):
+        feat = gb_record.features[i]
+        if feat.type == "backbone":
+            if not "sensor_module" in [x[0] for x in feat.qualifiers.values()]:
+                logging.debug(feat)
+                feats_to_remove.append(feat)
+
+    logging.warning(feats_to_remove)
+
+    for f in feats_to_remove:
+            gb_record.features.remove(f)
+
+    gb_record.features = sorted(gb_record.features, key=lambda x: x.location.start)
+
+    return gb_record
+
+
+"""
+INPUTS:
+    new_features: list of Bio SeqFeatures
+    SENSOR_MOD_LENGTH: (int) Length of Sensor Module
+    sensor_mod_bool: (bool) True if sensor module in plasmid, False otherwise.
+OUTPUTS:
+    backbone_dicts_list: list of backbone_dicts:
+        backbone_dict:
+            feat_index: (int)
+            start_bp: (int)
+            end_bp: (int)
+    backbone_loc_list: (list) of lists,
+        internal_list: (list) [start_bp, end_bp] for each backbone item
+    SENSOR_MOD_LENGTH: (int)
+    sensor_mod_bool: (bool)
+    sensor_mod_dict: Bio SeqFeature
+"""
+def find_backbones(new_features, SENSOR_MOD_LENGTH, sensor_mod_bool):
 
     #Marking backbone locations in new_fp:
     backbone_dicts_list = []
@@ -63,7 +147,14 @@ def merge_plasmids(new_fp, base_fp, insertion_point):
                 backbone_dicts_list.append(bb_dict)
                 backbone_loc_list.append([feat.location.nofuzzy_start, feat.location.nofuzzy_end])
 
+    return [backbone_dicts_list, backbone_loc_list, SENSOR_MOD_LENGTH, sensor_mod_bool, sensor_mod_dict]
 
+
+
+"""
+Debugging function to check lengths
+"""
+def check_lengths(backbone_loc_list, base_gb_record, sensor_mod_bool):
     #Checking sum length of backbone
     logging.info(backbone_loc_list)
     diff = [(x[1]-x[0]) for x in backbone_loc_list]
@@ -86,18 +177,49 @@ def merge_plasmids(new_fp, base_fp, insertion_point):
     else:
         logging.info("Backbone and Base Plasmid Lengths are the same length")
 
+
+
+"""
+Inputs:
+    backbone_loc_list: (list) list of lists:
+        internal_list: [start_bp, end_bp] for each backbone
+Outputs:
+    bb_space: (list) list of ints. Each int represents the difference between the location in the new plasmid and the base plasmid.
+        
+"""
+def make_diff_list(backbone_loc_list):
     #Creating a difference space list (difference between each consecutive backbone piece)
     bb_space = [0]
     if len(backbone_loc_list) > 1:
         for i in range(1, len(backbone_loc_list)):
             bb_space.append( (backbone_loc_list[i][0] - backbone_loc_list[i-1][1]) + bb_space[-1])
-    logging.debug(bb_space)
+    return bb_space
 
+
+
+"""
+Inputs:
+    backbone_dicts_list: (list) backbone_dicts
+    new_features: (list) of BioPython SeqFeatures
+    base_gb_record: (BioPython Record object)
+    bb_space: (list) of ints representing differences in location
+Outputs:
+    replace_backbone_dict_list: (list)
+        replace_backbone_dict: (dict)
+            SeqIO_feat: BioPython SeqFeature
+            sequence: (str) DNA sequence
+            feature_type: (str)
+            new_plasmid_start: (int)
+            new_plasmid_end: 
+
+"""
+def make_backbone_replacement_features(backbone_dicts_list, new_features, base_gb_record, bb_space ):
 
     #Now we replace the features of the new plasmid with the base features.
     #We keep track of where in our new plasmid we are:
     start_bp = 0
     replace_backbone_dict_list= []
+    base_features = base_gb_record.features
     for i in range(len(backbone_dicts_list)):
         bb_dict = backbone_dicts_list[i]
         b_ind = bb_dict["feat_index"]
@@ -150,52 +272,7 @@ def merge_plasmids(new_fp, base_fp, insertion_point):
                         }
                 replace_backbone_dict_list.append(replace_backbone_dict)
 
-
-    combined_gb_record = replace_backbone_features(new_gb_record, replace_backbone_dict_list)
-    
-    SeqIO.write(combined_gb_record, "test_out.gbk", "genbank")
-
-    raise Exception("Stop. Program Incomplete")
-
-
-
-
-"""
-Inputs:
-    gb_record: A bio Python record object - Bio.SeqRecord.SeqRecord:
-        https://biopython.org/DIST/docs/api/Bio.SeqRecord.SeqRecord-class.html
-    new_feature_list: (list) A list of dicts containing the following info:
-        "SeqIO_feat": The newly minted bioPython feature (new length and location)
-        "sequence": ACTCG...
-        "feature_type": the type of feature
-        "new_plasmid_start": ?
-        "new_plasmid_end": ?
-Outputs:
-    gb_record: Modified version of gb_record in the input
-"""
-def replace_backbone_features(gb_record, new_feature_list):
-    
-    gb_record.features += [x["SeqIO_feat"] for x in new_feature_list]
-
-    feats_to_remove = []
-    for i in range(len(gb_record.features)):
-        feat = gb_record.features[i]
-        if feat.type == "backbone":
-            if not "sensor_module" in [x[0] for x in feat.qualifiers.values()]:
-                logging.debug(feat)
-                feats_to_remove.append(feat)
-
-    logging.warning(feats_to_remove)
-
-    for f in feats_to_remove:
-            gb_record.features.remove(f)
-
-    gb_record.features = sorted(gb_record.features, key=lambda x: x.location.start)
-
-    return gb_record
-
-
-
+    return replace_backbone_dict_list
 
 
 def test():
@@ -203,8 +280,9 @@ def test():
     logging.debug("\n\n-----\nNEW TEST\n-----\n")
     new_fp = "/Users/omreeg/KBase/apps/cello/test_local/workdir/tmp/cello_output/job_1580764268958/job_1580764268958_A000_plasmid_circuit_P000.ape"
     base_fp = "/Users/omreeg/KBase/apps/cello/test_local/workdir/tmp/KBase_derived_pAN1201.gbk_genome.gbff"
+    out_fp = "new_test_out.gbk"
     insertion_point = 54
-    merge_plasmids(new_fp, base_fp, insertion_point)
+    merge_plasmids(new_fp, base_fp, insertion_point, out_fp)
 
     return 0
 
