@@ -52,51 +52,55 @@ def make_kbase_genomes(output_files, kb_output_folder, output_folder, gfu, ws_na
 
 
 def turn_ape_to_gbk(output_files, kb_output_folder, output_folder):
-            #Locating the '.ape' files. List ape_files will contain full paths to files.
-            # ape files are like genbank files.
-            circuit_ape_files = []
-            output_ape_files = []
-            sensor_ape_files = []
-            extra_ape_files = []
-            for out_f in output_files:
-                if out_f[-4:] == ".ape":
-                    if "plasmid_circuit" in out_f:
-                        logging.info("Recognized plasmid_circuit .ape file: " + out_f)
-                        circuit_ape_files.append(os.path.join(kb_output_folder, os.path.join(output_folder, out_f)))
-                    elif "plasmid_output" in out_f:
-                        logging.info("Recognized plasmid_output .ape file: " + out_f)
-                        output_ape_files.append(os.path.join(kb_output_folder, os.path.join(output_folder, out_f)))
-                    elif "sensor" in out_f:
-                        logging.info("Recognized sensor .ape file: " + out_f)
-                        sensor_ape_files.append(os.path.join(kb_output_folder, os.path.join(output_folder, out_f)))
-                    else:
-                        logging.info("Other .ape file: " + out_f)
-                        extra_ape_files.append(os.path.join(kb_output_folder, os.path.join(output_folder, out_f)))
-                        
-            ape_files = circuit_ape_files + output_ape_files + sensor_ape_files
-            logging.debug("Unused ape files: ")
-            logging.debug(extra_ape_files)
+    #Locating the '.ape' files. List ape_files will contain full paths to files.
+    # ape files are like genbank files.
+    circuit_ape_files = []
+    output_ape_files = []
+    sensor_ape_files = []
+    extra_ape_files = []
+    for out_f in output_files:
+        if out_f[-4:] == ".ape":
+            if "plasmid_circuit" in out_f:
+                logging.info("Recognized plasmid_circuit .ape file: " + out_f)
+                circuit_ape_files.append(os.path.join(kb_output_folder, os.path.join(output_folder, out_f)))
+            elif "plasmid_output" in out_f:
+                logging.info("Recognized plasmid_output .ape file: " + out_f)
+                output_ape_files.append(os.path.join(kb_output_folder, os.path.join(output_folder, out_f)))
+            elif "sensor" in out_f:
+                logging.info("Recognized sensor .ape file: " + out_f)
+                sensor_ape_files.append(os.path.join(kb_output_folder, os.path.join(output_folder, out_f)))
+            else:
+                logging.info("Other .ape file: " + out_f)
+                extra_ape_files.append(os.path.join(kb_output_folder, os.path.join(output_folder, out_f)))
+                
+    ape_files = circuit_ape_files + output_ape_files + sensor_ape_files
+    logging.debug("Unused ape files: ")
+    logging.debug(extra_ape_files)
 
-            logging.debug("PARSED APE FILES:")
-            logging.debug(ape_files)
+    logging.debug("PARSED APE FILES:")
+    logging.debug(ape_files)
 
-            if len(ape_files) == 0:
-                logging.critical("NO .APE FILES FOUND - CANNOT MAKE PLASMID - ONLY RETURNING OUTPUT FOLDER.")
+    if len(ape_files) == 0:
+        logging.critical("NO .APE FILES FOUND - CANNOT MAKE PLASMID - ONLY RETURNING OUTPUT FOLDER.")
 
-            for ap_f in ape_files:
-                #Replace "label" in .ape file with "locus_tag"
-                response = replace_label_with_locus_tag(ap_f)
-                if response != 0:
-                    #ISSUE - WE DO NOT CATCH IF THIS FAILS IN LATER STEPS
-                    logging.critical("Issue with replacing 'label' with 'locus_tag'. Could be that no 'label's exist.")
-                #Placeholder genome name:
-                g_name = (ap_f.split('/')[-1])[:-4]
+    for ap_f in ape_files:
+        #Replace "label" in .ape file with "locus_tag"
+        response = replace_label_with_locus_tag(ap_f)
+        
+        #Add information from base plasmid files:
+        replace_plasmid_sections_with_features(ap_f, config_info)
 
-                #renaming file to genbank type:
-                gbk_file_name = ap_f[:-4] + '.gbk'
-                shutil.copyfile(ap_f, gbk_file_name)
+        if response != 0:
+            #ISSUE - WE DO NOT CATCH IF THIS FAILS IN LATER STEPS
+            logging.critical("Issue with replacing 'label' with 'locus_tag'. Could be that no 'label's exist.")
+        #Placeholder genome name:
+        g_name = (ap_f.split('/')[-1])[:-4]
 
-            return ape_files
+        #renaming file to genbank type:
+        gbk_file_name = ap_f[:-4] + '.gbk'
+        shutil.copyfile(ap_f, gbk_file_name)
+
+    return ape_files
 
 
 
@@ -137,7 +141,35 @@ def replace_label_with_gene(filename):
 
 
 
+"""
+plasmid_filename: (str)
+config_info: (dict)
+    output_base: (str) filepath to output base genbank file.
+    output_insertion_bp: (int)
+    circuit_base: (str) filepath to circuit base genbank file.
+    circuit_insertion_bp: (int)
+    sensor_base: (str) filepath to sensor module base genbank file.
+    sensor_insertion_bp: (int)
 
-    
+"""
+def replace_plasmid_sections_with_features(plasmid_filename, config_info):
+
+    if "circuit" in plasmid_filename:
+        logging.info("Recognized circuit plasmid for replacing sections")
+        detailed_plasmid_insertion(plasmid_filename, config_info["circuit_base"], config_info["circuit_insertion_bp"])
+
+    elif "output" in plasmid_filename:
+        logging.info("Recognized output plasmid for replacing sections")
+
+        detailed_plasmid_insertion(plasmid_filename, config_info["output_base"], config_info["output_insertion_bp"])
+    elif "sensor" in plasmid_filename:
+        logging.info("Recognized sensor plasmid for replacing sections")
+
+        detailed_plasmid_insertion(plasmid_filename, config_info["sensor_base"], config_info["sensor_insertion_bp"])
+    else:
+        logging.critical("Did not recognize type of plasmid")
+
+    #if config_info["base_plasmid_info"]
+
 
 

@@ -4,6 +4,7 @@ import os
 import shutil
 import logging
 import re
+from Bio import SeqIO
 from biokbase.workspace.client import Workspace
 from installed_clients.KBaseReportClient import KBaseReport
 from installed_clients.DataFileUtilClient import DataFileUtil
@@ -154,6 +155,11 @@ class cello:
                     genome_info = gfu.genome_to_genbank({"genome_ref": plasmid_output_genome_base_ref})
                     output_genome_genbank_fn = genome_info['genbank_file']['file_path']
                     op_gb_fp = os.path.join(self.shared_folder, output_genome_genbank_fn)
+                    #Checking if insertion point is less than length of plasmid:
+                    op_p_rec = SeqIO.read(open(op_gb_fp,"r"),"genbank")
+                    if not plasmid_output_insertion_bp < len(op_p_rec.seq):
+                        raise Exception("Output insertion point must be less than total length of output plasmid.")
+
                 else:
                     logging.critical("No plasmid output base given.")
                 if "plasmid_circuit_base" in params:
@@ -166,6 +172,9 @@ class cello:
                     genome_info = gfu.genome_to_genbank({"genome_ref": plasmid_circuit_genome_base_ref})
                     circuit_genome_genbank_fn = genome_info['genbank_file']['file_path']
                     cr_gb_fp = os.path.join(self.shared_folder, circuit_genome_genbank_fn)
+                    cr_p_rec = SeqIO.read(open(cr_gb_fp,"r"),"genbank")
+                    if not plasmid_circuit_insertion_bp < len(cr_p_rec.seq):
+                        raise Exception("Circuit insertion point must be less than total length of circuit plasmid.")
                 else:
                     raise Exception("custom base circuit plasmid indicated, but none given")
 
@@ -178,6 +187,9 @@ class cello:
                     genome_info = gfu.genome_to_genbank({"genome_ref": sensor_module_genome_base_ref})
                     circuit_genome_genbank_fn = genome_info['genbank_file']['file_path']
                     sn_gb_fp = os.path.join(self.shared_folder, circuit_genome_genbank_fn)
+                    sn_p_rec = SeqIO.read(open(sn_gb_fp,"r"),"genbank")
+                    if not plasmid_sensor_insertion_bp < len(sn_p_rec.seq):
+                        raise Exception("Sensor insertion point must be less than total length of sensor plasmid.")
                 else:
                     raise Exception("sensor module info indicated, but none given")
 
