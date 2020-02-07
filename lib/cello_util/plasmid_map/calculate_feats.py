@@ -764,6 +764,9 @@ def calculate_arrow_values(A,B,arrow_angle, flag_length, line_width):
             flag_b_1 = [flag_length*math.cos((180-arrow_angle)*(math.pi/180)), flag_length*math.sin((180-arrow_angle)*(math.pi/180))]
             flag_b_2 = perform_rotation(flag_b_1, rotation_angle)
 
+    flag_a_2 = [B[0] + flag_a_2[0], B[1] + flag_a_2[1]]
+    flag_b_2 = [B[0] + flag_b_2[0], B[1] + flag_b_2[1]]
+
     arrow_dict = {
             "flags_end": B,
             "inner_flag_start" : flag_a_2,
@@ -954,7 +957,7 @@ def calculate_pointer_and_text(feature_dict, config_dict):
     text_changes = line_extension_coordinates(end_point, start_point, 
             "pixels", js_info["pointer_distance"])
     text_dict = {"type": "text"}
-    text_dict["text_point"] = [start_point[0] + text_changes[0] , start_point[1] + text_changes[1]]
+    text_dict["text_point"] = [text_changes[0] , text_changes[1]]
     text_dict["text_str"] = feature_dict["feat_name"][0] + " ({})".format(feature_dict["bp_len"])
     text_dict["new_text_font_bool"] = False
     text_dict["text_font"] = str(js_info["text_size"]) + "pt Calibri"
@@ -997,6 +1000,9 @@ def calculate_promoter_feature(feature_dict, config_dict):
         radius = js_info['circle_radius']
 
     cc = js_info['center_coordinates']
+    js_object['center_x'] = cc[0]
+    js_object['center_y'] = cc[1]
+    js_object['feat_name'] = feature_dict['feat_name']
 
     percent_angle_to_promoter = promoter_info['percent_start']
 
@@ -1150,6 +1156,8 @@ def calculate_terminator_feature(feature_dict, config_dict):
     js_object = {"type": "terminator",
             "border_color": terminator_info["border_color"],
             "internal_color": terminator_info["internal_color"],
+            "border_width": terminator_info['border_width'],
+            "feat_name": feature_dict['feat_name'],
             "base_1": var_a,
             "armpit_1": var_b,
             "palm_hand_1":var_c,
@@ -1190,9 +1198,10 @@ def calculate_rbs_feature(feature_dict, config_dict):
     First, we find the center of the rbs circle we will make.
     """
     percent_center = rbs_info["percent_center"]
-    relative_angle_to_t_center = (feature_dict['plasmid_percentage'] * (percent_center/100))*(math.pi * 2)
+    relative_angle_to_t_center = (feature_dict['plasmid_percentage'] * \
+            (percent_center/100))*(math.pi * 2)
 
-    starting_angle = get_angle_from_point(feature_dict['point_start'],cc)
+    starting_angle = feature_dict['angle_start'] 
     rbs_symbol_center_angle = starting_angle + relative_angle_to_t_center
     rbs_circle_center = [cc[0] + radius*(math.cos(rbs_symbol_center_angle)),cc[1] + radius*(math.sin(rbs_symbol_center_angle))]
     
@@ -1201,13 +1210,16 @@ def calculate_rbs_feature(feature_dict, config_dict):
     extension_length = js_info['circle_line_width']/2
     rbs_circle_center = line_extension_coordinates(cc,rbs_circle_center,"pixels", extension_length)
 
+    #We add math.pi/2 to make the angle perpendicular to circle
     start_angle = get_angle_from_point(rbs_circle_center, cc) + (math.pi/2)
 
     js_object = {
             "type": "rbs",
+            "radius": rbs_info["radius"],
+            "feat_name": feature_dict['feat_name'],
             "circle_center": rbs_circle_center,
             "start_angle": start_angle,
-            "end_angle": start_angle - math.pi,
+            "end_angle": start_angle + math.pi,
             "border_color": rbs_info["border_color"],
             "internal_color": rbs_info["internal_color"],
             "border_width": rbs_info["border_width"],
@@ -1266,6 +1278,7 @@ def calculate_cds_feature(feature_dict, config_dict):
 
     js_object = {
         "type": "cds",
+        "feat_name": feature_dict['feat_name'],
         "internal_color": feature_dict["feat_color"], 
         "a": var_a ,
         "b": var_b,

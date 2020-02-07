@@ -10,7 +10,7 @@ Process:
     2. "feature_prepare" takes Genbank File and prepares two
         json files: plasmid_info.json, and feature_list.json
 
-    3. canvas_prepare takes plasmid_info.json, feature_list.json, and config.json
+    3. js_prepare takes plasmid_info.json, feature_list.json, and config.json
         and creates js_feats.json
 
     4. canvas_make takes js_feats.json and creates plasmid_js.js
@@ -26,9 +26,10 @@ Process:
 
 import sys
 from os import path
-from prepare_features import feature_prepare
-from py_feat_to_js_feat import canvas_prepare
+from prep_py_feat import feature_prepare
+from py_feat_to_js_feat import js_prepare
 from features_to_canvas import make_canvas_js
+from plasmid_html import html_prepare
 
 def main():
     args = sys.argv
@@ -55,8 +56,9 @@ def main():
     make_canvas_js(js_feats_fp)
 
     plasmid_js = path.join(program_dir, "tmp/plasmid_js.js")
+    template_html_fp = path.join(program_dir, "template.html")
 
-    html_prepare(plasmid_js, out_fp)
+    html_prepare(plasmid_js, template_html_fp, out_fp)
 
     return 0
 
@@ -71,20 +73,6 @@ def genbank_prepare(gbk_input):
     return 0
 
 
-
-
-
-
-
-"""
-Inputs:
-    plasmid_js: (str) filepath to file containing javascript string.
-    out_fp: (str) filepath to where we'll write the file out.
-"""
-def html_prepare(plasmid_js_fp, out_fp):
-
-
-    return 0
 
 
 if __name__ == "__main__":

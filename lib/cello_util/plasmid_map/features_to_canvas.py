@@ -111,15 +111,22 @@ These are the features and their keys (the name is under "type"):
 """
 
 import json
+import logging
 from js_print import *
 
 def make_canvas_js(js_feats_fp):
+
+    logging.info("Creating Javascript File from feats file.")
+
     with open(js_feats_fp) as f:
         js_feats_list = json.loads(f.read())
 
 
     javascript_str = "//Canvas Code Start \n"
-    for i in len(js_feats_list):
+    javascript_str += 'var c = document.getElementById("myCanvas");\n'
+    javascript_str += 'var ctx = c.getContext("2d");\n\n\n'
+
+    for i in range(len(js_feats_list)):
         js_feat = js_feats_list[i]
         if js_feat["type"] == "plasmid_arc_forward":
             js_str = print_plasmid_arc_forward(js_feat)
@@ -150,9 +157,12 @@ def make_canvas_js(js_feats_fp):
         else:
             logging.info("Did not recognize feature to translate to javascipt.")
 
-        javascript_str += "//Feature: {} + \n".format(str(i)) + js_str
+        javascript_str += "//Feature: {} \n".format(str(i)) + js_str
 
-    return  
+    with open("tmp/plasmid_js.js","w") as g:
+        g.write(javascript_str)
+
+    return 0
 
 
 

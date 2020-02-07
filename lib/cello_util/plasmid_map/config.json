@@ -37,7 +37,7 @@
             "title_text_color": "#333",
             "max_title_length" : 35,
             "gap_arc_info" : {
-                "circle_line_width": 2,
+                "circle_line_width": 3,
                 "color": "black"
             },
             "promoter_info" : {

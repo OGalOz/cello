@@ -5,6 +5,7 @@
 This file takes features_list and plasmid_info json files and creates pre-javascript features,
 divided into sections by type:
     plasmid_arc_forward:
+        feat_name:
         arc_start:
         arc_end:
         arc_angle:
@@ -14,6 +15,7 @@ divided into sections by type:
         center_y:
         radius:
     plasmid_arc_reverse
+        feat_name
         arc_start:
         arc_end:
         arc_angle:
@@ -45,12 +47,19 @@ divided into sections by type:
         text_font
 
     center_text:
-        plasmid_name:
-        plasmid_len:
-        text_size:
-        font_type:
+        "type" : "center_text",
+        "plasmid_name": plasmid_name_str,
+        "name_start_x": plasmid_name_start,
+        "name_start_y": cc[1] - 15,
+        "length_str": plasmid_length_str,
+        "length_start_x": plasmid_length_str_start,
+        "length_start_y": cc[1] + 15,
+        "font_style": font_style,
+        "fill_color": js_info["title_text_color"]
 
     promoter:
+
+        feat_name
         color
         line_width
         p_line_coordinate_start
@@ -63,9 +72,14 @@ divided into sections by type:
         inner_flag_start
         outer_flag_start
         flags_end
+        center_x
+        center_y
 
     terminator:
+
+        feat_name
         border_color:
+        border_width: (int)
         internal_color:
         base_1: list<int> earlier angle point touching circle
         base_2: later angle point touching circle
@@ -77,6 +91,8 @@ divided into sections by type:
         back_hand_2: highest point on T which is right above palm hand 2
 
     rbs:
+
+        feat_name
         circle_center: 2d-coordinates
         radius: float
         start_angle: float
@@ -86,6 +102,8 @@ divided into sections by type:
         border_width: int
 
     cds:
+        
+        feat_name
         The CDS visual will look like an arrow head ending at the end of the CDS.
         In order to draw this, we need 6 variables. The variables represent:
             a: point on plasmid map that outer arrow starts.
@@ -97,6 +115,8 @@ divided into sections by type:
             internal_color:
 
     gap_arc:
+
+        feat_name
         line_width:
         line_color:
         start_angle
@@ -110,7 +130,7 @@ divided into sections by type:
 
 from Bio import SeqIO
 import json
-from plasmid_sbol_visuals import *
+from calculate_feats import *
 
 
 
@@ -121,7 +141,7 @@ Inputs:
     plasmid_info_fp: (str) file path to plasmid info json file.
     config_fp: (str) file path to config info json file
 """
-def canvas_prepare(feature_list_fp, plasmid_info_fp, config_fp):
+def js_prepare(feature_list_fp, plasmid_info_fp, config_fp):
     with open(feature_list_fp, "r") as f:
         feature_dict_list = json.loads(f.read())
 
@@ -193,6 +213,8 @@ def create_arc(feature_dict, config_dict):
             #Positive arc
             js_object = {
                     "type": "plasmid_arc_forward",
+
+                    "feat_name": feature_dict['feat_name'],
                     "arc_start": feature_dict['angle_start'],
                     "arc_end": feature_dict['angle_end'],
                     "arc_angle":feature_dict['angle_end'] - feature_dict['angle_start'],
@@ -208,6 +230,8 @@ def create_arc(feature_dict, config_dict):
             #Complementary arc
             js_object = {
                     "type": "plasmid_arc_reverse",
+
+                    "feat_name": feature_dict['feat_name'],
                     "arc_start": feature_dict['angle_start'],
                     "arc_end": feature_dict['angle_end'],
                     "arc_angle":feature_dict['angle_end'] - feature_dict['angle_start'],
@@ -222,6 +246,7 @@ def create_arc(feature_dict, config_dict):
         #gap arc
         js_object = {
                     "type": "gap_arc",
+                    "feat_name": feature_dict['feat_name'],
                     "arc_start": feature_dict['angle_start'],
                     "arc_end": feature_dict['angle_end'],
                     "arc_angle":feature_dict['angle_end'] - feature_dict['angle_start'],

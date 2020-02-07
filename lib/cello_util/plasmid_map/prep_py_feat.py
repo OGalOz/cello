@@ -15,7 +15,7 @@ import logging
 import math
 import random
 import json
-from plasmid_sbol_visuals import calc_dist
+from calculate_feats import calc_dist
 
 
 """
