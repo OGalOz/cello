@@ -26,7 +26,11 @@ def merge_plasmids(new_fp, base_fp, insertion_point, out_fp):
     SENSOR MODULE LENGTH NORMALLY: 3076 bp
     """
 
-    logging.info("\n\n---MERGING PLASMID GENBANKS---\n\nNew: {} \nBase: {}\nOut: {}\n\n-------------------------\n".format(new_fp, base_fp, out_fp))
+    logging.info("\n\n---MERGING PLASMID GENBANKS---\n\n \
+            New: {} \n \
+            Base: {}\n \
+            Out: {}\n\n \
+            -------------------------\n".format(new_fp, base_fp, out_fp))
 
     SENSOR_MOD_LENGTH = 3076
 
@@ -213,7 +217,7 @@ Outputs:
             new_plasmid_end: 
 
 """
-def make_backbone_replacement_features(backbone_dicts_list, new_features, base_gb_record, bb_space ):
+def make_backbone_replacement_features(backbone_dicts_list, new_features, base_gb_record, bb_space):
 
     #Now we replace the features of the new plasmid with the base features.
     #We keep track of where in our new plasmid we are:
@@ -259,10 +263,18 @@ def make_backbone_replacement_features(backbone_dicts_list, new_features, base_g
                 seq_slice = base_gb_record.seq[overlap_start:overlap_end]
                 logging.debug(seq_slice)
 
+                #preparing qualifiers:
+                base_qualifiers = base_feat.qualifiers
+                logging.warning(base_qualifiers)
+                if "label" in base_qualifiers.keys():
+                    name = base_qualifiers["label"]
+                    base_qualifiers["locus_tag"] = name
+                    del base_qualifiers["label"]
+
                 #We make a new Bio Python seq feature:
                 new_location = SeqFeature.FeatureLocation(overlap_start + bb_space[i+1],overlap_end + bb_space[i+1])
 
-                new_feat_from_base_feat = SeqFeature.SeqFeature(location=new_location, type=base_feat.type, strand=base_feat.location.strand, id=base_feat.id, ref_db = base_feat.location.ref_db )
+                new_feat_from_base_feat = SeqFeature.SeqFeature(location=new_location, type=base_feat.type, strand=base_feat.location.strand, id=base_feat.id, ref_db = base_feat.location.ref_db, qualifiers=base_feat.qualifiers )
                 replace_backbone_dict = {
                         "SeqIO_feat": new_feat_from_base_feat,
                         "sequence": seq_slice,
@@ -279,7 +291,7 @@ def test():
     logging.basicConfig(level=logging.INFO)
     logging.debug("\n\n-----\nNEW TEST\n-----\n")
     new_fp = "/Users/omreeg/KBase/apps/cello/test_local/workdir/tmp/cello_output/job_1580764268958/job_1580764268958_A000_plasmid_circuit_P000.ape"
-    base_fp = "/Users/omreeg/KBase/apps/cello/test_local/workdir/tmp/KBase_derived_pAN1201.gbk_genome.gbff"
+    base_fp = "/Users/omreeg/KBase/apps/cello/lib/cello_util/plasmids/pAN1201.ape" #"/Users/omreeg/KBase/apps/cello/test_local/workdir/tmp/KBase_derived_pAN1201.gbk_genome.gbff"
     out_fp = "new_test_out.gbk"
     insertion_point = 54
     merge_plasmids(new_fp, base_fp, insertion_point, out_fp)

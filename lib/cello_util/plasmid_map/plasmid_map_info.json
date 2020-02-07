@@ -1,0 +1,56 @@
+This file is intended to be a data storage file for conversion into canvas.
+
+FOR EVERY ITEM, you have a radius:
+
+{
+    {
+    "type": "plasmid_arc_forward"
+    "center_x":
+    "center_y":
+    "radius":
+    "start_angle":
+    "end_angle":
+    "translation":
+    "color":
+    "new_line_width_bool":
+    "line_width":
+    FINAL STRING:
+    ctx.lineWidth = line_width;
+    ctx.beginPath();
+    ctx.strokeStyle = color;
+    ctx.arc(center_x, center_y, radius, start_angle, end_angle)
+    }
+    
+    
+    {
+    "type": "pointer_and_text",
+       "pointer_dict":{}
+       "text_dict": {}
+    "text":,
+    "text_x":,
+    "text_y":,
+    "new_text_font_bool":,
+    "new_text_font":,
+    "new_line_width_bool":,
+    "line_width":,
+    "line_start_x":,
+    "line_start_y":,
+    "line_end_x":,
+    "line_end_y":,
+    "new_color_bool":,
+    "line_color":
+    },
+    
+    {
+    "type": "just_text"
+    "text":
+    
+    "text_x":
+    "text_y":
+    "new_text_font_bool":
+    "text_font":
+    
+    }
+
+}
+

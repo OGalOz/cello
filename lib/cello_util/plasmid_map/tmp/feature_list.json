@@ -1,0 +1,962 @@
+[
+  {
+    "angle_end": -1.518221520782816,
+    "angle_mid": -1.5440129350528933,
+    "angle_start": -1.5698043493229705,
+    "bp_end": 53,
+    "bp_len": 52,
+    "bp_start": 1,
+    "end_percentage": 0.008367540258920114,
+    "feat_color": "#ccbdab",
+    "feat_name": [
+      "L3S3P21"
+    ],
+    "feat_pointer_direction": "out",
+    "feat_pointer_len": "short",
+    "feat_shade": "bright",
+    "feat_strand": 1,
+    "feat_type": "misc_feature",
+    "mid_percentage": 0.004262709188506473,
+    "name_opt": [
+      "locus_tag",
+      "gene",
+      "label",
+      "old_locus_tag",
+      "protein_id"
+    ],
+    "plasmid_percentage": 0.008209662140827282,
+    "point_end": [
+      513.1376472331896,
+      250.34543419921945
+    ],
+    "point_mid": [
+      506.69504741971275,
+      250.08966339895463
+    ],
+    "point_start": [
+      500.24799432730964,
+      250.000123002403
+    ],
+    "start_percentage": 0.00015787811809283233
+  },
+  {
+    "angle_end": -1.514253610895112,
+    "angle_mid": -1.515741577103001,
+    "angle_start": -1.51722954331089,
+    "bp_end": 57,
+    "bp_len": 3,
+    "bp_start": 54,
+    "end_percentage": 0.008999052731291445,
+    "feat_color": "#908733",
+    "feat_name": [
+      "Escar"
+    ],
+    "feat_pointer_direction": "in",
+    "feat_pointer_len": "medium",
+    "feat_shade": "dark",
+    "feat_strand": 1,
+    "feat_type": "scar",
+    "mid_percentage": 0.008762235554152195,
+    "name_opt": [
+      "locus_tag",
+      "gene",
+      "label",
+      "old_locus_tag",
+      "protein_id"
+    ],
+    "plasmid_percentage": 0.000473634354278497,
+    "point_end": [
+      514.1281480324874,
+      250.3995283795078
+    ],
+    "point_mid": [
+      513.7567354621273,
+      250.37878249350467
+    ],
+    "point_start": [
+      513.385292433763,
+      250.35858927961763
+    ],
+    "start_percentage": 0.008525418377012947
+  },
+  {
+    "angle_end": -1.4438232103883624,
+    "angle_mid": -1.4785424219057741,
+    "angle_start": -1.5132616334231859,
+    "bp_end": 128,
+    "bp_len": 70,
+    "bp_start": 58,
+    "end_percentage": 0.020208399115882538,
+    "feat_color": "#dcdcbf",
+    "feat_name": [
+      "pTac"
+    ],
+    "feat_pointer_direction": "in",
+    "feat_pointer_len": "long",
+    "feat_shade": "bright",
+    "feat_strand": 1,
+    "feat_type": "promoter",
+    "mid_percentage": 0.014682664982633407,
+    "name_opt": [
+      "locus_tag",
+      "gene",
+      "label",
+      "old_locus_tag",
+      "protein_id"
+    ],
+    "plasmid_percentage": 0.011051468266498263,
+    "point_end": [
+      531.6580527299088,
+      252.01256544463726
+    ],
+    "point_mid": [
+      523.0307754340819,
+      251.06309357006765
+    ],
+    "point_start": [
+      514.3757390855255,
+      250.41366598760882
+    ],
+    "start_percentage": 0.009156930849384275
+  },
+  {
+    "angle_end": -1.3654569901062046,
+    "angle_mid": -1.4041441115113205,
+    "angle_start": -1.4428312329164363,
+    "bp_end": 207,
+    "bp_len": 78,
+    "bp_start": 129,
+    "end_percentage": 0.03268077044521629,
+    "feat_color": "#539199",
+    "feat_name": [
+      "RiboJ53"
+    ],
+    "feat_pointer_direction": "in",
+    "feat_pointer_len": "medium",
+    "feat_shade": "dark",
+    "feat_strand": 1,
+    "feat_type": "ribozyme",
+    "mid_percentage": 0.026523523839595834,
+    "name_opt": [
+      "locus_tag",
+      "gene",
+      "label",
+      "old_locus_tag",
+      "protein_id"
+    ],
+    "plasmid_percentage": 0.012314493211240922,
+    "point_end": [
+      550.9748448726499,
+      255.25203741356847
+    ],
+    "point_mid": [
+      541.4704703856178,
+      253.46359277787064
+    ],
+    "point_start": [
+      531.9040350618978,
+      252.04409152680148
+    ],
+    "start_percentage": 0.020366277233975372
+  },
+  {
+    "angle_end": -1.3476013956115358,
+    "angle_mid": -1.3560332041229073,
+    "angle_start": -1.3644650126342786,
+    "bp_end": 225,
+    "bp_len": 17,
+    "bp_start": 208,
+    "end_percentage": 0.035522576570887275,
+    "feat_color": "#cafebc",
+    "feat_name": [
+      "P3"
+    ],
+    "feat_pointer_direction": "in",
+    "feat_pointer_len": "short",
+    "feat_shade": "bright",
+    "feat_strand": 1,
+    "feat_type": "rbs",
+    "mid_percentage": 0.0341806125670982,
+    "name_opt": [
+      "locus_tag",
+      "gene",
+      "label",
+      "old_locus_tag",
+      "protein_id"
+    ],
+    "plasmid_percentage": 0.00268392800757815,
+    "point_end": [
+      555.3366072928227,
+      256.20118972127875
+    ],
+    "point_mid": [
+      553.2789996899006,
+      255.74327400858832
+    ],
+    "point_start": [
+      551.2176042179043,
+      255.3027237213742
+    ],
+    "start_percentage": 0.03283864856330913
+  },
+  {
+    "angle_end": -0.7464630476243509,
+    "angle_mid": -1.0465362328819803,
+    "angle_start": -1.3466094181396098,
+    "bp_end": 831,
+    "bp_len": 605,
+    "bp_start": 226,
+    "end_percentage": 0.13119671613514367,
+    "feat_color": "#306627",
+    "feat_name": [
+      "PhlF"
+    ],
+    "feat_pointer_direction": "out",
+    "feat_pointer_len": "medium",
+    "feat_shade": "dark",
+    "feat_strand": 1,
+    "feat_type": "cds",
+    "mid_percentage": 0.0834385854120619,
+    "name_opt": [
+      "locus_tag",
+      "gene",
+      "label",
+      "old_locus_tag",
+      "protein_id"
+    ],
+    "plasmid_percentage": 0.09551626144616356,
+    "point_end": [
+      683.523802739446,
+      330.2383617301809
+    ],
+    "point_mid": [
+      625.1431522708067,
+      283.5763611808412
+    ],
+    "point_start": [
+      555.5784229544959,
+      256.2562023314415
+    ],
+    "start_percentage": 0.03568045468898011
+  },
+  {
+    "angle_end": -0.6899203317245661,
+    "angle_mid": -0.7176957009384954,
+    "angle_start": -0.7454710701524249,
+    "bp_end": 888,
+    "bp_len": 56,
+    "bp_start": 832,
+    "end_percentage": 0.14019576886643512,
+    "feat_color": "#adcbee",
+    "feat_name": [
+      "ECK120033737"
+    ],
+    "feat_pointer_direction": "out",
+    "feat_pointer_len": "long",
+    "feat_shade": "bright",
+    "feat_strand": 1,
+    "feat_type": "terminator",
+    "mid_percentage": 0.1357751815598358,
+    "name_opt": [
+      "locus_tag",
+      "gene",
+      "label",
+      "old_locus_tag",
+      "protein_id"
+    ],
+    "plasmid_percentage": 0.00884117461319861,
+    "point_end": [
+      692.8241810922619,
+      340.8810659094947
+    ],
+    "point_mid": [
+      688.3307878277755,
+      335.5873655822965
+    ],
+    "point_start": [
+      683.6921121371138,
+      330.42049670256137
+    ],
+    "start_percentage": 0.1313545942532365
+  },
+  {
+    "angle_end": -0.6859524218368619,
+    "angle_mid": -0.6874403880447509,
+    "angle_start": -0.6889283542526401,
+    "bp_end": 892,
+    "bp_len": 3,
+    "bp_start": 889,
+    "end_percentage": 0.14082728133880645,
+    "feat_color": "#350020",
+    "feat_name": [
+      "Cscar"
+    ],
+    "feat_pointer_direction": "in",
+    "feat_pointer_len": "medium",
+    "feat_shade": "dark",
+    "feat_strand": 1,
+    "feat_type": "scar",
+    "mid_percentage": 0.1405904641616672,
+    "name_opt": [
+      "locus_tag",
+      "gene",
+      "label",
+      "old_locus_tag",
+      "protein_id"
+    ],
+    "plasmid_percentage": 0.000473634354278497,
+    "point_end": [
+      693.4540310876741,
+      341.64742548373516
+    ],
+    "point_mid": [
+      693.2181937370341,
+      341.35974782862337
+    ],
+    "point_start": [
+      692.9819285929993,
+      341.07242140985574
+    ],
+    "start_percentage": 0.14035364698452796
+  },
+  {
+    "angle_end": -0.6740486921737494,
+    "angle_mid": -0.6775206133254906,
+    "angle_start": -0.6809925344772317,
+    "bp_end": 904,
+    "bp_len": 7,
+    "bp_start": 897,
+    "end_percentage": 0.14272181875592044,
+    "feat_color": "#dadffe",
+    "feat_name": [
+      "Linker\\1"
+    ],
+    "feat_pointer_direction": "in",
+    "feat_pointer_len": "short",
+    "feat_shade": "bright",
+    "feat_strand": 1,
+    "feat_type": "misc_feature",
+    "mid_percentage": 0.1421692453425955,
+    "name_opt": [
+      "locus_tag",
+      "gene",
+      "label",
+      "old_locus_tag",
+      "protein_id"
+    ],
+    "plasmid_percentage": 0.0011051468266498263,
+    "point_end": [
+      695.3252668715395,
+      343.96141463868025
+    ],
+    "point_mid": [
+      694.7823370476431,
+      343.28420253765614
+    ],
+    "point_start": [
+      694.2370592737516,
+      342.6088795240179
+    ],
+    "start_percentage": 0.1416166719292706
+  },
+  {
+    "angle_end": -0.5907225845319614,
+    "angle_mid": -0.601634336723148,
+    "angle_start": -0.6125460889143344,
+    "bp_end": 988,
+    "bp_len": 22,
+    "bp_start": 966,
+    "end_percentage": 0.15598358067571835,
+    "feat_color": "#910075",
+    "feat_name": [
+      "LacZ alpha"
+    ],
+    "feat_pointer_direction": "out",
+    "feat_pointer_len": "medium",
+    "feat_shade": "dark",
+    "feat_strand": -1,
+    "feat_type": "CDS",
+    "mid_percentage": 0.15424692137669718,
+    "name_opt": [
+      "locus_tag",
+      "gene",
+      "label",
+      "old_locus_tag",
+      "protein_id"
+    ],
+    "plasmid_percentage": 0.0034733185980423114,
+    "point_end": [
+      666.1076888673896,
+      388.6077395007423
+    ],
+    "point_mid": [
+      664.8823394263961,
+      386.80188099937936
+    ],
+    "point_start": [
+      663.6373582441868,
+      385.0095004495429
+    ],
+    "start_percentage": 0.15251026207767604
+  },
+  {
+    "angle_end": 2.4615920965844875,
+    "angle_mid": 0.9359307447622256,
+    "angle_start": -0.5897306070600354,
+    "bp_end": 4065,
+    "bp_len": 3076,
+    "bp_start": 989,
+    "end_percentage": 0.6417745500473634,
+    "feat_color": "#cddddd",
+    "feat_name": [
+      "sensor_module"
+    ],
+    "feat_pointer_direction": "out",
+    "feat_pointer_len": "long",
+    "feat_shade": "bright",
+    "feat_strand": 1,
+    "feat_type": "backbone",
+    "mid_percentage": 0.39895800442058726,
+    "name_opt": [
+      "locus_tag",
+      "gene",
+      "label",
+      "old_locus_tag",
+      "protein_id"
+    ],
+    "plasmid_percentage": 0.48563309125355225,
+    "point_end": [
+      305.6069078725608,
+      657.1983642826252
+    ],
+    "point_mid": [
+      648.2673232240807,
+      701.2878557289683
+    ],
+    "point_start": [
+      707.7726321695626,
+      360.96571170631455
+    ],
+    "start_percentage": 0.15614145879381117
+  },
+  {
+    "angle_end": 2.507223060293086,
+    "angle_mid": 2.48490356717475,
+    "angle_start": 2.462584074056413,
+    "bp_end": 4111,
+    "bp_len": 45,
+    "bp_start": 4066,
+    "end_percentage": 0.6490369434796337,
+    "feat_color": "#292360",
+    "feat_name": [
+      "LacZ alpha"
+    ],
+    "feat_pointer_direction": "out",
+    "feat_pointer_len": "medium",
+    "feat_shade": "dark",
+    "feat_strand": -1,
+    "feat_type": "CDS",
+    "mid_percentage": 0.645484685822545,
+    "name_opt": [
+      "locus_tag",
+      "gene",
+      "label",
+      "old_locus_tag",
+      "protein_id"
+    ],
+    "plasmid_percentage": 0.007104515314177455,
+    "point_end": [
+      338.9109040885661,
+      618.5339747854464
+    ],
+    "point_mid": [
+      341.5964250598628,
+      622.0995800409827
+    ],
+    "point_start": [
+      344.3608530443304,
+      625.6043627224448
+    ],
+    "start_percentage": 0.6419324281654563
+  },
+  {
+    "angle_end": 2.5945170778225775,
+    "angle_mid": 2.586085269311207,
+    "angle_start": 2.5776534607998354,
+    "bp_end": 4199,
+    "bp_len": 17,
+    "bp_start": 4182,
+    "end_percentage": 0.662930217871803,
+    "feat_color": "#dbddec",
+    "feat_name": [
+      "M13-fwd"
+    ],
+    "feat_pointer_direction": "out",
+    "feat_pointer_len": "short",
+    "feat_shade": "bright",
+    "feat_strand": 1,
+    "feat_type": "primer_bind",
+    "mid_percentage": 0.6615882538680139,
+    "name_opt": [
+      "locus_tag",
+      "gene",
+      "label",
+      "old_locus_tag",
+      "protein_id"
+    ],
+    "plasmid_percentage": 0.00268392800757815,
+    "point_end": [
+      286.4876416056652,
+      630.0479635091959
+    ],
+    "point_mid": [
+      287.59175796590034,
+      631.8436146196825
+    ],
+    "point_start": [
+      288.7109754844871,
+      633.6298923118737
+    ],
+    "start_percentage": 0.6602462898642248
+  },
+  {
+    "angle_end": 2.679827140408217,
+    "angle_mid": 2.6699073656889576,
+    "angle_start": 2.6599875909696964,
+    "bp_end": 4285,
+    "bp_len": 20,
+    "bp_start": 4265,
+    "end_percentage": 0.6765077360277865,
+    "feat_color": "#123715",
+    "feat_name": [
+      "M13-rev"
+    ],
+    "feat_pointer_direction": "out",
+    "feat_pointer_len": "medium",
+    "feat_shade": "dark",
+    "feat_strand": -1,
+    "feat_type": "primer_bind",
+    "mid_percentage": 0.6749289548468582,
+    "name_opt": [
+      "locus_tag",
+      "gene",
+      "label",
+      "old_locus_tag",
+      "protein_id"
+    ],
+    "plasmid_percentage": 0.0031575623618566467,
+    "point_end": [
+      320.94653896320216,
+      589.1058813476636
+    ],
+    "point_mid": [
+      321.83924426686326,
+      590.8776381548156
+    ],
+    "point_start": [
+      322.7494807890651,
+      592.6404525002658
+    ],
+    "start_percentage": 0.6733501736659299
+  },
+  {
+    "angle_end": 2.7076025096221477,
+    "angle_mid": 2.696690757430961,
+    "angle_start": 2.685779005239774,
+    "bp_end": 4313,
+    "bp_len": 22,
+    "bp_start": 4291,
+    "end_percentage": 0.6809283233343859,
+    "feat_color": "#ecddfc",
+    "feat_name": [
+      "LacO"
+    ],
+    "feat_pointer_direction": "in",
+    "feat_pointer_len": "long",
+    "feat_shade": "bright",
+    "feat_strand": -1,
+    "feat_type": "misc_binding",
+    "mid_percentage": 0.6791916640353647,
+    "name_opt": [
+      "locus_tag",
+      "gene",
+      "label",
+      "old_locus_tag",
+      "protein_id"
+    ],
+    "plasmid_percentage": 0.0034733185980423114,
+    "point_end": [
+      318.5409712708497,
+      584.0988756920888
+    ],
+    "point_mid": [
+      319.4694218751888,
+      586.073865731251
+    ],
+    "point_start": [
+      320.41936738070194,
+      588.0386073722927
+    ],
+    "start_percentage": 0.6774550047363436
+  },
+  {
+    "angle_end": 2.717522284341408,
+    "angle_mid": 2.7150423406615927,
+    "angle_start": 2.7125623969817774,
+    "bp_end": 4323,
+    "bp_len": 5,
+    "bp_start": 4318,
+    "end_percentage": 0.6825071045153142,
+    "feat_color": "#133214",
+    "feat_name": [
+      "pLac\\-10\\box"
+    ],
+    "feat_pointer_direction": "in",
+    "feat_pointer_len": "medium",
+    "feat_shade": "dark",
+    "feat_strand": -1,
+    "feat_type": "misc_feature",
+    "mid_percentage": 0.6821124092200821,
+    "name_opt": [
+      "locus_tag",
+      "gene",
+      "label",
+      "old_locus_tag",
+      "protein_id"
+    ],
+    "plasmid_percentage": 0.0007893905904641617,
+    "point_end": [
+      317.71567093776395,
+      582.2947348153601
+    ],
+    "point_mid": [
+      317.9203175710802,
+      582.7465361606377
+    ],
+    "point_start": [
+      318.1260840158384,
+      583.1978286049949
+    ],
+    "start_percentage": 0.68171771392485
+  },
+  {
+    "angle_end": 2.7413297436676327,
+    "angle_mid": 2.7388497999878174,
+    "angle_start": 2.736369856308003,
+    "bp_end": 4347,
+    "bp_len": 5,
+    "bp_start": 4342,
+    "end_percentage": 0.6862961793495421,
+    "feat_color": "#fddfde",
+    "feat_name": [
+      "pLac\\-35\\box"
+    ],
+    "feat_pointer_direction": "in",
+    "feat_pointer_len": "short",
+    "feat_shade": "bright",
+    "feat_strand": -1,
+    "feat_type": "misc_feature",
+    "mid_percentage": 0.6859014840543101,
+    "name_opt": [
+      "locus_tag",
+      "gene",
+      "label",
+      "old_locus_tag",
+      "protein_id"
+    ],
+    "plasmid_percentage": 0.0007893905904641617,
+    "point_end": [
+      315.80828395492335,
+      577.9320969842969
+    ],
+    "point_mid": [
+      316.00211736854,
+      578.3886419523866
+    ],
+    "point_start": [
+      316.19708239075504,
+      578.8447048211173
+    ],
+    "start_percentage": 0.685506788759078
+  },
+  {
+    "angle_end": 2.774065000241192,
+    "angle_mid": 2.7671211579377104,
+    "angle_start": 2.7601773156342277,
+    "bp_end": 4380,
+    "bp_len": 14,
+    "bp_start": 4366,
+    "end_percentage": 0.6915061572466056,
+    "feat_color": "#894386",
+    "feat_name": [
+      "CAP\\site"
+    ],
+    "feat_pointer_direction": "in",
+    "feat_pointer_len": "medium",
+    "feat_shade": "dark",
+    "feat_strand": -1,
+    "feat_type": "misc_feature",
+    "mid_percentage": 0.6904010104199558,
+    "name_opt": [
+      "locus_tag",
+      "gene",
+      "label",
+      "old_locus_tag",
+      "protein_id"
+    ],
+    "plasmid_percentage": 0.0022102936532996525,
+    "point_end": [
+      313.35629320510077,
+      571.8618585472133
+    ],
+    "point_mid": [
+      313.85978628515534,
+      573.1561401263896
+    ],
+    "point_start": [
+      314.3722544417684,
+      574.4468943540859
+    ],
+    "start_percentage": 0.689295863593306
+  },
+  {
+    "angle_end": 2.786960707376231,
+    "angle_mid": 2.786960707376231,
+    "angle_start": 2.786960707376231,
+    "bp_end": 4393,
+    "bp_len": 0,
+    "bp_start": 4393,
+    "end_percentage": 0.6935585727818124,
+    "feat_color": "#ffeaad",
+    "feat_name": [
+      "Center\\LacO3"
+    ],
+    "feat_pointer_direction": "in",
+    "feat_pointer_len": "long",
+    "feat_shade": "bright",
+    "feat_strand": -1,
+    "feat_type": "misc_feature",
+    "mid_percentage": 0.6935585727818124,
+    "name_opt": [
+      "locus_tag",
+      "gene",
+      "label",
+      "old_locus_tag",
+      "protein_id"
+    ],
+    "plasmid_percentage": 0.0,
+    "point_end": [
+      312.44512854839274,
+      569.4490474720213
+    ],
+    "point_mid": [
+      312.44512854839274,
+      569.4490474720213
+    ],
+    "point_start": [
+      312.44512854839274,
+      569.4490474720213
+    ],
+    "start_percentage": 0.6935585727818124
+  },
+  {
+    "angle_end": 2.7968804820954913,
+    "angle_mid": 2.7934085609437505,
+    "angle_start": 2.7899366397920096,
+    "bp_end": 4403,
+    "bp_len": 7,
+    "bp_start": 4396,
+    "end_percentage": 0.6951373539627408,
+    "feat_color": "#516534",
+    "feat_name": [
+      "LacI"
+    ],
+    "feat_pointer_direction": "in",
+    "feat_pointer_len": "medium",
+    "feat_shade": "dark",
+    "feat_strand": -1,
+    "feat_type": "misc_feature",
+    "mid_percentage": 0.6945847805494159,
+    "name_opt": [
+      "locus_tag",
+      "gene",
+      "label",
+      "old_locus_tag",
+      "protein_id"
+    ],
+    "plasmid_percentage": 0.0011051468266498263,
+    "point_end": [
+      311.7654487464803,
+      567.5851589802529
+    ],
+    "point_mid": [
+      312.0012331288241,
+      568.2382858439253
+    ],
+    "point_start": [
+      312.239283690486,
+      568.8905901479891
+    ],
+    "start_percentage": 0.6940322071360909
+  },
+  {
+    "angle_end": 2.8643349501864632,
+    "angle_mid": 2.8608630290347223,
+    "angle_start": 2.8573911078829806,
+    "bp_end": 4471,
+    "bp_len": 7,
+    "bp_start": 4464,
+    "end_percentage": 0.7058730659930534,
+    "feat_color": "#daddbe",
+    "feat_name": [
+      "Linker\\2"
+    ],
+    "feat_pointer_direction": "out",
+    "feat_pointer_len": "short",
+    "feat_shade": "bright",
+    "feat_strand": 1,
+    "feat_type": "misc_feature",
+    "mid_percentage": 0.7053204925797285,
+    "name_opt": [
+      "locus_tag",
+      "gene",
+      "label",
+      "old_locus_tag",
+      "protein_id"
+    ],
+    "plasmid_percentage": 0.0011051468266498263,
+    "point_end": [
+      259.54758178558654,
+      568.4297784216842
+    ],
+    "point_mid": [
+      259.78661333708516,
+      569.2641961473095
+    ],
+    "point_start": [
+      260.0285404746446,
+      570.0977789467735
+    ],
+    "start_percentage": 0.7047679191664036
+  },
+  {
+    "angle_end": 2.8683028600741673,
+    "angle_mid": 2.8668148938662785,
+    "angle_start": 2.865326927658389,
+    "bp_end": 4475,
+    "bp_len": 3,
+    "bp_start": 4472,
+    "end_percentage": 0.7065045784654247,
+    "feat_color": "#237670",
+    "feat_name": [
+      "cc"
+    ],
+    "feat_pointer_direction": "in",
+    "feat_pointer_len": "medium",
+    "feat_shade": "dark",
+    "feat_strand": 1,
+    "feat_type": "misc_feature",
+    "mid_percentage": 0.7062677612882855,
+    "name_opt": [
+      "locus_tag",
+      "gene",
+      "label",
+      "old_locus_tag",
+      "protein_id"
+    ],
+    "plasmid_percentage": 0.000473634354278497,
+    "point_end": [
+      259.27795217975176,
+      567.4751487084403
+    ],
+    "point_mid": [
+      259.3786193683394,
+      567.833260152476
+    ],
+    "point_start": [
+      259.47981930301705,
+      568.1912214107554
+    ],
+    "start_percentage": 0.7060309441111462
+  },
+  {
+    "angle_end": 3.176807853843168,
+    "angle_mid": 3.176807853843168,
+    "angle_start": 3.176807853843168,
+    "bp_end": 4786,
+    "bp_len": 0,
+    "bp_start": 4786,
+    "end_percentage": 0.7556046731922955,
+    "feat_color": "#faefee",
+    "feat_name": [
+      "origin"
+    ],
+    "feat_pointer_direction": "out",
+    "feat_pointer_len": "long",
+    "feat_shade": "bright",
+    "feat_strand": -1,
+    "feat_type": "rep_origin",
+    "mid_percentage": 0.7556046731922955,
+    "name_opt": [
+      "locus_tag",
+      "gene",
+      "label",
+      "old_locus_tag",
+      "protein_id"
+    ],
+    "plasmid_percentage": 0.0,
+    "point_end": [
+      300.1239982178047,
+      492.9584155501858
+    ],
+    "point_mid": [
+      300.1239982178047,
+      492.9584155501858
+    ],
+    "point_start": [
+      300.1239982178047,
+      492.9584155501858
+    ],
+    "start_percentage": 0.7556046731922955
+  },
+  {
+    "angle_end": 4.614183210664011,
+    "angle_mid": 4.209952390854147,
+    "angle_start": 3.805721571044282,
+    "bp_end": 6235,
+    "bp_len": 815,
+    "bp_start": 5420,
+    "end_percentage": 0.9843700663088096,
+    "feat_color": "#026180",
+    "feat_name": [
+      "Kanamycin\\phosphotransferase"
+    ],
+    "feat_pointer_direction": "out",
+    "feat_pointer_len": "medium",
+    "feat_shade": "dark",
+    "feat_strand": -1,
+    "feat_type": "CDS",
+    "mid_percentage": 0.9200347331859804,
+    "name_opt": [
+      "locus_tag",
+      "gene",
+      "label",
+      "old_locus_tag",
+      "protein_id"
+    ],
+    "plasmid_percentage": 0.12867066624565834,
+    "point_end": [
+      480.390401938325,
+      300.9636624536626
+    ],
+    "point_mid": [
+      403.6875156391236,
+      324.71764105810325
+    ],
+    "point_start": [
+      342.5092008099417,
+      376.72531415381036
+    ],
+    "start_percentage": 0.8556994000631513
+  }
+]

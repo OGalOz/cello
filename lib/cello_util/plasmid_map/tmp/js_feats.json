@@ -1,0 +1,1118 @@
+[
+  {
+    "arc_angle": 0.0515828285401545,
+    "arc_end": -1.518221520782816,
+    "arc_start": -1.5698043493229705,
+    "center_x": 500,
+    "center_y": 500,
+    "internal_color": "#ccbdab",
+    "line_width": 8,
+    "radius": 250,
+    "type": "plasmid_arc_forward"
+  },
+  {
+    "pointer": {
+      "end_point": [
+        506.69504741971275,
+        250.08966339895463
+      ],
+      "line_color": "black",
+      "line_width": 1,
+      "new_line_width_bool": false,
+      "start_point": [
+        508.56966069723234,
+        180.1147691506619
+      ],
+      "type": "pointer"
+    },
+    "text": {
+      "new_text_font_bool": false,
+      "text_font": "9pt Calibri",
+      "text_point": [
+        1017.2732223428588,
+        355.23133156930294
+      ],
+      "text_str": "L3S3P21 (52)",
+      "type": "text"
+    },
+    "type": "pointer_and_text"
+  },
+  {
+    "arc_angle": 0.002975932415778093,
+    "arc_end": -1.514253610895112,
+    "arc_start": -1.51722954331089,
+    "center_x": 500,
+    "center_y": 500,
+    "internal_color": "#908733",
+    "line_width": 8,
+    "radius": 250,
+    "type": "plasmid_arc_forward"
+  },
+  {
+    "pointer": {
+      "end_point": [
+        513.7567354621273,
+        250.37878249350467
+      ],
+      "line_color": "black",
+      "line_width": 1,
+      "new_line_width_bool": false,
+      "start_point": [
+        508.5291759865189,
+        345.23484514597294
+      ],
+      "type": "pointer"
+    },
+    "text": {
+      "new_text_font_bool": false,
+      "text_font": "9pt Calibri",
+      "text_point": [
+        1016.7832172637952,
+        695.4621146420758
+      ],
+      "text_str": "Escar (3)",
+      "type": "text"
+    },
+    "type": "pointer_and_text"
+  },
+  {
+    "arc_angle": 0.0694384230348235,
+    "arc_end": -1.4438232103883624,
+    "arc_start": -1.5132616334231859,
+    "center_x": 500,
+    "center_y": 500,
+    "internal_color": "#dcdcbf",
+    "line_width": 8,
+    "radius": 250,
+    "type": "plasmid_arc_forward"
+  },
+  {
+    "pointer": {
+      "end_point": [
+        523.0307754340819,
+        251.06309357006765
+      ],
+      "line_color": "black",
+      "line_width": 1,
+      "new_line_width_bool": false,
+      "start_point": [
+        511.9760032257226,
+        370.5528086564352
+      ],
+      "type": "pointer"
+    },
+    "text": {
+      "new_text_font_bool": false,
+      "text_font": "9pt Calibri",
+      "text_point": [
+        1023.4913909427635,
+        746.0843554414691
+      ],
+      "text_str": "pTac (70)",
+      "type": "text"
+    },
+    "type": "pointer_and_text"
+  },
+  {
+    "arc_begin_point": [
+      519.267651084063,
+      230.68836337487605
+    ],
+    "arc_end_angle": -1.4438232103883626,
+    "arc_end_point": [
+      534.1906969483015,
+      232.17357068020823
+    ],
+    "arc_start_angle": -1.4993739488162212,
+    "big_radius": 270.0,
+    "color": "black",
+    "flags_end": [
+      534.1906969483015,
+      232.17357068020823
+    ],
+    "inner_flag_start": [
+      -7.399244036294934,
+      -6.726900303360668
+    ],
+    "line_width": 3,
+    "outer_flag_start": [
+      -8.851909081625701,
+      4.652279614407589
+    ],
+    "p_line_coordinate_start": [
+      517.8404176704287,
+      250.6373734952556
+    ],
+    "type": "promoter"
+  },
+  {
+    "arc_angle": 0.07737424281023175,
+    "arc_end": -1.3654569901062046,
+    "arc_start": -1.4428312329164363,
+    "center_x": 500,
+    "center_y": 500,
+    "internal_color": "#539199",
+    "line_width": 8,
+    "radius": 250,
+    "type": "plasmid_arc_forward"
+  },
+  {
+    "pointer": {
+      "end_point": [
+        541.4704703856178,
+        253.46359277787064
+      ],
+      "line_color": "black",
+      "line_width": 1,
+      "new_line_width_bool": false,
+      "start_point": [
+        525.711691639083,
+        347.1474275222798
+      ],
+      "type": "pointer"
+    },
+    "text": {
+      "new_text_font_bool": false,
+      "text_font": "9pt Calibri",
+      "text_point": [
+        1050.5939738704537,
+        699.2255831890022
+      ],
+      "text_str": "RiboJ53 (78)",
+      "type": "text"
+    },
+    "type": "pointer_and_text"
+  },
+  {
+    "arc_angle": 0.01686361702274275,
+    "arc_end": -1.3476013956115358,
+    "arc_start": -1.3644650126342786,
+    "center_x": 500,
+    "center_y": 500,
+    "internal_color": "#cafebc",
+    "line_width": 8,
+    "radius": 250,
+    "type": "plasmid_arc_forward"
+  },
+  {
+    "pointer": {
+      "end_point": [
+        553.2789996899006,
+        255.74327400858832
+      ],
+      "line_color": "black",
+      "line_width": 1,
+      "new_line_width_bool": false,
+      "start_point": [
+        538.3608797767284,
+        324.1351572861836
+      ],
+      "type": "pointer"
+    },
+    "text": {
+      "new_text_font_bool": false,
+      "text_font": "9pt Calibri",
+      "text_point": [
+        1075.656179559659,
+        653.1554490921953
+      ],
+      "text_str": "P3 (17)",
+      "type": "text"
+    },
+    "type": "pointer_and_text"
+  },
+  {
+    "border_color": "black",
+    "border_width": 1,
+    "circle_center": [
+      554.131463684939,
+      251.83516639272574
+    ],
+    "end_angle": -2.9268295309178036,
+    "internal_color": "#bb99ff",
+    "start_angle": 0.21476312267198927,
+    "type": "rbs"
+  },
+  {
+    "arc_angle": 0.6001463705152589,
+    "arc_end": -0.7464630476243509,
+    "arc_start": -1.3466094181396098,
+    "center_x": 500,
+    "center_y": 500,
+    "internal_color": "#306627",
+    "line_width": 8,
+    "radius": 250,
+    "type": "plasmid_arc_forward"
+  },
+  {
+    "pointer": {
+      "end_point": [
+        625.1431522708067,
+        283.5763611808412
+      ],
+      "line_color": "black",
+      "line_width": 1,
+      "new_line_width_bool": false,
+      "start_point": [
+        672.6975501337132,
+        201.33537842956088
+      ],
+      "type": "pointer"
+    },
+    "text": {
+      "new_text_font_bool": false,
+      "text_font": "9pt Calibri",
+      "text_point": [
+        1347.8979633128424,
+        398.3422840827386
+      ],
+      "text_str": "PhlF (605)",
+      "type": "text"
+    },
+    "type": "pointer_and_text"
+  },
+  {
+    "a": [
+      675.7795108462559,
+      316.64906990513794
+    ],
+    "b": [
+      684.084054665764,
+      307.98682123923896
+    ],
+    "c": [
+      686.4601835832771,
+      327.5221755178638
+    ],
+    "d": [
+      670.2431482999172,
+      322.42390234907054
+    ],
+    "e": [
+      661.938604480409,
+      331.0861510149695
+    ],
+    "f": [
+      680.5874218956149,
+      332.954547942498
+    ],
+    "internal_color": "#306627",
+    "type": "cds"
+  },
+  {
+    "arc_angle": 0.05555073842785874,
+    "arc_end": -0.6899203317245661,
+    "arc_start": -0.7454710701524249,
+    "center_x": 500,
+    "center_y": 500,
+    "internal_color": "#adcbee",
+    "line_width": 8,
+    "radius": 250,
+    "type": "plasmid_arc_forward"
+  },
+  {
+    "pointer": {
+      "end_point": [
+        688.3307878277755,
+        335.5873655822965
+      ],
+      "line_color": "black",
+      "line_width": 1,
+      "new_line_width_bool": false,
+      "start_point": [
+        778.7295659851077,
+        256.6693010617988
+      ],
+      "type": "pointer"
+    },
+    "text": {
+      "new_text_font_bool": false,
+      "text_font": "9pt Calibri",
+      "text_point": [
+        1561.2257477267708,
+        510.05034943524356
+      ],
+      "text_str": "ECK120033737 (56)",
+      "type": "text"
+    },
+    "type": "pointer_and_text"
+  },
+  {
+    "armpit_1": [
+      701.6992593240946,
+      326.5716032821856
+    ],
+    "armpit_2": [
+      699.0686571734113,
+      323.55831067694123
+    ],
+    "back_hand_1": [
+      707.3431540800223,
+      326.95429373674676
+    ],
+    "back_hand_2": [
+      699.4513476279724,
+      317.91441592101353
+    ],
+    "base_1": [
+      689.646088903117,
+      337.09401188491864
+    ],
+    "base_2": [
+      687.0154867524337,
+      334.08071927967427
+    ],
+    "border_color": "black",
+    "internal_color": "#EA6062",
+    "palm_hand_1": [
+      704.3298614747779,
+      329.58489588743004
+    ],
+    "palm_hand_2": [
+      696.438055022728,
+      320.5450180716968
+    ],
+    "type": "terminator"
+  },
+  {
+    "arc_angle": 0.002975932415778204,
+    "arc_end": -0.6859524218368619,
+    "arc_start": -0.6889283542526401,
+    "center_x": 500,
+    "center_y": 500,
+    "internal_color": "#350020",
+    "line_width": 8,
+    "radius": 250,
+    "type": "plasmid_arc_forward"
+  },
+  {
+    "pointer": {
+      "end_point": [
+        693.2181937370341,
+        341.35974782862337
+      ],
+      "line_color": "black",
+      "line_width": 1,
+      "new_line_width_bool": false,
+      "start_point": [
+        619.7952801169611,
+        401.6430436537465
+      ],
+      "type": "pointer"
+    },
+    "text": {
+      "new_text_font_bool": false,
+      "text_font": "9pt Calibri",
+      "text_point": [
+        1235.7261963591814,
+        806.4588923509205
+      ],
+      "text_str": "Cscar (3)",
+      "type": "text"
+    },
+    "type": "pointer_and_text"
+  },
+  {
+    "arc_angle": 0.006943842303482328,
+    "arc_end": -0.6740486921737494,
+    "arc_start": -0.6809925344772317,
+    "center_x": 500,
+    "center_y": 500,
+    "internal_color": "#dadffe",
+    "line_width": 8,
+    "radius": 250,
+    "type": "plasmid_arc_forward"
+  },
+  {
+    "pointer": {
+      "end_point": [
+        694.7823370476431,
+        343.28420253765614
+      ],
+      "line_color": "black",
+      "line_width": 1,
+      "new_line_width_bool": false,
+      "start_point": [
+        640.243282674303,
+        387.16462582711245
+      ],
+      "type": "pointer"
+    },
+    "text": {
+      "new_text_font_bool": false,
+      "text_font": "9pt Calibri",
+      "text_point": [
+        1276.5909186076533,
+        777.4635676034718
+      ],
+      "text_str": "Linker\\1 (7)",
+      "type": "text"
+    },
+    "type": "pointer_and_text"
+  },
+  {
+    "arc_angle": 0.021823504382373016,
+    "arc_end": -0.5907225845319614,
+    "arc_start": -0.6125460889143344,
+    "center_x": 500,
+    "center_y": 500,
+    "internal_color": "#910075",
+    "line_width": 8,
+    "radius": 200,
+    "type": "plasmid_arc_reverse"
+  },
+  {
+    "pointer": {
+      "end_point": [
+        664.8823394263961,
+        386.80188099937936
+      ],
+      "line_color": "black",
+      "line_width": 1,
+      "new_line_width_bool": false,
+      "start_point": [
+        743.2014506539343,
+        333.03277447408453
+      ],
+      "type": "pointer"
+    },
+    "text": {
+      "new_text_font_bool": false,
+      "text_font": "9pt Calibri",
+      "text_point": [
+        1490.5249597935285,
+        663.2355959731535
+      ],
+      "text_str": "LacZ alpha (22)",
+      "type": "text"
+    },
+    "type": "pointer_and_text"
+  },
+  {
+    "a": [
+      669.181480486423,
+      386.01040985939954
+    ],
+    "b": [
+      679.1333322797419,
+      379.30513985112896
+    ],
+    "c": [
+      669.4298426447374,
+      386.37989429075714
+    ],
+    "d": [
+      662.5469126242103,
+      390.48058986491327
+    ],
+    "e": [
+      652.5950608308914,
+      397.1858598731839
+    ],
+    "f": [
+      662.7855350900418,
+      390.83558471072746
+    ],
+    "internal_color": "#910075",
+    "type": "cds"
+  },
+  {
+    "arc_angle": 3.051322703644523,
+    "arc_end": 2.4615920965844875,
+    "arc_start": -0.5897306070600354,
+    "center_x": 500,
+    "center_y": 500,
+    "internal_color": "#cddddd",
+    "line_width": 8,
+    "radius": 250,
+    "type": "plasmid_arc_forward"
+  },
+  {
+    "pointer": {
+      "end_point": [
+        648.2673232240807,
+        701.2878557289683
+      ],
+      "line_color": "black",
+      "line_width": 1,
+      "new_line_width_bool": false,
+      "start_point": [
+        719.4356383716394,
+        797.9060264788732
+      ],
+      "type": "pointer"
+    },
+    "text": {
+      "new_text_font_bool": false,
+      "text_font": "9pt Calibri",
+      "text_point": [
+        1441.8366232077603,
+        1599.8378100723257
+      ],
+      "text_str": "sensor_module (3076)",
+      "type": "text"
+    },
+    "type": "pointer_and_text"
+  },
+  {
+    "arc_angle": 0.04463898623667273,
+    "arc_end": 2.507223060293086,
+    "arc_start": 2.462584074056413,
+    "center_x": 500,
+    "center_y": 500,
+    "internal_color": "#292360",
+    "line_width": 8,
+    "radius": 200,
+    "type": "plasmid_arc_reverse"
+  },
+  {
+    "pointer": {
+      "end_point": [
+        341.5964250598628,
+        622.0995800409827
+      ],
+      "line_color": "black",
+      "line_width": 1,
+      "new_line_width_bool": false,
+      "start_point": [
+        416.83812315642797,
+        564.1022795215159
+      ],
+      "type": "pointer"
+    },
+    "text": {
+      "new_text_font_bool": false,
+      "text_font": "9pt Calibri",
+      "text_point": [
+        837.6363356863594,
+        1125.1520695420072
+      ],
+      "text_str": "LacZ alpha (45)",
+      "type": "text"
+    },
+    "type": "pointer_and_text"
+  },
+  {
+    "a": [
+      336.23046355645454,
+      621.6369143519609
+    ],
+    "b": [
+      326.59696141271655,
+      628.7920269608998
+    ],
+    "c": [
+      335.68912217033744,
+      620.9046542811553
+    ],
+    "d": [
+      342.6527983189465,
+      616.8668392793348
+    ],
+    "e": [
+      352.2863004626844,
+      609.7117266703958
+    ],
+    "f": [
+      342.13268600679476,
+      616.1632952897374
+    ],
+    "internal_color": "#292360",
+    "type": "cds"
+  },
+  {
+    "arc_angle": 0.016863617022742083,
+    "arc_end": 2.5945170778225775,
+    "arc_start": 2.5776534607998354,
+    "center_x": 500,
+    "center_y": 500,
+    "internal_color": "#dbddec",
+    "line_width": 8,
+    "radius": 250,
+    "type": "plasmid_arc_forward"
+  },
+  {
+    "pointer": {
+      "end_point": [
+        287.59175796590034,
+        631.8436146196825
+      ],
+      "line_color": "black",
+      "line_width": 1,
+      "new_line_width_bool": false,
+      "start_point": [
+        347.0660657354482,
+        594.9274025261714
+      ],
+      "type": "pointer"
+    },
+    "text": {
+      "new_text_font_bool": false,
+      "text_font": "9pt Calibri",
+      "text_point": [
+        698.3802963115784,
+        1187.2179327599492
+      ],
+      "text_str": "M13-fwd (17)",
+      "type": "text"
+    },
+    "type": "pointer_and_text"
+  },
+  {
+    "arc_angle": 0.01983954943852062,
+    "arc_end": 2.679827140408217,
+    "arc_start": 2.6599875909696964,
+    "center_x": 500,
+    "center_y": 500,
+    "internal_color": "#123715",
+    "line_width": 8,
+    "radius": 200,
+    "type": "plasmid_arc_reverse"
+  },
+  {
+    "pointer": {
+      "end_point": [
+        321.83924426686326,
+        590.8776381548156
+      ],
+      "line_color": "black",
+      "line_width": 1,
+      "new_line_width_bool": false,
+      "start_point": [
+        406.4656032401032,
+        547.7107600312783
+      ],
+      "type": "pointer"
+    },
+    "text": {
+      "new_text_font_bool": false,
+      "text_font": "9pt Calibri",
+      "text_point": [
+        817.3852253735347,
+        1093.149579108686
+      ],
+      "text_str": "M13-rev (20)",
+      "type": "text"
+    },
+    "type": "pointer_and_text"
+  },
+  {
+    "arc_angle": 0.02182350438237357,
+    "arc_end": 2.7076025096221477,
+    "arc_start": 2.685779005239774,
+    "center_x": 500,
+    "center_y": 500,
+    "internal_color": "#ecddfc",
+    "line_width": 8,
+    "radius": 200,
+    "type": "plasmid_arc_reverse"
+  },
+  {
+    "pointer": {
+      "end_point": [
+        319.4694218751888,
+        586.073865731251
+      ],
+      "line_color": "black",
+      "line_width": 1,
+      "new_line_width_bool": false,
+      "start_point": [
+        211.15107500030206,
+        637.7181851700016
+      ],
+      "type": "pointer"
+    },
+    "text": {
+      "new_text_font_bool": false,
+      "text_font": "9pt Calibri",
+      "text_point": [
+        417.7888855474838,
+        1277.5882169832844
+      ],
+      "text_str": "LacO (22)",
+      "type": "text"
+    },
+    "type": "pointer_and_text"
+  },
+  {
+    "arc_angle": 0.004959887359630599,
+    "arc_end": 2.717522284341408,
+    "arc_start": 2.7125623969817774,
+    "center_x": 500,
+    "center_y": 500,
+    "internal_color": "#133214",
+    "line_width": 8,
+    "radius": 200,
+    "type": "plasmid_arc_reverse"
+  },
+  {
+    "pointer": {
+      "end_point": [
+        317.9203175710802,
+        582.7465361606377
+      ],
+      "line_color": "black",
+      "line_width": 1,
+      "new_line_width_bool": false,
+      "start_point": [
+        231.4324684173433,
+        622.0511408369406
+      ],
+      "type": "pointer"
+    },
+    "text": {
+      "new_text_font_bool": false,
+      "text_font": "9pt Calibri",
+      "text_point": [
+        458.31294477396364,
+        1246.1709450778972
+      ],
+      "text_str": "pLac\\-10\\box (5)",
+      "type": "text"
+    },
+    "type": "pointer_and_text"
+  },
+  {
+    "arc_angle": 0.004959887359629711,
+    "arc_end": 2.7413297436676327,
+    "arc_start": 2.736369856308003,
+    "center_x": 500,
+    "center_y": 500,
+    "internal_color": "#fddfde",
+    "line_width": 8,
+    "radius": 200,
+    "type": "plasmid_arc_reverse"
+  },
+  {
+    "pointer": {
+      "end_point": [
+        316.00211736854,
+        578.3886419523866
+      ],
+      "line_color": "black",
+      "line_width": 1,
+      "new_line_width_bool": false,
+      "start_point": [
+        251.60285844752897,
+        605.8246666357219
+      ],
+      "type": "pointer"
+    },
+    "text": {
+      "new_text_font_bool": false,
+      "text_font": "9pt Calibri",
+      "text_point": [
+        498.6057698292715,
+        1213.6090493202535
+      ],
+      "text_str": "pLac\\-35\\box (5)",
+      "type": "text"
+    },
+    "type": "pointer_and_text"
+  },
+  {
+    "arc_angle": 0.013887684606964434,
+    "arc_end": 2.774065000241192,
+    "arc_start": 2.7601773156342277,
+    "center_x": 500,
+    "center_y": 500,
+    "internal_color": "#894386",
+    "line_width": 8,
+    "radius": 200,
+    "type": "plasmid_arc_reverse"
+  },
+  {
+    "pointer": {
+      "end_point": [
+        313.85978628515534,
+        573.1561401263896
+      ],
+      "line_color": "black",
+      "line_width": 1,
+      "new_line_width_bool": false,
+      "start_point": [
+        225.44318477060412,
+        607.9053066864246
+      ],
+      "type": "pointer"
+    },
+    "text": {
+      "new_text_font_bool": false,
+      "text_font": "9pt Calibri",
+      "text_point": [
+        446.2328641983371,
+        1217.639516876009
+      ],
+      "text_str": "CAP\\site (14)",
+      "type": "text"
+    },
+    "type": "pointer_and_text"
+  },
+  {
+    "arc_angle": 0.0,
+    "arc_end": 2.786960707376231,
+    "arc_start": 2.786960707376231,
+    "center_x": 500,
+    "center_y": 500,
+    "internal_color": "#ffeaad",
+    "line_width": 8,
+    "radius": 200,
+    "type": "plasmid_arc_reverse"
+  },
+  {
+    "pointer": {
+      "end_point": [
+        312.44512854839274,
+        569.4490474720213
+      ],
+      "line_color": "black",
+      "line_width": 1,
+      "new_line_width_bool": false,
+      "start_point": [
+        199.91220567742837,
+        611.1184759552341
+      ],
+      "type": "pointer"
+    },
+    "text": {
+      "new_text_font_bool": false,
+      "text_font": "9pt Calibri",
+      "text_point": [
+        395.13553956856657,
+        1223.9731780972688
+      ],
+      "text_str": "Center\\LacO3 (0)",
+      "type": "text"
+    },
+    "type": "pointer_and_text"
+  },
+  {
+    "arc_angle": 0.006943842303481773,
+    "arc_end": 2.7968804820954913,
+    "arc_start": 2.7899366397920096,
+    "center_x": 500,
+    "center_y": 500,
+    "internal_color": "#516534",
+    "line_width": 8,
+    "radius": 200,
+    "type": "plasmid_arc_reverse"
+  },
+  {
+    "pointer": {
+      "end_point": [
+        312.0012331288241,
+        568.2382858439253
+      ],
+      "line_color": "black",
+      "line_width": 1,
+      "new_line_width_bool": false,
+      "start_point": [
+        222.70181886501553,
+        600.6514716197897
+      ],
+      "type": "pointer"
+    },
+    "text": {
+      "new_text_font_bool": false,
+      "text_font": "9pt Calibri",
+      "text_point": [
+        440.70366855825165,
+        1203.0089003856776
+      ],
+      "text_str": "LacI (7)",
+      "type": "text"
+    },
+    "type": "pointer_and_text"
+  },
+  {
+    "arc_angle": 0.006943842303482661,
+    "arc_end": 2.8643349501864632,
+    "arc_start": 2.8573911078829806,
+    "center_x": 500,
+    "center_y": 500,
+    "internal_color": "#daddbe",
+    "line_width": 8,
+    "radius": 250,
+    "type": "plasmid_arc_forward"
+  },
+  {
+    "pointer": {
+      "end_point": [
+        259.78661333708516,
+        569.2641961473095
+      ],
+      "line_color": "black",
+      "line_width": 1,
+      "new_line_width_bool": false,
+      "start_point": [
+        327.0463616027013,
+        549.8702212260628
+      ],
+      "type": "pointer"
+    },
+    "text": {
+      "new_text_font_bool": false,
+      "text_font": "9pt Calibri",
+      "text_point": [
+        658.896990938661,
+        1098.3551585291793
+      ],
+      "text_str": "Linker\\2 (7)",
+      "type": "text"
+    },
+    "type": "pointer_and_text"
+  },
+  {
+    "arc_angle": 0.002975932415778537,
+    "arc_end": 2.8683028600741673,
+    "arc_start": 2.865326927658389,
+    "center_x": 500,
+    "center_y": 500,
+    "internal_color": "#237670",
+    "line_width": 8,
+    "radius": 250,
+    "type": "plasmid_arc_forward"
+  },
+  {
+    "pointer": {
+      "end_point": [
+        259.3786193683394,
+        567.833260152476
+      ],
+      "line_color": "black",
+      "line_width": 1,
+      "new_line_width_bool": false,
+      "start_point": [
+        167.94249472830836,
+        593.6098990104168
+      ],
+      "type": "pointer"
+    },
+    "text": {
+      "new_text_font_bool": false,
+      "text_font": "9pt Calibri",
+      "text_point": [
+        331.0725618439835,
+        1188.5764632238831
+      ],
+      "text_str": "cc (3)",
+      "type": "text"
+    },
+    "type": "pointer_and_text"
+  },
+  {
+    "arc_angle": 0.0,
+    "arc_end": 3.176807853843168,
+    "arc_start": 3.176807853843168,
+    "center_x": 500,
+    "center_y": 500,
+    "internal_color": "#faefee",
+    "line_width": 8,
+    "radius": 200,
+    "type": "plasmid_arc_reverse"
+  },
+  {
+    "pointer": {
+      "end_point": [
+        300.1239982178047,
+        492.9584155501858
+      ],
+      "line_color": "black",
+      "line_width": 1,
+      "new_line_width_bool": false,
+      "start_point": [
+        420.04959928712185,
+        497.18336622007433
+      ],
+      "type": "pointer"
+    },
+    "text": {
+      "new_text_font_bool": false,
+      "text_font": "9pt Calibri",
+      "text_point": [
+        845.0960986187986,
+        994.542772051394
+      ],
+      "text_str": "origin (0)",
+      "type": "text"
+    },
+    "type": "pointer_and_text"
+  },
+  {
+    "arc_angle": 0.8084616396197291,
+    "arc_end": 4.614183210664011,
+    "arc_start": 3.805721571044282,
+    "center_x": 500,
+    "center_y": 500,
+    "internal_color": "#026180",
+    "line_width": 8,
+    "radius": 200,
+    "type": "plasmid_arc_reverse"
+  },
+  {
+    "pointer": {
+      "end_point": [
+        403.6875156391236,
+        324.71764105810325
+      ],
+      "line_color": "black",
+      "line_width": 1,
+      "new_line_width_bool": false,
+      "start_point": [
+        449.4359457105399,
+        407.97676155550425
+      ],
+      "type": "pointer"
+    },
+    "text": {
+      "new_text_font_bool": false,
+      "text_font": "9pt Calibri",
+      "text_point": [
+        901.2797035301016,
+        820.3355820845559
+      ],
+      "text_str": "Kanamycin\\phosphotransferase (815)",
+      "type": "text"
+    },
+    "type": "pointer_and_text"
+  },
+  {
+    "a": [
+      463.66826421577065,
+      299.2613515665084
+    ],
+    "b": [
+      461.53110328728656,
+      287.453195776303
+    ],
+    "c": [
+      479.9982099770915,
+      296.98293570273586
+    ],
+    "d": [
+      465.0930381680934,
+      307.1334554266453
+    ],
+    "e": [
+      467.23019909657756,
+      318.9416112168507
+    ],
+    "f": [
+      480.7825938995585,
+      304.94438920458936
+    ],
+    "internal_color": "#026180",
+    "type": "cds"
+  },
+  {
+    "fill_color": "#333",
+    "font_style": "bold 20pt Calibri",
+    "plasmid_length_start_x": 447.5,
+    "plasmid_length_start_y": 515,
+    "plasmid_length_str": "6334 bp",
+    "plasmid_name": "plasmid_circuit_P000",
+    "plasmid_name_start_x": 350.0,
+    "plasmid_name_start_y": 485,
+    "type": "center_text"
+  }
+]

@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html>
+<body>
+<div id="Plasmid_Div_Id_Here" class="tabcontent">
+<canvas id="myCanvas" width="1000" height="1000" style="border:1px solid #d3d3d3;">
+Your browser does not support the HTML5 canvas tag.</canvas>
+
+
+<script>
+function wrapText(context, text, x, y, maxWidth, lineHeight) {
+    /*
+        var words = text.split(' ');
+        var line = '';
+
+        for(var n = 0; n < words.length; n++) {
+          var testLine = line + words[n] + ' ';
+          var metrics = context.measureText(testLine);
+          var testWidth = metrics.width;
+          if (testWidth > maxWidth && n > 0) {
+            context.fillText(line, x, y);
+            line = words[n] + ' ';
+            y += lineHeight;
+          }
+          else {
+            line = testLine;
+          }
+        } 
+    */
+
+    context.fillText(text, x, y);
+
+}
+
+
+</script>
+
+
+<script>var c = document.getElementById("myCanvas");var ctx = c.getContext("2d");ctx.lineWidth = '8';ctx.beginPath();ctx.strokeStyle = 'black';ctx.arc(500, 500, 250, 0 * Math.PI - (Math.PI/2), 0.002 * Math.PI - (Math.PI/2));ctx.stroke();ctx.beginPath();ctx.strokeStyle = '#DCDABB';ctx.arc(500, 500, 250, -1.5703003380589335, -1.5250006948259587);ctx.stroke();ctx.beginPath();ctx.strokeStyle = '#814227';ctx.arc(500, 500, 250, -1.5440129350528933, -1.5410370026371152);ctx.stroke();ctx.beginPath();ctx.strokeStyle = '#FBDFCD';ctx.arc(500, 500, 250, -1.5420289801090412, -1.4725905570742177);ctx.stroke();ctx.beginPath();ctx.strokeStyle = '#713266';ctx.arc(500, 500, 250, -1.5068137798556664, -1.4294395370454347);ctx.stroke();ctx.beginPath();ctx.strokeStyle = '#DBDDFE';ctx.arc(500, 500, 250, -1.4676306697145876, -1.4507670526918448);ctx.stroke();ctx.beginPath();ctx.strokeStyle = '#009470';ctx.arc(500, 500, 250, -1.4587028724672533, -0.8585565019519944);ctx.stroke();ctx.beginPath();ctx.strokeStyle = '#BDEBBF';ctx.arc(500, 500, 250, -1.1581336984736608, -1.102582960045802);ctx.stroke();ctx.beginPath();ctx.strokeStyle = '#562269';ctx.arc(500, 500, 250, -1.1298623405237684, -1.1268864081079901);ctx.stroke();ctx.beginPath();ctx.strokeStyle = '#DEFABE';ctx.arc(500, 500, 250, -1.125894430636064, -1.1189505883325819);ctx.stroke();ctx.beginPath();ctx.strokeStyle = '#201824';ctx.arc(500, 500, 250, -1.0916712078546156, -1.0698477034722425);ctx.stroke();ctx.beginPath();ctx.strokeStyle = '#EFDDAB';ctx.arc(500, 500, 250, -1.080263466927466, 1.971059236717057);ctx.stroke();ctx.beginPath();ctx.strokeStyle = '#574624';ctx.arc(500, 500, 250, 0.4458938736307583, 0.49053285986743056);ctx.stroke();ctx.beginPath();ctx.strokeStyle = '#DABAAE';ctx.arc(500, 500, 250, 0.5034285670024694, 0.5202921840252124);ctx.stroke();ctx.beginPath();ctx.strokeStyle = '#316802';ctx.arc(500, 500, 250, 0.5445956320873999, 0.564435181525921);ctx.stroke();ctx.beginPath();ctx.strokeStyle = '#ADADEE';ctx.arc(500, 500, 250, 0.5574913392224388, 0.5793148436048119);ctx.stroke();ctx.beginPath();ctx.strokeStyle = '#350069';ctx.arc(500, 500, 250, 0.5708830350934404, 0.575842922453071);ctx.stroke();ctx.beginPath();ctx.strokeStyle = '#CBAFDA';ctx.arc(500, 500, 250, 0.5827867647565532, 0.5877466521161834);ctx.stroke();ctx.beginPath();ctx.strokeStyle = '#388743';ctx.arc(500, 500, 250, 0.5946904944196656, 0.6085781790266305);ctx.stroke();ctx.beginPath();ctx.strokeStyle = '#ABECBB';ctx.arc(500, 500, 250, 0.6080821902906672, 0.6080821902906672);ctx.stroke();ctx.beginPath();ctx.strokeStyle = '#297033';ctx.arc(500, 500, 250, 0.6095701564985565, 0.6165139988020383);ctx.stroke();ctx.beginPath();ctx.strokeStyle = '#FFFFDE';ctx.arc(500, 500, 250, 0.643297390544042, 0.6502412328475242);ctx.stroke();ctx.beginPath();ctx.strokeStyle = '#956803';ctx.arc(500, 500, 250, 0.6472653004317461, 0.6502412328475242);ctx.stroke();ctx.beginPath();ctx.strokeStyle = '#ADECDA';ctx.arc(500, 500, 250, 0.8030057635241357, 0.8030057635241357);ctx.stroke();ctx.beginPath();ctx.strokeStyle = '#270498';ctx.arc(500, 500, 250, 1.1174626221246928, 1.9259242617444219);ctx.stroke();</script>
+<script>var c = document.getElementById("myCanvas");var ctx = c.getContext("2d");ctx.lineWidth = "1";ctx.strokeStyle = "black";ctx.font = '9pt Calibri';ctx.fillStyle = '#333';var maxWidth= 50; var lineHeight= 25;ctx.beginPath();ctx.moveTo(500,180);ctx.lineTo(500,244);ctx.stroke();var text = "0";wrapText(ctx, text, 495, 175, maxWidth, lineHeight);ctx.beginPath();ctx.moveTo(503.600279916028,319.9860041986005);ctx.lineTo(504.8250349895035,258.74825052482504);ctx.stroke();var text = "L3S3P21";wrapText(ctx, text, 468.400279916028, 319.9860041986005, maxWidth, lineHeight);ctx.beginPath();ctx.moveTo(508.9592321314772,180.02742387581412);ctx.lineTo(507.24490401643465,241.25342798447676);ctx.stroke();var text = "Escar";wrapText(ctx, text, 513.9592321314772, 180.02742387581412, maxWidth, lineHeight);ctx.beginPath();ctx.moveTo(507.8129251126464,369.78458145589343);ctx.lineTo(514.1016156390808,264.97307268198665);ctx.stroke();var text = "pTac";wrapText(ctx, text, 483.4129251126464, 369.78458145589343, maxWidth, lineHeight);ctx.beginPath();ctx.moveTo(536.9879222584804,131.60029430553595);ctx.lineTo(526.4984902823101,236.075036788192);ctx.stroke();var text = "RiboJ53";wrapText(ctx, text, 541.9879222584804, 131.60029430553595, maxWidth, lineHeight);ctx.beginPath();ctx.moveTo(519.4538721246557,320.5920681837302);ctx.lineTo(526.0567340155819,259.69900852296627);ctx.stroke();var text = "P3";wrapText(ctx, text, 502.2538721246557, 320.5920681837302, maxWidth, lineHeight);ctx.beginPath();ctx.moveTo(627.9108277990115,205.80509606227355);ctx.lineTo(603.4888534748765,261.9756370077842);ctx.stroke();var text = "PhlF";wrapText(ctx, text, 632.9108277990115, 205.80509606227355, maxWidth, lineHeight);ctx.beginPath();ctx.moveTo(576.3827222136862,336.42567978767215);ctx.lineTo(602.2978402767108,280.928209973459);ctx.stroke();var text = "ECK120033...";wrapText(ctx, text, 523.1827222136861, 336.42567978767215, maxWidth, lineHeight);ctx.beginPath();ctx.moveTo(658.3497310805732,165.54168949336884);ctx.lineTo(613.4187163850717,260.4427111866711);ctx.stroke();var text = "Cscar";wrapText(ctx, text, 663.3497310805732, 165.54168949336884, maxWidth, lineHeight);ctx.beginPath();ctx.moveTo(556.2592470597588,382.2723163379122);ctx.lineTo(601.5324058824699,287.53403954223904);ctx.stroke();var text = "Linker\1";wrapText(ctx, text, 517.4592470597588, 382.2723163379122, maxWidth, lineHeight);ctx.beginPath();ctx.moveTo(649.7521404293323,217.13484585570566);ctx.lineTo(621.0940175536665,271.26685573196323);ctx.stroke();var text = "LacZ alpha";wrapText(ctx, text, 654.7521404293323, 217.13484585570566, maxWidth, lineHeight);ctx.beginPath();ctx.moveTo(788.2158078384379,637.0626286165016);ctx.lineTo(732.9019759798048,610.7578285770627);ctx.stroke();var text = "sensor_mo...";wrapText(ctx, text, 793.2158078384379, 637.0626286165016, maxWidth, lineHeight);ctx.beginPath();ctx.moveTo(660.446299144958,580.5828946378265);ctx.lineTo(715.1807873931198,608.0728618297283);ctx.stroke();var text = "LacZ alpha";wrapText(ctx, text, 614.446299144958, 580.5828946378265, maxWidth, lineHeight);ctx.beginPath();ctx.moveTo(821.6019353311698,680.8084613382614);ctx.lineTo(730.0752419163962,629.3510576672827);ctx.stroke();var text = "M13-fwd";wrapText(ctx, text, 826.6019353311698, 680.8084613382614, maxWidth, lineHeight);ctx.beginPath();ctx.moveTo(609.9169061259064,567.9203523702535);ctx.lineTo(699.2396132657383,623.1150440462817);ctx.stroke();var text = "M13-rev";wrapText(ctx, text, 574.7169061259063, 567.9203523702535, maxWidth, lineHeight);ctx.beginPath();ctx.moveTo(769.009977022242,671.653985338002);ctx.lineTo(717.3762471277803,638.7067481672502);ctx.stroke();var text = "LacO";wrapText(ctx, text, 774.009977022242, 671.653985338002, maxWidth, lineHeight);ctx.beginPath();ctx.moveTo(651.1175067236412,597.1469686080551);ctx.lineTo(702.6396883404551,630.2683710760069);ctx.stroke();var text = "pLac\-10\...";wrapText(ctx, text, 597.9175067236412, 597.1469686080551, maxWidth, lineHeight);ctx.beginPath();ctx.moveTo(807.9937084751272,704.3419796613824);ctx.lineTo(720.4992135593909,646.2927474576728);ctx.stroke();var text = "pLac\-35\...";wrapText(ctx, text, 812.9937084751272, 704.3419796613824, maxWidth, lineHeight);ctx.beginPath();ctx.moveTo(606.9749210086843,573.220698360313);ctx.lineTo(693.6218651260855,632.5275872950391);ctx.stroke();var text = "CAP\site";wrapText(ctx, text, 568.1749210086844, 573.220698360313, maxWidth, lineHeight);ctx.beginPath();ctx.moveTo(762.543346391119,681.8592935977507);ctx.lineTo(712.1929182988898,646.9824116997188);ctx.stroke();var text = "Center\La...";wrapText(ctx, text, 767.543346391119, 681.8592935977507, maxWidth, lineHeight);ctx.beginPath();ctx.moveTo(646.6801787258555,602.8199292048889);ctx.lineTo(696.8350223407319,637.9774911506112);ctx.stroke();var text = "LacI";wrapText(ctx, text, 622.2801787258555, 602.8199292048889, maxWidth, lineHeight);ctx.beginPath();ctx.moveTo(794.8263675105256,722.2309302843158);ctx.lineTo(710.9782959388157,659.0288662855395);ctx.stroke();var text = "Linker\2";wrapText(ctx, text, 799.8263675105256, 722.2309302843158, maxWidth, lineHeight);ctx.beginPath();ctx.moveTo(603.4050241368548,578.4631087671612);ctx.lineTo(687.0506280171069,641.9328885958952);ctx.stroke();var text = "cc";wrapText(ctx, text, 586.2050241368547, 578.4631087671612, maxWidth, lineHeight);ctx.beginPath();ctx.moveTo(721.6467011522861,729.333869978377);ctx.lineTo(679.0808376440358,685.2917337472971);ctx.stroke();var text = "origin";wrapText(ctx, text, 726.6467011522861, 729.333869978377, maxWidth, lineHeight);ctx.beginPath();ctx.moveTo(515.3695832439981,818.9188523129618);ctx.lineTo(512.4211979054998,757.7398565391202);ctx.stroke();var text = "Kanamycin...";wrapText(ctx, text, 520.3695832439981, 818.9188523129618, maxWidth, lineHeight);</script>
+<script>var c = document.getElementById("myCanvas");var ctx = c.getContext("2d");ctx.lineWidth = "2";ctx.strokeStyle = "black";ctx.font = 'bold 20pt Calibri';ctx.fillStyle = '#333';var maxWidth= 50; var lineHeight= 25;var text = "plasmid_circuit_P000";wrapText(ctx, text, 350.0, 485, maxWidth, lineHeight);var text = "6334 bp";wrapText(ctx, text, 447.5, 515, maxWidth, lineHeight);</script>
+<script>
+var c = document.getElementById("myCanvas");var ctx = c.getContext("2d");
+//Promoter Symbol:
+ctx.strokeStyle = 'black'; ctx.lineWidth = 3; ctx.beginPath(); ctx.moveTo(510.66052441866316,250.22739698053533); ctx.lineTo(511.5133663721562,230.24558873897814); ctx.stroke(); ctx.beginPath();ctx.arc(500,500,270.0,-1.5281412955020766,-1.472590557074218);ctx.stroke(); 
+ctx.lineWidth = 3;ctx.moveTo(526.4729573832612,231.30094431244453);ctx.lineTo(518.883286412542,224.7896545357396);ctx.stroke();ctx.moveTo(526.4729573832612,231.30094431244453);ctx.lineTo(517.7585260750928,236.2059098551588);ctx.stroke();
+
+//RBS Symbol: 
+ctx.beginPath();ctx.arc(528.2869565721738, 247.5800164648529, 8, 0.11159746559168093, -3.029995187998112, true); ctx.closePath(); ctx.lineWidth = 1; ctx.fillStyle = '#bb99ff'; ctx.fill(); ctx.strokeStyle = 'black';ctx.stroke(); 
+
+//CDS Symbol: 
+ctx.beginPath(); ctx.moveTo(654.166910854254,298.13726545581403); ctx.lineTo(661.4503869576046,288.6004433513643); ctx.lineTo(665.9968060059498,307.7474047097853); ctx.closePath(); ctx.fillStyle = '#009470'; ctx.fill(); 
+ctx.beginPath(); ctx.moveTo(649.311260118687,304.4951468587806); ctx.lineTo(642.0277840153365,314.0319689632304); ctx.lineTo(660.7685601474948,313.80260456144566); ctx.closePath(); ctx.fillStyle = '#009470'; ctx.fill(); ctx.beginPath(); 
+
+//Terminator Symbol: 
+ctx.strokeStyle = "black"; ctx.lineWidth = 2; ctx.moveTo(608.3930558308238,274.7114174050182); ctx.lineTo(615.2144270819477,260.2383771489304); ctx.lineTo(618.8326871459697,261.9437199617114); ctx.lineTo(620.5380299587507,258.3254598976894); ctx.lineTo(609.6832497666849,253.2094314593464); ctx.lineTo(607.9779069539038,256.82769152336834); ctx.lineTo(611.5961670179257,258.53303433614934); ctx.lineTo(604.7747957668017,273.00607459223716); ctx.stroke(); 
+ctx.beginPath(); ctx.moveTo(608.3930558308238,274.7114174050182); ctx.lineTo(615.2144270819477,260.2383771489304); ctx.lineTo(618.8326871459697,261.9437199617114); ctx.lineTo(620.5380299587507,258.3254598976894); ctx.lineTo(609.6832497666849,253.2094314593464); ctx.lineTo(607.9779069539038,256.82769152336834); ctx.lineTo(611.5961670179257,258.53303433614934); ctx.lineTo(604.7747957668017,273.00607459223716); ctx.fillStyle = "#EA6062"; ctx.closePath(); ctx.fill(); 
+
+//CDS Symbol: 
+ctx.beginPath(); ctx.moveTo(621.4989890598308,276.94396296571773); ctx.lineTo(627.2390987791929,266.4058824759091); ctx.lineTo(621.985485784931,277.20964729635534); ctx.closePath(); ctx.fillStyle = '#201824'; ctx.fill(); 
+ctx.beginPath(); ctx.moveTo(617.6722492469228,283.9693499589235); ctx.lineTo(611.9321395275607,294.5074304487321); ctx.lineTo(618.1434232405237,284.22666627914725); ctx.closePath(); ctx.fillStyle = '#201824'; ctx.fill(); ctx.beginPath(); 
+
+//CDS Symbol: 
+ctx.beginPath(); ctx.moveTo(724.5807256119342,618.6570591394254); ctx.lineTo(735.1908386329704,624.262904453099); ctx.lineTo(724.0488167500797,619.6583792004939); ctx.closePath(); ctx.fillStyle = '#574624'; ctx.fill(); 
+ctx.beginPath(); ctx.moveTo(717.5073169312434,614.9198289303097); ctx.lineTo(706.8972039102072,609.313983616636); ctx.lineTo(716.992161104408,615.8896113516595); ctx.closePath(); ctx.fillStyle = '#574624'; ctx.fill(); ctx.beginPath(); 
+
+//CDS Symbol: 
+ctx.beginPath(); ctx.moveTo(431.2026711796016,744.5054754952903); ctx.lineTo(427.9524036762757,756.0569152824694); ctx.lineTo(411.68157868263404,738.1509110963219); ctx.closePath(); ctx.fillStyle = '#270498'; ctx.fill(); 
+ctx.beginPath(); ctx.moveTo(433.36951618181894,736.8045156371709); ctx.lineTo(436.6197836851449,725.2530758499918); ctx.lineTo(414.46326124381096,730.6500949988); ctx.closePath(); ctx.fillStyle = '#270498'; ctx.fill(); ctx.beginPath(); 
+
+</script>
+
+
+
+</div>
+</body>
+</html>

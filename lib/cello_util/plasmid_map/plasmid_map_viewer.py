@@ -5,7 +5,9 @@
 Maintainer: ogaloz@lbl.gov
 Takes as an input a genbank file - (representing a plasmid).
 Maximum Features (in the plasmid) = 100 (config file)
-    
+
+To Do: Export all values to a json data file instead of writing to javascript
+    Then convert the json data to javascript with one python script.
 
 
 """
@@ -18,9 +20,8 @@ import math
 import inspect
 import json
 import sys
-#from cello_util.plasmid_sbol_visuals import make_sbol_visuals_js
-from cello_util.plasmid_map.plasmid_sbol_visuals import make_sbol_visuals_js
- 
+#from cello_util.plasmid_map.plasmid_sbol_visuals import make_sbol_visuals_js
+#from plasmid_sbol_visuals import make_sbol_visuals_js 
 
 
 """
@@ -42,7 +43,7 @@ Outputs:
 def make_plasmid_graph(gb_file, gb_info, js_info, base_html_filepath, user_output_name):
     logging.info("Starting to make plasmid graph for {}".format(gb_file))
     plasmid_info, js_feat_list = get_js_feat_list(gb_file, gb_info)
-    js_plasmid_str = make_js_canvas_plasmid(js_feat_list, js_info)
+    js_plasmid_str = make_js_canvas_plasmid(js_feat_list, js_info, plasmid_info)
     js_pointers_and_names_str = make_js_pointers_and_names(js_feat_list, js_info)
     plasmid_name_center_canvas_str = make_plasmid_name_in_center(js_info, plasmid_info)
     sbol_visuals_js_str = make_sbol_standard_visuals(js_feat_list,js_info, plasmid_info, gb_info)
@@ -131,9 +132,9 @@ def get_js_feat_list(gb_file, gb_info):
     for i in range(p_feat_len):
         feat = p_features[i]
         typ = feat.type
-        #We assume location is a property of every feature- without this, file cannot work.
+        #We assume location is a property of every feature- without this, program throws an error.
         loc = feat.location
-        f_start = loc.nofuzzy_start
+        f_start = loc.nofuzzy_start + 1
         f_end = loc.nofuzzy_end
         f_len = f_end - f_start
         js_feat = {"start_bp":f_start, "end_bp":f_end, "bp_len": f_len, "typ": typ}
@@ -141,7 +142,11 @@ def get_js_feat_list(gb_file, gb_info):
         js_feat['percentage'] = f_percentage
         if not isinstance(gb_info, dict):
             raise TypeError("gb_info parameter must be a dict type.")
-        f_name = feat.qualifiers[gb_info['name_tag']][0]
+        if gb_info['name_tag'] in feat.qualifiers:
+            f_name = feat.qualifiers[gb_info['name_tag']][0]
+        else:
+            logging.warning(feat.qualifiers)
+            f_name = "unknown"
         js_feat['name'] = f_name
         if 'color_tag' in gb_info:
             f_color = feat.qualifiers[gb_info['color_tag']][0]
@@ -149,6 +154,7 @@ def get_js_feat_list(gb_file, gb_info):
         js_feat['pointer_direction'] = 'out'
         js_feat['midpoint'] = [0,0]
         js_feat_list.append(js_feat)
+
 
     out_list = [plasmid_info, js_feat_list]
     return out_list
@@ -187,21 +193,22 @@ Outputs:
     op_dict: (dict):
         js_str: (string) A string of the entire <script> part of the javascript referring to "myCanvas" canvas element. 
         js_feat_list: (list)
-            percentage: (float)
-            name: (str)
-            color: (str) [optional]
-            start_bp: (int) Start in plasmid in terms of base pairs.
-            end_bp: (int) End in plasmid in terms of base pairs.
-            bp_len: (int) Length in base pairs.
-            start_circle: (list) [x,y] for starting point on canvas.
-            end_circle: (list) [x,y] for ending point on canvas.
-            midpoint: (list) [x,y] midpoint location of feature (floats or ints)
-            pointer_direction: (str) default is 'out', could be 'in' if near to out. Incomplete
-            typ:(str) from this list: (ribozyme/promoter/rbs/terminator/scar)
-            pointer_len: (float) Length of pointer (either short or long)
+            js_feat_dict:
+                percentage: (float)
+                name: (str)
+                color: (str) [optional]
+                start_bp: (int) Start in plasmid in terms of base pairs.
+                end_bp: (int) End in plasmid in terms of base pairs.
+                bp_len: (int) Length in base pairs.
+                start_circle: (list) [x,y] for starting point on canvas.
+                end_circle: (list) [x,y] for ending point on canvas.
+                midpoint: (list) [x,y] midpoint location of feature (floats or ints)
+                pointer_direction: (str) default is 'out', could be 'in' if near to out. Incomplete
+                typ:(str) from this list: (ribozyme/promoter/rbs/terminator/scar)
+                pointer_len: (float) Length of pointer (either short or long)
 
 """
-def make_js_canvas_plasmid(js_feat_list, js_info):
+def make_js_canvas_plasmid(js_feat_list, js_info, plasmid_info):
     if 'circle_radius' not in js_info or 'circle_line_width' not in js_info or 'center_coordinates' not in js_info or 'pointer_thick' not in js_info or 'pointer_len_short' not in js_info or 'pointer_len_long' not in js_info:
         logging.debug(js_info.keys())
         raise ValueError("input js_info must contain 'circle_radius', 'circle_line_width', 'center_coordinates', 'pointer_len', 'pointer_thick', 'pointer_len_short', 'pointer_len_long' values.")
@@ -252,7 +259,8 @@ def make_js_canvas_plasmid(js_feat_list, js_info):
     for i in range(s, len(js_feat_list)):
         js_add_str = "ctx.beginPath();"
         js_feat = js_feat_list[i]
-
+        #start_point = end_point
+        start_point = float(float(js_feat['start_bp'])/float(plasmid_info['plasmid_length']))
         #Getting color
         if 'color' in js_feat:
             c_color = js_feat['color']
@@ -275,20 +283,24 @@ def make_js_canvas_plasmid(js_feat_list, js_info):
         #Getting representation of the length of segment (not true length). We keep Pi out of the calculations at first.
         arc_len = js_feat['percentage'] * 2
         end_point = start_point + arc_len
-        js_start = str(start_point) + " * Math.PI - (Math.PI/2)"
-        js_end = str(end_point) + " * Math.PI - (Math.PI/2)"
+        js_feat['arc_start'] = start_point * math.pi - math.pi/2
+        js_feat['arc_end'] = end_point * math.pi - math.pi/2
+        js_start = str(js_feat['arc_start'])
+        js_end = str(js_feat['arc_end'])
         #We calculate starting and ending point in terms of location in the canvas for later use:
         start_theta = (math.pi)*(start_point)
-        js_feat['start_circle'] = [c_c[0] + math.floor(radius*(math.cos(start_theta - (math.pi/2)))), c_c[1] + math.floor(radius*(math.sin(start_theta - math.pi/2)))] 
+        js_feat['start_circle'] = [c_c[0] + radius*(math.cos(start_theta - (math.pi/2))), c_c[1] + radius*(math.sin(start_theta - math.pi/2))] 
         end_theta = (math.pi)*(end_point)
-        js_feat['end_circle'] = [c_c[0] + math.floor(radius*(math.cos(end_theta - (math.pi/2)))), c_c[1] + math.floor(radius*(math.sin(end_theta - math.pi/2)))] 
+        js_feat['end_circle'] = [c_c[0] + radius*(math.cos(end_theta - (math.pi/2))), c_c[1] + radius*(math.sin(end_theta - math.pi/2))] 
         js_add_str += "ctx.arc(" + str(c_c[0]) + ", " + str(c_c[1]) + ", " + str(radius) + ", " + js_start + ", " + js_end + ");"
         js_add_str += "ctx.stroke();"
         js_str += js_add_str
 
         #Calculating the location of the middle of the arc. theta = angle between two points.
         theta = (math.pi)*(start_point + ((end_point - start_point)/2.0))
-        start_point = end_point
+
+        #This is the mistake: start_point is not end_point.
+        #start_point = end_point
         new_midpoint_list = [c_c[0] + math.floor(radius*(math.cos(theta - (math.pi/2)))), c_c[1] + math.floor(radius*(math.sin(theta - math.pi/2)))]
         js_feat['midpoint'] = new_midpoint_list
         midpoint_distance = math.sqrt( ((new_midpoint_list[0] - old_midpoint_list[0])**2) + ((new_midpoint_list[1] - old_midpoint_list[1])**2))
@@ -335,6 +347,9 @@ def make_js_canvas_plasmid(js_feat_list, js_info):
             logging.debug(js_feat_list[i-2].keys())
             js_feat['pointer_len'] = pl_short 
 
+    #DEBUG:
+    with open("json_dumps_test.json", "w") as f:
+        f.write(json.dumps(js_feat_list, indent=2, sort_keys=True))
 
     js_str += "</script>\n"
 
@@ -621,7 +636,9 @@ def convert_canvas_to_img_js():
 def main():
     input_args = sys.argv
     if len(input_args) < 3:
-        raise Exception("You must include at least 2 arguments to the program- the gbk file representing the plasmid, and the filename of the output html file to write to.")
+        raise Exception("You must include at least 2 arguments to the \
+        program- the gbk file representing the plasmid, and \
+        the filename of the output html file to write to.")
 
     input_gbk = input_args[1]
     output_file_path = input_args[2]
@@ -640,7 +657,8 @@ def run_program(input_gbk, output_filepath):
     config_dict = json.loads(file_str)
     gb_info = config_dict['genbank_info']
     js_info = config_dict["js_info"]
-    js_html_str = make_plasmid_graph(input_gbk, gb_info, js_info, base_html_filepath, user_output_name)
+    plasmid_map_dict = make_plasmid_graph(input_gbk, gb_info, js_info, base_html_filepath, user_output_name)
+    js_html_str = plasmid_map_dict['complete_js_str']
     g = open(base_html_filepath, "r")
     template_str = g.read()
     file_str = template_str.replace("{--Insert Code--}",js_html_str)
@@ -650,15 +668,13 @@ def run_program(input_gbk, output_filepath):
     h.close()
 
 
-#main()
-
 
 
 
 
 
 def test():
-    logging.basicConfig(level=logging.DEBUG)
+    logging.basicConfig(level=logging.INFO)
     gb_file = os.path.join(os.getcwd(), "test_circuit.gbk")
     out_file_name = os.path.join(os.getcwd(), "test.html")
     base_html_filepath = os.path.join(os.getcwd(), "test_template.html")
@@ -670,7 +686,8 @@ def test():
     
     gb_info = config_dict['genbank_info']
     js_info = config_dict["js_info"]
-    final_html_str = make_plasmid_graph(gb_file, gb_info, js_info, base_html_filepath, user_output_name)
+    plasmid_map_dict = make_plasmid_graph(gb_file, gb_info, js_info, base_html_filepath, user_output_name)
+    final_html_str = plasmid_map_dict['complete_js_str']
     logging.debug(len(final_html_str))
     logging.debug(final_html_str)
     g = open("test_template.html", "r")
@@ -683,4 +700,12 @@ def test():
     h.close()
 
     return 0
+
+
+
+if __name__ == "__main__":
+    from plasmid_sbol_visuals import make_sbol_visuals_js
+    main()
+else:
+    from cello_util.plasmid_map.plasmid_sbol_visuals import make_sbol_visuals_js
 

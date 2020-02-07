@@ -3,29 +3,43 @@
 
     "genbank_info": {
         "name_tag": "locus_tag",
+        "multiple_name_tags" : ["locus_tag","gene","label","old_locus_tag","protein_id"],
+        "name_tags": ["locus_tag","gene","label","old_locus_tag","protein_id"],
+        "gap_names": ["gap"],
         "types_dict": {
             "promoter": ["promoter"],
             "terminator": ["terminator"],
             "rbs": ["rbs"],
-            "cds": ["cds", "output"],
+            "cds": ["cds", "output", "CDS"],
             "scar": ["scar"],
             "ribozyme": ["ribozyme"],
-            "backbone": ["backbone"]
+            "backbone": ["backbone"],
+            "misc_feature": ["misc_feature"]
         },
-        "max_number_of_features_allowed" : 100,
+        "max_num_feat" : 100,
         "cello_bool": true
 
     },
     "js_info": {
             "circle_radius": 250, 
+            "complementary_radius": 200,
             "circle_line_width": 8, 
             "center_coordinates":[500,500],
             "pointer_len_short": 70,
+            "pointer_len_medium": 95,
             "pointer_len_long": 120,
+            "midpoint_distance": 30,
+            "pointer_distance": 5,
             "pointer_thick":1,
+            "pointer_color": "black",
             "text_size" : 9,
             "title_text_size" : 20,
+            "title_text_color": "#333",
             "max_title_length" : 35,
+            "gap_arc_info" : {
+                "circle_line_width": 2,
+                "color": "black"
+            },
             "promoter_info" : {
                 "percent_start": 20,
                 "pixels": 20,
@@ -55,7 +69,60 @@
                 "percent_start": 90,
                 "arrow_height": 12
             }
-    }
+    },
+
+    "feature_priority_list": [["assembly_gap",
+    "C_region",
+    "CDS",
+    "cds",
+    "centromere",
+    "D-loop",
+    "D_segment",
+    "exon",
+    "iDNA",
+    "intron",
+    "J_segment",
+    "mat_peptide",
+    "mobile_element",
+    "modified_base",
+    "mRNA",
+    "ncRNA",
+    "N_region",
+    "operon",
+    "polyA_site",
+    "precursor_RNA",
+    "prim_transcript",
+    "primer_bind",
+    "promoter",
+    "propeptide",
+    "protein_bind",
+    "rbs",
+    "repeat_region",
+    "rep_origin",
+    "ribozyme",
+    "rRNA",
+    "S_region",
+    "scar",
+    "sig_peptide",
+    "stem_loop",
+    "STS",
+    "telomere",
+    "terminator",
+    "tmRNA",
+    "transit_peptide",
+    "tRNA",
+    "V_region",
+    "V_segment",
+    "3'UTR",
+    "5'UTR"], 
+    ["regulatory","variation"],
+    ["oriT", "sensor_module"],
+    ["misc_binding", "misc_difference", "misc_recomb", "misc_RNA", "misc_structure", "backbone"],
+    ["gap", "unsure"], 
+    ["misc_feature","old_sequence"],
+    ["gene"],
+    ["source"]
+    ]
 }
 
 

@@ -9,8 +9,10 @@ from biokbase.workspace.client import Workspace
 from installed_clients.KBaseReportClient import KBaseReport
 from installed_clients.DataFileUtilClient import DataFileUtil
 from installed_clients.GenomeFileUtilClient import GenomeFileUtil
-from cello_util.file_maker import make_verilog_case_file_string, make_input_file_str, make_output_file_str, make_ucf_file
-from cello_util.truth_table import make_truth_table_from_text, make_truth_table_from_values
+from cello_util.file_maker import make_verilog_case_file_string, \
+    make_input_file_str, make_output_file_str, make_ucf_file
+from cello_util.truth_table import make_truth_table_from_text, \
+    make_truth_table_from_values
 from cello_util.upload import make_kbase_genomes, turn_ape_to_gbk
 from cello_util.html_design import build_html
 #from cello_util.plasmid_map_viewer import make_plasmid_graph
@@ -56,7 +58,8 @@ class cello:
 
     def run_cello(self, ctx, params):
         """
-        This function accepts any number of parameters and returns results in a KBaseReport
+        This function accepts any number of parameters and returns results in a 
+        KBaseReport.
         :param params: instance of mapping from String to unspecified object
         :returns: instance of type "ReportResults" -> structure: parameter
            "report_name" of String, parameter "report_ref" of String
@@ -95,7 +98,8 @@ class cello:
                         item["custom_var"] = False
                         gene_inputs_list.append(item)
                     else:
-                        raise Exception("Expected template item to be dict, but instead it is " + str(type(item)))
+                        raise Exception("Expected template item to be dict, but \
+                                instead it is " + str(type(item)))
             if "custom_promoter_inputs" in params:
                 custom_promoter_inputs_list = params["custom_promoter_inputs"]
                 for item in custom_promoter_inputs_list:
@@ -106,7 +110,8 @@ class cello:
                         item["inp_promoter_name"] = item["custom_inp_promoter_name"]
                         gene_inputs_list.append(item)
                     else:
-                        raise Exception("Expected custom item to be dict, but instead it is " + str(type(item)))
+                        raise Exception("Expected custom item to be dict, but \
+                                instead it is " + str(type(item)))
         else:
             raise Exception("Input Promoters not supplied (not in params).")
 
@@ -119,7 +124,8 @@ class cello:
                         gene_dict["custom_var"] = False
                         gene_outputs_list.append(gene_dict)
                     else:
-                        raise Exception("Expected template gene output to be dict, but instead it is " + str(type(gene_dict)))
+                        raise Exception("Expected template gene output to be \
+                                dict, but instead it is " + str(type(gene_dict)))
                 #logging.debug(gene_outputs_list)
             if "custom_gene_outputs" in params:
                 custom_gene_outputs_list = params["custom_gene_outputs"]
@@ -130,7 +136,8 @@ class cello:
                         gene_dict["out_DNA_sequence"] = gene_dict["custom_out_DNA_sequence"]
                         gene_outputs_list.append(gene_dict)
                     else:
-                        raise Exception("Expected custom gene output to be dict, but instead it is " + str(type(gene_dict)))
+                        raise Exception("Expected custom gene output to be dict, \
+                                but instead it is " + str(type(gene_dict)))
         else:
             raise Exception("No gene outputs supplied (in params).")
         if "truth_table_text" in params:
@@ -141,9 +148,12 @@ class cello:
         #UCF info - 
         if "base_plasmid_info" in params:
             base_plasmid_info = params["base_plasmid_info"]
-            #Initializing the additional info dict as False values to be updated later.
-            additional_info_dict = {"msd_gb_bool": False, "op_gb_bool": False, "cr_gb_bool": False, "sn_gb_bool": False}
-            #We only change things if the "custom" - meaning the user is altering an existing UCF file 
+            #Initializing the additional info dict as False values to be updated
+            # later in the program.
+            additional_info_dict = {"msd_gb_bool": False, "op_gb_bool": False, 
+                    "cr_gb_bool": False, "sn_gb_bool": False}
+            #We only change things if the "custom" - meaning the user is 
+            # altering an existing UCF file 
             if base_plasmid_info == "custom":
                 if "plasmid_output_base" in params:
                     plasmid_output_base = params["plasmid_output_base"]
@@ -154,11 +164,13 @@ class cello:
                     #Downloading_genbank file
                     genome_info = gfu.genome_to_genbank({"genome_ref": plasmid_output_genome_base_ref})
                     output_genome_genbank_fn = genome_info['genbank_file']['file_path']
-                    op_gb_fp = os.path.join(self.shared_folder, output_genome_genbank_fn)
+                    op_gb_fp = os.path.join(self.shared_folder, 
+                            output_genome_genbank_fn)
                     #Checking if insertion point is less than length of plasmid:
                     op_p_rec = SeqIO.read(open(op_gb_fp,"r"),"genbank")
-                    if not plasmid_output_insertion_bp < len(op_p_rec.seq):
-                        raise Exception("Output insertion point must be less than total length of output plasmid.")
+                    if not int(plasmid_output_insertion_bp) < len(op_p_rec.seq):
+                        raise Exception("Output insertion point must be less \
+                                than total length of output plasmid.")
 
                 else:
                     logging.critical("No plasmid output base given.")
@@ -173,7 +185,7 @@ class cello:
                     circuit_genome_genbank_fn = genome_info['genbank_file']['file_path']
                     cr_gb_fp = os.path.join(self.shared_folder, circuit_genome_genbank_fn)
                     cr_p_rec = SeqIO.read(open(cr_gb_fp,"r"),"genbank")
-                    if not plasmid_circuit_insertion_bp < len(cr_p_rec.seq):
+                    if not int(plasmid_circuit_insertion_bp) < len(cr_p_rec.seq):
                         raise Exception("Circuit insertion point must be less than total length of circuit plasmid.")
                 else:
                     raise Exception("custom base circuit plasmid indicated, but none given")
@@ -188,7 +200,7 @@ class cello:
                     circuit_genome_genbank_fn = genome_info['genbank_file']['file_path']
                     sn_gb_fp = os.path.join(self.shared_folder, circuit_genome_genbank_fn)
                     sn_p_rec = SeqIO.read(open(sn_gb_fp,"r"),"genbank")
-                    if not plasmid_sensor_insertion_bp < len(sn_p_rec.seq):
+                    if not int(sensor_insertion_bp) < len(sn_p_rec.seq):
                         raise Exception("Sensor insertion point must be less than total length of sensor plasmid.")
                 else:
                     raise Exception("sensor module info indicated, but none given")
@@ -268,7 +280,8 @@ class cello:
         if not os.path.exists(cello_kb):
             os.mkdir(cello_kb)
         else:
-            raise Exception("kb_run directory already exists within cello ??? Need new directory to run our verilog files.")
+            raise Exception("kb_run directory already exists within cello ??? \
+                    Need new directory to run our verilog files.")
 
         #CODE
         #Creating input files to Cello from params:
@@ -338,7 +351,9 @@ class cello:
         shutil.copyfile(os.path.join(cello_kb, "new_verilog.v"), os.path.join(full_path_output_folder,"VERILOG_INPUT.v" ))
         shutil.copyfile(os.path.join(cello_kb, "new_inputs.txt"), os.path.join(full_path_output_folder,"PROMOTERS_INPUT.txt" ))
         shutil.copyfile(os.path.join(cello_kb, "new_outputs.txt"), os.path.join(full_path_output_folder,"OUTPUTS_INPUT.txt" ))
+        #The UCF
         shutil.copyfile(ucf_filepath, os.path.join(full_path_output_folder, "UCF.json"))
+
         output_files = os.listdir(full_path_output_folder)
         logging.debug("CELLO OUTPUT FOLDER:")
         logging.debug(output_files)
@@ -351,6 +366,11 @@ class cello:
         else:
             turn_ape_to_gbk(output_files, kb_output_folder, output_folder)
         
+
+        #We copy the base plasmids if the base plasmid info is "e_coli" or "tetrlaci"
+        if base_plasmid_info == "e_coli":
+            shutil.copyfile("/kb/module/lib/cello_util/plasmids/pAN1201.ape", full_path_output_folder)
+            shutil.copyfile("/kb/module/lib/cello_util/plasmids/pAN4020.ape", full_path_output_folder)
 
         dfu = DataFileUtil(self.callback_url)
         file_zip_shock_id = dfu.file_to_shock({'file_path': kb_output_folder,

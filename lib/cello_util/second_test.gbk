@@ -3,7 +3,7 @@ DEFINITION  .
 ACCESSION   job_1580764268958_A000_plasmid_circuit_P000
 VERSION     job_1580764268958_A000_plasmid_circuit_P000
 KEYWORDS    .
-SOURCE      .
+SOURCE      
   ORGANISM  .
             .
 FEATURES             Location/Qualifiers
@@ -49,13 +49,6 @@ FEATURES             Location/Qualifiers
                      width 5 offset 0"
                      /locus_tag="Linker\1"
      CDS             complement(966..988)
-                     /vntifkey="4"
-                     /ApEinfo_fwdcolor="#6495ed"
-                     /ApEinfo_revcolor="#6495ed"
-                     /ApEinfo_graphicformat="arrow_data {{0 1 2 0 0 -1} {} 0}
-                     width 5 offset 0"
-                     /locus_tag="LacZ\alpha"
-     CDS             complement(966..988)
                      /ApEinfo_fwdcolor="#6495ed"
                      /ApEinfo_revcolor="#6495ed"
                      /ApEinfo_graphicformat="arrow_data {{0 1 2 0 0 -1} {} 0}
@@ -66,31 +59,11 @@ FEATURES             Location/Qualifiers
                      /ApEinfo_fwdcolor="pink"
                      /ApEinfo_revcolor="pink"
      CDS             complement(4066..4111)
-                     /vntifkey="4"
-                     /ApEinfo_fwdcolor="#6495ed"
-                     /ApEinfo_revcolor="#6495ed"
-                     /ApEinfo_graphicformat="arrow_data {{0 1 2 0 0 -1} {} 0}
-                     width 5 offset 0"
-                     /locus_tag="LacZ\alpha"
-     CDS             complement(4066..4111)
                      /ApEinfo_fwdcolor="#6495ed"
                      /ApEinfo_revcolor="#6495ed"
                      /ApEinfo_graphicformat="arrow_data {{0 1 2 0 0 -1} {} 0}
                      width 5 offset 0"
                      /locus_tag="LacZ alpha"
-     misc_feature    4070..4089
-                     /ApEinfo_fwdcolor="#ff8080"
-                     /ApEinfo_revcolor="#ff8080"
-                     /ApEinfo_graphicformat="arrow_data {{0 1 2 0 0 -1} {} 0}
-                     width 5 offset 0"
-                     /locus_tag="spacer:lacZ"
-     misc_feature    complement(4094..4099)
-                     /vntifkey="21"
-                     /ApEinfo_fwdcolor="#ff0000"
-                     /ApEinfo_revcolor="#ff0000"
-                     /ApEinfo_graphicformat="arrow_data {{0 1 2 0 0 -1} {} 0}
-                     width 5 offset 0"
-                     /locus_tag="<-- EarI site"
      primer_bind     4182..4199
                      /ApEinfo_fwdcolor="cyan"
                      /ApEinfo_revcolor="green"
@@ -109,13 +82,6 @@ FEATURES             Location/Qualifiers
                      /ApEinfo_graphicformat="arrow_data {{0 1 2 0 0 -1} {} 0}
                      width 5 offset 0"
                      /locus_tag="LacO"
-     misc_feature    complement(4316..4345)
-                     /vntifkey="21"
-                     /ApEinfo_fwdcolor="#0080ff"
-                     /ApEinfo_revcolor="#0080ff"
-                     /ApEinfo_graphicformat="arrow_data {{0 1 2 0 0 -1} {} 0}
-                     width 5 offset 0"
-                     /locus_tag="3'\lacI\KO\check\-\R\(580bp)"
      misc_feature    complement(4318..4323)
                      /vntifkey="21"
                      /ApEinfo_fwdcolor="cyan"
@@ -137,13 +103,6 @@ FEATURES             Location/Qualifiers
                      /ApEinfo_graphicformat="arrow_data {{0 1 2 0 0 -1} {} 0}
                      width 5 offset 0"
                      /locus_tag="CAP\site"
-     misc_feature    complement(4383..4403)
-                     /vntifkey="21"
-                     /ApEinfo_fwdcolor="#8080ff"
-                     /ApEinfo_revcolor="#8080ff"
-                     /ApEinfo_graphicformat="arrow_data {{0 1 2 0 0 -1} {} 0}
-                     width 5 offset 0"
-                     /locus_tag="LacO3"
      misc_feature    complement(4393)
                      /vntifkey="21"
                      /ApEinfo_fwdcolor="#ffff00"
@@ -171,25 +130,6 @@ FEATURES             Location/Qualifiers
                      /ApEinfo_graphicformat="arrow_data {{0 1 2 0 0 -1} {} 0}
                      width 5 offset 0"
                      /locus_tag="cc"
-     rep_origin      4513..5348
-                     /vntifkey="33"
-                     /ApEinfo_fwdcolor="pink"
-                     /ApEinfo_revcolor="pink"
-                     /ApEinfo_graphicformat="arrow_data {{0 1 2 0 0 -1} {} 0}
-                     width 5 offset 0"
-                     /locus_tag="more\stringent\p15A"
-     misc_feature    4513..5348
-                     /ApEinfo_fwdcolor="#ff00ff"
-                     /ApEinfo_revcolor="#ff00ff"
-                     /ApEinfo_graphicformat="arrow_data {{0 1 2 0 0 -1} {} 0}
-                     width 5 offset 0"
-                     /locus_tag="p15A"
-     misc_feature    complement(4523..4550)
-                     /ApEinfo_fwdcolor="cyan"
-                     /ApEinfo_revcolor="cyan"
-                     /ApEinfo_graphicformat="arrow_data {{0 1 2 0 0 -1} {} 0}
-                     width 5 offset 0"
-                     /locus_tag="pMJS02 seq R v2"
      rep_origin      complement(4786)
                      /vntifkey="33"
                      /ApEinfo_fwdcolor="pink"
@@ -204,12 +144,6 @@ FEATURES             Location/Qualifiers
                      /ApEinfo_graphicformat="arrow_data {{0 1 2 0 0 -1} {} 0}
                      width 5 offset 0"
                      /locus_tag="Kanamycin\phosphotransferase"
-     misc_feature    complement(5420..6235)
-                     /ApEinfo_fwdcolor="#ff8080"
-                     /ApEinfo_revcolor="#ff8080"
-                     /ApEinfo_graphicformat="arrow_data {{0 1 2 0 0 -1} {} 0}
-                     width 5 offset 0"
-                     /locus_tag="KanR"
 ORIGIN
         1 ccaattattg aaggcctccc taacgggggg cctttttttg tttctggtct cccgcttaac
        61 gatcgttggc tgtgttgaca attaatcatc ggctcgtata atgtgtggaa ttgtgagcgc

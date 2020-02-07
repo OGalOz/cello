@@ -1,0 +1,602 @@
+[
+  {
+    "arc_end": -1.5250006948259587,
+    "arc_start": -1.5703003380589335,
+    "bp_len": 52,
+    "color": "#DCDABB",
+    "end_bp": 53,
+    "end_circle": [
+      511.44490656073265,
+      250.26210917480685
+    ],
+    "midpoint": [
+      505,
+      250
+    ],
+    "name": "L3S3P21",
+    "percentage": 0.007209662140827282,
+    "pointer_direction": "in",
+    "pointer_len": 70,
+    "start_bp": 1,
+    "start_circle": [
+      500.1239971789068,
+      250.00003075060266
+    ],
+    "typ": "misc_feature"
+  },
+  {
+    "arc_end": -1.5410370026371152,
+    "arc_start": -1.5440129350528933,
+    "bp_len": 3,
+    "color": "#814227",
+    "end_bp": 57,
+    "end_circle": [
+      507.43873294746584,
+      250.11069400205162
+    ],
+    "midpoint": [
+      507,
+      250
+    ],
+    "name": "Escar",
+    "percentage": 0.000473634354278497,
+    "pointer_direction": "out",
+    "pointer_len": 70,
+    "start_bp": 54,
+    "start_circle": [
+      506.69504741971275,
+      250.08966339895463
+    ],
+    "typ": "scar"
+  },
+  {
+    "arc_end": -1.4725905570742177,
+    "arc_start": -1.5420289801090412,
+    "bp_len": 70,
+    "color": "#FBDFCD",
+    "end_bp": 128,
+    "end_circle": [
+      524.5119975770938,
+      251.20457806707827
+    ],
+    "midpoint": [
+      515,
+      250
+    ],
+    "name": "pTac",
+    "percentage": 0.011051468266498263,
+    "pointer_direction": "in",
+    "pointer_len": 120,
+    "start_bp": 58,
+    "start_circle": [
+      507.19084476616644,
+      250.10343789569876
+    ],
+    "typ": "promoter"
+  },
+  {
+    "arc_end": -1.4294395370454347,
+    "arc_start": -1.5068137798556664,
+    "bp_len": 78,
+    "color": "#713266",
+    "end_bp": 207,
+    "end_circle": [
+      535.2216251761271,
+      252.49356145758065
+    ],
+    "midpoint": [
+      525,
+      251
+    ],
+    "name": "RiboJ53",
+    "percentage": 0.012314493211240922,
+    "pointer_direction": "out",
+    "pointer_len": 120,
+    "start_bp": 129,
+    "start_circle": [
+      515.9847252353673,
+      250.51154624081335
+    ],
+    "typ": "ribozyme"
+  },
+  {
+    "arc_end": -1.4507670526918448,
+    "arc_start": -1.4676306697145876,
+    "bp_len": 17,
+    "color": "#DBDDFE",
+    "end_bp": 225,
+    "end_circle": [
+      529.9353177049842,
+      251.79871725975778
+    ],
+    "midpoint": [
+      527,
+      251
+    ],
+    "name": "P3",
+    "percentage": 0.00268392800757815,
+    "pointer_direction": "in",
+    "pointer_len": 70,
+    "start_bp": 208,
+    "start_circle": [
+      525.7456882831239,
+      251.32921455299936
+    ],
+    "typ": "rbs"
+  },
+  {
+    "arc_end": -0.8585565019519944,
+    "arc_start": -1.4587028724672533,
+    "bp_len": 605,
+    "color": "#009470",
+    "end_bp": 831,
+    "end_circle": [
+      663.3826830767223,
+      310.77500463561546
+    ],
+    "midpoint": [
+      600,
+      270
+    ],
+    "name": "PhlF",
+    "percentage": 0.09551626144616356,
+    "pointer_direction": "out",
+    "pointer_len": 70,
+    "start_bp": 226,
+    "start_circle": [
+      527.9647151144114,
+      251.56897394131744
+    ],
+    "typ": "cds"
+  },
+  {
+    "arc_end": -1.102582960045802,
+    "arc_start": -1.1581336984736608,
+    "bp_len": 56,
+    "color": "#BDEBBF",
+    "end_bp": 888,
+    "end_circle": [
+      612.8231644644574,
+      276.9059983768591
+    ],
+    "midpoint": [
+      606,
+      273
+    ],
+    "name": "ECK120033737",
+    "percentage": 0.00884117461319861,
+    "pointer_direction": "in",
+    "pointer_len": 70,
+    "start_bp": 832,
+    "start_circle": [
+      600.2624659971027,
+      270.9859438545751
+    ],
+    "typ": "terminator"
+  },
+  {
+    "arc_end": -1.1268864081079901,
+    "arc_start": -1.1298623405237684,
+    "bp_len": 3,
+    "color": "#562269",
+    "end_bp": 892,
+    "end_circle": [
+      607.3684264311978,
+      274.23015922030584
+    ],
+    "midpoint": [
+      607,
+      274
+    ],
+    "name": "Cscar",
+    "percentage": 0.000473634354278497,
+    "pointer_direction": "out",
+    "pointer_len": 120,
+    "start_bp": 889,
+    "start_circle": [
+      606.6960761988554,
+      273.9116382390106
+    ],
+    "typ": "scar"
+  },
+  {
+    "arc_end": -1.1189505883325819,
+    "arc_start": -1.125894430636064,
+    "bp_len": 7,
+    "color": "#DEFABE",
+    "end_bp": 904,
+    "end_circle": [
+      609.1566955270874,
+      275.08931590160785
+    ],
+    "midpoint": [
+      608,
+      274
+    ],
+    "name": "Linker\\1",
+    "percentage": 0.0011051468266498263,
+    "pointer_direction": "in",
+    "pointer_len": 120,
+    "start_bp": 897,
+    "start_circle": [
+      607.5923321640638,
+      274.336777343986
+    ],
+    "typ": "misc_feature"
+  },
+  {
+    "arc_end": -1.0698477034722425,
+    "arc_start": -1.0916712078546156,
+    "bp_len": 22,
+    "color": "#201824",
+    "end_bp": 988,
+    "end_circle": [
+      620.0644545127274,
+      280.7181567877513
+    ],
+    "midpoint": [
+      617,
+      279
+    ],
+    "name": "LacZ alpha",
+    "percentage": 0.0034733185980423114,
+    "pointer_direction": "out",
+    "pointer_len": 70,
+    "start_bp": 966,
+    "start_circle": [
+      615.2507459639246,
+      278.1503537195542
+    ],
+    "typ": "CDS"
+  },
+  {
+    "arc_end": 1.971059236717057,
+    "arc_start": -1.080263466927466,
+    "bp_len": 3076,
+    "color": "#EFDDAB",
+    "end_bp": 4065,
+    "end_circle": [
+      402.5848787696289,
+      730.2396450563458
+    ],
+    "midpoint": [
+      725,
+      607
+    ],
+    "name": "sensor_module",
+    "percentage": 0.48563309125355225,
+    "pointer_direction": "out",
+    "pointer_len": 70,
+    "start_bp": 989,
+    "start_circle": [
+      617.7739952760767,
+      279.47951107275617
+    ],
+    "typ": "backbone"
+  },
+  {
+    "arc_end": 0.49053285986743056,
+    "arc_start": 0.4458938736307583,
+    "bp_len": 45,
+    "color": "#574624",
+    "end_bp": 4111,
+    "end_circle": [
+      720.5204889272438,
+      617.7739952760767
+    ],
+    "midpoint": [
+      723,
+      612
+    ],
+    "name": "LacZ alpha",
+    "percentage": 0.007104515314177455,
+    "pointer_direction": "in",
+    "pointer_len": 70,
+    "start_bp": 4066,
+    "start_circle": [
+      725.5563824753847,
+      607.8161320240065
+    ],
+    "typ": "CDS"
+  },
+  {
+    "arc_end": 0.5202921840252124,
+    "arc_start": 0.5034285670024694,
+    "bp_len": 17,
+    "color": "#DABAAE",
+    "end_bp": 4199,
+    "end_circle": [
+      716.9184905493695,
+      624.2834198828754
+    ],
+    "midpoint": [
+      717,
+      622
+    ],
+    "name": "M13-fwd",
+    "percentage": 0.00268392800757815,
+    "pointer_direction": "out",
+    "pointer_len": 120,
+    "start_bp": 4182,
+    "start_circle": [
+      718.9834161277612,
+      620.6078913712356
+    ],
+    "typ": "primer_bind"
+  },
+  {
+    "arc_end": 0.564435181525921,
+    "arc_start": 0.5445956320873999,
+    "bp_len": 20,
+    "color": "#316802",
+    "end_bp": 4285,
+    "end_circle": [
+      711.2227196077964,
+      633.7346728469704
+    ],
+    "midpoint": [
+      712,
+      631
+    ],
+    "name": "M13-rev",
+    "percentage": 0.0031575623618566467,
+    "pointer_direction": "in",
+    "pointer_len": 120,
+    "start_bp": 4265,
+    "start_circle": [
+      713.8342131258853,
+      629.5180655230515
+    ],
+    "typ": "primer_bind"
+  },
+  {
+    "arc_end": 0.5793148436048119,
+    "arc_start": 0.5574913392224388,
+    "bp_len": 22,
+    "color": "#ADADEE",
+    "end_bp": 4313,
+    "end_circle": [
+      709.2094839141529,
+      636.8626751177026
+    ],
+    "midpoint": [
+      710,
+      634
+    ],
+    "name": "LacO",
+    "percentage": 0.0034733185980423114,
+    "pointer_direction": "out",
+    "pointer_len": 70,
+    "start_bp": 4291,
+    "start_circle": [
+      712.1462523871697,
+      632.2647632518929
+    ],
+    "typ": "misc_binding"
+  },
+  {
+    "arc_end": 0.575842922453071,
+    "arc_start": 0.5708830350934404,
+    "bp_len": 5,
+    "color": "#350069",
+    "end_bp": 4323,
+    "end_circle": [
+      709.6833984471,
+      636.1354928579417
+    ],
+    "midpoint": [
+      710,
+      635
+    ],
+    "name": "pLac\\-10\\box",
+    "percentage": 0.0007893905904641617,
+    "pointer_direction": "in",
+    "pointer_len": 70,
+    "start_bp": 4318,
+    "start_circle": [
+      710.3560332377715,
+      635.0938165885824
+    ],
+    "typ": "misc_feature"
+  },
+  {
+    "arc_end": 0.5877466521161834,
+    "arc_start": 0.5827867647565532,
+    "bp_len": 5,
+    "color": "#CBAFDA",
+    "end_bp": 4347,
+    "end_circle": [
+      708.0480608478067,
+      638.6218033985538
+    ],
+    "midpoint": [
+      708,
+      638
+    ],
+    "name": "pLac\\-35\\box",
+    "percentage": 0.0007893905904641617,
+    "pointer_direction": "out",
+    "pointer_len": 120,
+    "start_bp": 4342,
+    "start_circle": [
+      708.7330475231452,
+      637.5882076040691
+    ],
+    "typ": "misc_feature"
+  },
+  {
+    "arc_end": 0.6085781790266305,
+    "arc_start": 0.5946904944196656,
+    "bp_len": 14,
+    "color": "#388743",
+    "end_bp": 4380,
+    "end_circle": [
+      705.1154260127488,
+      642.9253721758616
+    ],
+    "midpoint": [
+      706,
+      641
+    ],
+    "name": "CAP\\site",
+    "percentage": 0.0022102936532996525,
+    "pointer_direction": "in",
+    "pointer_len": 120,
+    "start_bp": 4366,
+    "start_circle": [
+      707.0804849396145,
+      640.0631027686238
+    ],
+    "typ": "misc_feature"
+  },
+  {
+    "arc_end": 0.6080821902906672,
+    "arc_start": 0.6080821902906672,
+    "bp_len": 0,
+    "color": "#ABECBB",
+    "end_bp": 4393,
+    "end_circle": [
+      705.186290154833,
+      642.8236196589929
+    ],
+    "midpoint": [
+      705,
+      642
+    ],
+    "name": "Center\\LacO3",
+    "percentage": 0.0,
+    "pointer_direction": "out",
+    "pointer_len": 70,
+    "start_bp": 4393,
+    "start_circle": [
+      705.186290154833,
+      642.8236196589929
+    ],
+    "typ": "misc_feature"
+  },
+  {
+    "arc_end": 0.6165139988020383,
+    "arc_start": 0.6095701564985565,
+    "bp_len": 7,
+    "color": "#297033",
+    "end_bp": 4403,
+    "end_circle": [
+      703.9747491555535,
+      644.5486136458218
+    ],
+    "midpoint": [
+      704,
+      643
+    ],
+    "name": "LacI",
+    "percentage": 0.0011051468266498263,
+    "pointer_direction": "in",
+    "pointer_len": 70,
+    "start_bp": 4396,
+    "start_circle": [
+      704.9735463678747,
+      643.1287717035841
+    ],
+    "typ": "misc_feature"
+  },
+  {
+    "arc_end": 0.6502412328475242,
+    "arc_start": 0.643297390544042,
+    "bp_len": 7,
+    "color": "#FFFFDE",
+    "end_bp": 4471,
+    "end_circle": [
+      698.9844461367917,
+      651.344607421719
+    ],
+    "midpoint": [
+      699,
+      650
+    ],
+    "name": "Linker\\2",
+    "percentage": 0.0011051468266498263,
+    "pointer_direction": "out",
+    "pointer_len": 120,
+    "start_bp": 4464,
+    "start_circle": [
+      700.0305535870625,
+      649.959253237849
+    ],
+    "typ": "misc_feature"
+  },
+  {
+    "arc_end": 0.6502412328475242,
+    "arc_start": 0.6472653004317461,
+    "bp_len": 3,
+    "color": "#956803",
+    "end_bp": 4475,
+    "end_circle": [
+      698.9844461367917,
+      651.344607421719
+    ],
+    "midpoint": [
+      699,
+      651
+    ],
+    "name": "cc",
+    "percentage": 0.000473634354278497,
+    "pointer_direction": "in",
+    "pointer_len": 120,
+    "start_bp": 4472,
+    "start_circle": [
+      699.4339556754176,
+      650.7517738657015
+    ],
+    "typ": "misc_feature"
+  },
+  {
+    "arc_end": 0.8030057635241357,
+    "arc_start": 0.8030057635241357,
+    "bp_len": 0,
+    "color": "#ADECDA",
+    "end_bp": 4786,
+    "end_circle": [
+      673.6368406465533,
+      679.8617457112086
+    ],
+    "midpoint": [
+      673,
+      679
+    ],
+    "name": "origin",
+    "percentage": 0.0,
+    "pointer_direction": "out",
+    "pointer_len": 70,
+    "start_bp": 4786,
+    "start_circle": [
+      673.6368406465533,
+      679.8617457112086
+    ],
+    "typ": "rep_origin"
+  },
+  {
+    "arc_end": 1.9259242617444219,
+    "arc_start": 1.1174626221246928,
+    "bp_len": 815,
+    "color": "#270498",
+    "end_bp": 6235,
+    "end_circle": [
+      413.0724199632225,
+      734.400503047561
+    ],
+    "midpoint": [
+      512,
+      749
+    ],
+    "name": "Kanamycin\\phosphotransferase",
+    "percentage": 0.12867066624565834,
+    "pointer_direction": "out",
+    "pointer_len": 70,
+    "start_bp": 5420,
+    "start_circle": [
+      609.4912340625169,
+      724.7480137030517
+    ],
+    "typ": "CDS"
+  }
+]
