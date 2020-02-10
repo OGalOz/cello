@@ -140,13 +140,13 @@ def print_gap_arc(js_feat):
     js_str = "//Plasmid Gap Arc: {}\n".format(js_feat['feat_name'][0])
     js_str += "ctx.beginPath();\n"
     js_str += "ctx.lineWidth = '{}';".format(str(js_feat['line_width']))
-    js_str += "ctx.strokeStyle = '{}';\n".format(js_feat['line_color'])
+    js_str += "ctx.strokeStyle = '{}';\n".format(js_feat['internal_color'])
     js_str += "ctx.arc({},{},{},{},{});\n".format(
             str(js_feat['center_x']),
             str(js_feat['center_y']),
             str(js_feat['radius']),
-            str(js_feat['start_angle']),
-            str(js_feat['end_angle'])
+            str(js_feat['arc_start']),
+            str(js_feat['arc_end'])
             )
     js_str += "ctx.stroke();\n\n"
 

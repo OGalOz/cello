@@ -1248,11 +1248,15 @@ def calculate_cds_feature(feature_dict, config_dict):
     else:
         raise Exception("CDS Info not found in js_info.")
 
+    
+
 
     if feature_dict["feat_strand"] == 1:
+        complement_bool = False
         radius = js_info['circle_radius']
     else:
         radius = js_info['complementary_radius']
+        complement_bool = True
 
     cc = js_info['center_coordinates']
 
@@ -1264,6 +1268,12 @@ def calculate_cds_feature(feature_dict, config_dict):
     First, we find the start of the CDS arrow we will make.
     """
     percent_start = cds_info["percent_start"]
+    if complement_bool:
+        percent_start = 100 - percent_start
+        arrow_end = feature_dict['point_start']
+    else:
+        arrow_end = feature_dict['point_end']
+
     relative_angle_to_t_center = (feature_dict['plasmid_percentage'] * (percent_start/100))*(math.pi * 2)
 
     starting_angle = get_angle_from_point(feature_dict['point_start'],cc)
@@ -1271,10 +1281,10 @@ def calculate_cds_feature(feature_dict, config_dict):
     cds_symbol_start_point = [cc[0] + radius*(math.cos(cds_symbol_start_angle)),cc[1] + radius*(math.sin(cds_symbol_start_angle))]
     var_a = line_extension_coordinates(cc,cds_symbol_start_point,"pixels", js_info['circle_line_width']/2)
     var_b = line_extension_coordinates(cc,var_a,"pixels",cds_info["arrow_height"])
-    var_c = line_extension_coordinates(cc,feature_dict['point_end'],"pixels", js_info['circle_line_width']/2)
+    var_c = line_extension_coordinates(cc,arrow_end,"pixels", js_info['circle_line_width']/2)
     var_d = line_extension_coordinates(var_a, cds_symbol_start_point,"pixels", js_info['circle_line_width']/2)
     var_e = line_extension_coordinates(var_a,var_d,"pixels",cds_info["arrow_height"])
-    var_f = line_extension_coordinates(var_c, feature_dict['point_end'],"pixels", js_info['circle_line_width']/2)
+    var_f = line_extension_coordinates(var_c, arrow_end, "pixels", js_info['circle_line_width']/2)
 
     js_object = {
         "type": "cds",

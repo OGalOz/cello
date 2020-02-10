@@ -5,7 +5,7 @@
         "name_tag": "locus_tag",
         "multiple_name_tags" : ["locus_tag","gene","label","old_locus_tag","protein_id"],
         "name_tags": ["locus_tag","gene","label","old_locus_tag","protein_id"],
-        "gap_names": ["gap"],
+        "gap_names": ["gap", "feature_gap"],
         "types_dict": {
             "promoter": ["promoter"],
             "terminator": ["terminator"],
@@ -22,7 +22,7 @@
     },
     "js_info": {
             "circle_radius": 250, 
-            "complementary_radius": 200,
+            "complementary_radius": 230,
             "circle_line_width": 8, 
             "center_coordinates":[500,500],
             "pointer_len_short": 70,

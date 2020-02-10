@@ -1,4 +1,44 @@
-//Canvas Code Start 
+<!DOCTYPE html>
+<html>
+<body>
+<div id="Plasmid_Div_Id_Here" class="tabcontent">
+<canvas id="myCanvas" width="1000" height="1000" style="border:1px solid #d3d3d3;">
+Your browser does not support the HTML5 canvas tag.</canvas>
+
+
+<script>
+function wrapText(context, text, x, y, maxWidth, lineHeight) {
+    /*
+        var words = text.split(' ');
+        var line = '';
+
+        for(var n = 0; n < words.length; n++) {
+          var testLine = line + words[n] + ' ';
+          var metrics = context.measureText(testLine);
+          var testWidth = metrics.width;
+          if (testWidth > maxWidth && n > 0) {
+            context.fillText(line, x, y);
+            line = words[n] + ' ';
+            y += lineHeight;
+          }
+          else {
+            line = testLine;
+          }
+        } 
+    */
+
+    context.fillText(text, x, y);
+
+}
+
+
+</script>
+
+
+{--Insert Code--}
+
+    <script>
+    //Canvas Code Start 
 var c = document.getElementById("myCanvas");
 var ctx = c.getContext("2d");
 
@@ -614,3 +654,8 @@ ctx.font = "bold 20pt Calibri";
 ctx.fillStyle = "#333";ctx.fillText("plasmid_circuit_P000",350.0,485);
 ctx.fillText("6334 bp",447.5,515);
 
+
+    </script>
+</div>
+</body>
+</html>

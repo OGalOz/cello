@@ -7,15 +7,18 @@ Process:
         (Clears tmp dir)
          a. Remove duplicate sections
 
-    2. "feature_prepare" takes Genbank File and prepares two
+    2. "feature_prepare" (prep_py_feat.py) takes Genbank File and prepares two
         json files: plasmid_info.json, and feature_list.json
 
-    3. js_prepare takes plasmid_info.json, feature_list.json, and config.json
+    3. "refine_features" takes feature_list.json and removes unnecessary features
+    and adds in gap features.
+
+    4. js_prepare takes plasmid_info.json, feature_list.json, and config.json
         and creates js_feats.json
 
-    4. canvas_make takes js_feats.json and creates plasmid_js.js
+    5. canvas_make takes js_feats.json and creates plasmid_js.js
 
-    5. html_prepare takes plasmid_js.js and template.html and creates the final
+    6. html_prepare takes plasmid_js.js and template.html and creates the final
         html_file
 
     
@@ -27,6 +30,7 @@ Process:
 import sys
 from os import path
 from prep_py_feat import feature_prepare
+from feature_refine import refine_features
 from py_feat_to_js_feat import js_prepare
 from features_to_canvas import make_canvas_js
 from plasmid_html import html_prepare
@@ -48,9 +52,9 @@ def main():
     feature_list_fp = path.join(program_dir, "tmp/feature_list.json")
     plasmid_info_fp = path.join(program_dir, "tmp/plasmid_info.json")
 
+    
 
-
-    canvas_prepare(feature_list_fp, plasmid_info_fp, config_fp)
+    js_prepare(feature_list_fp, plasmid_info_fp, config_fp)
 
     js_feats_fp = path.join(program_dir, "tmp/js_feats.json")
     make_canvas_js(js_feats_fp)

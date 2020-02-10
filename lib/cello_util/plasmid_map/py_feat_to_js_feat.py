@@ -170,11 +170,13 @@ def create_javascript_object_list(feature_dict_list, plasmid_info, config_dict):
     for feature_dict in feature_dict_list:
         arc_object = create_arc(feature_dict, config_dict)
         javascript_object_list.append(arc_object)
-        pointer_and_text_object = calculate_pointer_and_text(feature_dict, 
-                config_dict)
-        javascript_object_list.append(pointer_and_text_object)
 
         feat_type = feature_dict['feat_type']
+        if feat_type != "feature_gap":
+            pointer_and_text_object = calculate_pointer_and_text(feature_dict, 
+                config_dict)
+            javascript_object_list.append(pointer_and_text_object)
+
         
         #Note, all the functions that begin with "calculate"
         # come from plasmid_sbol_visuals
@@ -251,7 +253,8 @@ def create_arc(feature_dict, config_dict):
                     "arc_end": feature_dict['angle_end'],
                     "arc_angle":feature_dict['angle_end'] - feature_dict['angle_start'],
                     "line_width": config_dict['js_info']['gap_arc_info']['circle_line_width'],
-                    "internal_color": config_dict['js_info']['gap_arc_info']['color'], 
+                    "internal_color": config_dict['js_info']['gap_arc_info']['color'],
+
                     "center_x":config_dict['js_info']['center_coordinates'][0],
                     "center_y":config_dict['js_info']['center_coordinates'][1],
                     "radius": config_dict['js_info']['circle_radius']
