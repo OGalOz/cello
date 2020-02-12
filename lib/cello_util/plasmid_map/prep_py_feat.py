@@ -130,19 +130,20 @@ def get_features(gb_record, config_dict):
         feat_color = get_random_color(feat_shade)
 
         #Calculating positions in the canvas:
+        angle_start = (2*math.pi)*start_percentage 
+        angle_mid = (2*math.pi)*mid_percentage  
+        angle_end = (2*math.pi)*end_percentage 
+        
 
-        angle_start = (2*math.pi)*start_percentage - math.pi/2
-        angle_mid = (2*math.pi)*mid_percentage - math.pi/2 
-        angle_end = (2*math.pi)*end_percentage - math.pi/2
+        point_start = [circle_center[0] + radius*math.cos(-1*(angle_start - (math.pi/2) )),
+        circle_center[1] - radius*math.sin(-1*(angle_start - (math.pi/2)))]
 
-        point_start = [circle_center[0] + radius*math.cos(angle_start),
-        circle_center[1] + radius*math.sin(angle_start) ]
+        point_mid = [circle_center[0] + radius*math.cos(-1*(angle_mid-(math.pi/2))), 
+        circle_center[1] - radius*math.sin(-1*(angle_mid - (math.pi/2)))]
 
-        point_mid = [circle_center[0] + radius*math.cos(angle_mid), 
-        circle_center[1] + radius*math.sin(angle_mid)]
+        point_end = [circle_center[0] + radius*math.cos(-1*(angle_end-(math.pi/2))),
+        circle_center[1] - radius*math.sin(-1*(angle_end - (math.pi/2)))]
 
-        point_end = [circle_center[0] + radius*math.cos(angle_end),
-        circle_center[1] + radius*math.sin(angle_end)]
 
 
         #This is either short, medium, or long
@@ -221,9 +222,9 @@ def add_gap_elements(feat_info_dict_list, config_dict, plasmid_info):
             feat_color = "black"
             #Calculating positions in the canvas:
     
-            angle_start = (2*math.pi)*start_percentage - math.pi/2
-            angle_mid = (2*math.pi)*mid_percentage - math.pi/2 
-            angle_end = (2*math.pi)*end_percentage - math.pi/2
+            angle_start = (2*math.pi)*start_percentage 
+            angle_mid = (2*math.pi)*mid_percentage  
+            angle_end = (2*math.pi)*end_percentage 
     
             point_start = [circle_center[0] + radius*math.cos(angle_start),
             circle_center[1] + radius*math.sin(angle_start) ]

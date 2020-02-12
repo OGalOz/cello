@@ -33,9 +33,18 @@
             "pointer_thick":1,
             "pointer_color": "black",
             "text_size" : 9,
+            "text_color": "black",
             "title_text_size" : 20,
             "title_text_color": "#333",
             "max_title_length" : 35,
+            "text_rect_info": {
+                "x_diff": 8,
+                "y_diff": 15,
+                "border_color": "gray",
+                "clicked_border_color": "black",
+                "internal_color": "white",
+                "clicked_internal": "#E6E6FA"
+            },
             "gap_arc_info" : {
                 "circle_line_width": 3,
                 "color": "black"

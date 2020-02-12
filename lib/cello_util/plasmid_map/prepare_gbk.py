@@ -175,6 +175,22 @@ def find_and_remove_duplicates(gb_record, priority_list):
             duplicates: {}.".format(len(gb_record.features)))
     return gb_record
 
+
+
+def genbank_prep(gbk_fp, config_fp):
+    gb_record = SeqIO.read(open(gbk_fp, "r"), "genbank")
+    config_dict = json.loads((open(config_fp,"r")).read())
+    priority_list = config_dict["feature_priority_list"]
+
+    #Running program:
+    gb_record = find_and_remove_duplicates(gb_record, priority_list)
+
+    SeqIO.write(gb_record, "tmp/prepared_genbank.gbk", "genbank")  
+
+
+
+
+
 def test():
     logging.basicConfig(level=logging.DEBUG)
     test_gbk = "../new_test_out.gbk"

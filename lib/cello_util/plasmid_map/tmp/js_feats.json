@@ -1,16 +1,25 @@
 [
   {
-    "arc_angle": 0.0515828285401545,
-    "arc_end": -1.518221520782816,
-    "arc_start": -1.5698043493229705,
+    "arc_angle": 0.05158282854015449,
+    "arc_end": 0.05257480601208053,
+    "arc_start": 0.0009919774719260477,
     "center_x": 500,
     "center_y": 500,
+    "end_point": [
+      513.1376472331896,
+      250.34543419921945
+    ],
     "feat_name": [
       "L3S3P21"
     ],
-    "internal_color": "#aaecff",
+    "html_id": "2C0i7P-arc",
+    "internal_color": "#cefeae",
     "line_width": 8,
     "radius": 250,
+    "start_point": [
+      500.24799432730964,
+      250.000123002403
+    ],
     "type": "plasmid_arc_forward"
   },
   {
@@ -19,6 +28,7 @@
         506.69504741971275,
         250.08966339895463
       ],
+      "html_id": "2C0i7P-pointer",
       "line_color": "black",
       "line_width": 1,
       "new_line_width_bool": false,
@@ -29,6 +39,10 @@
       "type": "pointer"
     },
     "text": {
+      "fill_color": "black",
+      "font_size": "9",
+      "font_weight": "normal",
+      "html_id": "2C0i7P-text",
       "new_text_font_bool": false,
       "text_font": "9pt Calibri",
       "text_point": [
@@ -38,20 +52,43 @@
       "text_str": "L3S3P21 (52)",
       "type": "text"
     },
+    "text_rect": {
+      "border_color": "gray",
+      "clicked_border_color": "black",
+      "clicked_internal": "#E6E6FA",
+      "height": 19,
+      "html_id": "2C0i7P-text-rect",
+      "internal_color": "white",
+      "type": "text-rect",
+      "width": 72.0,
+      "x": 500.70356164562656,
+      "x_diff": 8,
+      "y": 160.116562418641,
+      "y_diff": 15
+    },
     "type": "pointer_and_text"
   },
   {
-    "arc_angle": 0.002975932415778093,
-    "arc_end": -1.514253610895112,
-    "arc_start": -1.51722954331089,
+    "arc_angle": 0.0029759324157781417,
+    "arc_end": 0.056542715899784726,
+    "arc_start": 0.053566783484006585,
     "center_x": 500,
     "center_y": 500,
+    "end_point": [
+      514.1281480324874,
+      250.3995283795078
+    ],
     "feat_name": [
       "Escar"
     ],
-    "internal_color": "#675117",
+    "html_id": "9W6B3a-arc",
+    "internal_color": "#706875",
     "line_width": 8,
     "radius": 250,
+    "start_point": [
+      513.385292433763,
+      250.35858927961763
+    ],
     "type": "plasmid_arc_forward"
   },
   {
@@ -60,6 +97,7 @@
         513.7567354621273,
         250.37878249350467
       ],
+      "html_id": "9W6B3a-pointer",
       "line_color": "black",
       "line_width": 1,
       "new_line_width_bool": false,
@@ -70,6 +108,10 @@
       "type": "pointer"
     },
     "text": {
+      "fill_color": "black",
+      "font_size": "9",
+      "font_weight": "normal",
+      "html_id": "9W6B3a-text",
       "new_text_font_bool": false,
       "text_font": "9pt Calibri",
       "text_point": [
@@ -79,20 +121,43 @@
       "text_str": "Escar (3)",
       "type": "text"
     },
+    "text_rect": {
+      "border_color": "gray",
+      "clicked_border_color": "black",
+      "clicked_internal": "#E6E6FA",
+      "height": 19,
+      "html_id": "9W6B3a-text-rect",
+      "internal_color": "white",
+      "type": "text-rect",
+      "width": 54.0,
+      "x": 500.2540412772764,
+      "x_diff": 8,
+      "y": 335.22726949610285,
+      "y_diff": 15
+    },
     "type": "pointer_and_text"
   },
   {
-    "arc_angle": 0.0694384230348235,
-    "arc_end": -1.4438232103883624,
-    "arc_start": -1.5132616334231859,
+    "arc_angle": 0.06943842303482334,
+    "arc_end": 0.1269731164065341,
+    "arc_start": 0.057534693371710764,
     "center_x": 500,
     "center_y": 500,
+    "end_point": [
+      531.6580527299088,
+      252.01256544463726
+    ],
     "feat_name": [
       "pTac"
     ],
-    "internal_color": "#cdbdcc",
+    "html_id": "3M8M5X-arc",
+    "internal_color": "#bcdfdb",
     "line_width": 8,
     "radius": 250,
+    "start_point": [
+      514.3757390855255,
+      250.41366598760882
+    ],
     "type": "plasmid_arc_forward"
   },
   {
@@ -101,6 +166,7 @@
         523.0307754340819,
         251.06309357006765
       ],
+      "html_id": "3M8M5X-pointer",
       "line_color": "black",
       "line_width": 1,
       "new_line_width_bool": false,
@@ -111,6 +177,10 @@
       "type": "pointer"
     },
     "text": {
+      "fill_color": "black",
+      "font_size": "9",
+      "font_weight": "normal",
+      "html_id": "3M8M5X-text",
       "new_text_font_bool": false,
       "text_font": "9pt Calibri",
       "text_point": [
@@ -120,6 +190,20 @@
       "text_str": "pTac (70)",
       "type": "text"
     },
+    "text_rect": {
+      "border_color": "gray",
+      "clicked_border_color": "black",
+      "clicked_internal": "#E6E6FA",
+      "height": 19,
+      "html_id": "3M8M5X-text-rect",
+      "internal_color": "white",
+      "type": "text-rect",
+      "width": 54.0,
+      "x": 503.51538771704094,
+      "x_diff": 8,
+      "y": 360.53154678503387,
+      "y_diff": 15
+    },
     "type": "pointer_and_text"
   },
   {
@@ -127,12 +211,12 @@
       519.267651084063,
       230.68836337487605
     ],
-    "arc_end_angle": -1.4438232103883626,
+    "arc_end_angle": 0.12697311640653397,
     "arc_end_point": [
       534.1906969483015,
       232.17357068020823
     ],
-    "arc_start_angle": -1.4993739488162212,
+    "arc_start_angle": 0.07142237797867536,
     "big_radius": 270.0,
     "center_x": 500,
     "center_y": 500,
@@ -144,14 +228,15 @@
       534.1906969483015,
       232.17357068020823
     ],
+    "html_id": "3M8M5X-promoter",
     "inner_flag_start": [
-      526.7914529120065,
-      225.44667037684755
+      525.3387878666758,
+      227.52129106580063
     ],
     "line_width": 3,
     "outer_flag_start": [
-      525.3387878666758,
-      236.8258502946158
+      526.7914529120065,
+      238.9004709835689
     ],
     "p_line_coordinate_start": [
       517.8404176704287,
@@ -160,17 +245,26 @@
     "type": "promoter"
   },
   {
-    "arc_angle": 0.07737424281023175,
-    "arc_end": -1.3654569901062046,
-    "arc_start": -1.4428312329164363,
+    "arc_angle": 0.0773742428102317,
+    "arc_end": 0.20533933668869186,
+    "arc_start": 0.12796509387846017,
     "center_x": 500,
     "center_y": 500,
+    "end_point": [
+      550.9748448726499,
+      255.25203741356847
+    ],
     "feat_name": [
       "RiboJ53"
     ],
-    "internal_color": "#996238",
+    "html_id": "9S3w1y-arc",
+    "internal_color": "#554452",
     "line_width": 8,
     "radius": 250,
+    "start_point": [
+      531.9040350618978,
+      252.04409152680148
+    ],
     "type": "plasmid_arc_forward"
   },
   {
@@ -179,6 +273,7 @@
         541.4704703856178,
         253.46359277787064
       ],
+      "html_id": "9S3w1y-pointer",
       "line_color": "black",
       "line_width": 1,
       "new_line_width_bool": false,
@@ -189,6 +284,10 @@
       "type": "pointer"
     },
     "text": {
+      "fill_color": "black",
+      "font_size": "9",
+      "font_weight": "normal",
+      "html_id": "9S3w1y-text",
       "new_text_font_bool": false,
       "text_font": "9pt Calibri",
       "text_point": [
@@ -198,20 +297,43 @@
       "text_str": "RiboJ53 (78)",
       "type": "text"
     },
+    "text_rect": {
+      "border_color": "gray",
+      "clicked_border_color": "black",
+      "clicked_internal": "#E6E6FA",
+      "height": 19,
+      "html_id": "9S3w1y-text-rect",
+      "internal_color": "white",
+      "type": "text-rect",
+      "width": 72.0,
+      "x": 516.8822822313707,
+      "x_diff": 8,
+      "y": 337.0781556667224,
+      "y_diff": 15
+    },
     "type": "pointer_and_text"
   },
   {
-    "arc_angle": 0.01686361702274275,
-    "arc_end": -1.3476013956115358,
-    "arc_start": -1.3644650126342786,
+    "arc_angle": 0.016863617022742805,
+    "arc_end": 0.22319493118336073,
+    "arc_start": 0.20633131416061792,
     "center_x": 500,
     "center_y": 500,
+    "end_point": [
+      555.3366072928227,
+      256.20118972127875
+    ],
     "feat_name": [
       "P3"
     ],
-    "internal_color": "#bedfca",
+    "html_id": "6M7o5b-arc",
+    "internal_color": "#cbbeeb",
     "line_width": 8,
     "radius": 250,
+    "start_point": [
+      551.2176042179043,
+      255.3027237213742
+    ],
     "type": "plasmid_arc_forward"
   },
   {
@@ -220,6 +342,7 @@
         553.2789996899006,
         255.74327400858832
       ],
+      "html_id": "6M7o5b-pointer",
       "line_color": "black",
       "line_width": 1,
       "new_line_width_bool": false,
@@ -230,6 +353,10 @@
       "type": "pointer"
     },
     "text": {
+      "fill_color": "black",
+      "font_size": "9",
+      "font_weight": "normal",
+      "html_id": "6M7o5b-text",
       "new_text_font_bool": false,
       "text_font": "9pt Calibri",
       "text_point": [
@@ -239,36 +366,68 @@
       "text_str": "P3 (17)",
       "type": "text"
     },
+    "text_rect": {
+      "border_color": "gray",
+      "clicked_border_color": "black",
+      "clicked_internal": "#E6E6FA",
+      "height": 19,
+      "html_id": "6M7o5b-text-rect",
+      "internal_color": "white",
+      "type": "text-rect",
+      "width": 42.0,
+      "x": 529.2952997829304,
+      "x_diff": 8,
+      "y": 314.0202918060118,
+      "y_diff": 15
+    },
     "type": "pointer_and_text"
   },
   {
     "border_color": "black",
     "border_width": 1,
     "circle_center": [
-      554.1314636849391,
+      554.131463684939,
       251.83516639272574
     ],
-    "end_angle": 3.3563557762617826,
+    "end_angle": 4.927152103056679,
+    "end_point": [
+      546.3152484532138,
+      250.13023840264893
+    ],
     "feat_name": [
       "P3"
     ],
+    "html_id": "6M7o5b-rbs",
     "internal_color": "#bb99ff",
     "radius": 8,
-    "start_angle": 0.21476312267198971,
+    "start_angle": 1.7855594494668858,
+    "start_point": [
+      561.9476789166642,
+      253.54009438280255
+    ],
     "type": "rbs"
   },
   {
     "arc_angle": 0.6001463705152589,
-    "arc_end": -0.7464630476243509,
-    "arc_start": -1.3466094181396098,
+    "arc_end": 0.8243332791705457,
+    "arc_start": 0.2241869086552868,
     "center_x": 500,
     "center_y": 500,
+    "end_point": [
+      683.523802739446,
+      330.2383617301809
+    ],
     "feat_name": [
       "PhlF"
     ],
-    "internal_color": "#926671",
+    "html_id": "7R2b5c-arc",
+    "internal_color": "#664944",
     "line_width": 8,
     "radius": 250,
+    "start_point": [
+      555.5784229544959,
+      256.2562023314415
+    ],
     "type": "plasmid_arc_forward"
   },
   {
@@ -277,6 +436,7 @@
         625.1431522708067,
         283.5763611808412
       ],
+      "html_id": "7R2b5c-pointer",
       "line_color": "black",
       "line_width": 1,
       "new_line_width_bool": false,
@@ -287,6 +447,10 @@
       "type": "pointer"
     },
     "text": {
+      "fill_color": "black",
+      "font_size": "9",
+      "font_weight": "normal",
+      "html_id": "7R2b5c-text",
       "new_text_font_bool": false,
       "text_font": "9pt Calibri",
       "text_point": [
@@ -295,6 +459,20 @@
       ],
       "text_str": "PhlF (605)",
       "type": "text"
+    },
+    "text_rect": {
+      "border_color": "gray",
+      "clicked_border_color": "black",
+      "clicked_internal": "#E6E6FA",
+      "height": 19,
+      "html_id": "7R2b5c-text-rect",
+      "internal_color": "white",
+      "type": "text-rect",
+      "width": 60.0,
+      "x": 667.2004131791293,
+      "x_diff": 8,
+      "y": 182.0069056531777,
+      "y_diff": 15
     },
     "type": "pointer_and_text"
   },
@@ -326,21 +504,31 @@
     "feat_name": [
       "PhlF"
     ],
-    "internal_color": "#926671",
+    "html_id": "7R2b5c-cds",
+    "internal_color": "#664944",
     "type": "cds"
   },
   {
     "arc_angle": 0.05555073842785874,
-    "arc_end": -0.6899203317245661,
-    "arc_start": -0.7454710701524249,
+    "arc_end": 0.8808759950703304,
+    "arc_start": 0.8253252566424717,
     "center_x": 500,
     "center_y": 500,
+    "end_point": [
+      692.8241810922619,
+      340.8810659094947
+    ],
     "feat_name": [
       "ECK120033737"
     ],
-    "internal_color": "#ccbafd",
+    "html_id": "8o6c3k-arc",
+    "internal_color": "#bbadbd",
     "line_width": 8,
     "radius": 250,
+    "start_point": [
+      683.6921121371138,
+      330.42049670256137
+    ],
     "type": "plasmid_arc_forward"
   },
   {
@@ -349,6 +537,7 @@
         688.3307878277755,
         335.5873655822965
       ],
+      "html_id": "8o6c3k-pointer",
       "line_color": "black",
       "line_width": 1,
       "new_line_width_bool": false,
@@ -359,6 +548,10 @@
       "type": "pointer"
     },
     "text": {
+      "fill_color": "black",
+      "font_size": "9",
+      "font_weight": "normal",
+      "html_id": "8o6c3k-text",
       "new_text_font_bool": false,
       "text_font": "9pt Calibri",
       "text_point": [
@@ -367,6 +560,20 @@
       ],
       "text_str": "ECK120033737 (56)",
       "type": "text"
+    },
+    "text_rect": {
+      "border_color": "gray",
+      "clicked_border_color": "black",
+      "clicked_internal": "#E6E6FA",
+      "height": 19,
+      "html_id": "8o6c3k-text-rect",
+      "internal_color": "white",
+      "type": "text-rect",
+      "width": 102.0,
+      "x": 774.4961817416632,
+      "x_diff": 8,
+      "y": 238.38104837344474,
+      "y_diff": 15
     },
     "type": "pointer_and_text"
   },
@@ -400,6 +607,7 @@
     "feat_name": [
       "ECK120033737"
     ],
+    "html_id": "8o6c3k-terminator",
     "internal_color": "#EA6062",
     "palm_hand_1": [
       704.3298614747779,
@@ -413,16 +621,25 @@
   },
   {
     "arc_angle": 0.002975932415778204,
-    "arc_end": -0.6859524218368619,
-    "arc_start": -0.6889283542526401,
+    "arc_end": 0.8848439049580347,
+    "arc_start": 0.8818679725422565,
     "center_x": 500,
     "center_y": 500,
+    "end_point": [
+      693.4540310876741,
+      341.64742548373516
+    ],
     "feat_name": [
       "Cscar"
     ],
-    "internal_color": "#156579",
+    "html_id": "7T9u1S-arc",
+    "internal_color": "#285885",
     "line_width": 8,
     "radius": 250,
+    "start_point": [
+      692.9819285929993,
+      341.07242140985574
+    ],
     "type": "plasmid_arc_forward"
   },
   {
@@ -431,6 +648,7 @@
         693.2181937370341,
         341.35974782862337
       ],
+      "html_id": "7T9u1S-pointer",
       "line_color": "black",
       "line_width": 1,
       "new_line_width_bool": false,
@@ -441,6 +659,10 @@
       "type": "pointer"
     },
     "text": {
+      "fill_color": "black",
+      "font_size": "9",
+      "font_weight": "normal",
+      "html_id": "7T9u1S-text",
       "new_text_font_bool": false,
       "text_font": "9pt Calibri",
       "text_point": [
@@ -450,20 +672,43 @@
       "text_str": "Cscar (3)",
       "type": "text"
     },
+    "text_rect": {
+      "border_color": "gray",
+      "clicked_border_color": "black",
+      "clicked_internal": "#E6E6FA",
+      "height": 19,
+      "html_id": "7T9u1S-text-rect",
+      "internal_color": "white",
+      "type": "text-rect",
+      "width": 54.0,
+      "x": 607.9309162422204,
+      "x_diff": 8,
+      "y": 389.81584869717403,
+      "y_diff": 15
+    },
     "type": "pointer_and_text"
   },
   {
     "arc_angle": 0.006943842303482328,
-    "arc_end": -0.6740486921737494,
-    "arc_start": -0.6809925344772317,
+    "arc_end": 0.8967476346211471,
+    "arc_start": 0.8898037923176648,
     "center_x": 500,
     "center_y": 500,
+    "end_point": [
+      695.3252668715395,
+      343.96141463868025
+    ],
     "feat_name": [
       "Linker\\1"
     ],
-    "internal_color": "#fecfde",
+    "html_id": "4q3m3N-arc",
+    "internal_color": "#eeddaa",
     "line_width": 8,
     "radius": 250,
+    "start_point": [
+      694.2370592737516,
+      342.6088795240179
+    ],
     "type": "plasmid_arc_forward"
   },
   {
@@ -472,6 +717,7 @@
         694.7823370476431,
         343.28420253765614
       ],
+      "html_id": "4q3m3N-pointer",
       "line_color": "black",
       "line_width": 1,
       "new_line_width_bool": false,
@@ -482,6 +728,10 @@
       "type": "pointer"
     },
     "text": {
+      "fill_color": "black",
+      "font_size": "9",
+      "font_weight": "normal",
+      "html_id": "4q3m3N-text",
       "new_text_font_bool": false,
       "text_font": "9pt Calibri",
       "text_point": [
@@ -491,20 +741,43 @@
       "text_str": "Linker\\1 (7)",
       "type": "text"
     },
+    "text_rect": {
+      "border_color": "gray",
+      "clicked_border_color": "black",
+      "clicked_internal": "#E6E6FA",
+      "height": 19,
+      "html_id": "4q3m3N-text-rect",
+      "internal_color": "white",
+      "type": "text-rect",
+      "width": 72.0,
+      "x": 628.3476359333501,
+      "x_diff": 8,
+      "y": 375.2989417763593,
+      "y_diff": 15
+    },
     "type": "pointer_and_text"
   },
   {
     "arc_angle": 0.021823504382373016,
-    "arc_end": -0.5907225845319614,
-    "arc_start": -0.6125460889143344,
+    "arc_end": 0.9800737422629352,
+    "arc_start": 0.9582502378805622,
     "center_x": 500,
     "center_y": 500,
+    "end_point": [
+      707.634611084237,
+      360.7596743759279
+    ],
     "feat_name": [
       "LacZ alpha"
     ],
-    "internal_color": "#260057",
+    "html_id": "8Q7B2D-arc",
+    "internal_color": "#739784",
     "line_width": 8,
     "radius": 230,
+    "start_point": [
+      704.5466978052335,
+      356.2618755619286
+    ],
     "type": "plasmid_arc_reverse"
   },
   {
@@ -513,6 +786,7 @@
         689.6146903403557,
         369.8221631492862
       ],
+      "html_id": "8Q7B2D-pointer",
       "line_color": "black",
       "line_width": 1,
       "new_line_width_bool": false,
@@ -523,6 +797,10 @@
       "type": "pointer"
     },
     "text": {
+      "fill_color": "black",
+      "font_size": "9",
+      "font_weight": "normal",
+      "html_id": "8Q7B2D-text",
       "new_text_font_bool": false,
       "text_font": "9pt Calibri",
       "text_point": [
@@ -531,6 +809,20 @@
       ],
       "text_str": "LacZ alpha (22)",
       "type": "text"
+    },
+    "text_rect": {
+      "border_color": "gray",
+      "clicked_border_color": "black",
+      "clicked_internal": "#E6E6FA",
+      "height": 19,
+      "html_id": "8Q7B2D-text-rect",
+      "internal_color": "white",
+      "type": "text-rect",
+      "width": 90.0,
+      "x": 599.1735206271576,
+      "x_diff": 8,
+      "y": 411.4212226495966,
+      "y_diff": 15
     },
     "type": "pointer_and_text"
   },
@@ -562,21 +854,31 @@
     "feat_name": [
       "LacZ alpha"
     ],
-    "internal_color": "#260057",
+    "html_id": "8Q7B2D-cds",
+    "internal_color": "#739784",
     "type": "cds"
   },
   {
     "arc_angle": 3.051322703644523,
-    "arc_end": 2.4615920965844875,
-    "arc_start": -0.5897306070600354,
+    "arc_end": 4.032388423379384,
+    "arc_start": 0.9810657197348611,
     "center_x": 500,
     "center_y": 500,
+    "end_point": [
+      305.6069078725608,
+      657.1983642826252
+    ],
     "feat_name": [
       "sensor_module"
     ],
-    "internal_color": "#ebaaaf",
+    "html_id": "6V8v0k-arc",
+    "internal_color": "#aceabf",
     "line_width": 8,
     "radius": 250,
+    "start_point": [
+      707.7726321695626,
+      360.96571170631455
+    ],
     "type": "plasmid_arc_forward"
   },
   {
@@ -585,6 +887,7 @@
         648.2673232240807,
         701.2878557289683
       ],
+      "html_id": "6V8v0k-pointer",
       "line_color": "black",
       "line_width": 1,
       "new_line_width_bool": false,
@@ -595,6 +898,10 @@
       "type": "pointer"
     },
     "text": {
+      "fill_color": "black",
+      "font_size": "9",
+      "font_weight": "normal",
+      "html_id": "6V8v0k-text",
       "new_text_font_bool": false,
       "text_font": "9pt Calibri",
       "text_point": [
@@ -604,20 +911,43 @@
       "text_str": "sensor_module (3076)",
       "type": "text"
     },
+    "text_rect": {
+      "border_color": "gray",
+      "clicked_border_color": "black",
+      "clicked_internal": "#E6E6FA",
+      "height": 19,
+      "html_id": "6V8v0k-text-rect",
+      "internal_color": "white",
+      "type": "text-rect",
+      "width": 120.0,
+      "x": 714.400984836121,
+      "x_diff": 8,
+      "y": 786.9317835934526,
+      "y_diff": 15
+    },
     "type": "pointer_and_text"
   },
   {
     "arc_angle": 0.04463898623667273,
-    "arc_end": 2.507223060293086,
-    "arc_start": 2.462584074056413,
+    "arc_end": 4.078019387087982,
+    "arc_start": 4.03338040085131,
     "center_x": 500,
     "center_y": 500,
+    "end_point": [
+      298.6386301107076,
+      648.1674684818081
+    ],
     "feat_name": [
       "LacZ alpha"
     ],
-    "internal_color": "#154589",
+    "html_id": "0O7V1w-arc",
+    "internal_color": "#825508",
     "line_width": 8,
     "radius": 230,
+    "start_point": [
+      305.45106630541295,
+      657.005453403056
+    ],
     "type": "plasmid_arc_reverse"
   },
   {
@@ -626,6 +956,7 @@
         317.83588881884225,
         640.4145170471301
       ],
+      "html_id": "0O7V1w-pointer",
       "line_color": "black",
       "line_width": 1,
       "new_line_width_bool": false,
@@ -636,6 +967,10 @@
       "type": "pointer"
     },
     "text": {
+      "fill_color": "black",
+      "font_size": "9",
+      "font_weight": "normal",
+      "html_id": "0O7V1w-text",
       "new_text_font_bool": false,
       "text_font": "9pt Calibri",
       "text_point": [
@@ -644,6 +979,20 @@
       ],
       "text_str": "LacZ alpha (45)",
       "type": "text"
+    },
+    "text_rect": {
+      "border_color": "gray",
+      "clicked_border_color": "black",
+      "clicked_internal": "#E6E6FA",
+      "height": 19,
+      "html_id": "0O7V1w-text-rect",
+      "internal_color": "white",
+      "type": "text-rect",
+      "width": 90.0,
+      "x": 389.03767628891086,
+      "x_diff": 8,
+      "y": 564.3647270266388,
+      "y_diff": 15
     },
     "type": "pointer_and_text"
   },
@@ -675,21 +1024,31 @@
     "feat_name": [
       "LacZ alpha"
     ],
-    "internal_color": "#154589",
+    "html_id": "0O7V1w-cds",
+    "internal_color": "#825508",
     "type": "cds"
   },
   {
     "arc_angle": 0.016863617022742083,
-    "arc_end": 2.5945170778225775,
-    "arc_start": 2.5776534607998354,
+    "arc_end": 4.165313404617474,
+    "arc_start": 4.148449787594732,
     "center_x": 500,
     "center_y": 500,
+    "end_point": [
+      286.4876416056652,
+      630.0479635091959
+    ],
     "feat_name": [
       "M13-fwd"
     ],
-    "internal_color": "#beadbc",
+    "html_id": "1s4V9p-arc",
+    "internal_color": "#aabaac",
     "line_width": 8,
     "radius": 250,
+    "start_point": [
+      288.7109754844871,
+      633.6298923118737
+    ],
     "type": "plasmid_arc_forward"
   },
   {
@@ -698,6 +1057,7 @@
         287.59175796590034,
         631.8436146196825
       ],
+      "html_id": "1s4V9p-pointer",
       "line_color": "black",
       "line_width": 1,
       "new_line_width_bool": false,
@@ -708,6 +1068,10 @@
       "type": "pointer"
     },
     "text": {
+      "fill_color": "black",
+      "font_size": "9",
+      "font_weight": "normal",
+      "html_id": "1s4V9p-text",
       "new_text_font_bool": false,
       "text_font": "9pt Calibri",
       "text_point": [
@@ -717,20 +1081,43 @@
       "text_str": "M13-fwd (17)",
       "type": "text"
     },
+    "text_rect": {
+      "border_color": "gray",
+      "clicked_border_color": "black",
+      "clicked_internal": "#E6E6FA",
+      "height": 19,
+      "html_id": "1s4V9p-text-rect",
+      "internal_color": "white",
+      "type": "text-rect",
+      "width": 72.0,
+      "x": 343.31423057613017,
+      "x_diff": 8,
+      "y": 577.2905302337778,
+      "y_diff": 15
+    },
     "type": "pointer_and_text"
   },
   {
     "arc_angle": 0.01983954943852062,
-    "arc_end": 2.679827140408217,
-    "arc_start": 2.6599875909696964,
+    "arc_end": 4.250623467203114,
+    "arc_start": 4.230783917764593,
     "center_x": 500,
     "center_y": 500,
+    "end_point": [
+      276.1831737040027,
+      611.3823516845796
+    ],
     "feat_name": [
       "M13-rev"
     ],
-    "internal_color": "#930600",
+    "html_id": "4n0m9y-arc",
+    "internal_color": "#084250",
     "line_width": 8,
     "radius": 230,
+    "start_point": [
+      278.43685098633136,
+      615.8005656253322
+    ],
     "type": "plasmid_arc_reverse"
   },
   {
@@ -739,6 +1126,7 @@
         295.1151309068928,
         604.5092838780379
       ],
+      "html_id": "4n0m9y-pointer",
       "line_color": "black",
       "line_width": 1,
       "new_line_width_bool": false,
@@ -749,6 +1137,10 @@
       "type": "pointer"
     },
     "text": {
+      "fill_color": "black",
+      "font_size": "9",
+      "font_weight": "normal",
+      "html_id": "4n0m9y-text",
       "new_text_font_bool": false,
       "text_font": "9pt Calibri",
       "text_point": [
@@ -758,20 +1150,43 @@
       "text_str": "M13-rev (20)",
       "type": "text"
     },
+    "text_rect": {
+      "border_color": "gray",
+      "clicked_border_color": "black",
+      "clicked_internal": "#E6E6FA",
+      "height": 19,
+      "html_id": "4n0m9y-text-rect",
+      "internal_color": "white",
+      "type": "text-rect",
+      "width": 72.0,
+      "x": 198.03475304032443,
+      "x_diff": 8,
+      "y": 634.9481029554456,
+      "y_diff": 15
+    },
     "type": "pointer_and_text"
   },
   {
     "arc_angle": 0.02182350438237357,
-    "arc_end": 2.7076025096221477,
-    "arc_start": 2.685779005239774,
+    "arc_end": 4.278398836417044,
+    "arc_start": 4.256575332034671,
     "center_x": 500,
     "center_y": 500,
+    "end_point": [
+      273.17621408856206,
+      605.123594615111
+    ],
     "feat_name": [
       "LacO"
     ],
-    "internal_color": "#ddecff",
+    "html_id": "3M1D3v-arc",
+    "internal_color": "#defbdc",
     "line_width": 8,
     "radius": 230,
+    "start_point": [
+      275.5242092258775,
+      610.0482592153659
+    ],
     "type": "plasmid_arc_reverse"
   },
   {
@@ -780,6 +1195,7 @@
         292.3898351564671,
         598.9849455909387
       ],
+      "html_id": "3M1D3v-pointer",
       "line_color": "black",
       "line_width": 1,
       "new_line_width_bool": false,
@@ -790,6 +1206,10 @@
       "type": "pointer"
     },
     "text": {
+      "fill_color": "black",
+      "font_size": "9",
+      "font_weight": "normal",
+      "html_id": "3M1D3v-text",
       "new_text_font_bool": false,
       "text_font": "9pt Calibri",
       "text_point": [
@@ -799,20 +1219,43 @@
       "text_str": "LacO (22)",
       "type": "text"
     },
+    "text_rect": {
+      "border_color": "gray",
+      "clicked_border_color": "black",
+      "clicked_internal": "#E6E6FA",
+      "height": 19,
+      "html_id": "3M1D3v-text-rect",
+      "internal_color": "white",
+      "type": "text-rect",
+      "width": 54.0,
+      "x": 171.55822382846006,
+      "x_diff": 8,
+      "y": 637.7811116729705,
+      "y_diff": 15
+    },
     "type": "pointer_and_text"
   },
   {
     "arc_angle": 0.004959887359630599,
-    "arc_end": 2.717522284341408,
-    "arc_start": 2.7125623969817774,
+    "arc_end": 4.2883186111363045,
+    "arc_start": 4.283358723776674,
     "center_x": 500,
     "center_y": 500,
+    "end_point": [
+      272.1445886722049,
+      602.8684185192002
+    ],
     "feat_name": [
       "pLac\\-10\\box"
     ],
-    "internal_color": "#127355",
+    "html_id": "3y8q7b-arc",
+    "internal_color": "#159556",
     "line_width": 8,
     "radius": 230,
+    "start_point": [
+      272.6576050197979,
+      603.9972857562436
+    ],
     "type": "plasmid_arc_reverse"
   },
   {
@@ -821,6 +1264,7 @@
         290.60836520674223,
         595.1585165847333
       ],
+      "html_id": "3y8q7b-pointer",
       "line_color": "black",
       "line_width": 1,
       "new_line_width_bool": false,
@@ -831,6 +1275,10 @@
       "type": "pointer"
     },
     "text": {
+      "fill_color": "black",
+      "font_size": "9",
+      "font_weight": "normal",
+      "html_id": "3y8q7b-text",
       "new_text_font_bool": false,
       "text_font": "9pt Calibri",
       "text_point": [
@@ -840,20 +1288,43 @@
       "text_str": "pLac\\-10\\box (5)",
       "type": "text"
     },
+    "text_rect": {
+      "border_color": "gray",
+      "clicked_border_color": "black",
+      "clicked_internal": "#E6E6FA",
+      "height": 19,
+      "html_id": "3y8q7b-text-rect",
+      "internal_color": "white",
+      "type": "text-rect",
+      "width": 96.0,
+      "x": 191.56852399228234,
+      "x_diff": 8,
+      "y": 621.5317846650522,
+      "y_diff": 15
+    },
     "type": "pointer_and_text"
   },
   {
     "arc_angle": 0.004959887359629711,
-    "arc_end": 2.7413297436676327,
-    "arc_start": 2.736369856308003,
+    "arc_end": 4.312126070462529,
+    "arc_start": 4.3071661831029,
     "center_x": 500,
     "center_y": 500,
+    "end_point": [
+      269.7603549436542,
+      597.4151212303711
+    ],
     "feat_name": [
       "pLac\\-35\\box"
     ],
-    "internal_color": "#edbddb",
+    "html_id": "6u7V3s-arc",
+    "internal_color": "#fffeae",
     "line_width": 8,
     "radius": 230,
+    "start_point": [
+      270.2463529884438,
+      598.5558810263966
+    ],
     "type": "plasmid_arc_reverse"
   },
   {
@@ -862,6 +1333,7 @@
         288.40243497382096,
         590.1469382452447
       ],
+      "html_id": "6u7V3s-pointer",
       "line_color": "black",
       "line_width": 1,
       "new_line_width_bool": false,
@@ -872,6 +1344,10 @@
       "type": "pointer"
     },
     "text": {
+      "fill_color": "black",
+      "font_size": "9",
+      "font_weight": "normal",
+      "html_id": "6u7V3s-text",
       "new_text_font_bool": false,
       "text_font": "9pt Calibri",
       "text_point": [
@@ -881,20 +1357,43 @@
       "text_str": "pLac\\-35\\box (5)",
       "type": "text"
     },
+    "text_rect": {
+      "border_color": "gray",
+      "clicked_border_color": "black",
+      "clicked_internal": "#E6E6FA",
+      "height": 19,
+      "html_id": "6u7V3s-text-rect",
+      "internal_color": "white",
+      "type": "text-rect",
+      "width": 96.0,
+      "x": 211.40322898702345,
+      "x_diff": 8,
+      "y": 604.5426789773896,
+      "y_diff": 15
+    },
     "type": "pointer_and_text"
   },
   {
     "arc_angle": 0.013887684606964434,
-    "arc_end": 2.774065000241192,
-    "arc_start": 2.7601773156342277,
+    "arc_end": 4.344861327036089,
+    "arc_start": 4.330973642429124,
     "center_x": 500,
     "center_y": 500,
+    "end_point": [
+      266.695366506376,
+      589.8273231840167
+    ],
     "feat_name": [
       "CAP\\site"
     ],
-    "internal_color": "#299527",
+    "html_id": "9X5I8p-arc",
+    "internal_color": "#981946",
     "line_width": 8,
     "radius": 230,
+    "start_point": [
+      267.9653180522105,
+      593.0586179426074
+    ],
     "type": "plasmid_arc_reverse"
   },
   {
@@ -903,6 +1402,7 @@
         285.9387542279286,
         584.129561145348
       ],
+      "html_id": "9X5I8p-pointer",
       "line_color": "black",
       "line_width": 1,
       "new_line_width_bool": false,
@@ -913,6 +1413,10 @@
       "type": "pointer"
     },
     "text": {
+      "fill_color": "black",
+      "font_size": "9",
+      "font_weight": "normal",
+      "html_id": "9X5I8p-text",
       "new_text_font_bool": false,
       "text_font": "9pt Calibri",
       "text_point": [
@@ -922,20 +1426,43 @@
       "text_str": "CAP\\site (14)",
       "type": "text"
     },
+    "text_rect": {
+      "border_color": "gray",
+      "clicked_border_color": "black",
+      "clicked_internal": "#E6E6FA",
+      "height": 19,
+      "html_id": "9X5I8p-text-rect",
+      "internal_color": "white",
+      "type": "text-rect",
+      "width": 78.0,
+      "x": 184.86864737050627,
+      "x_diff": 8,
+      "y": 605.7076312085428,
+      "y_diff": 15
+    },
     "type": "pointer_and_text"
   },
   {
     "arc_angle": 0.0,
-    "arc_end": 2.786960707376231,
-    "arc_start": 2.786960707376231,
+    "arc_end": 4.357757034171128,
+    "arc_start": 4.357757034171128,
     "center_x": 500,
     "center_y": 500,
+    "end_point": [
+      265.5564106854909,
+      586.8113093400267
+    ],
     "feat_name": [
       "Center\\LacO3"
     ],
-    "internal_color": "#dcccad",
+    "html_id": "6G6A5F-arc",
+    "internal_color": "#ccdffb",
     "line_width": 8,
     "radius": 230,
+    "start_point": [
+      265.5564106854909,
+      586.8113093400267
+    ],
     "type": "plasmid_arc_reverse"
   },
   {
@@ -944,6 +1471,7 @@
         284.3118978306517,
         579.8664045928246
       ],
+      "html_id": "6G6A5F-pointer",
       "line_color": "black",
       "line_width": 1,
       "new_line_width_bool": false,
@@ -954,6 +1482,10 @@
       "type": "pointer"
     },
     "text": {
+      "fill_color": "black",
+      "font_size": "9",
+      "font_weight": "normal",
+      "html_id": "6G6A5F-text",
       "new_text_font_bool": false,
       "text_font": "9pt Calibri",
       "text_point": [
@@ -963,20 +1495,43 @@
       "text_str": "Center\\LacO3 (0)",
       "type": "text"
     },
+    "text_rect": {
+      "border_color": "gray",
+      "clicked_border_color": "black",
+      "clicked_internal": "#E6E6FA",
+      "height": 19,
+      "html_id": "6G6A5F-text-rect",
+      "internal_color": "white",
+      "type": "text-rect",
+      "width": 96.0,
+      "x": 159.09010317339713,
+      "x_diff": 8,
+      "y": 608.272059262838,
+      "y_diff": 15
+    },
     "type": "pointer_and_text"
   },
   {
     "arc_angle": 0.006943842303481773,
-    "arc_end": 2.7968804820954913,
-    "arc_start": 2.7899366397920096,
+    "arc_end": 4.367676808890388,
+    "arc_start": 4.360732966586906,
     "center_x": 500,
     "center_y": 500,
+    "end_point": [
+      264.70681093310037,
+      584.4814487253161
+    ],
     "feat_name": [
       "LacI"
     ],
-    "internal_color": "#934281",
+    "html_id": "8J4T6J-arc",
+    "internal_color": "#213475",
     "line_width": 8,
     "radius": 230,
+    "start_point": [
+      265.2991046131075,
+      586.1132376849863
+    ],
     "type": "plasmid_arc_reverse"
   },
   {
@@ -985,6 +1540,7 @@
         283.8014180981477,
         578.4740287205141
       ],
+      "html_id": "8J4T6J-pointer",
       "line_color": "black",
       "line_width": 1,
       "new_line_width_bool": false,
@@ -995,6 +1551,10 @@
       "type": "pointer"
     },
     "text": {
+      "fill_color": "black",
+      "font_size": "9",
+      "font_weight": "normal",
+      "html_id": "8J4T6J-text",
       "new_text_font_bool": false,
       "text_font": "9pt Calibri",
       "text_point": [
@@ -1004,20 +1564,43 @@
       "text_str": "LacI (7)",
       "type": "text"
     },
+    "text_rect": {
+      "border_color": "gray",
+      "clicked_border_color": "black",
+      "clicked_internal": "#E6E6FA",
+      "height": 19,
+      "html_id": "8J4T6J-text-rect",
+      "internal_color": "white",
+      "type": "text-rect",
+      "width": 48.0,
+      "x": 181.80203466255972,
+      "x_diff": 8,
+      "y": 597.5931716424767,
+      "y_diff": 15
+    },
     "type": "pointer_and_text"
   },
   {
     "arc_angle": 0.006943842303482661,
-    "arc_end": 2.8643349501864632,
-    "arc_start": 2.8573911078829806,
+    "arc_end": 4.43513127698136,
+    "arc_start": 4.428187434677877,
     "center_x": 500,
     "center_y": 500,
+    "end_point": [
+      259.54758178558654,
+      568.4297784216842
+    ],
     "feat_name": [
       "Linker\\2"
     ],
-    "internal_color": "#bcaffe",
+    "html_id": "8T8m0c-arc",
+    "internal_color": "#ceaefe",
     "line_width": 8,
     "radius": 250,
+    "start_point": [
+      260.0285404746446,
+      570.0977789467735
+    ],
     "type": "plasmid_arc_forward"
   },
   {
@@ -1026,6 +1609,7 @@
         259.78661333708516,
         569.2641961473095
       ],
+      "html_id": "8T8m0c-pointer",
       "line_color": "black",
       "line_width": 1,
       "new_line_width_bool": false,
@@ -1036,6 +1620,10 @@
       "type": "pointer"
     },
     "text": {
+      "fill_color": "black",
+      "font_size": "9",
+      "font_weight": "normal",
+      "html_id": "8T8m0c-text",
       "new_text_font_bool": false,
       "text_font": "9pt Calibri",
       "text_point": [
@@ -1045,20 +1633,43 @@
       "text_str": "Linker\\2 (7)",
       "type": "text"
     },
+    "text_rect": {
+      "border_color": "gray",
+      "clicked_border_color": "black",
+      "clicked_internal": "#E6E6FA",
+      "height": 19,
+      "html_id": "8T8m0c-text-rect",
+      "internal_color": "white",
+      "type": "text-rect",
+      "width": 72.0,
+      "x": 179.7225973382107,
+      "x_diff": 8,
+      "y": 575.0434549915024,
+      "y_diff": 15
+    },
     "type": "pointer_and_text"
   },
   {
     "arc_angle": 0.002975932415778537,
-    "arc_end": 2.8683028600741673,
-    "arc_start": 2.865326927658389,
+    "arc_end": 4.439099186869064,
+    "arc_start": 4.436123254453285,
     "center_x": 500,
     "center_y": 500,
+    "end_point": [
+      259.27795217975176,
+      567.4751487084403
+    ],
     "feat_name": [
       "cc"
     ],
-    "internal_color": "#261931",
+    "html_id": "2y3r9q-arc",
+    "internal_color": "#640730",
     "line_width": 8,
     "radius": 250,
+    "start_point": [
+      259.47981930301705,
+      568.1912214107554
+    ],
     "type": "plasmid_arc_forward"
   },
   {
@@ -1067,6 +1678,7 @@
         259.3786193683394,
         567.833260152476
       ],
+      "html_id": "2y3r9q-pointer",
       "line_color": "black",
       "line_width": 1,
       "new_line_width_bool": false,
@@ -1077,6 +1689,10 @@
       "type": "pointer"
     },
     "text": {
+      "fill_color": "black",
+      "font_size": "9",
+      "font_weight": "normal",
+      "html_id": "2y3r9q-text",
       "new_text_font_bool": false,
       "text_font": "9pt Calibri",
       "text_point": [
@@ -1086,20 +1702,43 @@
       "text_str": "cc (3)",
       "type": "text"
     },
+    "text_rect": {
+      "border_color": "gray",
+      "clicked_border_color": "black",
+      "clicked_internal": "#E6E6FA",
+      "height": 19,
+      "html_id": "2y3r9q-text-rect",
+      "internal_color": "white",
+      "type": "text-rect",
+      "width": 36.0,
+      "x": 155.13006711567516,
+      "x_diff": 8,
+      "y": 579.9665642134663,
+      "y_diff": 15
+    },
     "type": "pointer_and_text"
   },
   {
     "arc_angle": 0.0,
-    "arc_end": 3.176807853843168,
-    "arc_start": 3.176807853843168,
+    "arc_end": 4.747604180638064,
+    "arc_start": 4.747604180638064,
     "center_x": 500,
     "center_y": 500,
+    "end_point": [
+      250.15499777225588,
+      491.1980194377322
+    ],
     "feat_name": [
       "origin"
     ],
-    "internal_color": "#ffccaf",
+    "html_id": "5j2K1v-arc",
+    "internal_color": "#cabfdb",
     "line_width": 8,
     "radius": 230,
+    "start_point": [
+      250.15499777225588,
+      491.1980194377322
+    ],
     "type": "plasmid_arc_reverse"
   },
   {
@@ -1108,6 +1747,7 @@
         270.1425979504754,
         491.90217788271366
       ],
+      "html_id": "5j2K1v-pointer",
       "line_color": "black",
       "line_width": 1,
       "new_line_width_bool": false,
@@ -1118,6 +1758,10 @@
       "type": "pointer"
     },
     "text": {
+      "fill_color": "black",
+      "font_size": "9",
+      "font_weight": "normal",
+      "html_id": "5j2K1v-text",
       "new_text_font_bool": false,
       "text_font": "9pt Calibri",
       "text_point": [
@@ -1127,20 +1771,43 @@
       "text_str": "origin (0)",
       "type": "text"
     },
+    "text_rect": {
+      "border_color": "gray",
+      "clicked_border_color": "black",
+      "clicked_internal": "#E6E6FA",
+      "height": 19,
+      "html_id": "5j2K1v-text-rect",
+      "internal_color": "white",
+      "type": "text-rect",
+      "width": 60.0,
+      "x": 387.06509906434746,
+      "x_diff": 8,
+      "y": 481.30316816384754,
+      "y_diff": 15
+    },
     "type": "pointer_and_text"
   },
   {
     "arc_angle": 0.8084616396197291,
-    "arc_end": 4.614183210664011,
-    "arc_start": 3.805721571044282,
+    "arc_end": 6.184979537458908,
+    "arc_start": 5.376517897839179,
     "center_x": 500,
     "center_y": 500,
+    "end_point": [
+      475.4880024229063,
+      251.20457806707827
+    ],
     "feat_name": [
       "Kanamycin\\phosphotransferase"
     ],
-    "internal_color": "#788354",
+    "html_id": "6P9O3b-arc",
+    "internal_color": "#708399",
     "line_width": 8,
     "radius": 230,
+    "start_point": [
+      303.1365010124272,
+      345.90664269226295
+    ],
     "type": "plasmid_arc_reverse"
   },
   {
@@ -1149,6 +1816,7 @@
         389.2406429849922,
         298.42528721681873
       ],
+      "html_id": "6P9O3b-pointer",
       "line_color": "black",
       "line_width": 1,
       "new_line_width_bool": false,
@@ -1159,6 +1827,10 @@
       "type": "pointer"
     },
     "text": {
+      "fill_color": "black",
+      "font_size": "9",
+      "font_weight": "normal",
+      "html_id": "6P9O3b-text",
       "new_text_font_bool": false,
       "text_font": "9pt Calibri",
       "text_point": [
@@ -1168,28 +1840,42 @@
       "text_str": "Kanamycin\\phosphotransferase (815)",
       "type": "text"
     },
+    "text_rect": {
+      "border_color": "gray",
+      "clicked_border_color": "black",
+      "clicked_internal": "#E6E6FA",
+      "height": 19,
+      "html_id": "6P9O3b-text-rect",
+      "internal_color": "white",
+      "type": "text-rect",
+      "width": 204.0,
+      "x": 429.3968851654304,
+      "x_diff": 8,
+      "y": 371.0664666877671,
+      "y_diff": 15
+    },
     "type": "pointer_and_text"
   },
   {
     "a": [
-      327.9854776774266,
-      341.35888266235355
+      327.9854776774265,
+      341.35888266235366
     ],
     "b": [
-      319.1642201224229,
-      333.22344074760247
+      319.16422012242276,
+      333.2234407476026
     ],
     "c": [
       315.7357649476318,
       355.76861755995816
     ],
     "d": [
-      333.8663160474291,
-      346.78251060552094
+      333.866316047429,
+      346.78251060552105
     ],
     "e": [
-      342.68757360243285,
-      354.917952520272
+      342.68757360243274,
+      354.91795252027214
     ],
     "f": [
       322.0353969152341,
@@ -1198,168 +1884,292 @@
     "feat_name": [
       "Kanamycin\\phosphotransferase"
     ],
-    "internal_color": "#788354",
+    "html_id": "6P9O3b-cds",
+    "internal_color": "#708399",
     "type": "cds"
   },
   {
     "arc_angle": 0.002975932415778093,
-    "arc_end": -0.6819845119491579,
-    "arc_start": -0.684960444364936,
+    "arc_end": 0.8888118148457387,
+    "arc_start": 0.8858358824299606,
     "center_x": 500,
     "center_y": 500,
+    "end_point": [
+      694.0808352870636,
+      342.4162782065492
+    ],
     "feat_name": "gap",
+    "html_id": "5V1P9H-gap",
     "internal_color": "black",
     "line_width": 3,
     "radius": 250,
+    "start_point": [
+      693.611018067211,
+      341.8394054039436
+    ],
     "type": "gap_arc"
   },
   {
     "arc_angle": 0.05951864831556297,
-    "arc_end": -0.6135380663862605,
-    "arc_start": -0.6730567147018235,
+    "arc_end": 0.957258260408636,
+    "arc_start": 0.8977396120930731,
     "center_x": 500,
     "center_y": 500,
+    "end_point": [
+      704.4040122083769,
+      356.059040599565
+    ],
     "feat_name": "gap",
+    "html_id": "1N6X3K-gap",
     "internal_color": "black",
     "line_width": 3,
     "radius": 250,
+    "start_point": [
+      695.4799575056749,
+      344.15524964382166
+    ],
     "type": "gap_arc"
   },
   {
     "arc_angle": 0.06844644556289747,
-    "arc_end": 2.576661483327909,
-    "arc_start": 2.5082150377650114,
+    "arc_end": 4.1474578101228055,
+    "arc_start": 4.079011364559908,
     "center_x": 500,
     "center_y": 500,
+    "end_point": [
+      288.8436372617275,
+      633.839420482693
+    ],
     "feat_name": "gap",
+    "html_id": "4w3R4L-gap",
     "internal_color": "black",
     "line_width": 3,
     "radius": 250,
+    "start_point": [
+      298.4917504157359,
+      647.9676496721021
+    ],
     "type": "gap_arc"
   },
   {
     "arc_angle": 0.06348655820326687,
-    "arc_end": 2.658995613497771,
-    "arc_start": 2.595509055294504,
+    "arc_end": 4.229791940292667,
+    "arc_start": 4.1663053820894005,
     "center_x": 500,
     "center_y": 500,
+    "end_point": [
+      278.55183153102763,
+      616.0202942667257
+    ],
     "feat_name": "gap",
+    "html_id": "8X7C6F-gap",
     "internal_color": "black",
     "line_width": 3,
     "radius": 250,
+    "start_point": [
+      286.358742026884,
+      629.8361001095785
+    ],
     "type": "gap_arc"
   },
   {
     "arc_angle": 0.003967909887705012,
-    "arc_end": 2.6847870277678485,
-    "arc_start": 2.6808191178801435,
+    "arc_end": 4.255583354562745,
+    "arc_start": 4.25161544467504,
     "center_x": 500,
     "center_y": 500,
+    "end_point": [
+      275.633485046187,
+      610.2708799614858
+    ],
     "feat_name": "gap",
+    "html_id": "2q9n4f-gap",
     "internal_color": "black",
     "line_width": 3,
     "radius": 250,
+    "start_point": [
+      276.0727950585118,
+      611.1602756702804
+    ],
     "type": "gap_arc"
   },
   {
     "arc_angle": 0.002975932415777649,
-    "arc_end": 2.711570419509851,
-    "arc_start": 2.7085944870940732,
+    "arc_end": 4.2823667463047475,
+    "arc_start": 4.27939081388897,
     "center_x": 500,
     "center_y": 500,
+    "end_point": [
+      272.76087982213414,
+      604.2227530858278
+    ],
     "feat_name": "gap",
+    "html_id": "3r3d1B-gap",
     "internal_color": "black",
     "line_width": 3,
     "radius": 250,
+    "start_point": [
+      273.07204546752126,
+      604.8985388444723
+    ],
     "type": "gap_arc"
   },
   {
     "arc_angle": 0.01686361702274297,
-    "arc_end": 2.7353778788360765,
-    "arc_start": 2.7185142618133336,
+    "arc_end": 4.306174205630973,
+    "arc_start": 4.28931058860823,
     "center_x": 500,
     "center_y": 500,
+    "end_point": [
+      270.3442312271168,
+      598.7837429405062
+    ],
     "feat_name": "gap",
+    "html_id": "9N3P9W-gap",
     "internal_color": "black",
     "line_width": 3,
     "radius": 250,
+    "start_point": [
+      272.0426576422492,
+      602.6423405091252
+    ],
     "type": "gap_arc"
   },
   {
     "arc_angle": 0.016863617022742083,
-    "arc_end": 2.7591853381623013,
-    "arc_start": 2.742321721139559,
+    "arc_end": 4.329981664957198,
+    "arc_start": 4.313118047934456,
     "center_x": 500,
     "center_y": 500,
+    "end_point": [
+      268.05774425293254,
+      593.2887452963215
+    ],
     "feat_name": "gap",
+    "html_id": "1T2I7X-gap",
     "internal_color": "black",
     "line_width": 3,
     "radius": 250,
+    "start_point": [
+      269.6638346339354,
+      597.186680797612
+    ],
     "type": "gap_arc"
   },
   {
     "arc_angle": 0.010911752191185897,
-    "arc_end": 2.7859687299043046,
-    "arc_start": 2.7750569777131187,
+    "arc_end": 4.356765056699201,
+    "arc_start": 4.345853304508015,
     "center_x": 500,
     "center_y": 500,
+    "end_point": [
+      265.642640883041,
+      587.0438293489245
+    ],
     "feat_name": "gap",
+    "html_id": "3d0m2J-gap",
     "internal_color": "black",
     "line_width": 3,
     "radius": 250,
+    "start_point": [
+      266.60637462815,
+      589.5958460855443
+    ],
     "type": "gap_arc"
   },
   {
     "arc_angle": 0.0009919774719264751,
-    "arc_end": 2.788944662320084,
-    "arc_start": 2.7879526848481575,
+    "arc_end": 4.3597409891149805,
+    "arc_start": 4.358749011643054,
     "center_x": 500,
     "center_y": 500,
+    "end_point": [
+      265.38464246601256,
+      586.3460132791273
+    ],
     "feat_name": "gap",
+    "html_id": "3o2f1g-gap",
     "internal_color": "black",
     "line_width": 3,
     "radius": 250,
+    "start_point": [
+      265.47041118493973,
+      586.5787039071315
+    ],
     "type": "gap_arc"
   },
   {
     "arc_angle": 0.05852667084363716,
-    "arc_end": 2.856399130411054,
-    "arc_start": 2.797872459567417,
+    "arc_end": 4.427195457205951,
+    "arc_start": 4.3686687863623135,
     "center_x": 500,
     "center_y": 500,
+    "end_point": [
+      260.09819394905253,
+      570.3357907007065
+    ],
     "feat_name": "gap",
+    "html_id": "1I3L0L-gap",
     "internal_color": "black",
     "line_width": 3,
     "radius": 250,
+    "start_point": [
+      264.62312301942393,
+      584.2480016550587
+    ],
     "type": "gap_arc"
   },
   {
     "arc_angle": 0.30652103882514936,
-    "arc_end": 3.1758158763712423,
-    "arc_start": 2.869294837546093,
+    "arc_end": 4.746612203166139,
+    "arc_start": 4.4400911643409895,
     "center_x": 500,
     "center_y": 500,
+    "end_point": [
+      250.1463893334044,
+      491.44586434142775
+    ],
     "feat_name": "gap",
+    "html_id": "2l1p0Z-gap",
     "internal_color": "black",
     "line_width": 3,
     "radius": 250,
+    "start_point": [
+      259.2111368008569,
+      567.2363247007476
+    ],
     "type": "gap_arc"
   },
   {
     "arc_angle": 0.6269297622572623,
-    "arc_end": 3.8047295935723557,
-    "arc_start": 3.1777998313150935,
+    "arc_end": 5.375525920367252,
+    "arc_start": 4.74859615810999,
     "center_x": 500,
     "center_y": 500,
+    "end_point": [
+      302.9837407572072,
+      346.102002631689
+    ],
     "feat_name": "gap",
+    "html_id": "4r6u5o-gap",
     "internal_color": "black",
     "line_width": 3,
     "radius": 250,
+    "start_point": [
+      250.16385206339265,
+      490.95018319535484
+    ],
     "type": "gap_arc"
   },
   {
     "fill_color": "#333",
-    "font_style": "bold 20pt Calibri",
+    "font_family": "Calibri",
+    "font_size": "20pt",
+    "font_weight": "bold",
+    "html_id": {
+      "length": "plasmid_center_text-length",
+      "name": "plasmid_center_text-name"
+    },
     "length_start_x": 447.5,
     "length_start_y": 515,
     "length_str": "6334 bp",

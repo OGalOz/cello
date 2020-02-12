@@ -130,6 +130,7 @@ divided into sections by type:
 
 from Bio import SeqIO
 import json
+import math
 from calculate_feats import *
 
 
@@ -213,41 +214,69 @@ def create_arc(feature_dict, config_dict):
         #Regular arc
         if feature_dict['feat_strand'] == 1:
             #Positive arc
+            cx = config_dict['js_info']['center_coordinates'][0]
+            cy = config_dict['js_info']['center_coordinates'][1]
+            start_point = calculate_position(cx,cy,config_dict['js_info']['circle_radius'], 
+                    feature_dict['angle_start'])
+            end_point = calculate_position(cx,cy,config_dict['js_info']['circle_radius'], 
+                    feature_dict['angle_end'])
+
             js_object = {
                     "type": "plasmid_arc_forward",
-
+                    "html_id": feature_dict['feat_html_id'] + "-arc",
+                    "start_point": start_point,
+                    "end_point": end_point,
                     "feat_name": feature_dict['feat_name'],
                     "arc_start": feature_dict['angle_start'],
                     "arc_end": feature_dict['angle_end'],
                     "arc_angle":feature_dict['angle_end'] - feature_dict['angle_start'],
                     "line_width": config_dict['js_info']['circle_line_width'],
                     "internal_color":feature_dict['feat_color'],
-                    "center_x":config_dict['js_info']['center_coordinates'][0],
-                    "center_y":config_dict['js_info']['center_coordinates'][1],
+                    "center_x":cx,
+                    "center_y":cy,
                     "radius": config_dict['js_info']['circle_radius']
             }
 
 
         else:
             #Complementary arc
+            cx = config_dict['js_info']['center_coordinates'][0]
+            cy = config_dict['js_info']['center_coordinates'][1]
+            start_point = calculate_position(cx,cy,config_dict['js_info']['circle_radius'], 
+                    feature_dict['angle_start'])
+            end_point = calculate_position(cx,cy,config_dict['js_info']['circle_radius'], 
+                    feature_dict['angle_end'])
+
             js_object = {
                     "type": "plasmid_arc_reverse",
-
+                    "start_point": start_point,
+                    "end_point": end_point,
+                    "html_id": feature_dict['feat_html_id'] + "-arc",
                     "feat_name": feature_dict['feat_name'],
                     "arc_start": feature_dict['angle_start'],
                     "arc_end": feature_dict['angle_end'],
                     "arc_angle":feature_dict['angle_end'] - feature_dict['angle_start'],
                     "line_width": config_dict['js_info']['circle_line_width'],
                     "internal_color":feature_dict['feat_color'],
-                    "center_x":config_dict['js_info']['center_coordinates'][0],
-                    "center_y":config_dict['js_info']['center_coordinates'][1],
+                    "center_x":cx,
+                    "center_y": cy,
                     "radius": config_dict['js_info']['complementary_radius']
             }
 
     else:
         #gap arc
+        cx = config_dict['js_info']['center_coordinates'][0]
+        cy = config_dict['js_info']['center_coordinates'][1]
+        start_point = calculate_position(cx,cy,config_dict['js_info']['circle_radius'], 
+                feature_dict['angle_start'])
+        end_point = calculate_position(cx,cy,config_dict['js_info']['circle_radius'], 
+                feature_dict['angle_end'])
+
         js_object = {
                     "type": "gap_arc",
+                    "start_point": start_point,
+                    "end_point": end_point,
+                    "html_id": feature_dict['feat_html_id'] + "-gap",
                     "feat_name": feature_dict['feat_name'],
                     "arc_start": feature_dict['angle_start'],
                     "arc_end": feature_dict['angle_end'],
@@ -255,8 +284,8 @@ def create_arc(feature_dict, config_dict):
                     "line_width": config_dict['js_info']['gap_arc_info']['circle_line_width'],
                     "internal_color": config_dict['js_info']['gap_arc_info']['color'],
 
-                    "center_x":config_dict['js_info']['center_coordinates'][0],
-                    "center_y":config_dict['js_info']['center_coordinates'][1],
+                    "center_x":cx,
+                    "center_y":cy,
                     "radius": config_dict['js_info']['circle_radius']
             }
 
@@ -292,17 +321,24 @@ def create_center_text(plasmid_info, config_dict):
     plasmid_length_str_len = len(plasmid_length_str)*15
     plasmid_length_str_start = cc[0] - float(plasmid_length_str_len)/2
 
-    font_style = "bold {}pt Calibri".format(js_info['title_text_size'])
+    font_weight = "bold"
+    font_size = "{}pt".format(str(js_info['title_text_size']))
+    font_family = "Calibri"
 
     center_text_obj = {
         "type" : "center_text",
+        "html_id": { "name": "plasmid_center_text-name",
+        "length": "plasmid_center_text-length"
+            },
         "plasmid_name": plasmid_name_str,
         "name_start_x": plasmid_name_start,
         "name_start_y": cc[1] - 15,
         "length_str": plasmid_length_str,
         "length_start_x": plasmid_length_str_start,
         "length_start_y": cc[1] + 15,
-        "font_style": font_style,
+        "font_weight" : font_weight,
+        "font_size": font_size,
+        "font_family": font_family,
         "fill_color": js_info["title_text_color"]
     }
 
