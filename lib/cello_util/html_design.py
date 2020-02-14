@@ -24,7 +24,8 @@ import logging
 import shutil
 import traceback
 import json
-from cello_util.plasmid_map.plasmid_map_viewer import get_cello_plasmid_div 
+from cello_util.plasmid_map.plasmid_map_viewer import get_cello_plasmid_map_div 
+
 
 
 """
@@ -260,12 +261,10 @@ def make_plasmid_divs(gbk_files, user_output_name, plasmid_vis_info):
     plasmid_divs_str = ''
 
     #We place basic parameters on the design of the plasmid map:
-    base_html_filepath = os.path.join(os.path.dirname(__file__), "plasmid_html_base.html")
+    base_div_html_fp = os.path.join(os.path.dirname(__file__), 
+            ".plasmid_map/div_svg_template.html")
     config_filepath = os.path.join(os.path.dirname(__file__), "plasmid_map/config.json")
-    with open(config_filepath, "r") as f:
-        config_file_str = f.read()
-        config_dict = json.loads(config_file_str)
-
+ 
     if plasmid_vis_info["base_plasmid_info"] == "none":
         #If there are expected to be big CDs, we make the arrow smaller.
         #Instead of 85 percent, it will be 96 percent
@@ -276,15 +275,18 @@ def make_plasmid_divs(gbk_files, user_output_name, plasmid_vis_info):
     for i in range(k):
         gb_file = gbk_files[i]
         try:
-            plasmid_map_dict = get_cello_plasmid_div(gb_file, base_html_filepath, config_dict, user_output_name)
+            plasmid_map_dict = get_cello_plasmid_map_div(gb_file, base_div_html_fp,
+                    config_filepath, user_output_name)
         except:
             logging.critical("FAILED TO MAKE VISUALIZATION: {}".format(gb_file))
             logging.critical(traceback.print_exc())
             break
         plasmid_map_html = plasmid_map_dict["complete_div_str"]
         plasmid_map_name = plasmid_map_dict["plasmid_name"]
-        plasmid_map_html = plasmid_map_html.replace("Plasmid_Name_Here", user_output_name + "_" + plasmid_map_name)
-        plasmid_map_html = plasmid_map_html.replace('id="Plasmid_Div_Id_Here"', 'id="Plasmid_Map_' + str(i+1) + '"')
+        plasmid_map_html = plasmid_map_html.replace("Plasmid_Name_Here",
+                user_output_name + "_" + plasmid_map_name)
+        plasmid_map_html = plasmid_map_html.replace('id="Plasmid_Div_Id_Here"',
+                'id="Plasmid_Map_' + str(i+1) + '"')
         plasmid_map_html = plasmid_map_html.replace('myCanvas','myCanvas_' + str(i+1))
         plasmid_divs_str += plasmid_map_html + '\n'
 

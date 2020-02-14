@@ -317,7 +317,8 @@ class cello:
         ucf_command = ""
         if new_ucf_bool:
             ucf_command = "-UCF " + ucf_filepath
-        dexec_args = "-verilog new_verilog.v -input_promoters new_inputs.txt -output_genes new_outputs.txt " + ucf_command
+        dexec_args = "-verilog new_verilog.v -input_promoters new_inputs.txt" 
+        dexec_args += " -output_genes new_outputs.txt " + ucf_command
         op = os.system('mvn -e -f /cello/pom.xml -DskipTests=true -PCelloMain -Dexec.args="{}"'.format(dexec_args))
         logging.debug("Response from Cello: ")
         logging.debug(op)
@@ -348,9 +349,12 @@ class cello:
         full_path_output_folder = os.path.join(kb_output_folder,output_folder)
 
         #Copying input files to output folder.
-        shutil.copyfile(os.path.join(cello_kb, "new_verilog.v"), os.path.join(full_path_output_folder,"VERILOG_INPUT.v" ))
-        shutil.copyfile(os.path.join(cello_kb, "new_inputs.txt"), os.path.join(full_path_output_folder,"PROMOTERS_INPUT.txt" ))
-        shutil.copyfile(os.path.join(cello_kb, "new_outputs.txt"), os.path.join(full_path_output_folder,"OUTPUTS_INPUT.txt" ))
+        shutil.copyfile(os.path.join(cello_kb, "new_verilog.v"), os.path.join(
+            full_path_output_folder,"VERILOG_INPUT.v" ))
+        shutil.copyfile(os.path.join(cello_kb, "new_inputs.txt"), os.path.join(
+            full_path_output_folder,"PROMOTERS_INPUT.txt" ))
+        shutil.copyfile(os.path.join(cello_kb, "new_outputs.txt"), os.path.join(
+            full_path_output_folder,"OUTPUTS_INPUT.txt" ))
         #The UCF
         shutil.copyfile(ucf_filepath, os.path.join(full_path_output_folder, "UCF.json"))
 
@@ -361,7 +365,8 @@ class cello:
         
 
         if kb_genome_bool == True:
-            genome_ref_list = make_kbase_genomes(output_files, kb_output_folder, output_folder, gfu, ws_name, main_output_name)
+            genome_ref_list = make_kbase_genomes(output_files, kb_output_folder, output_folder, gfu,
+                    ws_name, main_output_name)
             ext_report_params['objects_created'] = genome_ref_list
         else:
             turn_ape_to_gbk(output_files, kb_output_folder, output_folder)
@@ -369,8 +374,10 @@ class cello:
 
         #We copy the base plasmids if the base plasmid info is "e_coli" or "tetrlaci"
         if base_plasmid_info == "e_coli":
-            shutil.copyfile("/kb/module/lib/cello_util/plasmids/pAN1201.ape", full_path_output_folder)
-            shutil.copyfile("/kb/module/lib/cello_util/plasmids/pAN4020.ape", full_path_output_folder)
+            shutil.copyfile("/kb/module/lib/cello_util/plasmids/pAN1201.ape", 
+                    full_path_output_folder)
+            shutil.copyfile("/kb/module/lib/cello_util/plasmids/pAN4020.ape", 
+                    full_path_output_folder)
 
         dfu = DataFileUtil(self.callback_url)
         file_zip_shock_id = dfu.file_to_shock({'file_path': kb_output_folder,
@@ -380,7 +387,8 @@ class cello:
         config_info = {
                 'base_plasmid_info': base_plasmid_info
                 }
-        html_result_dict = build_html(full_path_output_folder, self.shared_folder, main_output_name, config_info)
+        html_result_dict = build_html(full_path_output_folder, self.shared_folder, 
+                main_output_name, config_info)
         
         report_shock_id = dfu.file_to_shock({'file_path': html_result_dict['output_directory'],
                                                   'pack': 'zip'})['shock_id']

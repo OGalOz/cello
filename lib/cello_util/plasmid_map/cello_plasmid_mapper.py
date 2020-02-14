@@ -34,7 +34,7 @@ from prep_py_feat import feature_prepare
 from feature_refine import refine_features
 from py_feat_to_js_feat import js_prepare
 from features_to_svg import make_svg_js
-from plasmid_html import html_prepare
+from plasmid_html import html_prepare, div_html_prepare
 
 def main():
     args = sys.argv
@@ -67,6 +67,36 @@ def main():
 
     return 0
 
+def get_cello_plasmid_map_div(gbk_input,base_div_html_fp, config_fp):
+    args = sys.argv
+    gbk_input    = args[1] 
+    config_fp = args[2] 
+    out_fp       = args[3] 
+       
+    program_dir = path.dirname(path.abspath(__file__))
+
+    genbank_prep(gbk_input, config_fp)
+    
+    prepared_genbank_fp = path.join(program_dir, "tmp/prepared_genbank.gbk")
+
+    feature_prepare(prepared_genbank_fp, config_fp)
+
+    feature_list_fp = path.join(program_dir, "tmp/feature_list.json")
+    plasmid_info_fp = path.join(program_dir, "tmp/plasmid_info.json")
+
+    
+
+    js_prepare(feature_list_fp, plasmid_info_fp, config_fp)
+
+    js_feats_fp = path.join(program_dir, "tmp/js_feats.json")
+    make_svg_js(js_feats_fp)
+
+    plasmid_js = path.join(program_dir, "tmp/plasmid_js.js")
+    template_html_fp = path.join(program_dir, base_div_html_fp)
+
+    html_str = div_html_prepare(plasmid_js, template_html_fp, out_fp, config_fp)
+
+    return html_str
 
 
 

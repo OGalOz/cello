@@ -80,6 +80,198 @@ div.desc {
 </head>
 <body>
 
+    <script>
+        var lists_dict = {
+            "single_selected_id" : [],
+            "multi_selected_ids": [],
+            "gapified_features": [],
+            "deleted_features": {}
+        };
+        function highlight_text_rect_by_id(id_val, highlight_color, hg_bool) {
+
+            if (hg_bool == true) {
+                if (id_val.split('-')[1] == 'prtxt') {
+                    base_id = get_base_id(id_val)
+                    var crnt_text_rect = d3.select("#".concat(base_id).concat("-text-rect"));
+                    crnt_text_rect.attr("fill", highlight_color);
+                    var crnt_text_rect = d3.select("#".concat(base_id).concat("-pointer"));
+                    crnt_text_rect.attr("stroke", "gray");
+                } 
+            } else {
+                if (id_val.split('-')[1] == 'prtxt') {
+                    base_id = get_base_id(id_val)
+                    var crnt_text_rect = d3.select("#".concat(base_id).concat("-text-rect"));
+                    crnt_text_rect.attr("fill", "white");
+                    var crnt_text_rect = d3.select("#".concat(base_id).concat("-pointer"));
+                    crnt_text_rect.attr("stroke", "black");
+                } 
+
+
+            }
+
+        }
+
+       function remove_elem_by_id(id_val, remove_bool) {
+            let crnt_elem = d3.select("#".concat(id_val));
+            if (remove_bool == true) {
+                elem_copy = Object.assign({}, crnt_elem);
+                lists_dict["deleted_features"][id_val] = elem_copy;
+                crnt_elem.remove();
+            } else {
+                let n_svg = document.getElementsByTagName('svg')[0];
+                copied_obj = lists_dict["deleted_features"][id_val];
+                obj_node = copied_obj._groups[0][0];
+                n_svg.appendChild(obj_node);
+            }
+
+
+        }
+        function reset_all_deleted_features() {
+            deleted_ids = Object.keys(lists_dict["deleted_features"])
+            console.log(deleted_ids);
+            for (let g = 0; g < deleted_ids.length; g++) {
+                reset_id_val = deleted_ids[g];
+                remove_elem_by_id(reset_id_val, false);
+            }
+            lists_dict["deleted_features"] = {}
+
+
+        }
+
+
+        function select_and_highlight_by_id(id_val) {
+           
+            if ( !(lists_dict["single_selected_id"].includes(id_val))) {
+                lists_dict["single_selected_id"] = [id_val]; 
+            } else {
+                lists_dict["single_selected_id"] = [];
+            }
+
+
+            let multi_id = lists_dict["multi_selected_ids"]
+            if ( !(multi_id.includes(id_val))) {
+                highlight_text_rect_by_id(id_val, "&{--Highlight Color--}&", true)
+                multi_id.push(id_val);
+                lists_dict["multi_selected_ids"] = multi_id;
+            } else {
+                highlight_text_rect_by_id(id_val, "&{--Highlight Color--}&", false)
+                multi_id = multi_id.filter(item => item !== id_val) 
+                lists_dict["multi_selected_ids"] = multi_id;
+            }
+
+        }
+        function unselect_all() {
+            //For each id in multi_selected_ids, unhighlight and replace text
+            //Then make the list []
+            let id_list = lists_dict["multi_selected_ids"]
+            for (let i = 0; i < id_list.length; i++)  {
+                id_val = id_list[i];
+                highlight_text_rect_by_id(id_val, "foo" , false)
+            }
+            lists_dict["multi_selected_ids"] = [];
+
+        }
+        function delete_all_selected() {
+            let id_list = lists_dict["multi_selected_ids"]
+            for (let i = 0; i < id_list.length; i++)  {
+                id_val = id_list[i];
+                console.log(id_val);
+                if (id_val.includes("-prtxt")) {
+                    console.log("found id: ".concat(id_val))
+                    base_id = get_base_id(id_val)
+                    console.log(base_id)
+                    remove_pointer_collection_by_id(base_id)
+                }
+            }
+            lists_dict["multi_selected_ids"] = [];
+        }
+        function remove_pointer_collection_by_id(base_id) {
+            x = base_id.concat("-pointer");
+            y = base_id.concat("-text-rect");
+            z = base_id.concat("-text");
+            pointer_text_list = [x,y,z];
+            for (let j = 0; j < pointer_text_list.length; j++) {
+                pointer_text_id_val = pointer_text_list[j];
+                remove_elem_by_id(pointer_text_id_val, true);
+
+            }
+        }
+        function get_base_id(id_val) {
+
+        base_id = id_val.split("-")[0]
+        return base_id
+
+        }
+        function pointer_text_selection(id_val) {
+            base_id = get_base_id(id_val)
+            select_and_highlight_by_id(base_id.concat("-prtxt"))
+        }
+        function update_xy_values_by_id(obj_id, dx, dy) {
+        
+            d3_obj = d3.select("#".concat(obj_id))
+
+            let orig_x  = parseInt(d3_obj.raise()._groups[0][0].attributes[1].value);
+            let orig_y  = parseInt(d3_obj.raise()._groups[0][0].attributes[2].value);
+            let new_x = orig_x + dx;
+            let new_y = orig_y + dy;
+            d3_obj.raise()._groups[0][0].attributes[1].value = new_x.toString();
+            d3_obj.raise()._groups[0][0].attributes[2].value = new_y.toString();
+        
+        }
+
+
+        //DRAGGING ELEMENTS
+        function drag_started() {
+          let my_elem = d3.select(this).classed("dragging", true);
+          base_id = get_base_id(my_elem.attr("id"))
+          text_rect_id = base_id.concat("-text-rect")
+          text_rect_elem = d3.select("#".concat(text_rect_id))
+          pointer_id = base_id.concat("-pointer")
+          pointer_elem = d3.select("#".concat(pointer_id))
+          text_id = base_id.concat("-text")
+          text_elem = d3.select("#".concat(text_id))
+        
+          pointer_base_x = pointer_elem.raise()._groups[0][0].attributes["x2"].value
+          pointer_base_y = pointer_elem.raise()._groups[0][0].attributes["y2"].value
+        
+          x_text_displacement = 5
+          y_text_displacement = 15
+          let coordinates= d3.mouse(this);
+          let mouse_x = coordinates[0];
+          let mouse_y = coordinates[1];
+          x_offset = parseInt(text_rect_elem.raise()._groups[0][0].attributes["x"].value) - mouse_x;
+          y_offset = parseInt(text_rect_elem.raise()._groups[0][0].attributes["y"].value) - mouse_y;
+        
+          d3.event.on("drag", dragged).on("end", ended);
+        
+          function dragged() {
+            o_x = parseInt(my_elem.raise().attr("x"))
+            o_y = parseInt(my_elem.raise().attr("y"))
+            n_x = d3.event.x
+            n_y = d3.event.y
+        
+        
+            pointer_elem.raise()._groups[0][0].attributes["x1"].value = (n_x + x_offset).toString()
+            pointer_elem.raise()._groups[0][0].attributes["y1"].value = (n_y + y_offset).toString()
+            text_rect_elem.raise()._groups[0][0].attributes["x"].value = (n_x + x_offset).toString()
+            text_rect_elem.raise()._groups[0][0].attributes["y"].value = (n_y + y_offset).toString()
+            text_elem.raise()._groups[0][0].attributes["x"].value = (n_x +
+                x_text_displacement + x_offset).toString();
+            text_elem.raise()._groups[0][0].attributes["y"].value = (n_y +
+                y_text_displacement + y_offset).toString();
+        
+          }
+        
+          function ended() {
+            my_elem.classed("dragging", false);
+          }
+        }
+        
+
+
+    </script>
+
+
 <p></p>
 
 <div class="tab">
