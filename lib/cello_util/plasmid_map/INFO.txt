@@ -1,4 +1,21 @@
 
 
+Features to Add:
+    Replace feature with gap, and go backwards (gap back to feature) "gapify <-> ungapify"
+    Edit text size
+    Edit text box size
+    Remove text box
+    Highlight text
+    Boldify text
+    Change thickness of feature
+    
+Javascript:
+    Keep lists:
+        clicked_features
+        focused_feature
+        features_into_gaps: []
+
+    
+
 
 

@@ -1,93 +1,5 @@
 #python3
 """
-This file maintians the functions for printing
-js features into javascript.
-List of features:
-    plasmid_arc_forward:
-        arc_start:
-        arc_end:
-        arc_angle:
-        line_width:
-        internal_color:
-        center_x:
-        center_y:
-        radius:
-    plasmid_arc_reverse
-        arc_start:
-        arc_end:
-        arc_angle:
-        line_width:
-        internal_color:
-        center_x:
-        center_y:
-        radius:
-    pointer_and_text:
-        pointer:
-            new_line_width_bool:
-            line_width:
-            line_color:
-            start_point:
-            end_point:
-        text:
-            text_point:
-            text_str:
-            new_text_font_bool:
-            text_font
-    text:
-        text_point:
-        text_str:
-        new_text_font_bool:
-        text_font
-
-    center_text:
-        plasmid_name:
-        plasmid_len:
-        text_size
-        font_type:
-
-    promoter:
-        color
-        line_width
-        arc_start_angle
-        arc_angle
-        arc_end_angle
-        arc_begin_point
-        arc_end_point
-        inner_flag_start
-        inner_flag_end
-        outer_flag_start
-        outer_flag_end
-
-    terminator:
-        border_color:
-        internal_color:
-        base_1: list<float> earlier angle point touching circle
-        base_2: later angle point touching circle
-        armpit_1: point directly above base 1 in the T
-        armpit_2: point directly above base 2 in the T
-        palm_hand_1: bottom edge of T which is closer to armpit 1
-        palm_hand_2: bottom edge of T which is closer to armpit 2
-        back_hand_1: highest point on T which is right above palm hand 1
-        back_hand_2: highest point on T which is right above palm hand 2
-
-    rbs:
-        circle_center:
-        radius:
-        border_color:
-        internal_color
-        border_width:
-
-    cds:
-        The CDS visual will look like an arrow head ending at the end of the CDS.
-        In order to draw this, we need 6 variables. The variables represent:
-            var_a: point on plasmid map that outer arrow starts.
-            var_b: point outside plasmid map that outer arrow has its peak.
-            var_c: point on plasmid map, same as end of cds, where arrow ends.
-            var_d: inner complement to a.
-            var_e: inner complement to b.
-            var_f: inner complement to c.
-            internal_color:
-
     gap_arc:
         line_width:
         line_color:
@@ -193,6 +105,12 @@ def print_pointer_and_text(js_feat, num):
     js_str += ".attr('width', '{}')\n".format(text_rect_dict["width"])
     js_str += ".attr('height', '{}')\n".format(text_rect_dict["height"])
     js_str += ".attr('stroke', '{}')\n".format(text_rect_dict['border_color'])
+    on_click_str = ".on('click', () => [& \n" + \
+        "let click_id = '{}';\n".format(text_rect_dict['html_id']) + \
+        "pointer_text_selection(click_id)&])\n"
+    on_click_str = on_click_str.replace('[&', '{').replace('&]', '}')
+    js_str += on_click_str
+    js_str += '.call(d3.drag().on("start", drag_started))\n'
     js_str += ".attr('fill', '{}');\n\n".format(text_rect_dict['internal_color'])
 
     #Text (after text box)
@@ -207,6 +125,7 @@ def print_pointer_and_text(js_feat, num):
         'start_x': text_dict["text_point"][0],
         'start_y':  text_dict["text_point"][1],
         'text_str':  text_dict['text_str'],
+        'text_rect_bool': True,
             }
 
     js_str += ut_text(txt_dict)
@@ -232,7 +151,7 @@ def print_center_text(js_feat, num):
 
     js_str = "//Center Text: \n"
     ct_dict = {
-            'const_name': "center_name",
+        'const_name': "center_name",
         'final_id': js_feat['html_id']["name"],
         'font_weight': js_feat["font_weight"],
         'font_size': js_feat["font_size"],
@@ -414,6 +333,43 @@ def print_cds(js_feat, num):
     return js_str
 
 
+def print_delete_box(js_feat):
+
+    
+    js_str = "// Delete-Box: \n"
+    js_str += "const {} = svg.insert('image')\n".format("delete_box")
+    js_str += ".attr('id', '{}')\n".format(js_feat['html_id'])
+    js_str += ".attr('x', '{}')\n".format(js_feat["x"])
+    js_str += ".attr('y', '{}')\n".format(js_feat["y"])
+    js_str += ".attr('width', '{}')\n".format(js_feat["width"])
+    js_str += ".attr('height', '{}')\n".format(js_feat["height"])
+    js_str += ".attr('xlink:href', '{}')".format(js_feat['img_link'])
+    on_click_str = ".on('click', () => [& \n delete_all_selected();\n&]);\n" 
+    on_click_str = on_click_str.replace('[&', '{').replace('&]','}')
+    js_str += on_click_str
+
+    return js_str
+
+def print_reset_box(js_feat):
+
+    
+    js_str = "// Reset-Box: \n"
+    js_str += "const {} = svg.insert('image')\n".format("reset_box")
+    js_str += ".attr('id', '{}')\n".format(js_feat['html_id'])
+    js_str += ".attr('x', '{}')\n".format(js_feat["x"])
+    js_str += ".attr('y', '{}')\n".format(js_feat["y"])
+    js_str += ".attr('width', '{}')\n".format(js_feat["width"])
+    js_str += ".attr('height', '{}')\n".format(js_feat["height"])
+    js_str += ".attr('stroke', '{}')\n".format(js_feat['border_color'])
+    js_str += ".attr('xlink:href', '{}')".format(js_feat['img_link'])
+    on_click_str = ".on('click', () => [& \n reset_all_deleted_features();\n&]);\n" 
+    on_click_str = on_click_str.replace('[&', '{').replace('&]','}')
+    js_str += on_click_str
+
+    return js_str
+
+
+
 
 #UTILITY FUNCTIONS:
 """
@@ -427,14 +383,26 @@ Inputs:
         start_x:
         start_y:
         text_str:
+        text_rect_bool:
 """
 def ut_text(inp_dict):
+
     js_str = "const {} = svg.append('text')\n".format(inp_dict['const_name'])
     js_str += ".attr('id', '{}')\n".format(inp_dict['final_id'])
     js_str += ".attr('font-weight', '{}')\n".format(inp_dict["font_weight"])
     js_str += ".attr('font-size', '{}')".format(inp_dict['font_size'])
     js_str += ".attr('x', {})\n".format(inp_dict["start_x"])
     js_str += ".attr('y', '{}')\n".format(inp_dict["start_y"])
+    
+    if "text_rect_bool" in inp_dict.keys():
+        if inp_dict["text_rect_bool"] == True:
+            on_click_str = ".on('click', () => [& \n" + \
+                "let click_id = '{}';\n".format(inp_dict['final_id']) + \
+                "pointer_text_selection(click_id)&])\n"
+            on_click_str = on_click_str.replace('[&', '{').replace('&]', '}')
+            js_str += on_click_str
+
+
     js_str += ".text('{}');\n\n".format(inp_dict['text_str'])
     return js_str
 
@@ -459,6 +427,13 @@ def ut_line(inp_dict):
     js_str += ".attr('x2', '{}')\n".format(inp_dict["end_point"][0])
     js_str += ".attr('y2', '{}')\n".format(inp_dict["end_point"][1])
     js_str += ".attr('stroke', '{}')\n".format(inp_dict['line_color'])
+    if "pointer" in inp_dict['final_id']:
+        on_click_str = ".on('click', () => [& \n" + \
+        "let click_id = '{}';\n".format(inp_dict['final_id']) + \
+        "pointer_text_selection(click_id)&])\n".format(
+            inp_dict['const_name'])
+        on_click_str = on_click_str.replace('[&', '{').replace('&]','}')
+        js_str += on_click_str
     js_str += ".attr('stroke-width', '{}');\n\n".format(inp_dict['line_width'])
 
     return js_str

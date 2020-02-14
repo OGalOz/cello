@@ -304,9 +304,9 @@ def calculate_text_rect(text_start_coordinates, text_str, js_info):
     text_size = js_info['text_size']
     height = text_size + 10
     text_rect_info_dict['height'] = height
-    width_to_pixel_ratio = text_size/1.5
-    width = len(text_str) * width_to_pixel_ratio
-    text_rect_info_dict['width'] = width 
+    width_to_pixel_ratio = text_size/1.862
+    text_box_width = len(text_str) * width_to_pixel_ratio
+    text_rect_info_dict['width'] = text_box_width 
     #x and y represent the top left corner of the rectangle
     x = text_start_coordinates[0] - text_rect_info_dict["x_diff"]
     y = text_start_coordinates[1] - text_rect_info_dict["y_diff"]

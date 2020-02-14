@@ -205,6 +205,14 @@ def create_javascript_object_list(feature_dict_list, plasmid_info, config_dict):
     plasmid_name_object = create_center_text(plasmid_info, config_dict)
     javascript_object_list.append(plasmid_name_object)
 
+    #Creating delete box
+    user_delete_box = create_delete_box(config_dict)
+    javascript_object_list.append(user_delete_box)
+
+    #Creating reset box
+    user_reset_box = create_reset_box(config_dict)
+    javascript_object_list.append(user_reset_box)
+
     return javascript_object_list
 
 def create_arc(feature_dict, config_dict):
@@ -344,4 +352,33 @@ def create_center_text(plasmid_info, config_dict):
 
 
     return center_text_obj 
+
+
+def create_delete_box(config_dict):
+    delete_box_object = {"type": "delete_box"}
+    delete_box_object["html_id"] = "delete-box"
+    db_info = config_dict["js_info"]["delete_box_info"]
+    delete_box_object["x"] = db_info["top_left_corner_x"]
+    delete_box_object["y"] = db_info["top_left_corner_y"]
+    delete_box_object["width"] = db_info["width"]
+    delete_box_object["height"] = db_info["height"]
+    delete_box_object["internal_color"] = db_info["internal_color"]
+    delete_box_object["border_color"] = db_info["border_color"]
+    delete_box_object["img_link"] = db_info["img_link"]
+
+    return delete_box_object
+
+def create_reset_box(config_dict):
+    reset_box_object = {"type": "reset_box"}
+    reset_box_object["html_id"] = "reset-box"
+    rb_info = config_dict["js_info"]["reset_box_info"]
+    reset_box_object["x"] = rb_info["top_left_corner_x"]
+    reset_box_object["y"] = rb_info["top_left_corner_y"]
+    reset_box_object["width"] = rb_info["width"]
+    reset_box_object["height"] = rb_info["height"]
+    reset_box_object["internal_color"] = rb_info["internal_color"]
+    reset_box_object["border_color"] = rb_info["border_color"]
+    reset_box_object["img_link"] = rb_info["img_link"]
+
+    return reset_box_object
 

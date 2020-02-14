@@ -7,8 +7,8 @@
     "bp_len": 52,
     "bp_start": 1,
     "end_percentage": 0.008367540258920114,
-    "feat_color": "#cefeae",
-    "feat_html_id": "2C0i7P",
+    "feat_color": "#fbffda",
+    "feat_html_id": "G4c7w7",
     "feat_name": [
       "L3S3P21"
     ],
@@ -41,8 +41,8 @@
     "bp_len": 3,
     "bp_start": 54,
     "end_percentage": 0.008999052731291445,
-    "feat_color": "#706875",
-    "feat_html_id": "9W6B3a",
+    "feat_color": "#840253",
+    "feat_html_id": "N7G7G6",
     "feat_name": [
       "Escar"
     ],
@@ -75,8 +75,8 @@
     "bp_len": 70,
     "bp_start": 58,
     "end_percentage": 0.020208399115882538,
-    "feat_color": "#bcdfdb",
-    "feat_html_id": "3M8M5X",
+    "feat_color": "#efcdcb",
+    "feat_html_id": "a7n8Z7",
     "feat_name": [
       "pTac"
     ],
@@ -109,8 +109,8 @@
     "bp_len": 78,
     "bp_start": 129,
     "end_percentage": 0.03268077044521629,
-    "feat_color": "#554452",
-    "feat_html_id": "9S3w1y",
+    "feat_color": "#199078",
+    "feat_html_id": "Q7m3r0",
     "feat_name": [
       "RiboJ53"
     ],
@@ -143,8 +143,8 @@
     "bp_len": 17,
     "bp_start": 208,
     "end_percentage": 0.035522576570887275,
-    "feat_color": "#cbbeeb",
-    "feat_html_id": "6M7o5b",
+    "feat_color": "#eadddd",
+    "feat_html_id": "y4e6h1",
     "feat_name": [
       "P3"
     ],
@@ -177,8 +177,8 @@
     "bp_len": 605,
     "bp_start": 226,
     "end_percentage": 0.13119671613514367,
-    "feat_color": "#664944",
-    "feat_html_id": "7R2b5c",
+    "feat_color": "#261495",
+    "feat_html_id": "H4k7w5",
     "feat_name": [
       "PhlF"
     ],
@@ -211,8 +211,8 @@
     "bp_len": 56,
     "bp_start": 832,
     "end_percentage": 0.14019576886643512,
-    "feat_color": "#bbadbd",
-    "feat_html_id": "8o6c3k",
+    "feat_color": "#fceace",
+    "feat_html_id": "A2H6I7",
     "feat_name": [
       "ECK120033737"
     ],
@@ -245,8 +245,8 @@
     "bp_len": 3,
     "bp_start": 889,
     "end_percentage": 0.14082728133880645,
-    "feat_color": "#285885",
-    "feat_html_id": "7T9u1S",
+    "feat_color": "#590663",
+    "feat_html_id": "D0g4I3",
     "feat_name": [
       "Cscar"
     ],
@@ -279,8 +279,8 @@
     "bp_len": 7,
     "bp_start": 897,
     "end_percentage": 0.14272181875592044,
-    "feat_color": "#eeddaa",
-    "feat_html_id": "4q3m3N",
+    "feat_color": "#facbdb",
+    "feat_html_id": "M2J2W2",
     "feat_name": [
       "Linker\\1"
     ],
@@ -313,8 +313,8 @@
     "bp_len": 22,
     "bp_start": 966,
     "end_percentage": 0.15598358067571835,
-    "feat_color": "#739784",
-    "feat_html_id": "8Q7B2D",
+    "feat_color": "#240562",
+    "feat_html_id": "t3W4H0",
     "feat_name": [
       "LacZ alpha"
     ],
@@ -347,8 +347,8 @@
     "bp_len": 3076,
     "bp_start": 989,
     "end_percentage": 0.6417745500473634,
-    "feat_color": "#aceabf",
-    "feat_html_id": "6V8v0k",
+    "feat_color": "#aabbcc",
+    "feat_html_id": "j2g9r4",
     "feat_name": [
       "sensor_module"
     ],
@@ -381,8 +381,8 @@
     "bp_len": 45,
     "bp_start": 4066,
     "end_percentage": 0.6490369434796337,
-    "feat_color": "#825508",
-    "feat_html_id": "0O7V1w",
+    "feat_color": "#250105",
+    "feat_html_id": "w8O5n8",
     "feat_name": [
       "LacZ alpha"
     ],
@@ -415,8 +415,8 @@
     "bp_len": 17,
     "bp_start": 4182,
     "end_percentage": 0.662930217871803,
-    "feat_color": "#aabaac",
-    "feat_html_id": "1s4V9p",
+    "feat_color": "#ffdfcf",
+    "feat_html_id": "Z4T8f7",
     "feat_name": [
       "M13-fwd"
     ],
@@ -449,8 +449,8 @@
     "bp_len": 20,
     "bp_start": 4265,
     "end_percentage": 0.6765077360277865,
-    "feat_color": "#084250",
-    "feat_html_id": "4n0m9y",
+    "feat_color": "#446608",
+    "feat_html_id": "L6n9Y0",
     "feat_name": [
       "M13-rev"
     ],
@@ -483,8 +483,8 @@
     "bp_len": 22,
     "bp_start": 4291,
     "end_percentage": 0.6809283233343859,
-    "feat_color": "#defbdc",
-    "feat_html_id": "3M1D3v",
+    "feat_color": "#eeaefb",
+    "feat_html_id": "Z4n4d6",
     "feat_name": [
       "LacO"
     ],
@@ -517,8 +517,8 @@
     "bp_len": 5,
     "bp_start": 4318,
     "end_percentage": 0.6825071045153142,
-    "feat_color": "#159556",
-    "feat_html_id": "3y8q7b",
+    "feat_color": "#875063",
+    "feat_html_id": "s5u4l9",
     "feat_name": [
       "pLac\\-10\\box"
     ],
@@ -551,8 +551,8 @@
     "bp_len": 5,
     "bp_start": 4342,
     "end_percentage": 0.6862961793495421,
-    "feat_color": "#fffeae",
-    "feat_html_id": "6u7V3s",
+    "feat_color": "#cfacdc",
+    "feat_html_id": "z0v5E9",
     "feat_name": [
       "pLac\\-35\\box"
     ],
@@ -585,8 +585,8 @@
     "bp_len": 14,
     "bp_start": 4366,
     "end_percentage": 0.6915061572466056,
-    "feat_color": "#981946",
-    "feat_html_id": "9X5I8p",
+    "feat_color": "#871038",
+    "feat_html_id": "r6R5b9",
     "feat_name": [
       "CAP\\site"
     ],
@@ -619,8 +619,8 @@
     "bp_len": 0,
     "bp_start": 4393,
     "end_percentage": 0.6935585727818124,
-    "feat_color": "#ccdffb",
-    "feat_html_id": "6G6A5F",
+    "feat_color": "#dfffbb",
+    "feat_html_id": "r5p0n4",
     "feat_name": [
       "Center\\LacO3"
     ],
@@ -653,8 +653,8 @@
     "bp_len": 7,
     "bp_start": 4396,
     "end_percentage": 0.6951373539627408,
-    "feat_color": "#213475",
-    "feat_html_id": "8J4T6J",
+    "feat_color": "#843464",
+    "feat_html_id": "b5x6c5",
     "feat_name": [
       "LacI"
     ],
@@ -687,8 +687,8 @@
     "bp_len": 7,
     "bp_start": 4464,
     "end_percentage": 0.7058730659930534,
-    "feat_color": "#ceaefe",
-    "feat_html_id": "8T8m0c",
+    "feat_color": "#dfeaff",
+    "feat_html_id": "q1w4K2",
     "feat_name": [
       "Linker\\2"
     ],
@@ -721,8 +721,8 @@
     "bp_len": 3,
     "bp_start": 4472,
     "end_percentage": 0.7065045784654247,
-    "feat_color": "#640730",
-    "feat_html_id": "2y3r9q",
+    "feat_color": "#159204",
+    "feat_html_id": "c0i6n1",
     "feat_name": [
       "cc"
     ],
@@ -755,8 +755,8 @@
     "bp_len": 0,
     "bp_start": 4786,
     "end_percentage": 0.7556046731922955,
-    "feat_color": "#cabfdb",
-    "feat_html_id": "5j2K1v",
+    "feat_color": "#ddabea",
+    "feat_html_id": "e0T5W9",
     "feat_name": [
       "origin"
     ],
@@ -789,8 +789,8 @@
     "bp_len": 815,
     "bp_start": 5420,
     "end_percentage": 0.9843700663088096,
-    "feat_color": "#708399",
-    "feat_html_id": "6P9O3b",
+    "feat_color": "#328045",
+    "feat_html_id": "F1T5Y6",
     "feat_name": [
       "Kanamycin\\phosphotransferase"
     ],
@@ -824,7 +824,7 @@
     "bp_start": 893,
     "end_percentage": 0.14145879381117776,
     "feat_color": "black",
-    "feat_html_id": "5V1P9H",
+    "feat_html_id": "g7F6C8",
     "feat_list_loc": [
       7,
       8
@@ -857,7 +857,7 @@
     "bp_start": 905,
     "end_percentage": 0.1523523839595832,
     "feat_color": "black",
-    "feat_html_id": "1N6X3K",
+    "feat_html_id": "h7R6J4",
     "feat_list_loc": [
       8,
       9
@@ -890,7 +890,7 @@
     "bp_start": 4112,
     "end_percentage": 0.660088411746132,
     "feat_color": "black",
-    "feat_html_id": "4w3R4L",
+    "feat_html_id": "d5b7R0",
     "feat_list_loc": [
       11,
       12
@@ -923,7 +923,7 @@
     "bp_start": 4200,
     "end_percentage": 0.6731922955478371,
     "feat_color": "black",
-    "feat_html_id": "8X7C6F",
+    "feat_html_id": "R2e9r0",
     "feat_list_loc": [
       12,
       13
@@ -956,7 +956,7 @@
     "bp_start": 4286,
     "end_percentage": 0.6772971266182507,
     "feat_color": "black",
-    "feat_html_id": "2q9n4f",
+    "feat_html_id": "R1G7N3",
     "feat_list_loc": [
       13,
       14
@@ -989,7 +989,7 @@
     "bp_start": 4314,
     "end_percentage": 0.6815598358067572,
     "feat_color": "black",
-    "feat_html_id": "3r3d1B",
+    "feat_html_id": "d8w8U7",
     "feat_list_loc": [
       14,
       15
@@ -1022,7 +1022,7 @@
     "bp_start": 4324,
     "end_percentage": 0.6853489106409851,
     "feat_color": "black",
-    "feat_html_id": "9N3P9W",
+    "feat_html_id": "x2O8e8",
     "feat_list_loc": [
       15,
       16
@@ -1055,7 +1055,7 @@
     "bp_start": 4348,
     "end_percentage": 0.6891379854752131,
     "feat_color": "black",
-    "feat_html_id": "1T2I7X",
+    "feat_html_id": "Q2X6n0",
     "feat_list_loc": [
       16,
       17
@@ -1088,7 +1088,7 @@
     "bp_start": 4381,
     "end_percentage": 0.6934006946637196,
     "feat_color": "black",
-    "feat_html_id": "3d0m2J",
+    "feat_html_id": "h7o7z7",
     "feat_list_loc": [
       17,
       18
@@ -1121,7 +1121,7 @@
     "bp_start": 4394,
     "end_percentage": 0.6938743290179982,
     "feat_color": "black",
-    "feat_html_id": "3o2f1g",
+    "feat_html_id": "R4s2H3",
     "feat_list_loc": [
       18,
       19
@@ -1154,7 +1154,7 @@
     "bp_start": 4404,
     "end_percentage": 0.7046100410483107,
     "feat_color": "black",
-    "feat_html_id": "1I3L0L",
+    "feat_html_id": "y3B4I5",
     "feat_list_loc": [
       19,
       20
@@ -1187,7 +1187,7 @@
     "bp_start": 4476,
     "end_percentage": 0.7554467950742028,
     "feat_color": "black",
-    "feat_html_id": "2l1p0Z",
+    "feat_html_id": "Z8i7Y9",
     "feat_list_loc": [
       21,
       22
@@ -1220,7 +1220,7 @@
     "bp_start": 4787,
     "end_percentage": 0.8555415219450584,
     "feat_color": "black",
-    "feat_html_id": "4r6u5o",
+    "feat_html_id": "V1o5x3",
     "feat_list_loc": [
       22,
       23

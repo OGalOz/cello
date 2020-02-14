@@ -61,7 +61,7 @@ def main():
     make_svg_js(js_feats_fp)
 
     plasmid_js = path.join(program_dir, "tmp/plasmid_js.js")
-    template_html_fp = path.join(program_dir, "svg_template.html")
+    template_html_fp = path.join(program_dir, "div_svg_template.html")
 
     html_prepare(plasmid_js, template_html_fp, out_fp, config_fp)
 

@@ -9,3 +9,4 @@ disp=$ui_dir/display.yaml
 tst=$PWD/test/cello_server_test.py
 mymod=$PWD/lib/cello_util/
 tmp_dir=$PWD/test_local/workdir/tmp
+pmap=$mymod/plasmid_map/

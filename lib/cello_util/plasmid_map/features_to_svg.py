@@ -126,38 +126,54 @@ def make_svg_js(js_feats_fp):
     javascript_str = "//SVG Code Start \n"
     javascript_str += "const svg = d3.select('svg');\n\n"
 
+
+    logging.warning(len(js_feats_list))
     for i in range(len(js_feats_list)):
+        js_str = ""
         js_feat = js_feats_list[i]
-        if js_feat["type"] == "plasmid_arc_forward":
+        typ = js_feat["type"]
+
+        if typ == "plasmid_arc_forward":
             js_str = print_plasmid_arc_forward(js_feat, i)
-        elif js_feat["type"] == "plasmid_arc_reverse":
+        elif typ == "plasmid_arc_reverse":
             js_str = print_plasmid_arc_reverse(js_feat, i)
 
-        elif js_feat["type"] == "pointer_and_text":
+        elif typ == "pointer_and_text":
             js_str = print_pointer_and_text(js_feat, i)
 
-        elif js_feat["type"] == "center_text":
+        elif typ == "center_text":
             js_str = print_center_text(js_feat, i)
 
-        elif js_feat["type"] == "promoter":
+        elif typ == "promoter":
             js_str = print_promoter(js_feat, i)
 
-        elif js_feat["type"] == "terminator":
+        elif typ == "terminator":
             js_str = print_terminator(js_feat, i)
 
-        elif js_feat["type"] == "rbs":
+        elif typ == "rbs":
             js_str = print_rbs(js_feat, i)
 
-        elif js_feat["type"] == "cds":
+        elif typ == "cds":
             js_str = print_cds(js_feat, i)
 
-        elif js_feat["type"] == "gap_arc":
+        elif typ == "gap_arc":
             js_str = print_gap_arc(js_feat, i)
-
         else:
             logging.info("Did not recognize feature to translate to javascipt.")
+            continue
 
         javascript_str += "//Feature: {} \n".format(str(i)) + js_str
+
+
+
+    #Adding delete box:
+    js_str = print_delete_box(js_feats_list[-2])
+    javascript_str += "//DELETE BOX \n" + js_str
+
+    #Adding reset box:
+    js_str = print_reset_box(js_feats_list[-1])
+    javascript_str += "//RESET BOX \n" + js_str
+
 
     with open("tmp/plasmid_js.js","w") as g:
         g.write(javascript_str)

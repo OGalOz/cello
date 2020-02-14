@@ -310,11 +310,11 @@ def create_id_list(n):
 
 def create_new_id():
         new_id = "{}{}{}{}{}{}".format(
-                random.choice([str(k) for k in range(10)]),
                 random.choice(string.ascii_letters),
                 random.choice([str(k) for k in range(10)]),
                 random.choice(string.ascii_letters),
                 random.choice([str(k) for k in range(10)]),
-                random.choice(string.ascii_letters))
+                random.choice(string.ascii_letters),
+                random.choice([str(k) for k in range(10)]))
         return new_id
 

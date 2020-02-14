@@ -12,8 +12,8 @@
     "feat_name": [
       "L3S3P21"
     ],
-    "html_id": "2C0i7P-arc",
-    "internal_color": "#cefeae",
+    "html_id": "G4c7w7-arc",
+    "internal_color": "#fbffda",
     "line_width": 8,
     "radius": 250,
     "start_point": [
@@ -28,7 +28,7 @@
         506.69504741971275,
         250.08966339895463
       ],
-      "html_id": "2C0i7P-pointer",
+      "html_id": "G4c7w7-pointer",
       "line_color": "black",
       "line_width": 1,
       "new_line_width_bool": false,
@@ -40,11 +40,11 @@
     },
     "text": {
       "fill_color": "black",
-      "font_size": "9",
+      "font_size": "18",
       "font_weight": "normal",
-      "html_id": "2C0i7P-text",
+      "html_id": "G4c7w7-text",
       "new_text_font_bool": false,
-      "text_font": "9pt Calibri",
+      "text_font": "18pt Calibri",
       "text_point": [
         508.70356164562656,
         175.116562418641
@@ -56,11 +56,11 @@
       "border_color": "gray",
       "clicked_border_color": "black",
       "clicked_internal": "#E6E6FA",
-      "height": 19,
-      "html_id": "2C0i7P-text-rect",
+      "height": 28,
+      "html_id": "G4c7w7-text-rect",
       "internal_color": "white",
       "type": "text-rect",
-      "width": 72.0,
+      "width": 116.00429645542425,
       "x": 500.70356164562656,
       "x_diff": 8,
       "y": 160.116562418641,
@@ -81,8 +81,8 @@
     "feat_name": [
       "Escar"
     ],
-    "html_id": "9W6B3a-arc",
-    "internal_color": "#706875",
+    "html_id": "N7G7G6-arc",
+    "internal_color": "#840253",
     "line_width": 8,
     "radius": 250,
     "start_point": [
@@ -97,7 +97,7 @@
         513.7567354621273,
         250.37878249350467
       ],
-      "html_id": "9W6B3a-pointer",
+      "html_id": "N7G7G6-pointer",
       "line_color": "black",
       "line_width": 1,
       "new_line_width_bool": false,
@@ -109,11 +109,11 @@
     },
     "text": {
       "fill_color": "black",
-      "font_size": "9",
+      "font_size": "18",
       "font_weight": "normal",
-      "html_id": "9W6B3a-text",
+      "html_id": "N7G7G6-text",
       "new_text_font_bool": false,
-      "text_font": "9pt Calibri",
+      "text_font": "18pt Calibri",
       "text_point": [
         508.2540412772764,
         350.22726949610285
@@ -125,11 +125,11 @@
       "border_color": "gray",
       "clicked_border_color": "black",
       "clicked_internal": "#E6E6FA",
-      "height": 19,
-      "html_id": "9W6B3a-text-rect",
+      "height": 28,
+      "html_id": "N7G7G6-text-rect",
       "internal_color": "white",
       "type": "text-rect",
-      "width": 54.0,
+      "width": 87.00322234156819,
       "x": 500.2540412772764,
       "x_diff": 8,
       "y": 335.22726949610285,
@@ -150,8 +150,8 @@
     "feat_name": [
       "pTac"
     ],
-    "html_id": "3M8M5X-arc",
-    "internal_color": "#bcdfdb",
+    "html_id": "a7n8Z7-arc",
+    "internal_color": "#efcdcb",
     "line_width": 8,
     "radius": 250,
     "start_point": [
@@ -166,7 +166,7 @@
         523.0307754340819,
         251.06309357006765
       ],
-      "html_id": "3M8M5X-pointer",
+      "html_id": "a7n8Z7-pointer",
       "line_color": "black",
       "line_width": 1,
       "new_line_width_bool": false,
@@ -178,11 +178,11 @@
     },
     "text": {
       "fill_color": "black",
-      "font_size": "9",
+      "font_size": "18",
       "font_weight": "normal",
-      "html_id": "3M8M5X-text",
+      "html_id": "a7n8Z7-text",
       "new_text_font_bool": false,
-      "text_font": "9pt Calibri",
+      "text_font": "18pt Calibri",
       "text_point": [
         511.51538771704094,
         375.53154678503387
@@ -194,11 +194,11 @@
       "border_color": "gray",
       "clicked_border_color": "black",
       "clicked_internal": "#E6E6FA",
-      "height": 19,
-      "html_id": "3M8M5X-text-rect",
+      "height": 28,
+      "html_id": "a7n8Z7-text-rect",
       "internal_color": "white",
       "type": "text-rect",
-      "width": 54.0,
+      "width": 87.00322234156819,
       "x": 503.51538771704094,
       "x_diff": 8,
       "y": 360.53154678503387,
@@ -228,7 +228,7 @@
       534.1906969483015,
       232.17357068020823
     ],
-    "html_id": "3M8M5X-promoter",
+    "html_id": "a7n8Z7-promoter",
     "inner_flag_start": [
       525.3387878666758,
       227.52129106580063
@@ -257,8 +257,8 @@
     "feat_name": [
       "RiboJ53"
     ],
-    "html_id": "9S3w1y-arc",
-    "internal_color": "#554452",
+    "html_id": "Q7m3r0-arc",
+    "internal_color": "#199078",
     "line_width": 8,
     "radius": 250,
     "start_point": [
@@ -273,7 +273,7 @@
         541.4704703856178,
         253.46359277787064
       ],
-      "html_id": "9S3w1y-pointer",
+      "html_id": "Q7m3r0-pointer",
       "line_color": "black",
       "line_width": 1,
       "new_line_width_bool": false,
@@ -285,11 +285,11 @@
     },
     "text": {
       "fill_color": "black",
-      "font_size": "9",
+      "font_size": "18",
       "font_weight": "normal",
-      "html_id": "9S3w1y-text",
+      "html_id": "Q7m3r0-text",
       "new_text_font_bool": false,
-      "text_font": "9pt Calibri",
+      "text_font": "18pt Calibri",
       "text_point": [
         524.8822822313707,
         352.0781556667224
@@ -301,11 +301,11 @@
       "border_color": "gray",
       "clicked_border_color": "black",
       "clicked_internal": "#E6E6FA",
-      "height": 19,
-      "html_id": "9S3w1y-text-rect",
+      "height": 28,
+      "html_id": "Q7m3r0-text-rect",
       "internal_color": "white",
       "type": "text-rect",
-      "width": 72.0,
+      "width": 116.00429645542425,
       "x": 516.8822822313707,
       "x_diff": 8,
       "y": 337.0781556667224,
@@ -326,8 +326,8 @@
     "feat_name": [
       "P3"
     ],
-    "html_id": "6M7o5b-arc",
-    "internal_color": "#cbbeeb",
+    "html_id": "y4e6h1-arc",
+    "internal_color": "#eadddd",
     "line_width": 8,
     "radius": 250,
     "start_point": [
@@ -342,7 +342,7 @@
         553.2789996899006,
         255.74327400858832
       ],
-      "html_id": "6M7o5b-pointer",
+      "html_id": "y4e6h1-pointer",
       "line_color": "black",
       "line_width": 1,
       "new_line_width_bool": false,
@@ -354,11 +354,11 @@
     },
     "text": {
       "fill_color": "black",
-      "font_size": "9",
+      "font_size": "18",
       "font_weight": "normal",
-      "html_id": "6M7o5b-text",
+      "html_id": "y4e6h1-text",
       "new_text_font_bool": false,
-      "text_font": "9pt Calibri",
+      "text_font": "18pt Calibri",
       "text_point": [
         537.2952997829304,
         329.0202918060118
@@ -370,11 +370,11 @@
       "border_color": "gray",
       "clicked_border_color": "black",
       "clicked_internal": "#E6E6FA",
-      "height": 19,
-      "html_id": "6M7o5b-text-rect",
+      "height": 28,
+      "html_id": "y4e6h1-text-rect",
       "internal_color": "white",
       "type": "text-rect",
-      "width": 42.0,
+      "width": 67.66917293233082,
       "x": 529.2952997829304,
       "x_diff": 8,
       "y": 314.0202918060118,
@@ -397,7 +397,7 @@
     "feat_name": [
       "P3"
     ],
-    "html_id": "6M7o5b-rbs",
+    "html_id": "y4e6h1-rbs",
     "internal_color": "#bb99ff",
     "radius": 8,
     "start_angle": 1.7855594494668858,
@@ -420,8 +420,8 @@
     "feat_name": [
       "PhlF"
     ],
-    "html_id": "7R2b5c-arc",
-    "internal_color": "#664944",
+    "html_id": "H4k7w5-arc",
+    "internal_color": "#261495",
     "line_width": 8,
     "radius": 250,
     "start_point": [
@@ -436,7 +436,7 @@
         625.1431522708067,
         283.5763611808412
       ],
-      "html_id": "7R2b5c-pointer",
+      "html_id": "H4k7w5-pointer",
       "line_color": "black",
       "line_width": 1,
       "new_line_width_bool": false,
@@ -448,11 +448,11 @@
     },
     "text": {
       "fill_color": "black",
-      "font_size": "9",
+      "font_size": "18",
       "font_weight": "normal",
-      "html_id": "7R2b5c-text",
+      "html_id": "H4k7w5-text",
       "new_text_font_bool": false,
-      "text_font": "9pt Calibri",
+      "text_font": "18pt Calibri",
       "text_point": [
         675.2004131791293,
         197.0069056531777
@@ -464,11 +464,11 @@
       "border_color": "gray",
       "clicked_border_color": "black",
       "clicked_internal": "#E6E6FA",
-      "height": 19,
-      "html_id": "7R2b5c-text-rect",
+      "height": 28,
+      "html_id": "H4k7w5-text-rect",
       "internal_color": "white",
       "type": "text-rect",
-      "width": 60.0,
+      "width": 96.67024704618689,
       "x": 667.2004131791293,
       "x_diff": 8,
       "y": 182.0069056531777,
@@ -504,8 +504,8 @@
     "feat_name": [
       "PhlF"
     ],
-    "html_id": "7R2b5c-cds",
-    "internal_color": "#664944",
+    "html_id": "H4k7w5-cds",
+    "internal_color": "#261495",
     "type": "cds"
   },
   {
@@ -521,8 +521,8 @@
     "feat_name": [
       "ECK120033737"
     ],
-    "html_id": "8o6c3k-arc",
-    "internal_color": "#bbadbd",
+    "html_id": "A2H6I7-arc",
+    "internal_color": "#fceace",
     "line_width": 8,
     "radius": 250,
     "start_point": [
@@ -537,7 +537,7 @@
         688.3307878277755,
         335.5873655822965
       ],
-      "html_id": "8o6c3k-pointer",
+      "html_id": "A2H6I7-pointer",
       "line_color": "black",
       "line_width": 1,
       "new_line_width_bool": false,
@@ -549,11 +549,11 @@
     },
     "text": {
       "fill_color": "black",
-      "font_size": "9",
+      "font_size": "18",
       "font_weight": "normal",
-      "html_id": "8o6c3k-text",
+      "html_id": "A2H6I7-text",
       "new_text_font_bool": false,
-      "text_font": "9pt Calibri",
+      "text_font": "18pt Calibri",
       "text_point": [
         782.4961817416632,
         253.38104837344474
@@ -565,11 +565,11 @@
       "border_color": "gray",
       "clicked_border_color": "black",
       "clicked_internal": "#E6E6FA",
-      "height": 19,
-      "html_id": "8o6c3k-text-rect",
+      "height": 28,
+      "html_id": "A2H6I7-text-rect",
       "internal_color": "white",
       "type": "text-rect",
-      "width": 102.0,
+      "width": 164.3394199785177,
       "x": 774.4961817416632,
       "x_diff": 8,
       "y": 238.38104837344474,
@@ -607,7 +607,7 @@
     "feat_name": [
       "ECK120033737"
     ],
-    "html_id": "8o6c3k-terminator",
+    "html_id": "A2H6I7-terminator",
     "internal_color": "#EA6062",
     "palm_hand_1": [
       704.3298614747779,
@@ -632,8 +632,8 @@
     "feat_name": [
       "Cscar"
     ],
-    "html_id": "7T9u1S-arc",
-    "internal_color": "#285885",
+    "html_id": "D0g4I3-arc",
+    "internal_color": "#590663",
     "line_width": 8,
     "radius": 250,
     "start_point": [
@@ -648,7 +648,7 @@
         693.2181937370341,
         341.35974782862337
       ],
-      "html_id": "7T9u1S-pointer",
+      "html_id": "D0g4I3-pointer",
       "line_color": "black",
       "line_width": 1,
       "new_line_width_bool": false,
@@ -660,11 +660,11 @@
     },
     "text": {
       "fill_color": "black",
-      "font_size": "9",
+      "font_size": "18",
       "font_weight": "normal",
-      "html_id": "7T9u1S-text",
+      "html_id": "D0g4I3-text",
       "new_text_font_bool": false,
-      "text_font": "9pt Calibri",
+      "text_font": "18pt Calibri",
       "text_point": [
         615.9309162422204,
         404.81584869717403
@@ -676,11 +676,11 @@
       "border_color": "gray",
       "clicked_border_color": "black",
       "clicked_internal": "#E6E6FA",
-      "height": 19,
-      "html_id": "7T9u1S-text-rect",
+      "height": 28,
+      "html_id": "D0g4I3-text-rect",
       "internal_color": "white",
       "type": "text-rect",
-      "width": 54.0,
+      "width": 87.00322234156819,
       "x": 607.9309162422204,
       "x_diff": 8,
       "y": 389.81584869717403,
@@ -701,8 +701,8 @@
     "feat_name": [
       "Linker\\1"
     ],
-    "html_id": "4q3m3N-arc",
-    "internal_color": "#eeddaa",
+    "html_id": "M2J2W2-arc",
+    "internal_color": "#facbdb",
     "line_width": 8,
     "radius": 250,
     "start_point": [
@@ -717,7 +717,7 @@
         694.7823370476431,
         343.28420253765614
       ],
-      "html_id": "4q3m3N-pointer",
+      "html_id": "M2J2W2-pointer",
       "line_color": "black",
       "line_width": 1,
       "new_line_width_bool": false,
@@ -729,11 +729,11 @@
     },
     "text": {
       "fill_color": "black",
-      "font_size": "9",
+      "font_size": "18",
       "font_weight": "normal",
-      "html_id": "4q3m3N-text",
+      "html_id": "M2J2W2-text",
       "new_text_font_bool": false,
-      "text_font": "9pt Calibri",
+      "text_font": "18pt Calibri",
       "text_point": [
         636.3476359333501,
         390.2989417763593
@@ -745,11 +745,11 @@
       "border_color": "gray",
       "clicked_border_color": "black",
       "clicked_internal": "#E6E6FA",
-      "height": 19,
-      "html_id": "4q3m3N-text-rect",
+      "height": 28,
+      "html_id": "M2J2W2-text-rect",
       "internal_color": "white",
       "type": "text-rect",
-      "width": 72.0,
+      "width": 116.00429645542425,
       "x": 628.3476359333501,
       "x_diff": 8,
       "y": 375.2989417763593,
@@ -770,8 +770,8 @@
     "feat_name": [
       "LacZ alpha"
     ],
-    "html_id": "8Q7B2D-arc",
-    "internal_color": "#739784",
+    "html_id": "t3W4H0-arc",
+    "internal_color": "#240562",
     "line_width": 8,
     "radius": 230,
     "start_point": [
@@ -786,7 +786,7 @@
         689.6146903403557,
         369.8221631492862
       ],
-      "html_id": "8Q7B2D-pointer",
+      "html_id": "t3W4H0-pointer",
       "line_color": "black",
       "line_width": 1,
       "new_line_width_bool": false,
@@ -798,11 +798,11 @@
     },
     "text": {
       "fill_color": "black",
-      "font_size": "9",
+      "font_size": "18",
       "font_weight": "normal",
-      "html_id": "8Q7B2D-text",
+      "html_id": "t3W4H0-text",
       "new_text_font_bool": false,
-      "text_font": "9pt Calibri",
+      "text_font": "18pt Calibri",
       "text_point": [
         607.1735206271576,
         426.4212226495966
@@ -814,11 +814,11 @@
       "border_color": "gray",
       "clicked_border_color": "black",
       "clicked_internal": "#E6E6FA",
-      "height": 19,
-      "html_id": "8Q7B2D-text-rect",
+      "height": 28,
+      "html_id": "t3W4H0-text-rect",
       "internal_color": "white",
       "type": "text-rect",
-      "width": 90.0,
+      "width": 145.00537056928033,
       "x": 599.1735206271576,
       "x_diff": 8,
       "y": 411.4212226495966,
@@ -854,8 +854,8 @@
     "feat_name": [
       "LacZ alpha"
     ],
-    "html_id": "8Q7B2D-cds",
-    "internal_color": "#739784",
+    "html_id": "t3W4H0-cds",
+    "internal_color": "#240562",
     "type": "cds"
   },
   {
@@ -871,8 +871,8 @@
     "feat_name": [
       "sensor_module"
     ],
-    "html_id": "6V8v0k-arc",
-    "internal_color": "#aceabf",
+    "html_id": "j2g9r4-arc",
+    "internal_color": "#aabbcc",
     "line_width": 8,
     "radius": 250,
     "start_point": [
@@ -887,7 +887,7 @@
         648.2673232240807,
         701.2878557289683
       ],
-      "html_id": "6V8v0k-pointer",
+      "html_id": "j2g9r4-pointer",
       "line_color": "black",
       "line_width": 1,
       "new_line_width_bool": false,
@@ -899,11 +899,11 @@
     },
     "text": {
       "fill_color": "black",
-      "font_size": "9",
+      "font_size": "18",
       "font_weight": "normal",
-      "html_id": "6V8v0k-text",
+      "html_id": "j2g9r4-text",
       "new_text_font_bool": false,
-      "text_font": "9pt Calibri",
+      "text_font": "18pt Calibri",
       "text_point": [
         722.400984836121,
         801.9317835934526
@@ -915,11 +915,11 @@
       "border_color": "gray",
       "clicked_border_color": "black",
       "clicked_internal": "#E6E6FA",
-      "height": 19,
-      "html_id": "6V8v0k-text-rect",
+      "height": 28,
+      "html_id": "j2g9r4-text-rect",
       "internal_color": "white",
       "type": "text-rect",
-      "width": 120.0,
+      "width": 193.34049409237377,
       "x": 714.400984836121,
       "x_diff": 8,
       "y": 786.9317835934526,
@@ -940,8 +940,8 @@
     "feat_name": [
       "LacZ alpha"
     ],
-    "html_id": "0O7V1w-arc",
-    "internal_color": "#825508",
+    "html_id": "w8O5n8-arc",
+    "internal_color": "#250105",
     "line_width": 8,
     "radius": 230,
     "start_point": [
@@ -956,7 +956,7 @@
         317.83588881884225,
         640.4145170471301
       ],
-      "html_id": "0O7V1w-pointer",
+      "html_id": "w8O5n8-pointer",
       "line_color": "black",
       "line_width": 1,
       "new_line_width_bool": false,
@@ -968,11 +968,11 @@
     },
     "text": {
       "fill_color": "black",
-      "font_size": "9",
+      "font_size": "18",
       "font_weight": "normal",
-      "html_id": "0O7V1w-text",
+      "html_id": "w8O5n8-text",
       "new_text_font_bool": false,
-      "text_font": "9pt Calibri",
+      "text_font": "18pt Calibri",
       "text_point": [
         397.03767628891086,
         579.3647270266388
@@ -984,11 +984,11 @@
       "border_color": "gray",
       "clicked_border_color": "black",
       "clicked_internal": "#E6E6FA",
-      "height": 19,
-      "html_id": "0O7V1w-text-rect",
+      "height": 28,
+      "html_id": "w8O5n8-text-rect",
       "internal_color": "white",
       "type": "text-rect",
-      "width": 90.0,
+      "width": 145.00537056928033,
       "x": 389.03767628891086,
       "x_diff": 8,
       "y": 564.3647270266388,
@@ -1024,8 +1024,8 @@
     "feat_name": [
       "LacZ alpha"
     ],
-    "html_id": "0O7V1w-cds",
-    "internal_color": "#825508",
+    "html_id": "w8O5n8-cds",
+    "internal_color": "#250105",
     "type": "cds"
   },
   {
@@ -1041,8 +1041,8 @@
     "feat_name": [
       "M13-fwd"
     ],
-    "html_id": "1s4V9p-arc",
-    "internal_color": "#aabaac",
+    "html_id": "Z4T8f7-arc",
+    "internal_color": "#ffdfcf",
     "line_width": 8,
     "radius": 250,
     "start_point": [
@@ -1057,7 +1057,7 @@
         287.59175796590034,
         631.8436146196825
       ],
-      "html_id": "1s4V9p-pointer",
+      "html_id": "Z4T8f7-pointer",
       "line_color": "black",
       "line_width": 1,
       "new_line_width_bool": false,
@@ -1069,11 +1069,11 @@
     },
     "text": {
       "fill_color": "black",
-      "font_size": "9",
+      "font_size": "18",
       "font_weight": "normal",
-      "html_id": "1s4V9p-text",
+      "html_id": "Z4T8f7-text",
       "new_text_font_bool": false,
-      "text_font": "9pt Calibri",
+      "text_font": "18pt Calibri",
       "text_point": [
         351.31423057613017,
         592.2905302337778
@@ -1085,11 +1085,11 @@
       "border_color": "gray",
       "clicked_border_color": "black",
       "clicked_internal": "#E6E6FA",
-      "height": 19,
-      "html_id": "1s4V9p-text-rect",
+      "height": 28,
+      "html_id": "Z4T8f7-text-rect",
       "internal_color": "white",
       "type": "text-rect",
-      "width": 72.0,
+      "width": 116.00429645542425,
       "x": 343.31423057613017,
       "x_diff": 8,
       "y": 577.2905302337778,
@@ -1110,8 +1110,8 @@
     "feat_name": [
       "M13-rev"
     ],
-    "html_id": "4n0m9y-arc",
-    "internal_color": "#084250",
+    "html_id": "L6n9Y0-arc",
+    "internal_color": "#446608",
     "line_width": 8,
     "radius": 230,
     "start_point": [
@@ -1126,7 +1126,7 @@
         295.1151309068928,
         604.5092838780379
       ],
-      "html_id": "4n0m9y-pointer",
+      "html_id": "L6n9Y0-pointer",
       "line_color": "black",
       "line_width": 1,
       "new_line_width_bool": false,
@@ -1138,11 +1138,11 @@
     },
     "text": {
       "fill_color": "black",
-      "font_size": "9",
+      "font_size": "18",
       "font_weight": "normal",
-      "html_id": "4n0m9y-text",
+      "html_id": "L6n9Y0-text",
       "new_text_font_bool": false,
-      "text_font": "9pt Calibri",
+      "text_font": "18pt Calibri",
       "text_point": [
         206.03475304032443,
         649.9481029554456
@@ -1154,11 +1154,11 @@
       "border_color": "gray",
       "clicked_border_color": "black",
       "clicked_internal": "#E6E6FA",
-      "height": 19,
-      "html_id": "4n0m9y-text-rect",
+      "height": 28,
+      "html_id": "L6n9Y0-text-rect",
       "internal_color": "white",
       "type": "text-rect",
-      "width": 72.0,
+      "width": 116.00429645542425,
       "x": 198.03475304032443,
       "x_diff": 8,
       "y": 634.9481029554456,
@@ -1179,8 +1179,8 @@
     "feat_name": [
       "LacO"
     ],
-    "html_id": "3M1D3v-arc",
-    "internal_color": "#defbdc",
+    "html_id": "Z4n4d6-arc",
+    "internal_color": "#eeaefb",
     "line_width": 8,
     "radius": 230,
     "start_point": [
@@ -1195,7 +1195,7 @@
         292.3898351564671,
         598.9849455909387
       ],
-      "html_id": "3M1D3v-pointer",
+      "html_id": "Z4n4d6-pointer",
       "line_color": "black",
       "line_width": 1,
       "new_line_width_bool": false,
@@ -1207,11 +1207,11 @@
     },
     "text": {
       "fill_color": "black",
-      "font_size": "9",
+      "font_size": "18",
       "font_weight": "normal",
-      "html_id": "3M1D3v-text",
+      "html_id": "Z4n4d6-text",
       "new_text_font_bool": false,
-      "text_font": "9pt Calibri",
+      "text_font": "18pt Calibri",
       "text_point": [
         179.55822382846006,
         652.7811116729705
@@ -1223,11 +1223,11 @@
       "border_color": "gray",
       "clicked_border_color": "black",
       "clicked_internal": "#E6E6FA",
-      "height": 19,
-      "html_id": "3M1D3v-text-rect",
+      "height": 28,
+      "html_id": "Z4n4d6-text-rect",
       "internal_color": "white",
       "type": "text-rect",
-      "width": 54.0,
+      "width": 87.00322234156819,
       "x": 171.55822382846006,
       "x_diff": 8,
       "y": 637.7811116729705,
@@ -1248,8 +1248,8 @@
     "feat_name": [
       "pLac\\-10\\box"
     ],
-    "html_id": "3y8q7b-arc",
-    "internal_color": "#159556",
+    "html_id": "s5u4l9-arc",
+    "internal_color": "#875063",
     "line_width": 8,
     "radius": 230,
     "start_point": [
@@ -1264,7 +1264,7 @@
         290.60836520674223,
         595.1585165847333
       ],
-      "html_id": "3y8q7b-pointer",
+      "html_id": "s5u4l9-pointer",
       "line_color": "black",
       "line_width": 1,
       "new_line_width_bool": false,
@@ -1276,11 +1276,11 @@
     },
     "text": {
       "fill_color": "black",
-      "font_size": "9",
+      "font_size": "18",
       "font_weight": "normal",
-      "html_id": "3y8q7b-text",
+      "html_id": "s5u4l9-text",
       "new_text_font_bool": false,
-      "text_font": "9pt Calibri",
+      "text_font": "18pt Calibri",
       "text_point": [
         199.56852399228234,
         636.5317846650522
@@ -1292,11 +1292,11 @@
       "border_color": "gray",
       "clicked_border_color": "black",
       "clicked_internal": "#E6E6FA",
-      "height": 19,
-      "html_id": "3y8q7b-text-rect",
+      "height": 28,
+      "html_id": "s5u4l9-text-rect",
       "internal_color": "white",
       "type": "text-rect",
-      "width": 96.0,
+      "width": 154.672395273899,
       "x": 191.56852399228234,
       "x_diff": 8,
       "y": 621.5317846650522,
@@ -1317,8 +1317,8 @@
     "feat_name": [
       "pLac\\-35\\box"
     ],
-    "html_id": "6u7V3s-arc",
-    "internal_color": "#fffeae",
+    "html_id": "z0v5E9-arc",
+    "internal_color": "#cfacdc",
     "line_width": 8,
     "radius": 230,
     "start_point": [
@@ -1333,7 +1333,7 @@
         288.40243497382096,
         590.1469382452447
       ],
-      "html_id": "6u7V3s-pointer",
+      "html_id": "z0v5E9-pointer",
       "line_color": "black",
       "line_width": 1,
       "new_line_width_bool": false,
@@ -1345,11 +1345,11 @@
     },
     "text": {
       "fill_color": "black",
-      "font_size": "9",
+      "font_size": "18",
       "font_weight": "normal",
-      "html_id": "6u7V3s-text",
+      "html_id": "z0v5E9-text",
       "new_text_font_bool": false,
-      "text_font": "9pt Calibri",
+      "text_font": "18pt Calibri",
       "text_point": [
         219.40322898702345,
         619.5426789773896
@@ -1361,11 +1361,11 @@
       "border_color": "gray",
       "clicked_border_color": "black",
       "clicked_internal": "#E6E6FA",
-      "height": 19,
-      "html_id": "6u7V3s-text-rect",
+      "height": 28,
+      "html_id": "z0v5E9-text-rect",
       "internal_color": "white",
       "type": "text-rect",
-      "width": 96.0,
+      "width": 154.672395273899,
       "x": 211.40322898702345,
       "x_diff": 8,
       "y": 604.5426789773896,
@@ -1386,8 +1386,8 @@
     "feat_name": [
       "CAP\\site"
     ],
-    "html_id": "9X5I8p-arc",
-    "internal_color": "#981946",
+    "html_id": "r6R5b9-arc",
+    "internal_color": "#871038",
     "line_width": 8,
     "radius": 230,
     "start_point": [
@@ -1402,7 +1402,7 @@
         285.9387542279286,
         584.129561145348
       ],
-      "html_id": "9X5I8p-pointer",
+      "html_id": "r6R5b9-pointer",
       "line_color": "black",
       "line_width": 1,
       "new_line_width_bool": false,
@@ -1414,11 +1414,11 @@
     },
     "text": {
       "fill_color": "black",
-      "font_size": "9",
+      "font_size": "18",
       "font_weight": "normal",
-      "html_id": "9X5I8p-text",
+      "html_id": "r6R5b9-text",
       "new_text_font_bool": false,
-      "text_font": "9pt Calibri",
+      "text_font": "18pt Calibri",
       "text_point": [
         192.86864737050627,
         620.7076312085428
@@ -1430,11 +1430,11 @@
       "border_color": "gray",
       "clicked_border_color": "black",
       "clicked_internal": "#E6E6FA",
-      "height": 19,
-      "html_id": "9X5I8p-text-rect",
+      "height": 28,
+      "html_id": "r6R5b9-text-rect",
       "internal_color": "white",
       "type": "text-rect",
-      "width": 78.0,
+      "width": 125.67132116004295,
       "x": 184.86864737050627,
       "x_diff": 8,
       "y": 605.7076312085428,
@@ -1455,8 +1455,8 @@
     "feat_name": [
       "Center\\LacO3"
     ],
-    "html_id": "6G6A5F-arc",
-    "internal_color": "#ccdffb",
+    "html_id": "r5p0n4-arc",
+    "internal_color": "#dfffbb",
     "line_width": 8,
     "radius": 230,
     "start_point": [
@@ -1471,7 +1471,7 @@
         284.3118978306517,
         579.8664045928246
       ],
-      "html_id": "6G6A5F-pointer",
+      "html_id": "r5p0n4-pointer",
       "line_color": "black",
       "line_width": 1,
       "new_line_width_bool": false,
@@ -1483,11 +1483,11 @@
     },
     "text": {
       "fill_color": "black",
-      "font_size": "9",
+      "font_size": "18",
       "font_weight": "normal",
-      "html_id": "6G6A5F-text",
+      "html_id": "r5p0n4-text",
       "new_text_font_bool": false,
-      "text_font": "9pt Calibri",
+      "text_font": "18pt Calibri",
       "text_point": [
         167.09010317339713,
         623.272059262838
@@ -1499,11 +1499,11 @@
       "border_color": "gray",
       "clicked_border_color": "black",
       "clicked_internal": "#E6E6FA",
-      "height": 19,
-      "html_id": "6G6A5F-text-rect",
+      "height": 28,
+      "html_id": "r5p0n4-text-rect",
       "internal_color": "white",
       "type": "text-rect",
-      "width": 96.0,
+      "width": 154.672395273899,
       "x": 159.09010317339713,
       "x_diff": 8,
       "y": 608.272059262838,
@@ -1524,8 +1524,8 @@
     "feat_name": [
       "LacI"
     ],
-    "html_id": "8J4T6J-arc",
-    "internal_color": "#213475",
+    "html_id": "b5x6c5-arc",
+    "internal_color": "#843464",
     "line_width": 8,
     "radius": 230,
     "start_point": [
@@ -1540,7 +1540,7 @@
         283.8014180981477,
         578.4740287205141
       ],
-      "html_id": "8J4T6J-pointer",
+      "html_id": "b5x6c5-pointer",
       "line_color": "black",
       "line_width": 1,
       "new_line_width_bool": false,
@@ -1552,11 +1552,11 @@
     },
     "text": {
       "fill_color": "black",
-      "font_size": "9",
+      "font_size": "18",
       "font_weight": "normal",
-      "html_id": "8J4T6J-text",
+      "html_id": "b5x6c5-text",
       "new_text_font_bool": false,
-      "text_font": "9pt Calibri",
+      "text_font": "18pt Calibri",
       "text_point": [
         189.80203466255972,
         612.5931716424767
@@ -1568,11 +1568,11 @@
       "border_color": "gray",
       "clicked_border_color": "black",
       "clicked_internal": "#E6E6FA",
-      "height": 19,
-      "html_id": "8J4T6J-text-rect",
+      "height": 28,
+      "html_id": "b5x6c5-text-rect",
       "internal_color": "white",
       "type": "text-rect",
-      "width": 48.0,
+      "width": 77.3361976369495,
       "x": 181.80203466255972,
       "x_diff": 8,
       "y": 597.5931716424767,
@@ -1593,8 +1593,8 @@
     "feat_name": [
       "Linker\\2"
     ],
-    "html_id": "8T8m0c-arc",
-    "internal_color": "#ceaefe",
+    "html_id": "q1w4K2-arc",
+    "internal_color": "#dfeaff",
     "line_width": 8,
     "radius": 250,
     "start_point": [
@@ -1609,7 +1609,7 @@
         259.78661333708516,
         569.2641961473095
       ],
-      "html_id": "8T8m0c-pointer",
+      "html_id": "q1w4K2-pointer",
       "line_color": "black",
       "line_width": 1,
       "new_line_width_bool": false,
@@ -1621,11 +1621,11 @@
     },
     "text": {
       "fill_color": "black",
-      "font_size": "9",
+      "font_size": "18",
       "font_weight": "normal",
-      "html_id": "8T8m0c-text",
+      "html_id": "q1w4K2-text",
       "new_text_font_bool": false,
-      "text_font": "9pt Calibri",
+      "text_font": "18pt Calibri",
       "text_point": [
         187.7225973382107,
         590.0434549915024
@@ -1637,11 +1637,11 @@
       "border_color": "gray",
       "clicked_border_color": "black",
       "clicked_internal": "#E6E6FA",
-      "height": 19,
-      "html_id": "8T8m0c-text-rect",
+      "height": 28,
+      "html_id": "q1w4K2-text-rect",
       "internal_color": "white",
       "type": "text-rect",
-      "width": 72.0,
+      "width": 116.00429645542425,
       "x": 179.7225973382107,
       "x_diff": 8,
       "y": 575.0434549915024,
@@ -1662,8 +1662,8 @@
     "feat_name": [
       "cc"
     ],
-    "html_id": "2y3r9q-arc",
-    "internal_color": "#640730",
+    "html_id": "c0i6n1-arc",
+    "internal_color": "#159204",
     "line_width": 8,
     "radius": 250,
     "start_point": [
@@ -1678,7 +1678,7 @@
         259.3786193683394,
         567.833260152476
       ],
-      "html_id": "2y3r9q-pointer",
+      "html_id": "c0i6n1-pointer",
       "line_color": "black",
       "line_width": 1,
       "new_line_width_bool": false,
@@ -1690,11 +1690,11 @@
     },
     "text": {
       "fill_color": "black",
-      "font_size": "9",
+      "font_size": "18",
       "font_weight": "normal",
-      "html_id": "2y3r9q-text",
+      "html_id": "c0i6n1-text",
       "new_text_font_bool": false,
-      "text_font": "9pt Calibri",
+      "text_font": "18pt Calibri",
       "text_point": [
         163.13006711567516,
         594.9665642134663
@@ -1706,11 +1706,11 @@
       "border_color": "gray",
       "clicked_border_color": "black",
       "clicked_internal": "#E6E6FA",
-      "height": 19,
-      "html_id": "2y3r9q-text-rect",
+      "height": 28,
+      "html_id": "c0i6n1-text-rect",
       "internal_color": "white",
       "type": "text-rect",
-      "width": 36.0,
+      "width": 58.00214822771213,
       "x": 155.13006711567516,
       "x_diff": 8,
       "y": 579.9665642134663,
@@ -1731,8 +1731,8 @@
     "feat_name": [
       "origin"
     ],
-    "html_id": "5j2K1v-arc",
-    "internal_color": "#cabfdb",
+    "html_id": "e0T5W9-arc",
+    "internal_color": "#ddabea",
     "line_width": 8,
     "radius": 230,
     "start_point": [
@@ -1747,7 +1747,7 @@
         270.1425979504754,
         491.90217788271366
       ],
-      "html_id": "5j2K1v-pointer",
+      "html_id": "e0T5W9-pointer",
       "line_color": "black",
       "line_width": 1,
       "new_line_width_bool": false,
@@ -1759,11 +1759,11 @@
     },
     "text": {
       "fill_color": "black",
-      "font_size": "9",
+      "font_size": "18",
       "font_weight": "normal",
-      "html_id": "5j2K1v-text",
+      "html_id": "e0T5W9-text",
       "new_text_font_bool": false,
-      "text_font": "9pt Calibri",
+      "text_font": "18pt Calibri",
       "text_point": [
         395.06509906434746,
         496.30316816384754
@@ -1775,11 +1775,11 @@
       "border_color": "gray",
       "clicked_border_color": "black",
       "clicked_internal": "#E6E6FA",
-      "height": 19,
-      "html_id": "5j2K1v-text-rect",
+      "height": 28,
+      "html_id": "e0T5W9-text-rect",
       "internal_color": "white",
       "type": "text-rect",
-      "width": 60.0,
+      "width": 96.67024704618689,
       "x": 387.06509906434746,
       "x_diff": 8,
       "y": 481.30316816384754,
@@ -1800,8 +1800,8 @@
     "feat_name": [
       "Kanamycin\\phosphotransferase"
     ],
-    "html_id": "6P9O3b-arc",
-    "internal_color": "#708399",
+    "html_id": "F1T5Y6-arc",
+    "internal_color": "#328045",
     "line_width": 8,
     "radius": 230,
     "start_point": [
@@ -1816,7 +1816,7 @@
         389.2406429849922,
         298.42528721681873
       ],
-      "html_id": "6P9O3b-pointer",
+      "html_id": "F1T5Y6-pointer",
       "line_color": "black",
       "line_width": 1,
       "new_line_width_bool": false,
@@ -1828,11 +1828,11 @@
     },
     "text": {
       "fill_color": "black",
-      "font_size": "9",
+      "font_size": "18",
       "font_weight": "normal",
-      "html_id": "6P9O3b-text",
+      "html_id": "F1T5Y6-text",
       "new_text_font_bool": false,
-      "text_font": "9pt Calibri",
+      "text_font": "18pt Calibri",
       "text_point": [
         437.3968851654304,
         386.0664666877671
@@ -1844,11 +1844,11 @@
       "border_color": "gray",
       "clicked_border_color": "black",
       "clicked_internal": "#E6E6FA",
-      "height": 19,
-      "html_id": "6P9O3b-text-rect",
+      "height": 28,
+      "html_id": "F1T5Y6-text-rect",
       "internal_color": "white",
       "type": "text-rect",
-      "width": 204.0,
+      "width": 328.6788399570354,
       "x": 429.3968851654304,
       "x_diff": 8,
       "y": 371.0664666877671,
@@ -1884,8 +1884,8 @@
     "feat_name": [
       "Kanamycin\\phosphotransferase"
     ],
-    "html_id": "6P9O3b-cds",
-    "internal_color": "#708399",
+    "html_id": "F1T5Y6-cds",
+    "internal_color": "#328045",
     "type": "cds"
   },
   {
@@ -1899,7 +1899,7 @@
       342.4162782065492
     ],
     "feat_name": "gap",
-    "html_id": "5V1P9H-gap",
+    "html_id": "g7F6C8-gap",
     "internal_color": "black",
     "line_width": 3,
     "radius": 250,
@@ -1920,7 +1920,7 @@
       356.059040599565
     ],
     "feat_name": "gap",
-    "html_id": "1N6X3K-gap",
+    "html_id": "h7R6J4-gap",
     "internal_color": "black",
     "line_width": 3,
     "radius": 250,
@@ -1941,7 +1941,7 @@
       633.839420482693
     ],
     "feat_name": "gap",
-    "html_id": "4w3R4L-gap",
+    "html_id": "d5b7R0-gap",
     "internal_color": "black",
     "line_width": 3,
     "radius": 250,
@@ -1962,7 +1962,7 @@
       616.0202942667257
     ],
     "feat_name": "gap",
-    "html_id": "8X7C6F-gap",
+    "html_id": "R2e9r0-gap",
     "internal_color": "black",
     "line_width": 3,
     "radius": 250,
@@ -1983,7 +1983,7 @@
       610.2708799614858
     ],
     "feat_name": "gap",
-    "html_id": "2q9n4f-gap",
+    "html_id": "R1G7N3-gap",
     "internal_color": "black",
     "line_width": 3,
     "radius": 250,
@@ -2004,7 +2004,7 @@
       604.2227530858278
     ],
     "feat_name": "gap",
-    "html_id": "3r3d1B-gap",
+    "html_id": "d8w8U7-gap",
     "internal_color": "black",
     "line_width": 3,
     "radius": 250,
@@ -2025,7 +2025,7 @@
       598.7837429405062
     ],
     "feat_name": "gap",
-    "html_id": "9N3P9W-gap",
+    "html_id": "x2O8e8-gap",
     "internal_color": "black",
     "line_width": 3,
     "radius": 250,
@@ -2046,7 +2046,7 @@
       593.2887452963215
     ],
     "feat_name": "gap",
-    "html_id": "1T2I7X-gap",
+    "html_id": "Q2X6n0-gap",
     "internal_color": "black",
     "line_width": 3,
     "radius": 250,
@@ -2067,7 +2067,7 @@
       587.0438293489245
     ],
     "feat_name": "gap",
-    "html_id": "3d0m2J-gap",
+    "html_id": "h7o7z7-gap",
     "internal_color": "black",
     "line_width": 3,
     "radius": 250,
@@ -2088,7 +2088,7 @@
       586.3460132791273
     ],
     "feat_name": "gap",
-    "html_id": "3o2f1g-gap",
+    "html_id": "R4s2H3-gap",
     "internal_color": "black",
     "line_width": 3,
     "radius": 250,
@@ -2109,7 +2109,7 @@
       570.3357907007065
     ],
     "feat_name": "gap",
-    "html_id": "1I3L0L-gap",
+    "html_id": "y3B4I5-gap",
     "internal_color": "black",
     "line_width": 3,
     "radius": 250,
@@ -2130,7 +2130,7 @@
       491.44586434142775
     ],
     "feat_name": "gap",
-    "html_id": "2l1p0Z-gap",
+    "html_id": "Z8i7Y9-gap",
     "internal_color": "black",
     "line_width": 3,
     "radius": 250,
@@ -2151,7 +2151,7 @@
       346.102002631689
     ],
     "feat_name": "gap",
-    "html_id": "4r6u5o-gap",
+    "html_id": "V1o5x3-gap",
     "internal_color": "black",
     "line_width": 3,
     "radius": 250,
@@ -2177,5 +2177,27 @@
     "name_start_y": 485,
     "plasmid_name": "plasmid_circuit_P000",
     "type": "center_text"
+  },
+  {
+    "border_color": "black",
+    "height": 50,
+    "html_id": "delete-box",
+    "img_link": "static/delete_img.png",
+    "internal_color": "red",
+    "type": "delete_box",
+    "width": 50,
+    "x": 0,
+    "y": 300
+  },
+  {
+    "border_color": "black",
+    "height": 50,
+    "html_id": "reset-box",
+    "img_link": "static/reset_img.png",
+    "internal_color": "blue",
+    "type": "reset_box",
+    "width": 50,
+    "x": 0,
+    "y": 350
   }
 ]

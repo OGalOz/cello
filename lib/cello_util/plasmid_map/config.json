@@ -32,11 +32,31 @@
             "pointer_distance": 5,
             "pointer_thick":1,
             "pointer_color": "black",
-            "text_size" : 9,
+            "text_size" : 18,
             "text_color": "black",
             "title_text_size" : 20,
             "title_text_color": "#333",
             "max_title_length" : 35,
+            "highlight_color": "FFFFD5",
+            "delete_box_info": {
+                "top_left_corner_x": 0,
+                "top_left_corner_y": 300,
+                "width": 50,
+                "height": 50,
+                "internal_color": "red",
+                "border_color": "black",
+                "img_link": "static/delete_img.png"
+
+            },
+            "reset_box_info": {
+                "top_left_corner_x": 0,
+                "top_left_corner_y": 350,
+                "width": 50,
+                "height": 50,
+                "internal_color": "blue",
+                "border_color": "black",
+                "img_link": "static/reset_img.png"
+            },
             "text_rect_info": {
                 "x_diff": 8,
                 "y_diff": 15,
