@@ -52,6 +52,7 @@ def build_html(results_dir, scratch_dir, user_output_name, config_info):
     logging.info("Starting to generate html report.")
 
     output_directory = os.path.join(scratch_dir, "HTML_Report")
+    config_info["scratch_dir"] = scratch_dir
     os.makedirs(output_directory, exist_ok=True)
     #The following function adds png files and javascript files.
     update_static_files(output_directory)
@@ -66,13 +67,15 @@ def build_html(results_dir, scratch_dir, user_output_name, config_info):
 
         result_file_path = os.path.join(output_directory, 'report.html')
         
-        html_template = open(os.path.join(os.path.dirname(__file__), "report_template.html"), "r")
+        html_template = open(os.path.join(os.path.dirname(__file__), 
+            "report_template.html"), "r")
         html_file_str = html_template.read()
         html_template.close()
         
         path_to_wiring_png_file = out_files_dict['wiring_png_file']
 
-        png_diagram_name = get_name_from_path(path_to_wiring_png_file,"wiring_png")
+        png_diagram_name = get_name_from_path(path_to_wiring_png_file,
+                "wiring_png")
         png_display_name = 'Wiring Diagram'
         #We get the wiring link file from the svg file:
         if out_files_dict["wiring_svg_diagram_found"] == True:
@@ -120,7 +123,8 @@ def build_html(results_dir, scratch_dir, user_output_name, config_info):
                 pdf_file_dict = truth_pdf_files[i]
                 pdf_gene = pdf_file_dict['gene_name']
                 if truth_gene_name == pdf_gene:
-                    truth_graph_link = get_name_from_path(pdf_file_dict['file_path'] , "truth")
+                    truth_graph_link = get_name_from_path(
+                            pdf_file_dict['file_path'] , "truth")
                     shutil.copy2(os.path.join(results_dir, truth_graph_link),
                     os.path.join(output_directory, truth_graph_link))
                     break
@@ -133,7 +137,7 @@ def build_html(results_dir, scratch_dir, user_output_name, config_info):
             truth_graph_display_name)
 
 
-        #Here add plasmid visualization step:
+        #Here add plasmid visualization step - MAPS:
         gbk_files = out_files_dict['gbk_files']
         
         try:
@@ -141,18 +145,20 @@ def build_html(results_dir, scratch_dir, user_output_name, config_info):
             gb_plasmid_divs_str = make_plasmid_divs(gbk_files, user_output_name,
                     plasmid_vis_info)
         except:
+            logging.critical("Failed to make plasmid_divs")
             gb_plasmid_divs_str = ""
+            logging.critical(traceback.print_exc())
         try:
             gb_plasmid_buttons_str = make_plasmid_buttons(gbk_files)
         except:
             gb_plasmid_buttons_str = ""
+            logging.critical(traceback.print_exc())
 
         html_file_str = html_file_str.replace('<p>Visualization_Content</p>', visualization_content)
         html_file_str = html_file_str.replace('<p>Overview_Content</p>',overview_content)
         html_file_str = html_file_str.replace('{New_Plasmid_Divs}', gb_plasmid_divs_str)
         html_file_str = html_file_str.replace('{New_Plasmid_Buttons}', gb_plasmid_buttons_str)
 
-        logging.debug(html_file_str)
 
         f = open(result_file_path, "w")
         f.write(html_file_str)
@@ -273,7 +279,6 @@ Output:
     plasmid_divs_str: (str) A string to insert into report html.
 """
 def make_plasmid_divs(gbk_files, user_output_name, plasmid_vis_info):
-    plasmid_divs_str = ''
 
     #We place basic parameters on the design of the plasmid map:
     base_div_html_fp = os.path.join(os.path.dirname(__file__), 
@@ -288,6 +293,7 @@ def make_plasmid_divs(gbk_files, user_output_name, plasmid_vis_info):
         #Instead of 85 percent, it will be 96 percent
         config_dict['js_info']['cds_info']['percent_start'] = 96 
 
+    plasmid_divs_str = ''
     #We set a maximum number of files to be made (6):
     k = min(len(gbk_files), 6)
     for i in range(k):
@@ -296,7 +302,10 @@ def make_plasmid_divs(gbk_files, user_output_name, plasmid_vis_info):
             "file_num": i,
             "uniq_id": "prfx_" + str(i),
             "svg_id": "svg-" + str(i),
-            "svg_name": "svg_" + str(i)
+            "svg_name": "svg_" + str(i),
+            "tmp_name": "plasmid_tmp_" + str(i),
+            "scratch_dir": plasmid_vis_info["scratch_dir"]
+
 
                 }
         try:
@@ -306,15 +315,17 @@ def make_plasmid_divs(gbk_files, user_output_name, plasmid_vis_info):
             logging.critical("FAILED TO MAKE VISUALIZATION: {}".format(gb_file))
             logging.critical(traceback.print_exc())
             break
-        plasmid_map_html = plasmid_map_dict["complete_div_str"]
+        plasmid_map_div_html = plasmid_map_dict["complete_div_str"]
         plasmid_map_name = plasmid_map_dict["plasmid_name"]
-        plasmid_map_html = plasmid_map_html.replace("Plasmid_Name_Here",
+        plasmid_map_div_html = plasmid_map_div_html.replace("Plasmid_Name_Here",
                 user_output_name + "_" + plasmid_map_name)
-        plasmid_map_html = plasmid_map_html.replace('id="Plasmid_Div_Id_Here"',
+        plasmid_map_div_html = plasmid_map_div_html.replace('id="Plasmid_Div_Id_Here"',
                 'id="Plasmid_Map_' + str(i+1) + '"')
-        plasmid_map_html = plasmid_map_html.replace('SVG_ID_HERE','my_svg_' + \
+        plasmid_map_div_html = plasmid_map_div_html.replace('SVG_ID_HERE','my_svg_' + \
                 str(i+1))
-        plasmid_divs_str += plasmid_map_html + '\n'
+
+
+        plasmid_divs_str += plasmid_map_div_html + '\n\n\n'
 
     return plasmid_divs_str
 

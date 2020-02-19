@@ -48,7 +48,7 @@ def div_html_prepare(plasmid_js_fp, template_html_fp, config_fp,
     html_str = html_str.replace("SVG_ID_HERE",
             uniq_dict['svg_id'])
     html_and_js_str = html_str.replace("{--Insert JS--}", js_str)
-    html_and_js_str = html_str.replace("&{--Highlight Color--}&",
+    html_and_js_str = html_and_js_str.replace("&{--Highlight Color--}&",
             '#' + config_dict['js_info']['highlight_color'])
 
 

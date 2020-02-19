@@ -15,7 +15,8 @@ Should you designate an inner circle and an outer circle for sequences going in 
 import logging
 from Bio import SeqIO
 import json
-
+import os
+import shutil
 
 
 
@@ -175,9 +176,29 @@ def find_and_remove_duplicates(gb_record, priority_list):
             duplicates: {}.".format(len(gb_record.features)))
     return gb_record
 
-
+def clear_dir(dir_name):
+    logging.info("Clearing tmp directory:")
+    logging.info(os.listdir(dir_name))
+    for fn in os.listdir(dir_name):
+        fp = os.path.join(dir_name, fn)
+        try:
+            if os.path.isfile(fp) or os.path.islink(fp):
+                os.unlink(fp)
+            elif os.path.isdir(fp):
+                shutil.rmtree(fp)
+        except Exception as e:
+            logging.critical("Failed to delete {}. Reason: {}".format(fp, e))
+    logging.info("tmp dir:")
+    logging.info(os.listdir(dir_name))
 
 def genbank_prep(gbk_fp, config_fp, out_fp):
+    
+    #Clear tmp dir:
+    tmp_dir = os.path.join(os.path.dirname(os.path.realpath(__file__)), "tmp")
+    clear_dir(tmp_dir)
+
+
+
     gb_record = SeqIO.read(open(gbk_fp, "r"), "genbank")
     config_dict = json.loads((open(config_fp,"r")).read())
     priority_list = config_dict["feature_priority_list"]
@@ -185,9 +206,13 @@ def genbank_prep(gbk_fp, config_fp, out_fp):
     #Running program:
     gb_record = find_and_remove_duplicates(gb_record, priority_list)
 
-    gb_record = check_gb_record(gb_record)
+    gb_record_dict = check_gb_record(gb_record)
+
+    gb_record = gb_record_dict['gb_record']
 
     SeqIO.write(gb_record, out_fp, "genbank")  
+
+    return gb_record_dict['old_gb_name']
 
 
 """
@@ -198,11 +223,11 @@ def check_gb_record(gb_record):
     locus_id = gb_record.name
     logging.info(locus_id)
     if len(locus_id) > 15:
-        logging.warning("locus id: \n {} \n is too long, changing to shorter version  ".format(
-            locus_id))
         new_locus_id = locus_id[-15:]
+        logging.warning("locus id: \n {} \n is too long, changing to {}".format(
+            locus_id, new_locus_id))
         gb_record.name = new_locus_id
-    return gb_record
+    return {'gb_record': gb_record, 'old_gb_name' : locus_id}
     
 
 

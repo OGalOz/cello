@@ -67,7 +67,6 @@ class cello:
         # ctx is the context object
         # return variables are: output
         #BEGIN run_cello
-        #html_design_test()
         report = KBaseReport(self.callback_url)
         ext_report_params = dict()
         ext_report_params["workspace_name"] = params['workspace_name']
@@ -395,11 +394,13 @@ class cello:
         html_config_info = {
                 'base_plasmid_info': base_plasmid_info
                 }
-        html_result_dict = build_html(full_path_output_folder, self.shared_folder, 
+        html_result_dict = build_html(full_path_output_folder, 
+                self.shared_folder, 
                 main_output_name, html_config_info)
         
-        report_shock_id = dfu.file_to_shock({'file_path': html_result_dict['output_directory'],
-                                                  'pack': 'zip'})['shock_id']
+        report_shock_id = dfu.file_to_shock({
+            'file_path': html_result_dict['output_directory'],
+                'pack': 'zip'})['shock_id']
 
         html_report = [{'shock_id': report_shock_id,
                             'name': os.path.basename(html_result_dict['result_file_path']),

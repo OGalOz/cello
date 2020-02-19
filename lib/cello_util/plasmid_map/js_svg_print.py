@@ -13,6 +13,7 @@
 """
 
 import math
+import logging
 
 def print_plasmid_arc_forward(js_feat, num):
 
@@ -419,11 +420,12 @@ Inputs:
 """
 def ut_text(inp_dict):
 
-    js_str = "const {} = {}.append('text')\n".format(inp_dict['const_name'],inp_dict['svg_name'])
+    js_str = "const {} = {}.append('text')\n".format(inp_dict['const_name'],
+            inp_dict['svg_name'])
     js_str += ".attr('id', '{}')\n".format(inp_dict['final_id'])
     js_str += ".attr('font-weight', '{}')\n".format(inp_dict["font_weight"])
     js_str += ".attr('font-size', '{}')".format(inp_dict['font_size'])
-    js_str += ".attr('x', {})\n".format(inp_dict["start_x"])
+    js_str += ".attr('x', '{}')\n".format(inp_dict["start_x"])
     js_str += ".attr('y', '{}')\n".format(inp_dict["start_y"])
     
     if "text_rect_bool" in inp_dict.keys():
@@ -435,7 +437,11 @@ def ut_text(inp_dict):
             js_str += on_click_str
 
 
+    
+    logging.warning("TEXT STRING: {}".format(inp_dict['text_str']))
+    logging.warning(inp_dict)
     js_str += ".text('{}');\n\n".format(inp_dict['text_str'])
+    logging.warning(js_str)
     return js_str
 
 

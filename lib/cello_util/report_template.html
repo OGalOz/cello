@@ -154,11 +154,11 @@ div.desc {
 
             let multi_id = lists_dict["multi_selected_ids"]
             if ( !(multi_id.includes(id_val))) {
-                highlight_text_rect_by_id(id_val, "&{--Highlight Color--}&", true)
+                highlight_text_rect_by_id(id_val, "#FFFFD5", true)
                 multi_id.push(id_val);
                 lists_dict["multi_selected_ids"] = multi_id;
             } else {
-                highlight_text_rect_by_id(id_val, "&{--Highlight Color--}&", false)
+                highlight_text_rect_by_id(id_val, "#FFFFD5", false)
                 multi_id = multi_id.filter(item => item !== id_val) 
                 lists_dict["multi_selected_ids"] = multi_id;
             }

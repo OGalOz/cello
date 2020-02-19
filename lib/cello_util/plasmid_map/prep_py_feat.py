@@ -24,14 +24,16 @@ Inputs:
     prepared_genbank_fp: (str) Filepath to input genbank
     config_fp: (str) Filepath to config file
 """
-def feature_prepare(prepared_genbank_fp, config_fp, feature_list_fp, plasmid_info_fp):
+def feature_prepare(prepared_genbank_fp, config_fp, feature_list_fp, 
+        plasmid_info_fp, old_gb_name):
     logging.basicConfig(level=logging.DEBUG)
     with open(config_fp, "r") as f:
         config_dict = json.loads(f.read())
     gb_record = SeqIO.read(open(prepared_genbank_fp,"r"), "genbank")
 
 
-    plasmid_info = get_plasmid_info(gb_record, config_dict, plasmid_info_fp)
+    plasmid_info = get_plasmid_info(gb_record, config_dict, plasmid_info_fp,
+            old_gb_name)
 
     feat_info_dict_list = get_features(gb_record, config_dict)
 
@@ -56,16 +58,21 @@ Outputs:
         plasmid_length: (int)
         num_features: (int)
 """
-def get_plasmid_info(gb_record, config_dict, plasmid_info_fp):
+def get_plasmid_info(gb_record, config_dict, plasmid_info_fp,
+        old_gb_name):
 
     plasmid_name = gb_record.name
+
+    logging.warning("PLASMID NAME : {}".format(plasmid_name))
+
     if config_dict["genbank_info"]["cello_bool"] == True:
-        plasmid_name = "_".join(plasmid_name.split("_")[3:])
+        plasmid_name = "_".join(old_gb_name.split("_")[3:])
 
     plasmid_info = {
             "plasmid_name": plasmid_name,
             "plasmid_length": len(gb_record.seq),
-            "num_features": len(gb_record.features)
+            "num_features": len(gb_record.features),
+            "old_gb_name": old_gb_name
             }
     
     #Checking

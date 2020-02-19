@@ -28,13 +28,55 @@ Process:
 """
 
 import sys
+import os
 from os import path
+import shutil
 from cello_util.plasmid_map.prepare_gbk import genbank_prep 
 from cello_util.plasmid_map.prep_py_feat import feature_prepare
 from cello_util.plasmid_map.feature_refine import refine_features
 from cello_util.plasmid_map.py_feat_to_js_feat import js_prepare
 from cello_util.plasmid_map.features_to_svg import make_svg_js
 from cello_util.plasmid_map.plasmid_html import html_prepare, div_html_prepare
+
+
+def get_cello_plasmid_map_div(gbk_input,base_div_html_fp, config_fp, uniq_dict):
+       
+
+    program_dir = path.dirname(path.abspath(__file__))
+
+
+    prepared_genbank_fp = path.join(program_dir, "tmp/prepared_genbank.gbk")
+
+    old_gb_name = genbank_prep(gbk_input, config_fp, prepared_genbank_fp)
+    
+
+    feature_list_fp = path.join(program_dir, "tmp/feature_list.json")
+
+    plasmid_info_fp = path.join(program_dir, "tmp/plasmid_info.json")
+
+    feature_prepare(prepared_genbank_fp, config_fp, feature_list_fp, 
+            plasmid_info_fp, old_gb_name)
+
+
+    js_feats_fp = path.join(program_dir, "tmp/js_feats.json")
+
+    js_prepare(feature_list_fp, plasmid_info_fp, config_fp, js_feats_fp, 
+            uniq_dict)
+
+    plasmid_js_fp = path.join(program_dir, "tmp/plasmid_js.js")
+    make_svg_js(js_feats_fp, plasmid_js_fp, uniq_dict)
+
+    template_html_fp = path.join(program_dir, base_div_html_fp)
+
+    html_dict = div_html_prepare(plasmid_js_fp, template_html_fp, config_fp, 
+            plasmid_info_fp, uniq_dict)
+
+    #We copy all the contents of the folder to a tmp folder in the scratch dir
+    shutil.copytree(path.join(program_dir, "tmp"),
+    path.join(uniq_dict["scratch_dir"],uniq_dict["tmp_name"]))
+
+    return html_dict
+
 
 def main():
     args = sys.argv
@@ -68,42 +110,6 @@ def main():
     html_prepare(plasmid_js_fp, template_html_fp, out_fp, config_fp)
 
     return 0
-
-def get_cello_plasmid_map_div(gbk_input,base_div_html_fp, config_fp, uniq_dict):
-       
-
-    program_dir = path.dirname(path.abspath(__file__))
-
-
-    prepared_genbank_fp = path.join(program_dir, "tmp/prepared_genbank.gbk")
-
-    genbank_prep(gbk_input, config_fp, prepared_genbank_fp)
-    
-
-    feature_list_fp = path.join(program_dir, "tmp/feature_list.json")
-
-    plasmid_info_fp = path.join(program_dir, "tmp/plasmid_info.json")
-
-    feature_prepare(prepared_genbank_fp, config_fp, feature_list_fp, 
-            plasmid_info_fp)
-
-
-    js_feats_fp = path.join(program_dir, "tmp/js_feats.json")
-
-    js_prepare(feature_list_fp, plasmid_info_fp, config_fp, js_feats_fp, 
-            uniq_dict)
-
-    plasmid_js_fp = path.join(program_dir, "tmp/plasmid_js.js")
-    make_svg_js(js_feats_fp, plasmid_js_fp, uniq_dict)
-
-    template_html_fp = path.join(program_dir, base_div_html_fp)
-
-    html_dict = div_html_prepare(plasmid_js_fp, template_html_fp, config_fp, 
-            plasmid_info_fp, uniq_dict)
-
-    return html_dict
-
-
 
 
 if __name__ == "__main__":
