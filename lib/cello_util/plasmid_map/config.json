@@ -72,6 +72,7 @@
                 "color": "black"
             },
             "promoter_info" : {
+                "include_bool" : false,
                 "percent_start": 20,
                 "pixels": 20,
                 "line_width": 3,

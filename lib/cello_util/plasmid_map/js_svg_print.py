@@ -232,35 +232,36 @@ def print_promoter(js_feat, num):
     js_str += ut_arc(arc_dict)
 
 
+    arrow_bool = js_feat['include_bool']
+    
+    if arrow_bool:
+        #Arrow (Part 1)
+        line_dict = {
+            'const_name': js_feat['const_prefix'] + "_promoter_" + str(num) + \
+                    "_arrow_1",
 
+            'svg_name' : js_feat['svg_name'],
+            'final_id': js_feat['html_id'] + "-arrow-1",
+            'start_point':  js_feat['inner_flag_start'],
+            'end_point': js_feat['flags_end'],
+            'line_color': js_feat["color"],
+            'line_width': js_feat["line_width"]
+                }
+        js_str += ut_line(line_dict)
 
-    #Arrow (Part 1)
-    line_dict = {
-        'const_name': js_feat['const_prefix'] + "_promoter_" + str(num) + \
-                "_arrow_1",
+        #Arrow (Part 2)
+        line_dict = {
+            'const_name': js_feat['const_prefix'] + "_promoter_" + str(num) + \
+                    "_arrow_2",
 
-        'svg_name' : js_feat['svg_name'],
-        'final_id': js_feat['html_id'] + "-arrow-1",
-        'start_point':  js_feat['inner_flag_start'],
-        'end_point': js_feat['flags_end'],
-        'line_color': js_feat["color"],
-        'line_width': js_feat["line_width"]
-            }
-    js_str += ut_line(line_dict)
-
-    #Arrow (Part 2)
-    line_dict = {
-        'const_name': js_feat['const_prefix'] + "_promoter_" + str(num) + \
-                "_arrow_2",
-
-        'svg_name' : js_feat['svg_name'],
-        'final_id': js_feat['html_id'] + "-arrow-2",
-        'start_point':  js_feat['outer_flag_start'],
-        'end_point': js_feat['flags_end'],
-        'line_color': js_feat["color"],
-        'line_width': js_feat["line_width"]
-            }
-    js_str += ut_line(line_dict)
+            'svg_name' : js_feat['svg_name'],
+            'final_id': js_feat['html_id'] + "-arrow-2",
+            'start_point':  js_feat['outer_flag_start'],
+            'end_point': js_feat['flags_end'],
+            'line_color': js_feat["color"],
+            'line_width': js_feat["line_width"]
+                }
+        js_str += ut_line(line_dict)
 
     return js_str
 

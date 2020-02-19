@@ -342,6 +342,7 @@ def calculate_promoter_feature(feature_dict, config_dict):
     js_object["html_id"] = feature_dict["feat_html_id"] + "-promoter"
     js_info = config_dict['js_info']
     promoter_info = js_info['promoter_info']
+    js_object['include_bool'] = promoter_info['include_bool']
     js_object["color"] = promoter_info["arrow_color"]
     js_object["line_width"] = promoter_info["line_width"]
 
