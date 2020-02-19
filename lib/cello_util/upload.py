@@ -83,6 +83,13 @@ def turn_ape_to_gbk(output_files, kb_output_folder, output_folder, config_info):
     if len(ape_files) == 0:
         logging.critical("NO .APE FILES FOUND - CANNOT MAKE PLASMID - ONLY RETURNING OUTPUT FOLDER.")
 
+    new_ape_files = []
+    for ap_f in ape_files:
+        if os.path.isfile(ap_f):
+            new_ape_files.append(ap_f)
+
+    ape_files = new_ape_files
+
     for ap_f in ape_files:
         #Replace "label" in .ape file with "locus_tag"
         response = replace_label_with_locus_tag(ap_f)
@@ -98,7 +105,9 @@ def turn_ape_to_gbk(output_files, kb_output_folder, output_folder, config_info):
 
         #renaming file to genbank type:
         gbk_file_name = ap_f[:-4] + '.gbk'
+
         shutil.copyfile(ap_f, gbk_file_name)
+
 
     return ape_files
 
