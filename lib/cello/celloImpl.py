@@ -369,8 +369,10 @@ class cello:
         
 
         if kb_genome_bool == True:
+            gbk_config_info = {}
             genome_ref_list = make_kbase_genomes(output_files, kb_output_folder,
-                    output_folder, gfu, ws_name, main_output_name)
+                    output_folder, gfu, ws_name, main_output_name,
+                    gbk_config_info)
             ext_report_params['objects_created'] = genome_ref_list
         else:
             #TD: More info in gbk config info

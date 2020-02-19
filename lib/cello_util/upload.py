@@ -17,9 +17,11 @@ def make_genbank_genome_dict(filepath, genome_name, workspace_name):
 
 
 #TD: Only output the .ape file that has plasmid circuit in its name.
-def make_kbase_genomes(output_files, kb_output_folder, output_folder, gfu, ws_name, main_output_name):
+def make_kbase_genomes(output_files, kb_output_folder, output_folder, gfu, 
+        ws_name, main_output_name, config_info):
 
-            ape_files = turn_ape_to_gbk(output_files, kb_output_folder, output_folder)
+            ape_files = turn_ape_to_gbk(output_files, kb_output_folder, 
+                    output_folder, config_info)
 
             #Uploading the ape files to KBase Genome File Object.
             genome_ref_list = []
