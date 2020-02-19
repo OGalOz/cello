@@ -382,9 +382,9 @@ class cello:
         #We copy the base plasmids if the base plasmid info is "e_coli" or "tetrlaci"
         if base_plasmid_info == "e_coli" or base_plasmid_info == "terlaci":
             shutil.copyfile("/kb/module/lib/cello_util/plasmids/pAN1201.ape", 
-                    full_path_output_folder)
+                    os.path.join(full_path_output_folder,"pAN12021.ape"))
             shutil.copyfile("/kb/module/lib/cello_util/plasmids/pAN4020.ape", 
-                    full_path_output_folder)
+                    os.path.join(full_path_output_folder,"pAN4020.ape"))
 
         dfu = DataFileUtil(self.callback_url)
         file_zip_shock_id = dfu.file_to_shock({'file_path': kb_output_folder,
