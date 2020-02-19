@@ -5,9 +5,10 @@ Features to Add:
     Edit text size
     Edit text box size
     Remove text box
-    Highlight text
     Boldify text
     Change thickness of feature
+    Unique Ids to Restart and Delete Boxes
+    Remove Redo Box
     
 Javascript:
     Keep lists:

@@ -386,18 +386,20 @@ def print_reset_box(js_feat):
 
     
     js_str = "// Reset-Box: \n"
-    const_str = js_feat['const_prefix'] + "_reset_box"
-    js_str += "const {} = {}.insert('image')\n".format(const_str, js_feat['svg_name'])
-    js_str += ".attr('id', '{}')\n".format(js_feat['html_id'])
-    js_str += ".attr('x', '{}')\n".format(js_feat["x"])
-    js_str += ".attr('y', '{}')\n".format(js_feat["y"])
-    js_str += ".attr('width', '{}')\n".format(js_feat["width"])
-    js_str += ".attr('height', '{}')\n".format(js_feat["height"])
-    js_str += ".attr('stroke', '{}')\n".format(js_feat['border_color'])
-    js_str += ".attr('xlink:href', '{}')".format(js_feat['img_link'])
-    on_click_str = ".on('click', () => [& \n reset_all_deleted_features();\n&]);\n" 
-    on_click_str = on_click_str.replace('[&', '{').replace('&]','}')
-    js_str += on_click_str
+    include_reset_bool = js_feat['include_bool']
+    if include_reset_bool:
+        const_str = js_feat['const_prefix'] + "_reset_box"
+        js_str += "const {} = {}.insert('image')\n".format(const_str, js_feat['svg_name'])
+        js_str += ".attr('id', '{}')\n".format(js_feat['html_id'])
+        js_str += ".attr('x', '{}')\n".format(js_feat["x"])
+        js_str += ".attr('y', '{}')\n".format(js_feat["y"])
+        js_str += ".attr('width', '{}')\n".format(js_feat["width"])
+        js_str += ".attr('height', '{}')\n".format(js_feat["height"])
+        js_str += ".attr('stroke', '{}')\n".format(js_feat['border_color'])
+        js_str += ".attr('xlink:href', '{}')".format(js_feat['img_link'])
+        on_click_str = ".on('click', () => [& \n reset_all_deleted_features();\n&]);\n" 
+        on_click_str = on_click_str.replace('[&', '{').replace('&]','}')
+        js_str += on_click_str
 
     return js_str
 

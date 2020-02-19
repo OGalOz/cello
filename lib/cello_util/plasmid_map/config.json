@@ -45,7 +45,8 @@
                 "height": 50,
                 "internal_color": "red",
                 "border_color": "black",
-                "img_link": "delete_img.png"
+                "img_link": "delete_img.png",
+                "include_bool" : true
 
             },
             "reset_box_info": {
@@ -55,7 +56,8 @@
                 "height": 50,
                 "internal_color": "blue",
                 "border_color": "black",
-                "img_link": "reset_img.png"
+                "img_link": "reset_img.png",
+                "include_bool" : false
             },
             "text_rect_info": {
                 "x_diff": 8,

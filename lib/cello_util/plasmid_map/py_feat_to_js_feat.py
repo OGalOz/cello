@@ -29,7 +29,7 @@ def js_prepare(feature_list_fp, plasmid_info_fp, config_fp,
 
 
     javascript_object_list = create_javascript_object_list(feature_dict_list,
-            plasmid_info, config_dict)
+            plasmid_info, config_dict, uniq_dict)
 
     javascript_object_list = update_javascript_object_list(
             javascript_object_list, uniq_dict)
@@ -41,7 +41,8 @@ def js_prepare(feature_list_fp, plasmid_info_fp, config_fp,
     return 0 
 
 
-def create_javascript_object_list(feature_dict_list, plasmid_info, config_dict):
+def create_javascript_object_list(feature_dict_list, plasmid_info, config_dict,
+        uniq_dict):
    
     javascript_object_list = []
     types_dict = config_dict["genbank_info"]["types_dict"]
@@ -80,15 +81,16 @@ def create_javascript_object_list(feature_dict_list, plasmid_info, config_dict):
                     {}".format(feat_type))
 
 
-    plasmid_name_object = create_center_text(plasmid_info, config_dict)
+    plasmid_name_object = create_center_text(plasmid_info, config_dict, 
+            uniq_dict)
     javascript_object_list.append(plasmid_name_object)
 
     #Creating delete box
-    user_delete_box = create_delete_box(config_dict)
+    user_delete_box = create_delete_box(config_dict, uniq_dict)
     javascript_object_list.append(user_delete_box)
 
     #Creating reset box
-    user_reset_box = create_reset_box(config_dict)
+    user_reset_box = create_reset_box(config_dict, uniq_dict)
     javascript_object_list.append(user_reset_box)
 
     return javascript_object_list
@@ -178,7 +180,7 @@ def create_arc(feature_dict, config_dict):
     return js_object
 
 
-def create_center_text(plasmid_info, config_dict):
+def create_center_text(plasmid_info, config_dict, uniq_dict):
 
     js_info = config_dict['js_info']
     plasmid_name_str = plasmid_info['plasmid_name']
@@ -213,8 +215,9 @@ def create_center_text(plasmid_info, config_dict):
 
     center_text_obj = {
         "type" : "center_text",
-        "html_id": { "name": "plasmid_center_text-name",
-        "length": "plasmid_center_text-length"
+        "html_id": { "name": "plasmid-center-text-name-{}".format(
+            uniq_dict['file_num']),
+        "length": "plasmid-center-text-length-{}".format(uniq_dict['file_num'])
             },
         "plasmid_name": plasmid_name_str,
         "name_start_x": plasmid_name_start,
@@ -232,9 +235,9 @@ def create_center_text(plasmid_info, config_dict):
     return center_text_obj 
 
 
-def create_delete_box(config_dict):
+def create_delete_box(config_dict, uniq_dict):
     delete_box_object = {"type": "delete_box"}
-    delete_box_object["html_id"] = "delete-box"
+    delete_box_object["html_id"] = "delete-box-{}".format(uniq_dict['file_num'])
     db_info = config_dict["js_info"]["delete_box_info"]
     delete_box_object["x"] = db_info["top_left_corner_x"]
     delete_box_object["y"] = db_info["top_left_corner_y"]
@@ -246,9 +249,9 @@ def create_delete_box(config_dict):
 
     return delete_box_object
 
-def create_reset_box(config_dict):
+def create_reset_box(config_dict, uniq_dict):
     reset_box_object = {"type": "reset_box"}
-    reset_box_object["html_id"] = "reset-box"
+    reset_box_object["html_id"] = "reset-box-{}".format(uniq_dict['file_num'])
     rb_info = config_dict["js_info"]["reset_box_info"]
     reset_box_object["x"] = rb_info["top_left_corner_x"]
     reset_box_object["y"] = rb_info["top_left_corner_y"]
@@ -257,6 +260,7 @@ def create_reset_box(config_dict):
     reset_box_object["internal_color"] = rb_info["internal_color"]
     reset_box_object["border_color"] = rb_info["border_color"]
     reset_box_object["img_link"] = rb_info["img_link"]
+    reset_box_object['include_bool'] = rb_info['include_bool']
 
     return reset_box_object
 

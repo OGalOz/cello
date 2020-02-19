@@ -115,7 +115,7 @@ div.desc {
 
         }
 
-       function remove_elem_by_id(id_val, remove_bool) {
+       function remove_elem_by_id(id_val, remove_bool, svg_num) {
             let crnt_elem = d3.select("#".concat(id_val));
             if (remove_bool == true) {
                 elem_copy = Object.assign({}, crnt_elem);
@@ -130,12 +130,12 @@ div.desc {
 
 
         }
-        function reset_all_deleted_features() {
+        function reset_all_deleted_features(svg_num) {
             deleted_ids = Object.keys(lists_dict["deleted_features"])
             console.log(deleted_ids);
             for (let g = 0; g < deleted_ids.length; g++) {
                 reset_id_val = deleted_ids[g];
-                remove_elem_by_id(reset_id_val, false);
+                remove_elem_by_id(reset_id_val, false, svg_num);
             }
             lists_dict["deleted_features"] = {}
 
@@ -175,7 +175,7 @@ div.desc {
             lists_dict["multi_selected_ids"] = [];
 
         }
-        function delete_all_selected() {
+        function delete_all_selected(svg_num) {
             let id_list = lists_dict["multi_selected_ids"]
             for (let i = 0; i < id_list.length; i++)  {
                 id_val = id_list[i];
@@ -184,19 +184,19 @@ div.desc {
                     console.log("found id: ".concat(id_val))
                     base_id = get_base_id(id_val)
                     console.log(base_id)
-                    remove_pointer_collection_by_id(base_id)
+                    remove_pointer_collection_by_id(base_id, svg_num)
                 }
             }
             lists_dict["multi_selected_ids"] = [];
         }
-        function remove_pointer_collection_by_id(base_id) {
+        function remove_pointer_collection_by_id(base_id, svg_num) {
             x = base_id.concat("-pointer");
             y = base_id.concat("-text-rect");
             z = base_id.concat("-text");
             pointer_text_list = [x,y,z];
             for (let j = 0; j < pointer_text_list.length; j++) {
                 pointer_text_id_val = pointer_text_list[j];
-                remove_elem_by_id(pointer_text_id_val, true);
+                remove_elem_by_id(pointer_text_id_val, true, svg_num);
 
             }
         }
