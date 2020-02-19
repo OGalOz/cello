@@ -14,7 +14,7 @@ from cello_util.file_maker import make_verilog_case_file_string, \
 from cello_util.truth_table import make_truth_table_from_text, \
     make_truth_table_from_values
 from cello_util.upload import make_kbase_genomes, turn_ape_to_gbk
-from cello_util.html_design import build_html
+from cello_util.html_design import build_html, html_design_test
 #from cello_util.plasmid_map_viewer import make_plasmid_graph
 
 
@@ -67,6 +67,7 @@ class cello:
         # ctx is the context object
         # return variables are: output
         #BEGIN run_cello
+        #html_design_test()
         report = KBaseReport(self.callback_url)
         ext_report_params = dict()
         ext_report_params["workspace_name"] = params['workspace_name']
@@ -319,14 +320,17 @@ class cello:
             ucf_command = "-UCF " + ucf_filepath
         dexec_args = "-verilog new_verilog.v -input_promoters new_inputs.txt" 
         dexec_args += " -output_genes new_outputs.txt " + ucf_command
-        op = os.system('mvn -e -f /cello/pom.xml -DskipTests=true -PCelloMain -Dexec.args="{}"'.format(dexec_args))
+        op = os.system('mvn -e -f /cello/pom.xml -DskipTests=true ' + \
+                '-PCelloMain -Dexec.args="{}"'.format(dexec_args))
         logging.debug("Response from Cello: ")
         logging.debug(op)
         dir_list = os.listdir(cello_kb)
         logging.debug(dir_list)
         output_dirpath = 'placeholder'
+        existing_files = ['0xFE_verilog.v', 'new_inputs.txt', 'new_outputs.txt',
+                'new_verilog.v', 'exports'] 
         for f in dir_list:
-            if f not in ['0xFE_verilog.v', 'new_inputs.txt', 'new_outputs.txt', 'new_verilog.v', 'exports']:
+            if f not in existing_files:
                 output_dirpath = os.path.join(cello_kb, f)
                 dir_name = f
                 logging.debug(output_dirpath)
@@ -356,7 +360,8 @@ class cello:
         shutil.copyfile(os.path.join(cello_kb, "new_outputs.txt"), os.path.join(
             full_path_output_folder,"OUTPUTS_INPUT.txt" ))
         #The UCF
-        shutil.copyfile(ucf_filepath, os.path.join(full_path_output_folder, "UCF.json"))
+        shutil.copyfile(ucf_filepath, os.path.join(full_path_output_folder, 
+            "UCF.json"))
 
         output_files = os.listdir(full_path_output_folder)
         logging.debug("CELLO OUTPUT FOLDER:")
@@ -365,15 +370,18 @@ class cello:
         
 
         if kb_genome_bool == True:
-            genome_ref_list = make_kbase_genomes(output_files, kb_output_folder, output_folder, gfu,
-                    ws_name, main_output_name)
+            genome_ref_list = make_kbase_genomes(output_files, kb_output_folder,
+                    output_folder, gfu, ws_name, main_output_name)
             ext_report_params['objects_created'] = genome_ref_list
         else:
-            turn_ape_to_gbk(output_files, kb_output_folder, output_folder)
+            #TD: More info in gbk config info
+            gbk_config_info = {}
+            turn_ape_to_gbk(output_files, kb_output_folder, output_folder, 
+                    gbk_config_info)
         
 
         #We copy the base plasmids if the base plasmid info is "e_coli" or "tetrlaci"
-        if base_plasmid_info == "e_coli":
+        if base_plasmid_info == "e_coli" or base_plasmid_info == "terlaci":
             shutil.copyfile("/kb/module/lib/cello_util/plasmids/pAN1201.ape", 
                     full_path_output_folder)
             shutil.copyfile("/kb/module/lib/cello_util/plasmids/pAN4020.ape", 
@@ -384,11 +392,11 @@ class cello:
                                               'pack': 'zip'})['shock_id']
        
         #Creating HTML to return to the user
-        config_info = {
+        html_config_info = {
                 'base_plasmid_info': base_plasmid_info
                 }
         html_result_dict = build_html(full_path_output_folder, self.shared_folder, 
-                main_output_name, config_info)
+                main_output_name, html_config_info)
         
         report_shock_id = dfu.file_to_shock({'file_path': html_result_dict['output_directory'],
                                                   'pack': 'zip'})['shock_id']
@@ -399,7 +407,9 @@ class cello:
                             'description': 'HTML summary report for Cello App'}]
 
         #'path': kb_output_folder
-        dir_link = {'shock_id': file_zip_shock_id, 'name': main_output_name + '.zip', 'label':'cello_output_dir', 'description': 'The directory of outputs from cello'}
+        dir_link = {'shock_id': file_zip_shock_id, 'name': main_output_name + \
+                '.zip', 'label':'cello_output_dir', \
+                'description': 'The directory of outputs from cello'}
         ext_report_params['file_links'] = [dir_link]
         ext_report_params['html_links'] = html_report
         ext_report_params['direct_html_link_index'] = 0

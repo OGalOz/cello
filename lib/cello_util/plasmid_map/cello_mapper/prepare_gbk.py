@@ -177,7 +177,7 @@ def find_and_remove_duplicates(gb_record, priority_list):
 
 
 
-def genbank_prep(gbk_fp, config_fp, out_fp):
+def genbank_prep(gbk_fp, config_fp):
     gb_record = SeqIO.read(open(gbk_fp, "r"), "genbank")
     config_dict = json.loads((open(config_fp,"r")).read())
     priority_list = config_dict["feature_priority_list"]
@@ -185,25 +185,8 @@ def genbank_prep(gbk_fp, config_fp, out_fp):
     #Running program:
     gb_record = find_and_remove_duplicates(gb_record, priority_list)
 
-    gb_record = check_gb_record(gb_record)
+    SeqIO.write(gb_record, "tmp/prepared_genbank.gbk", "genbank")  
 
-    SeqIO.write(gb_record, out_fp, "genbank")  
-
-
-"""
-We check if the gb_record has features that don't work with 
-SeqIO, for example length of locus id
-"""
-def check_gb_record(gb_record):
-    locus_id = gb_record.name
-    logging.info(locus_id)
-    if len(locus_id) > 15:
-        logging.warning("locus id: \n {} \n is too long, changing to shorter version  ".format(
-            locus_id))
-        new_locus_id = locus_id[-15:]
-        gb_record.name = new_locus_id
-    return gb_record
-    
 
 
 

@@ -29,12 +29,12 @@ Process:
 
 import sys
 from os import path
-from prepare_gbk import genbank_prep 
-from prep_py_feat import feature_prepare
-from feature_refine import refine_features
-from py_feat_to_js_feat import js_prepare
-from features_to_svg import make_svg_js
-from plasmid_html import html_prepare, div_html_prepare
+from cello_util.plasmid_map.prepare_gbk import genbank_prep 
+from cello_util.plasmid_map.prep_py_feat import feature_prepare
+from cello_util.plasmid_map.feature_refine import refine_features
+from cello_util.plasmid_map.py_feat_to_js_feat import js_prepare
+from cello_util.plasmid_map.features_to_svg import make_svg_js
+from cello_util.plasmid_map.plasmid_html import html_prepare, div_html_prepare
 
 def main():
     args = sys.argv
@@ -48,55 +48,60 @@ def main():
     
     prepared_genbank_fp = path.join(program_dir, "tmp/prepared_genbank.gbk")
 
-    feature_prepare(prepared_genbank_fp, config_fp)
-
     feature_list_fp = path.join(program_dir, "tmp/feature_list.json")
+
     plasmid_info_fp = path.join(program_dir, "tmp/plasmid_info.json")
 
-    
+    feature_prepare(prepared_genbank_fp, config_fp, feature_list_fp, plasmid_info_fp)
 
-    js_prepare(feature_list_fp, plasmid_info_fp, config_fp)
 
     js_feats_fp = path.join(program_dir, "tmp/js_feats.json")
-    make_svg_js(js_feats_fp)
 
-    plasmid_js = path.join(program_dir, "tmp/plasmid_js.js")
+    js_prepare(feature_list_fp, plasmid_info_fp, config_fp, js_feats_fp, 
+            uniq_dict)
+
+    plasmid_js_fp = path.join(program_dir, "tmp/plasmid_js.js")
+    make_svg_js(js_feats_fp, plasmid_js_fp)
+
     template_html_fp = path.join(program_dir, "div_svg_template.html")
 
-    html_prepare(plasmid_js, template_html_fp, out_fp, config_fp)
+    html_prepare(plasmid_js_fp, template_html_fp, out_fp, config_fp)
 
     return 0
 
-def get_cello_plasmid_map_div(gbk_input,base_div_html_fp, config_fp):
-    args = sys.argv
-    gbk_input    = args[1] 
-    config_fp = args[2] 
-    out_fp       = args[3] 
+def get_cello_plasmid_map_div(gbk_input,base_div_html_fp, config_fp, uniq_dict):
        
+
     program_dir = path.dirname(path.abspath(__file__))
 
-    genbank_prep(gbk_input, config_fp)
-    
+
     prepared_genbank_fp = path.join(program_dir, "tmp/prepared_genbank.gbk")
 
-    feature_prepare(prepared_genbank_fp, config_fp)
-
-    feature_list_fp = path.join(program_dir, "tmp/feature_list.json")
-    plasmid_info_fp = path.join(program_dir, "tmp/plasmid_info.json")
-
+    genbank_prep(gbk_input, config_fp, prepared_genbank_fp)
     
 
-    js_prepare(feature_list_fp, plasmid_info_fp, config_fp)
+    feature_list_fp = path.join(program_dir, "tmp/feature_list.json")
+
+    plasmid_info_fp = path.join(program_dir, "tmp/plasmid_info.json")
+
+    feature_prepare(prepared_genbank_fp, config_fp, feature_list_fp, 
+            plasmid_info_fp)
+
 
     js_feats_fp = path.join(program_dir, "tmp/js_feats.json")
-    make_svg_js(js_feats_fp)
 
-    plasmid_js = path.join(program_dir, "tmp/plasmid_js.js")
+    js_prepare(feature_list_fp, plasmid_info_fp, config_fp, js_feats_fp, 
+            uniq_dict)
+
+    plasmid_js_fp = path.join(program_dir, "tmp/plasmid_js.js")
+    make_svg_js(js_feats_fp, plasmid_js_fp, uniq_dict)
+
     template_html_fp = path.join(program_dir, base_div_html_fp)
 
-    html_str = div_html_prepare(plasmid_js, template_html_fp, out_fp, config_fp)
+    html_dict = div_html_prepare(plasmid_js_fp, template_html_fp, config_fp, 
+            plasmid_info_fp, uniq_dict)
 
-    return html_str
+    return html_dict
 
 
 

@@ -1,11 +1,137 @@
 #python3
 
 
+"""
+This file takes features_list and plasmid_info json files and creates pre-javascript features,
+divided into sections by type:
+    plasmid_arc_forward:
+        feat_name:
+        arc_start:
+        arc_end:
+        arc_angle:
+        line_width:
+        internal_color:
+        center_x:
+        center_y:
+        radius:
+    plasmid_arc_reverse
+        feat_name
+        arc_start:
+        arc_end:
+        arc_angle:
+        line_width:
+        internal_color:
+        center_x:
+        center_y:
+        radius:
+    pointer_and_text:
+        type: (str) pointer_and_text
+        pointer:
+            type: (str) "pointer"
+            new_line_width_bool: (bool)
+            line_width: (int)
+            line_color: (str)
+            start_point: list<int>
+            end_point: list<int>
+        text:
+            text_point: list<int>
+            text_str: (str)
+            new_text_font_bool: bool
+            text_font: (str)
+
+      
+    text:
+        text_point:
+        text_str:
+        new_text_font_bool:
+        text_font
+
+    center_text:
+        "type" : "center_text",
+        "plasmid_name": plasmid_name_str,
+        "name_start_x": plasmid_name_start,
+        "name_start_y": cc[1] - 15,
+        "length_str": plasmid_length_str,
+        "length_start_x": plasmid_length_str_start,
+        "length_start_y": cc[1] + 15,
+        "font_style": font_style,
+        "fill_color": js_info["title_text_color"]
+
+    promoter:
+
+        feat_name
+        color
+        line_width
+        p_line_coordinate_start
+        big_radius
+        arc_begin_point
+        arc_start_angle
+        arc_angle
+        arc_end_angle
+        arc_end_point
+        inner_flag_start
+        outer_flag_start
+        flags_end
+        center_x
+        center_y
+
+    terminator:
+
+        feat_name
+        border_color:
+        border_width: (int)
+        internal_color:
+        base_1: list<int> earlier angle point touching circle
+        base_2: later angle point touching circle
+        armpit_1: point directly above base 1 in the T
+        armpit_2: point directly above base 2 in the T
+        palm_hand_1: bottom edge of T which is closer to armpit 1
+        palm_hand_2: bottom edge of T which is closer to armpit 2
+        back_hand_1: highest point on T which is right above palm hand 1
+        back_hand_2: highest point on T which is right above palm hand 2
+
+    rbs:
+
+        feat_name
+        circle_center: 2d-coordinates
+        radius: float
+        start_angle: float
+        end_angle: float
+        border_color: str
+        internal_color: str
+        border_width: int
+
+    cds:
+        
+        feat_name
+        The CDS visual will look like an arrow head ending at the end of the CDS.
+        In order to draw this, we need 6 variables. The variables represent:
+            a: point on plasmid map that outer arrow starts.
+            b: point outside plasmid map that outer arrow has its peak.
+            c: point on plasmid map, same as end of cds, where arrow ends.
+            d: inner complement to a.
+            e: inner complement to b.
+            f: inner complement to c.
+            internal_color:
+
+    gap_arc:
+
+        feat_name
+        line_width:
+        line_color:
+        start_angle
+        end_angle
+        angle:
+        center_x:
+        center_y:
+        radius:
+
+"""
 
 from Bio import SeqIO
 import json
 import math
-from cello_util.plasmid_map.calculate_feats import *
+from calculate_feats import *
 
 
 
@@ -16,8 +142,7 @@ Inputs:
     plasmid_info_fp: (str) file path to plasmid info json file.
     config_fp: (str) file path to config info json file
 """
-def js_prepare(feature_list_fp, plasmid_info_fp, config_fp,
-        js_feats_fp, uniq_dict):
+def js_prepare(feature_list_fp, plasmid_info_fp, config_fp):
     with open(feature_list_fp, "r") as f:
         feature_dict_list = json.loads(f.read())
 
@@ -31,10 +156,7 @@ def js_prepare(feature_list_fp, plasmid_info_fp, config_fp,
     javascript_object_list = create_javascript_object_list(feature_dict_list,
             plasmid_info, config_dict)
 
-    javascript_object_list = update_javascript_object_list(
-            javascript_object_list, uniq_dict)
-
-    with open(js_feats_fp, "w") as f:
+    with open("tmp/js_feats.json", "w") as f:
         f.write(json.dumps(javascript_object_list, indent=2, sort_keys=True))
     
 
@@ -260,12 +382,3 @@ def create_reset_box(config_dict):
 
     return reset_box_object
 
-
-def update_javascript_object_list(javascript_object_list, uniq_dict):
-
-    #We add the uniq prefix to every object in this list.
-    for obj in javascript_object_list:
-        obj['const_prefix'] = uniq_dict["uniq_id"]
-        obj['svg_name'] = uniq_dict['svg_name']
-
-    return javascript_object_list

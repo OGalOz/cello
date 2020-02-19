@@ -16,7 +16,7 @@ import math
 import random
 import string
 import json
-from cello_util.plasmid_map.calculate_feats import calc_dist
+from calculate_feats import calc_dist
 
 
 """
@@ -24,14 +24,14 @@ Inputs:
     prepared_genbank_fp: (str) Filepath to input genbank
     config_fp: (str) Filepath to config file
 """
-def feature_prepare(prepared_genbank_fp, config_fp, feature_list_fp, plasmid_info_fp):
+def feature_prepare(prepared_genbank_fp, config_fp):
     logging.basicConfig(level=logging.DEBUG)
     with open(config_fp, "r") as f:
         config_dict = json.loads(f.read())
     gb_record = SeqIO.read(open(prepared_genbank_fp,"r"), "genbank")
 
 
-    plasmid_info = get_plasmid_info(gb_record, config_dict, plasmid_info_fp)
+    plasmid_info = get_plasmid_info(gb_record, config_dict)
 
     feat_info_dict_list = get_features(gb_record, config_dict)
 
@@ -39,7 +39,7 @@ def feature_prepare(prepared_genbank_fp, config_fp, feature_list_fp, plasmid_inf
 
     feat_info_dict_list = add_ids(feat_info_dict_list)
 
-    with open(feature_list_fp,"w") as g:
+    with open("tmp/feature_list.json","w") as g:
         g.write(json.dumps(feat_info_dict_list, indent=2, sort_keys=True))
 
     return 0
@@ -56,7 +56,7 @@ Outputs:
         plasmid_length: (int)
         num_features: (int)
 """
-def get_plasmid_info(gb_record, config_dict, plasmid_info_fp):
+def get_plasmid_info(gb_record, config_dict):
 
     plasmid_name = gb_record.name
     if config_dict["genbank_info"]["cello_bool"] == True:
@@ -73,7 +73,7 @@ def get_plasmid_info(gb_record, config_dict, plasmid_info_fp):
         raise ValueError("Too many features in genbank file: {}\
                 ".format(plasmid_name))
 
-    with open(plasmid_info_fp,"w") as g:
+    with open("tmp/plasmid_info.json","w") as g:
         g.write(json.dumps(plasmid_info, indent=2, sort_keys=True))
     return plasmid_info
 

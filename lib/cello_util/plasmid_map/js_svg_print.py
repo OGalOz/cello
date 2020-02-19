@@ -20,7 +20,8 @@ def print_plasmid_arc_forward(js_feat, num):
     js_str = "//Plasmid Arc Forward: {}\n".format(js_feat['feat_name'][0])
 
     arc_dict = {
-            'const_name': "plasmid_arc_" + str(num),
+            'const_name': js_feat['const_prefix'] + "_plasmid_arc_" + str(num),
+            'svg_name' : js_feat['svg_name'],
             'final_id': js_feat['html_id'],
             'start_point': js_feat['start_point'],
             'end_point': js_feat['end_point'],
@@ -40,7 +41,9 @@ def print_plasmid_arc_forward(js_feat, num):
 def print_plasmid_arc_reverse(js_feat, num):
     js_str = "//Plasmid Arc Reverse: {}\n".format(js_feat['feat_name'][0])
     arc_dict = {
-            'const_name': "reverse_arc_" + str(num),
+            'const_name': js_feat['const_prefix'] + "_reverse_arc_" + str(num),
+
+            'svg_name' : js_feat['svg_name'],
             'final_id': js_feat['html_id'],
             'start_point': js_feat['start_point'],
             'end_point': js_feat['end_point'],
@@ -64,7 +67,9 @@ def print_gap_arc(js_feat, num):
     js_str = "//Plasmid Gap Arc: {}\n".format(js_feat['feat_name'][0])
 
     arc_dict = {
-            'const_name': "gap_arc_" + str(num),
+            'const_name': js_feat['const_prefix'] + "_gap_arc_" + str(num),
+
+            'svg_name' : js_feat['svg_name'],
             'final_id': js_feat['html_id'],
             'start_point': js_feat['start_point'],
             'end_point': js_feat['end_point'],
@@ -91,14 +96,17 @@ def print_pointer_and_text(js_feat, num):
 
     #Pointer
     js_str += "//\tPointer: \n"
-    pointer_dict['const_name'] = "pointer_" + str(num)
+    pointer_dict['const_name'] = js_feat['const_prefix'] + "_pointer_" + str(num)
+    pointer_dict['svg_name'] = js_feat['svg_name']
     pointer_dict['final_id'] = pointer_dict['html_id']
     js_str += ut_line(pointer_dict)
 
 
     #Text Box
     js_str += "//\t Text-Box: {} \n".format(text_dict['text_str'])
-    js_str += "const {} = svg.insert('rect', 'text')\n".format("text_rect_" + str(num))
+    const_str = js_feat['const_prefix'] + "_text_rect_" + str(num)
+    js_str += "const {} = {}.insert('rect', 'text')\n".format(const_str, 
+            js_feat['svg_name'])
     js_str += ".attr('id', '{}')\n".format(text_rect_dict['html_id'])
     js_str += ".attr('x', '{}')\n".format(text_rect_dict["x"])
     js_str += ".attr('y', '{}')\n".format(text_rect_dict["y"])
@@ -117,7 +125,9 @@ def print_pointer_and_text(js_feat, num):
 
     js_str += "//\t Text: {} \n".format(text_dict['text_str'])
     txt_dict = {
-            'const_name': "text_" + str(num),
+            'const_name': js_feat['const_prefix'] + "_text_" + str(num),
+
+            'svg_name' : js_feat['svg_name'],
         'final_id': text_dict['html_id'],
         'font_weight': text_dict["font_weight"],
         'font_size': text_dict["font_size"],
@@ -151,7 +161,9 @@ def print_center_text(js_feat, num):
 
     js_str = "//Center Text: \n"
     ct_dict = {
-        'const_name': "center_name",
+        'const_name': js_feat['const_prefix'] + "_center_name",
+
+        'svg_name' : js_feat['svg_name'],
         'final_id': js_feat['html_id']["name"],
         'font_weight': js_feat["font_weight"],
         'font_size': js_feat["font_size"],
@@ -164,8 +176,9 @@ def print_center_text(js_feat, num):
     js_str += ut_text(ct_dict) 
 
     pl_dict = {
-            'const_name': "center_length",
+            'const_name': js_feat['const_prefix'] + "_center_length",
             
+        'svg_name' : js_feat['svg_name'],
         'final_id': js_feat['html_id']['length'], 
         'font_weight': js_feat["font_weight"],
         'font_size': js_feat["font_size"],
@@ -185,7 +198,10 @@ def print_promoter(js_feat, num):
 
     #Initial Line
     line_dict = {
-        'const_name': "promoter_" + str(num) + "_start_line",
+        'const_name': js_feat['const_prefix'] + "_promoter_" + str(num) + \
+        "_start_line",
+
+        'svg_name' : js_feat['svg_name'],
         'final_id': js_feat['html_id'] + "-start-line",
         'start_point':  js_feat['p_line_coordinate_start'],
         'end_point': js_feat['arc_begin_point'],
@@ -196,7 +212,10 @@ def print_promoter(js_feat, num):
 
     #Arc
     arc_dict = {
-            'const_name': "promoter_" + str(num) + "arc",
+            'const_name': js_feat['const_prefix'] + "_promoter_" + str(num) + \
+            "arc",
+
+            'svg_name' : js_feat['svg_name'],
             'final_id': js_feat['html_id'] + "-arc",
             'start_point': js_feat['arc_begin_point'],
             'end_point': js_feat['arc_end_point'],
@@ -216,7 +235,10 @@ def print_promoter(js_feat, num):
 
     #Arrow (Part 1)
     line_dict = {
-        'const_name': "promoter_" + str(num) + "_arrow_1",
+        'const_name': js_feat['const_prefix'] + "_promoter_" + str(num) + \
+                "_arrow_1",
+
+        'svg_name' : js_feat['svg_name'],
         'final_id': js_feat['html_id'] + "-arrow-1",
         'start_point':  js_feat['inner_flag_start'],
         'end_point': js_feat['flags_end'],
@@ -227,7 +249,10 @@ def print_promoter(js_feat, num):
 
     #Arrow (Part 2)
     line_dict = {
-        'const_name': "promoter_" + str(num) + "_arrow_2",
+        'const_name': js_feat['const_prefix'] + "_promoter_" + str(num) + \
+                "_arrow_2",
+
+        'svg_name' : js_feat['svg_name'],
         'final_id': js_feat['html_id'] + "-arrow-2",
         'start_point':  js_feat['outer_flag_start'],
         'end_point': js_feat['flags_end'],
@@ -255,7 +280,8 @@ def print_terminator(js_feat, num):
     bh_1 = js_feat['back_hand_1']
     bh_2 = js_feat['back_hand_2']
 
-    js_str += "const {} = svg.insert('polygon')\n".format("terminator_" + str(num))
+    const_str =  js_feat['const_prefix'] + "_terminator_" + str(num)
+    js_str += "const {} = {}.insert('polygon')\n".format(const_str, js_feat['svg_name'])
     js_str += ".attr('id', '{}')\n".format(js_feat['html_id'])
     js_str += ".attr('stroke', '{}')\n".format(js_feat['border_color'])
     js_str += ".attr('stroke-width', '{}')\n".format(js_feat['border_width'])
@@ -277,7 +303,9 @@ def print_rbs(js_feat, num):
     js_str = "//RBS Symbol: {} \n".format(js_feat['feat_name'][0])
 
     arc_dict= {
-        'const_name': "rbs_border_" + str(num),
+        'const_name': js_feat['const_prefix'] + "_rbs_border_" + str(num),
+
+        'svg_name' : js_feat['svg_name'],
         'final_id': js_feat['html_id'] + "-border",
         'start_point': js_feat['start_point'],
         'end_point': js_feat['end_point'],
@@ -313,7 +341,8 @@ def print_cds(js_feat, num):
     f = js_feat["f"]
 
     #In triangle
-    js_str += "const {} = svg.insert('polygon')\n".format("cds_" + str(num) + "_in")
+    const_str = js_feat['const_prefix'] + "_cds_" + str(num) + "_in"
+    js_str += "const {} = {}.insert('polygon')\n".format(const_str, js_feat['svg_name'])
     js_str += ".attr('id', '{}')\n".format(js_feat['html_id'] + "-in")
     js_str += ".attr('fill', '{}')\n".format(js_feat["internal_color"])
     points_str = "{},{} {},{} {},{} ".format(
@@ -322,7 +351,8 @@ def print_cds(js_feat, num):
     js_str += ".attr('points', '{}');\n\n".format(points_str)
 
     #Out Triangle
-    js_str += "const {} = svg.insert('polygon')\n".format("cds_" + str(num) + "_out")
+    const_str = js_feat['const_prefix'] + "_cds_" + str(num) + "_out"
+    js_str += "const {} = {}.insert('polygon')\n".format(const_str, js_feat['svg_name'])
     js_str += ".attr('id', '{}')\n".format(js_feat['html_id'] + "-out")
     js_str += ".attr('fill', '{}')\n".format(js_feat["internal_color"])
     points_str = "{},{} {},{} {},{} ".format(
@@ -337,7 +367,8 @@ def print_delete_box(js_feat):
 
     
     js_str = "// Delete-Box: \n"
-    js_str += "const {} = svg.insert('image')\n".format("delete_box")
+    const_str =  js_feat['const_prefix'] + "_delete_box"
+    js_str += "const {} = {}.insert('image')\n".format(const_str, js_feat['svg_name'])
     js_str += ".attr('id', '{}')\n".format(js_feat['html_id'])
     js_str += ".attr('x', '{}')\n".format(js_feat["x"])
     js_str += ".attr('y', '{}')\n".format(js_feat["y"])
@@ -354,7 +385,8 @@ def print_reset_box(js_feat):
 
     
     js_str = "// Reset-Box: \n"
-    js_str += "const {} = svg.insert('image')\n".format("reset_box")
+    const_str = js_feat['const_prefix'] + "_reset_box"
+    js_str += "const {} = {}.insert('image')\n".format(const_str, js_feat['svg_name'])
     js_str += ".attr('id', '{}')\n".format(js_feat['html_id'])
     js_str += ".attr('x', '{}')\n".format(js_feat["x"])
     js_str += ".attr('y', '{}')\n".format(js_feat["y"])
@@ -387,7 +419,7 @@ Inputs:
 """
 def ut_text(inp_dict):
 
-    js_str = "const {} = svg.append('text')\n".format(inp_dict['const_name'])
+    js_str = "const {} = {}.append('text')\n".format(inp_dict['const_name'],inp_dict['svg_name'])
     js_str += ".attr('id', '{}')\n".format(inp_dict['final_id'])
     js_str += ".attr('font-weight', '{}')\n".format(inp_dict["font_weight"])
     js_str += ".attr('font-size', '{}')".format(inp_dict['font_size'])
@@ -420,7 +452,8 @@ Inputs:
 """
 
 def ut_line(inp_dict):
-    js_str = "const {} = svg.append('line')\n".format(inp_dict['const_name'])
+    js_str = "const {} = {}.append('line')\n".format(inp_dict['const_name'],
+            inp_dict['svg_name'])
     js_str += ".attr('id', '{}')\n".format(inp_dict['final_id'])
     js_str += ".attr('x1', '{}')\n".format(inp_dict["start_point"][0])
     js_str += ".attr('y1', '{}')\n".format(inp_dict["start_point"][1])
@@ -456,7 +489,7 @@ Inputs:
         arc_end: (float)
 """
 def ut_arc(inp_dict):
-    js_str = "const {} = svg.append('path')\n".format(inp_dict['const_name'])
+    js_str = "const {} = {}.append('path')\n".format(inp_dict['const_name'],inp_dict['svg_name'])
     js_str += ".attr('id', '{}')\n".format(inp_dict['final_id'])
     js_str += ".attr('transform', 'translate({},{})')\n".format(
             inp_dict['center_x'], inp_dict['center_y'])
@@ -510,7 +543,7 @@ Inputs:
         arc_end: (float)
 """
 def ut_arc_line(inp_dict):
-    js_str = "const {} = svg.append('path')\n".format(inp_dict['const_name'])
+    js_str = "const {} = {}.append('path')\n".format(inp_dict['const_name'],inp_dict['svg_name'])
     js_str += ".attr('id', '{}')\n".format(inp_dict['final_id'])
     js_str += ".attr('transform', 'translate({},{})')\n".format(
             inp_dict['center_x'], inp_dict['center_y'])
@@ -562,7 +595,7 @@ Inputs:
 """
 
 def ut_semi_circle(inp_dict):
-    js_str = "const {} = svg.append('path')\n".format(inp_dict['const_name'])
+    js_str = "const {} = {}.append('path')\n".format(inp_dict['const_name'],inp_dict['svg_name'])
     js_str += ".attr('id', '{}')\n".format(inp_dict['final_id'])
     #js_str += ".attr('transform', 'translate({},{})')\n".format(
     #        inp_dict['center_x'], inp_dict['center_y'])

@@ -51,7 +51,7 @@ def make_kbase_genomes(output_files, kb_output_folder, output_folder, gfu, ws_na
             return genome_ref_list
 
 
-def turn_ape_to_gbk(output_files, kb_output_folder, output_folder):
+def turn_ape_to_gbk(output_files, kb_output_folder, output_folder, config_info):
     #Locating the '.ape' files. List ape_files will contain full paths to files.
     # ape files are like genbank files.
     circuit_ape_files = []
@@ -88,7 +88,7 @@ def turn_ape_to_gbk(output_files, kb_output_folder, output_folder):
         response = replace_label_with_locus_tag(ap_f)
         
         #Add information from base plasmid files:
-        replace_plasmid_sections_with_features(ap_f, config_info)
+        #replace_plasmid_sections_with_features(ap_f, config_info)
 
         if response != 0:
             #ISSUE - WE DO NOT CATCH IF THIS FAILS IN LATER STEPS

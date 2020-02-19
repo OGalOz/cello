@@ -113,10 +113,9 @@ These are the features and their keys (the name is under "type"):
 
 import json
 import logging
-from cello_util.plasmid_map.js_svg_print import *
-#from js_svg_print import *
+from js_svg_print import *
 
-def make_svg_js(js_feats_fp, plasmid_js_fp, uniq_dict):
+def make_svg_js(js_feats_fp):
 
     logging.info("Creating Javascript File from feats file.")
 
@@ -125,8 +124,7 @@ def make_svg_js(js_feats_fp, plasmid_js_fp, uniq_dict):
 
 
     javascript_str = "//SVG Code Start \n"
-    javascript_str += "const {} = d3.select('#{}');\n\n".format(
-            uniq_dict['svg_name'], uniq_dict['svg_id'])
+    javascript_str += "const svg = d3.select('svg');\n\n"
 
 
     logging.warning(len(js_feats_list))
@@ -177,7 +175,7 @@ def make_svg_js(js_feats_fp, plasmid_js_fp, uniq_dict):
     javascript_str += "//RESET BOX \n" + js_str
 
 
-    with open(plasmid_js_fp,"w") as g:
+    with open("tmp/plasmid_js.js","w") as g:
         g.write(javascript_str)
 
     return 0
