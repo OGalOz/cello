@@ -177,19 +177,23 @@ def find_and_remove_duplicates(gb_record, priority_list):
     return gb_record
 
 def clear_dir(dir_name):
-    logging.info("Clearing tmp directory:")
-    logging.info(os.listdir(dir_name))
-    for fn in os.listdir(dir_name):
-        fp = os.path.join(dir_name, fn)
-        try:
-            if os.path.isfile(fp) or os.path.islink(fp):
-                os.unlink(fp)
-            elif os.path.isdir(fp):
-                shutil.rmtree(fp)
-        except Exception as e:
-            logging.critical("Failed to delete {}. Reason: {}".format(fp, e))
-    logging.info("tmp dir:")
-    logging.info(os.listdir(dir_name))
+    logging.info("Clearing tmp directory: {}".format(dir_name))
+    if os.path.isdir(dir_name):
+        logging.info(os.listdir(dir_name))
+        for fn in os.listdir(dir_name):
+            fp = os.path.join(dir_name, fn)
+            try:
+                if os.path.isfile(fp) or os.path.islink(fp):
+                    os.unlink(fp)
+                elif os.path.isdir(fp):
+                    shutil.rmtree(fp)
+            except Exception as e:
+                logging.critical("Failed to delete {}. Reason: {}".format(fp, e))
+        logging.info("tmp dir:")
+        logging.info(os.listdir(dir_name))
+    else:
+        os.mkdir(dir_name)
+        logging.critical("Created directory")
 
 def genbank_prep(gbk_fp, config_fp, out_fp):
     
