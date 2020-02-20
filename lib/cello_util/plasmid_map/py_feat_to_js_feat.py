@@ -197,7 +197,7 @@ def create_center_text(plasmid_info, config_dict, uniq_dict):
     #We add the text box with the name, calculating center of the word to be center of circle,
     # and each letter has length 12 pixels
     plasmid_name_length = len(plasmid_name_str)*15
-    plasmid_name_start = cc[0] - float(plasmid_name_length)/2
+    plasmid_name_start = cc[0] - float(plasmid_name_length)/1.5
 
     #Getting length of plasmid and placing it under plasmid name
     plasmid_length_str = str(plasmid_info['plasmid_length']) + " bp"
@@ -207,7 +207,7 @@ def create_center_text(plasmid_info, config_dict, uniq_dict):
 
     #We add the text box with the length, 20 to the left of center, and 20 below
     plasmid_length_str_len = len(plasmid_length_str)*15
-    plasmid_length_str_start = cc[0] - float(plasmid_length_str_len)/2
+    plasmid_length_str_start = cc[0] - float(plasmid_length_str_len)/1.5
 
     font_weight = "bold"
     font_size = "{}pt".format(str(js_info['title_text_size']))

@@ -5,7 +5,7 @@
         "name_tag": "locus_tag",
         "multiple_name_tags" : ["locus_tag","gene","label","old_locus_tag","protein_id"],
         "name_tags": ["locus_tag","gene","label","old_locus_tag","protein_id"],
-        "gap_names": ["gap", "feature_gap"],
+        "gap_names": ["gap", "feature_gap", "backbone"],
         "types_dict": {
             "promoter": ["promoter"],
             "terminator": ["terminator"],
@@ -14,7 +14,20 @@
             "scar": ["scar"],
             "ribozyme": ["ribozyme"],
             "backbone": ["backbone"],
-            "misc_feature": ["misc_feature"]
+            "misc_feature": ["misc_feature"],
+            "unknown": ["", "unsure", "unknown"]
+        },
+        "colors_dict": {
+            "promoter": "#D2B48C",
+            "terminator":"#FF0000",
+            "rbs":"#BC8F8F",
+            "cds": "#00FFFF",
+            "scar":"#808080",
+            "ribozyme":"#0000ff",
+            "backbone": "black",
+            "misc_feature": "#ffccff",
+            "unknown": "#d9d9d9"
+
         },
         "max_num_feat" : 100,
         "cello_bool": true
@@ -32,9 +45,9 @@
             "pointer_distance": 5,
             "pointer_thick":1,
             "pointer_color": "black",
-            "text_size" : 18,
+            "text_size" : 25,
             "text_color": "black",
-            "title_text_size" : 20,
+            "title_text_size" : 30,
             "title_text_color": "#333",
             "max_title_length" : 35,
             "highlight_color": "FFFFD5",
@@ -61,7 +74,7 @@
             },
             "text_rect_info": {
                 "x_diff": 8,
-                "y_diff": 15,
+                "y_diff": 20,
                 "border_color": "gray",
                 "clicked_border_color": "black",
                 "internal_color": "white",

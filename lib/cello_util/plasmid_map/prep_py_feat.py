@@ -97,6 +97,7 @@ def get_features(gb_record, config_dict):
     features_list = gb_record.features
     plasmid_len = len(gb_record.seq)
     circle_center = config_dict['js_info']['center_coordinates']
+    genbank_info = config_dict["genbank_info"]
 
     feat_info_dict_list =  []
 
@@ -117,7 +118,7 @@ def get_features(gb_record, config_dict):
         start_percentage = float(float(bp_start)/float(plasmid_len))
         end_percentage = start_percentage + plasmid_percentage
         mid_percentage = start_percentage + (plasmid_percentage/2)
-        name_opt = config_dict["genbank_info"]["name_tags"]
+        name_opt = genbank_info["name_tags"]
         feat_name = ""
         for qual in feat.qualifiers.keys():
             if qual in name_opt:
@@ -125,6 +126,22 @@ def get_features(gb_record, config_dict):
         if feat_name == "":
             feat_name = "unknown"
 
+        #Choosing color:
+        types_dict = genbank_info["types_dict"]
+        colors_dict = genbank_info["colors_dict"] 
+        main_key = ""
+        for k in types_dict.keys():
+            if feat_type in types_dict[k]:
+                main_key = k
+        if main_key == "":
+            feat_color = colors_dict["unknown"] 
+        else:
+            feat_color = colors_dict[main_key]
+        
+
+
+
+        
 
         #Feature brightness
         feat_shade = "bright"
@@ -133,8 +150,10 @@ def get_features(gb_record, config_dict):
                 feat_shade = "dark"
 
 
+        """ OLD COLOR IMPLEMENTATION
         #Feature color
         feat_color = get_random_color(feat_shade)
+        """
 
         #Calculating positions in the canvas:
         angle_start = (2*math.pi)*start_percentage 

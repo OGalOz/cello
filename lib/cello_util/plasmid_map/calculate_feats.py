@@ -264,7 +264,7 @@ def calculate_pointer_and_text(feature_dict, config_dict):
     text_dict = {"type": "text"}
     text_dict['html_id'] = feature_dict['feat_html_id'] + "-text"
     text_dict["text_point"] = [text_coords[0] , text_coords[1]]
-    text_dict["text_str"] = feature_dict["feat_name"][0] + " ({})".format(feature_dict["bp_len"])
+    text_dict["text_str"] = feature_dict["feat_name"][0] 
     text_dict["new_text_font_bool"] = False
     text_dict["text_font"] = str(js_info["text_size"]) + "pt Calibri"
     text_dict["font_size"] = str(js_info["text_size"])
@@ -304,7 +304,7 @@ def calculate_text_rect(text_start_coordinates, text_str, js_info):
     text_size = js_info['text_size']
     height = text_size + 10
     text_rect_info_dict['height'] = height
-    width_to_pixel_ratio = text_size/1.862
+    width_to_pixel_ratio = text_size/1.62
     text_box_width = len(text_str) * width_to_pixel_ratio
     text_rect_info_dict['width'] = text_box_width 
     #x and y represent the top left corner of the rectangle
