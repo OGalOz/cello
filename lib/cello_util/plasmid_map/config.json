@@ -47,7 +47,7 @@
             "pointer_color": "black",
             "text_size" : 25,
             "text_color": "black",
-            "title_text_size" : 30,
+            "title_text_size" : 28,
             "title_text_color": "#333",
             "max_title_length" : 35,
             "highlight_color": "FFFFD5",

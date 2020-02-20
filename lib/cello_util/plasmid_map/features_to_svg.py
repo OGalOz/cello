@@ -148,16 +148,16 @@ def make_svg_js(js_feats_fp, plasmid_js_fp, uniq_dict):
 
         elif typ == "promoter":
             js_str = print_promoter(js_feat, i)
-
-        """ FOR NOW WE GET RID OF TERMINATOR SYMBOL
-        elif typ == "terminator":
-            js_str = print_terminator(js_feat, i)
-        """
-        """ FOR NOW WE GET RID OF RBS SYMBOL
-        elif typ == "rbs":
-            js_str = print_rbs(js_feat, i)
-        """
-
+        #""" 
+        #FOR NOW WE AVOID TERMINATOR SYMBOL
+        #elif typ == "terminator":
+        #    js_str = print_terminator(js_feat, i)
+        #"""
+        #""" 
+        #FOR NOW WE AVOID RBS SYMBOL
+        #elif typ == "rbs":
+        #    js_str = print_rbs(js_feat, i)
+        #"""
         elif typ == "cds":
             js_str = print_cds(js_feat, i)
 
