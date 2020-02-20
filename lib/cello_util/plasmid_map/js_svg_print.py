@@ -321,7 +321,7 @@ def print_rbs(js_feat, num):
     }
     #js_str += ut_arc(arc_dict)
     
-    arc_dict['const_name'] = "rbs_circle_" + str(num)
+    arc_dict['const_name'] = js_feat['const_prefix'] + "_rbs_border_" + str(num)
     arc_dict['final_id'] = js_feat['html_id'] + "-circle"
     arc_dict['radius'] = js_feat['radius'] - (arc_dict["line_width"]/2)
     arc_dict['internal_color'] = js_feat["internal_color"]
