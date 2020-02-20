@@ -50,7 +50,7 @@
             "title_text_size" : 28,
             "title_text_color": "#333",
             "max_title_length" : 35,
-            "highlight_color": "FFFFD5",
+            "highlight_color": "#FFFFD5",
             "delete_box_info": {
                 "top_left_corner_x": 0,
                 "top_left_corner_y": 300,
@@ -71,6 +71,25 @@
                 "border_color": "black",
                 "img_link": "reset_img.png",
                 "include_bool" : false
+            },
+            "legend_box_info": {
+                "top_left_corner_x": 0,
+                "top_left_corner_y": 700,
+                "width": 120,
+                "height": 300,
+                "text_box_width": 80,
+                "color_box_width": 40,
+                "title_text": "Color Legend",
+                "border_color": "black",
+                "internal_color": "white",
+                "row_font_weight": "normal",
+                "row_font_color": "black",
+                "row_font_size": 12,
+                "title_font_weight": "bold",
+                "title_font_color": "black",
+                "title_font_size": 12,
+
+                "include_bool" : true
             },
             "text_rect_info": {
                 "x_diff": 8,

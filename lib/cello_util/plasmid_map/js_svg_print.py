@@ -404,7 +404,80 @@ def print_reset_box(js_feat):
 
     return js_str
 
+def print_legend_box(js_feat):
 
+    js_str = "// Color Legend -Box: \n"
+    include_legend_bool = js_feat['include_bool']
+
+    if include_legend_bool:
+
+        #First we create the entire rectangle
+        js_feat["const_name"] = js_feat["const_prefix"] + "_legend_box"
+        js_feat["html_id"] = js_feat["html_id"] + "-main-box"
+        js_str += ut_box(js_feat)
+
+        # Then we create the title row
+        # first the box
+        js_str += "//TITLE ROW  \n"
+        title_row = js_feat["title_row_dict"]
+        title_row["const_name"] = js_feat["const_prefix"] + "_legend_title_box"
+        title_row["svg_name"] = js_feat["svg_name"]
+        title_row["html_id"] = js_feat["html_id"] + "-title-box"
+        js_str += ut_box(title_row)
+        # then the text
+        js_str += "//TITLE TEXT \n"
+        title_text_dict = title_row
+        title_text_dict["const_name"] = js_feat["const_prefix"] + "_legend_title_txt"
+        title_text_dict["final_id"] = js_feat["html_id"] + "-title-text"
+        title_text_dict["start_x"] = title_text_dict["x"] + 2
+        title_text_dict["start_y"] = title_text_dict["y"] + 15
+        title_text_dict['font_weight'] = js_feat["title_font_weight"]
+        title_text_dict['font_size'] = js_feat["title_font_size"]
+        title_text_dict['font_color'] = js_feat["title_font_color"]
+        title_text_dict['text_str'] = js_feat['title_text']
+        title_text_dict['text_rect_bool'] = False
+        js_str += ut_text(title_text_dict) 
+
+        # Then we create the rest of the rows, printing left rectangle first,
+        # then text, then right rectangle
+        js_str += "//LEGEND ROWS: \n"
+        row_info_list = js_feat['row_info_list']
+        for j in range(len(row_info_list)):
+            row_info_dict = row_info_list[j]
+            # first the left box
+            js_str += "// LEFT BOX {}\n".format(j)
+            left_box = row_info_dict["left_box"]
+            left_box['const_name'] = js_feat["const_prefix"] + "_lb_" + str(j)
+            left_box['svg_name'] = js_feat['svg_name']
+            left_box['html_id'] = js_feat["html_id"] + "-lb-" + str(j)
+            left_box['border_color'] = "black"
+            left_box['internal_color'] = "white"
+            js_str += ut_box(left_box)
+
+            #Then to the text in the left box
+            js_str += "// LEFT BOX TEXT {}\n".format(j)
+            left_box['const_name'] = js_feat["const_prefix"] + "_lbtxt_" + str(j)
+            left_box['final_id'] = js_feat["html_id"] + "-lbtxt-" + str(j)
+            left_box["start_x"] = left_box["x"] + 2
+            left_box["start_y"] = left_box["y"] + 15
+            left_box['font_weight'] = js_feat["row_font_weight"]
+            left_box['font_size'] = js_feat["row_font_size"]
+            left_box['font_color'] = js_feat["row_font_color"]
+            left_box['text_str'] = left_box['text']
+            left_box['text_rect_bool'] = False
+            js_str += ut_text(left_box) 
+
+            #Now right box
+
+            js_str += "// RIGHT BOX {}\n".format(j)
+            right_box = row_info_dict["right_box"]
+            right_box['const_name'] = js_feat["const_prefix"] + "_rb_" + str(j)
+            right_box['svg_name'] = js_feat['svg_name']
+            right_box['html_id'] = js_feat["html_id"] + "-rb-" + str(j)
+            right_box['border_color'] = "black"
+            js_str += ut_box(right_box)
+
+        return js_str
 
 
 #UTILITY FUNCTIONS:
@@ -412,6 +485,7 @@ def print_reset_box(js_feat):
 Inputs:
     inp_dict needs:
         const_name: (str)
+        svg_name: (str)
         final_id: (str)
         font_weight:
         font_size:
@@ -624,6 +698,43 @@ def ut_semi_circle(inp_dict):
             str(inp_dict["end_point"][1])
             )
     js_str += ".attr('d','{}');\n\n".format(arc_text)
+
+    return js_str
+
+
+"""
+const_name: (str) Name of constant
+svg_name: (str) Name of related svg object
+x:
+y:
+width:
+height:
+border_color:
+html_id:
+internal_color:
+"""
+def ut_box(inp_dict):
+    #Text Box
+    js_str = "const {} = {}.insert('rect', 'text')\n".format(inp_dict['const_name'],
+            inp_dict['svg_name'])
+
+            
+    js_str += ".attr('id', '{}')\n".format(inp_dict['html_id'])
+    js_str += ".attr('x', '{}')\n".format(inp_dict["x"])
+    js_str += ".attr('y', '{}')\n".format(inp_dict["y"])
+    js_str += ".attr('width', '{}')\n".format(inp_dict["width"])
+    js_str += ".attr('height', '{}')\n".format(inp_dict["height"])
+    js_str += ".attr('stroke', '{}')\n".format(inp_dict['border_color'])
+
+    """
+    on_click_str = ".on('click', () => [& \n" + \
+        "let click_id = '{}';\n".format(inp_dict['html_id']) + \
+        "pointer_text_selection(click_id)&])\n"
+    on_click_str = on_click_str.replace('[&', '{').replace('&]', '}')
+    js_str += on_click_str
+    js_str += '.call(d3.drag().on("start", drag_started))\n'
+    """
+    js_str += ".attr('fill', '{}');\n\n".format(inp_dict['internal_color'])
 
     return js_str
 

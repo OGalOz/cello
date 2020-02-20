@@ -93,6 +93,10 @@ def create_javascript_object_list(feature_dict_list, plasmid_info, config_dict,
     user_reset_box = create_reset_box(config_dict, uniq_dict)
     javascript_object_list.append(user_reset_box)
 
+    #Creating color legend box
+    color_legend_box = create_color_legend_box(config_dict, uniq_dict)
+    javascript_object_list.append(color_legend_box)
+
     return javascript_object_list
 
 def create_arc(feature_dict, config_dict):
@@ -263,6 +267,67 @@ def create_reset_box(config_dict, uniq_dict):
     reset_box_object['include_bool'] = rb_info['include_bool']
 
     return reset_box_object
+
+
+def create_color_legend_box(config_dict, uniq_dict):
+
+    legend_box_object = {"type": "legend_box"}
+    legend_box_object["html_id"] = "legend-box-{}".format(uniq_dict['file_num'])
+    lb_info = config_dict["js_info"]["legend_box_info"]
+    legend_box_object['include_bool'] = lb_info['include_bool']
+    legend_box_object["x"] = lb_info["top_left_corner_x"]
+    legend_box_object["y"] = lb_info["top_left_corner_y"]
+    legend_box_object["width"] = lb_info["width"]
+    legend_box_object["height"] = lb_info["height"]
+    text_box_width = lb_info["text_box_width"]
+    color_box_width = lb_info["color_box_width"]
+    legend_box_object["row_font_weight"] = lb_info["row_font_weight"]
+    legend_box_object["row_font_size"] = lb_info["row_font_size"]
+    legend_box_object["row_font_color"] = lb_info["row_font_color"]
+    legend_box_object["title_font_weight"] = lb_info["title_font_weight"]
+    legend_box_object["title_font_size"] = lb_info["title_font_size"]
+    legend_box_object["title_font_color"] = lb_info["title_font_color"]
+    legend_box_object["border_color"] = lb_info["border_color"]
+    legend_box_object["title_text"] = lb_info["title_text"]
+    legend_box_object["internal_color"] = lb_info["internal_color"]
+    colors_dict = config_dict["genbank_info"]["colors_dict"]
+    #The number of rows is number of features and colors plus title (1)
+    num_rows = len(colors_dict.keys()) + 1
+    row_height = lb_info['height']/num_rows
+    title_row_dict = {
+            "x" : lb_info["top_left_corner_x"] + 1,
+            "y" : lb_info["top_left_corner_y"] + 1,
+            "width": lb_info["width"],
+            "height" : row_height,
+            "text": lb_info["title_text"],
+            "internal_color": "white",
+            "border_color": "black"
+            }
+    legend_box_object["title_row_dict"] = title_row_dict
+
+    row_info_list = []
+    color_keys = list(colors_dict.keys())
+    for i in range(len(color_keys)):
+        new_row_dict = {
+                "left_box": {
+            "x" : lb_info["top_left_corner_x"],
+            "y" : lb_info["top_left_corner_y"] + row_height*(i+1),
+            "width": lb_info["text_box_width"],
+            "height": row_height,
+            "text": color_keys[i]
+            },
+                "right_box": {
+            "x": lb_info["top_left_corner_x"] + lb_info["text_box_width"],
+            "y" : lb_info["top_left_corner_y"] + row_height*(i+1),
+            "width": lb_info["color_box_width"],
+            "height": row_height,
+            "internal_color": colors_dict[color_keys[i]]
+                    }
+                }
+        row_info_list.append(new_row_dict)
+    legend_box_object["row_info_list"] = row_info_list
+
+    return legend_box_object
 
 
 def update_javascript_object_list(javascript_object_list, uniq_dict):
