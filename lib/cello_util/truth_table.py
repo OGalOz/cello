@@ -18,13 +18,13 @@ INPUTS:
 
 
 """
-def make_truth_table_from_text(gene_inputs_list, gene_outputs_list,truth_table_text):
+def make_truth_table_from_text(extracted_vars_dict):
 
-    logging.debug("TRUTH TABLE FUNCTIONS: Gene Inputs List:")
-    logging.debug(gene_inputs_list)
-    logging.debug("TRUTH TABLE FUNCTIONS: Gene Outputs List:")
-    logging.debug(gene_outputs_list)
+    gene_inputs_list = extracted_vars_dict['gene_inputs_list']
 
+    gene_outputs_list = extracted_vars_dict['gene_outputs_list']
+
+    truth_table_text = extracted_vars_dict['truth_table_text']
 
 
     #orig_gene_names stores the gene names given by the Promoter and Output Names, not the Truth Table.
@@ -106,7 +106,7 @@ def make_truth_table_from_text(gene_inputs_list, gene_outputs_list,truth_table_t
 
 
 
-
+"""
 # The following function is out of use.
 def make_truth_table_from_values(gene_inputs_list, gene_outputs_list, truth_table_values):
     # We find the number of rows in the truth table aside from the names of the genes.
@@ -173,6 +173,6 @@ def make_truth_table_from_values(gene_inputs_list, gene_outputs_list, truth_tabl
 
     return truth_table
 
-
+"""
 
 

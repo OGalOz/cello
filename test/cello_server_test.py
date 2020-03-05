@@ -111,6 +111,18 @@ class celloTest(unittest.TestCase):
                                                     'sensor_module_info': sensor_module_info,
                                                     })
 
+
+"""
+Testing needs to check:
+    Custom Inputs (max/min length?)
+    Custom Outputs (max/min length?)
+    base plasmids (max/min length?)
+    output_base/circuit_base/sensor_module combinations on/off?
+    complexity of genetic circuit turth table?
+    E_coli base and custom base?
+    Explanation of how process works in display.yml?
+"""
+
 '''
 'plasmid_output_genome_base': plasmid_output_genome_base,
 'plasmid_output_insertion_bp': plasmid_output_insertion_bp,

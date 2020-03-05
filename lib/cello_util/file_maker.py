@@ -355,7 +355,7 @@ def dict_of_out_gene_relations():
 """
 Inputs:
     base_plasmid_info: (str) One of "none", "e_coli", "tetrlaci", "custom"
-    ucfs_params_fp: (str) Filepath to ucf json file
+    ucf_params_fp: (str) Filepath to ucf json file
     additional_info_dict: (dict)
         output_fp: (str) Output UCF Filepath
         msd_gb_bool: (bool)
@@ -372,9 +372,14 @@ Inputs:
 Output:
     ucf_fp: (str) File path to the UCF file the program will be using.
 """
-def make_ucf_file(base_plasmid_info, ucfs_params_fp, additional_info_dict):
-   
-    with open(ucfs_params_fp, "r") as f:
+def make_ucf_file(extracted_vars_dict):
+    base_plasmid_info = extracted_vars_dict['ucf_info']['base_plasmid_info']
+    ucf_params_fp = extracted_vars_dict["ucf_params_fp"]
+    additional_info_dict = extracted_vars_dict["ucf_info"][
+            "additional_info_dict"]
+  
+
+    with open(ucf_params_fp, "r") as f:
         file_str = f.read()
         ucfs_info_dict = json.loads(file_str)
 

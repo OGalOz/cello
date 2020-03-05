@@ -1,0 +1,15 @@
+{
+    "new_ucf_bool": true,
+    "extracted_vars_json_fn": "extracted_vars.json",
+    "ucf_params_fp": "/kb/module/lib/cello_util/util_params.json",
+    "verilog_module_name": "testname",
+    "cello_kb": "/cello/kb_run",
+    "new_ucf_name": "tmp_kbase_ucf.json",
+    "main_dir": "/kb/module",
+    "plasmids_info": {
+        "filepaths": {
+            "pAN1201": "/kb/module/lib/cello_util/plasmids/pAN1201.ape",
+            "pAN4020": "/kb/module/lib/cello_util/plasmids/pAN4020.ape"
+        }
+    }
+}
