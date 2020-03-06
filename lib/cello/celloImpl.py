@@ -142,7 +142,7 @@ class cello:
         gfu = GenomeFileUtil(self.callback_url)
         kb_genome_bool = extracted_vars_dict["output_info"]["kb_genome_bool"]
         gbk_config_info = {
-                    "max_kbase_genomes": cello_config_dict["max_kbase_genomes"]
+                    "max_kbase_genomes": cello_config_dict["max_kbase_genomes"],
                     "max_gbks": cello_config_dict["max_gbk_files_from_ape"]
         }
 
