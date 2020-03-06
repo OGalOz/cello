@@ -141,19 +141,25 @@ class cello:
         output_files = os.listdir(final_op_dir)
         gfu = GenomeFileUtil(self.callback_url)
         kb_genome_bool = extracted_vars_dict["output_info"]["kb_genome_bool"]
+        gbk_config_info = {
+                    "max_kbase_genomes": cello_config_dict["max_kbase_genomes"]
+                    "max_gbks": cello_config_dict["max_gbk_files_from_ape"]
+        }
+
         if kb_genome_bool == True:
-            gbk_config_info = {}
-            genome_ref_list = make_kbase_genomes(output_files, 
+            try:
+                genome_ref_list = make_kbase_genomes(output_files, 
                     kb_output_folder,
                     output_folder, 
                     gfu, 
                     params['workspace_name'], 
                     extracted_vars_dict['output_info']['main_output_name'], 
                     gbk_config_info)
+            except:
+                logging.warning("Could not make KBase Genomes.")
+                genome_ref_list = []
             ext_report_params['objects_created'] = genome_ref_list
         else:
-            #TD: More info in gbk config info
-            gbk_config_info = {}
             turn_ape_to_gbk(output_files, kb_output_folder, output_folder, 
                     gbk_config_info)
        

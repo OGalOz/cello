@@ -11,5 +11,8 @@
             "pAN1201": "/kb/module/lib/cello_util/plasmids/pAN1201.ape",
             "pAN4020": "/kb/module/lib/cello_util/plasmids/pAN4020.ape"
         }
-    }
+    },
+    "max_kbase_genomes": 15,
+    "max_gbk_files_from_ape": 15
+
 }

@@ -13,6 +13,12 @@ def make_kbase_genomes(output_files, kb_output_folder, output_folder, gfu,
 
             #Uploading the ape files to KBase Genome File Object.
             genome_ref_list = []
+
+            if len(ape_files) > config_info["max_kbase_genomes"]:
+                logging.warning("Too many ape files generated. Limit is 15. Not \
+                creating KBase genomes from them.")
+
+                raise Exception("Too many ape files. Not creating objects.")
             for ape_fp in ape_files:
 
                 #Placeholder genome name:
@@ -36,9 +42,6 @@ def make_kbase_genomes(output_files, kb_output_folder, output_folder, gfu,
     
                 genome_ref_list.append({'ref' : result["genome_ref"], 
                     'description':'Genome created for file: ' + g_name + '.gbk'})
-                #DEBUG
-                logging.debug("Genbank to Genome Upload Results for: " + ape_fp)
-                logging.debug(result)
  
             return genome_ref_list
 
@@ -70,11 +73,6 @@ def turn_ape_to_gbk(output_files, kb_output_folder, output_folder, config_info):
                     os.path.join(output_folder, out_f)))
                 
     ape_files = circuit_ape_files + output_ape_files + sensor_ape_files
-    logging.debug("Unused ape files: ")
-    logging.debug(extra_ape_files)
-
-    logging.debug("PARSED APE FILES:")
-    logging.debug(ape_files)
 
     if len(ape_files) == 0:
         logging.critical("NO .APE FILES FOUND - CANNOT MAKE PLASMID - \
@@ -86,6 +84,12 @@ def turn_ape_to_gbk(output_files, kb_output_folder, output_folder, config_info):
             new_ape_files.append(ap_f)
 
     ape_files = new_ape_files
+
+    if len(ape_files) > config_info["max_gbks"]:
+        logging.warning("Too many ape files generated. Limit is {}. Not \
+                creating gbk files from them.".format(config_info["max_gbks"]))
+        raise Exception("Too many ape files. Limit is {}".format(
+            config_info["max_gbks"]))
 
     for ap_f in ape_files:
         #Replace "label" in .ape file with "locus_tag"
