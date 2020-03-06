@@ -10,10 +10,12 @@ from cello_util.truth_table import make_truth_table_from_text
 def extract_values_from_params(params, out_fp, cello_config_dict):
     extracted_vars_dict = {}
 
-    extracted_vars_dict['gene_inputs_list'] = get_gene_inputs(params)
+    extracted_vars_dict['gene_inputs_list'] = get_gene_inputs(params, 
+            cello_config_dict)
 
 
-    extracted_vars_dict['gene_outputs_list'] = get_gene_outputs(params)
+    extracted_vars_dict['gene_outputs_list'] = get_gene_outputs(params,
+            cello_config_dict)
 
 
     extracted_vars_dict['truth_table_text'] = get_truth_table_text(params)
@@ -44,7 +46,7 @@ def extract_values_from_params(params, out_fp, cello_config_dict):
     return extracted_vars_dict
 
 
-def get_gene_inputs(params):
+def get_gene_inputs(params, cello_config_dict):
     gene_inputs_list = []
 
     if "promoter_inputs" in params or "custom_promoter_inputs" in params:
@@ -72,11 +74,15 @@ def get_gene_inputs(params):
     else:
         raise Exception("Input Promoters not supplied (not in params).")
 
+    if len(gene_inputs_list) > cello_config_dict["max_input_num"]:
+        raise Exception("Number of promoter inputs exceeds the maximum alloted \
+                amount: {}".format(cello_config_dict["max_input_num"]))
+
     return gene_inputs_list
 
 
 
-def get_gene_outputs(params):
+def get_gene_outputs(params, cello_config_dict):
 
     gene_outputs_list = []
 
@@ -105,6 +111,12 @@ def get_gene_outputs(params):
                             but instead it is " + str(type(gene_dict)))
     else:
         raise Exception("No gene outputs supplied (in params).")
+
+    if len(gene_outputs_list) > cello_config_dict["max_output_num"]:
+        raise Exception("Number of protomer outputs exceeds the maximum alloted \
+                amount: {}".format(cello_config_dict["max_output_num"]))
+
+
 
     return gene_outputs_list
 

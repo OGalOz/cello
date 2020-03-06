@@ -13,6 +13,8 @@
         }
     },
     "max_kbase_genomes": 15,
-    "max_gbk_files_from_ape": 15
+    "max_gbk_files_from_ape": 15,
+    "max_input_num": 4,
+    "max_output_num": 2
 
 }
