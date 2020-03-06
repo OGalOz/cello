@@ -77,26 +77,29 @@ class cello:
                 "variables_json_tmp")
         os.mkdir(variables_json_dir)
 
+        #What folder to zip and return to User
+        kb_output_folder = os.path.join(self.shared_folder,"cello_output")
+        os.mkdir(kb_output_folder)
+
         #Making config dict
         cello_config_fp = os.path.join(os.path.dirname(
             os.path.realpath(__file__)), "cello_config.json")
         with open(cello_config_fp, "r") as f:
             cello_config_dict = json.loads(f.read())
 
+
         cello_config_dict["shared_folder"] = self.shared_folder
 
         extracted_vars_fp = os.path.join(variables_json_dir,
                 cello_config_dict["extracted_vars_json_fn"])
         
-        #extracting program parameters from params
+
+        #extracting program parameters from params given by User
         extracted_vars_dict = extract_values_from_params(params, 
                 extracted_vars_fp, cello_config_dict)
 
 
 
-        #What folder to zip and return to User
-        kb_output_folder = os.path.join(self.shared_folder,"cello_output")
-        os.mkdir(kb_output_folder)
 
         cello_kb = cello_config_dict['cello_kb']
         if not os.path.exists(cello_kb):
@@ -104,6 +107,8 @@ class cello:
         else:
             raise Exception("kb_run directory already exists within cello ?! \
                     Need new directory to run our verilog files.")
+
+
 
         #CODE
         #Creating input files to Cello from params:
