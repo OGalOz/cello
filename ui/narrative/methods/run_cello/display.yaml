@@ -30,14 +30,14 @@ parameters :
         short-hint : |
             The name of the gene (e.g. pTac)
         long-hint : |
-            Don't use spaces or special characters.
+            Don't use spaces or special characters. Maximum number of input promoters is 4.
     custom_inp_promoter_name :
         ui-name : |
             Input Name
         short-hint : |
             The name of the gene (e.g. pTac)
         long-hint : |
-            Don't use spaces or special characters.
+            Don't use spaces or special characters. Maximum number of input promoters is 4.
     low_RPU :
         ui-name : | 
             low RPU
@@ -69,12 +69,12 @@ parameters :
         short-hint : |
             The name of the gene (e.g. YFP)
         long-hint : |
-            Don't use spaces or special characters.
+            Don't use spaces or special characters. Maximum number of outputs is 2.
     custom_out_gene_name :
         ui-name : |
             Custom Output Gene Name
         short-hint : |
-            The name of your output gene.
+            The name of your output gene. Maximum number of outputs is 2.
     out_DNA_sequence :
         ui-name : |
             DNA sequence
@@ -134,6 +134,8 @@ parameters :
             Sensor Module Plasmid
         short-hint: |
             The plasmid into which the sensor module will be inserted
+        long-hint : |
+            This should be a Genome Object into which the sensor module will be inserted. 
     sensor_insertion_bp:
         ui-name: |
             Sensor Module Location (bp)
