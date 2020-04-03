@@ -118,7 +118,8 @@ class cello:
 
         #RUNNING CELLO:
         os.chdir(cello_kb)
-        #NOTE Again changes are made to extracted_vars_dict
+        # Again changes are made to extracted_vars_dict
+        # This is where UCF file is made/configured!!!
         extracted_vars_dict = run_cello_program(extracted_vars_dict, 
                 cello_config_dict, cello_kb)
 

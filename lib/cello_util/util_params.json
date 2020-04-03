@@ -3,6 +3,7 @@
     "none_ucf_fp": "/kb/module/lib/cello_util/UCF/complete_UCF/Eco1_no_data_no_gen_loc.json",
     "e_coli_ucf_fp": "/kb/module/lib/cello_util/UCF/complete_UCF/Eco1C1G1T0.UCF.json",
     "tetrlaci_ucf_fp": "/kb/module/lib/cello_util/UCF/complete_UCF/TetRLacI.UCF.json",
+    "bact_thetaiotaomicron_5482": "/kb/module/lib/cello_util/UCF/complete_UCF/Bth1C1G1T1.UCF.json",
     "custom_base_ucf_fp": "/kb/module/lib/cello_util/UCF/complete_UCF/Eco1C1G1T0.UCF.json"
     },
     "UCF_make_config_dict": {

@@ -78,8 +78,9 @@ class celloTest(unittest.TestCase):
        
         truth_table_text =    ' pTac, pTet, YFP & 0, 0, 1 & 0, 1, 0 & 1,0,1 & 1,1,0'
 
-        #base_plasmid_info can be one of "none", "e_coli", "tetrlaci", "custom"
-        base_plasmid_info = "e_coli" #info
+        #base_plasmid_info can be one of "none", "e_coli", "tetrlaci", 
+        # "bacteroides_theta_5482", "custom"
+        base_plasmid_info = "bacteroides_theta_5482" #info
 
         plasmid_output_genome_base = "33901/141/1"  #pAN4020
         plasmid_output_insertion_bp = "953"
@@ -99,7 +100,7 @@ class celloTest(unittest.TestCase):
                 "sensor_insertion_bp": sensor_insertion_bp}
         
 
-        main_output_name = "Test_2_1_20"
+        main_output_name = "Test_4_3_20"
 
         #no or yes
         kbase_genome_bool = "no"

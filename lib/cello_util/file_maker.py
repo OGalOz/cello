@@ -354,7 +354,8 @@ def dict_of_out_gene_relations():
 
 """
 Inputs:
-    base_plasmid_info: (str) One of "none", "e_coli", "tetrlaci", "custom"
+    base_plasmid_info: (str) One of "none", "e_coli", "tetrlaci", 
+        "bacteroides_theta_5482", "custom"
     ucf_params_fp: (str) Filepath to ucf json file
     additional_info_dict: (dict)
         output_fp: (str) Output UCF Filepath
@@ -379,10 +380,11 @@ def make_ucf_file(extracted_vars_dict):
             "additional_info_dict"]
   
 
+    # The following file is /kb/module/lib/cello_util/util_params.json
     with open(ucf_params_fp, "r") as f:
         file_str = f.read()
         ucfs_info_dict = json.loads(file_str)
-
+    
     file_info_dict = ucfs_info_dict["UCF_file_info"]
 
     if base_plasmid_info == "none":
@@ -398,6 +400,9 @@ def make_ucf_file(extracted_vars_dict):
         #TetRLacI UCF file
         ucf_fp = file_info_dict["tetrlaci_ucf_fp"]
 
+    elif base_plasmid_info == "bacteroides_theta_5482":
+        #Bacteroides thetaiotaomicron
+        ucf_fp = file_info_dict["bact_thetaiotaomicron_5482"]
 
     elif base_plasmid_info == "custom":
         #Use the additional info dict

@@ -286,6 +286,10 @@
                         "display": "TetRLacI"
                     },
                     {
+                        "value": "bacteroides_theta_5482",
+                        "display": "Bacteroides thetaiotaomicron"
+                    },
+                    {
                         "value" : "custom",
                         "display" : "Custom"
                     }
