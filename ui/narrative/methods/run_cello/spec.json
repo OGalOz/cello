@@ -1,474 +1,511 @@
 {
-
-    "ver": "0.0.1",
-    "authors": [
-        "omreegaloz"
-    ],
-    "contact": "ogaloz@lbl.gov",
-    "categories": ["active"],
-    "widgets": {
-        "input": null,
-        "output": "no-display"
+  "ver": "0.0.1",
+  "authors": [
+    "omreegaloz"
+  ],
+  "contact": "ogaloz@lbl.gov",
+  "categories": [
+    "active"
+  ],
+  "widgets": {
+    "input": null,
+    "output": "no-display"
+  },
+  "parameter-groups": [
+    {
+      "id": "promoter_inputs",
+      "parameters": [
+        "inp_promoter_name",
+        "low_RPU",
+        "high_RPU"
+      ],
+      "optional": true,
+      "advanced": false,
+      "allow_multiple": true,
+      "with_border": true
     },
-    "parameter-groups" : [
-        {
-            "id": "promoter_inputs",
-            "parameters": [
-                "inp_promoter_name",
-                "low_RPU",
-                "high_RPU"
-            ],
-            "optional":true,
-            "advanced": false,
-            "allow_multiple": true,
-            "with_border": true
-        },
-        {
-            "id": "custom_promoter_inputs",
-            "parameters": [
-                "custom_inp_promoter_name",
-                "custom_low_RPU",
-                "custom_high_RPU",
-                "custom_inp_DNA_sequence"
-            ],
-            "optional": true,
-            "advanced": false,
-            "allow_multiple": true,
-            "with_border": true
-        },
-        {
-            "id": "gene_outputs",
-            "parameters": [
-                "out_gene_name"
-            ],
-            "optional":true,
-            "advanced": false,
-            "allow_multiple": true,
-            "with_border": true
-        },
-        {
-            "id": "custom_gene_outputs",
-            "parameters": [
-                "custom_out_gene_name",
-                "custom_out_DNA_sequence"
-            ],
-            "optional":true,
-            "advanced": false,
-            "allow_multiple": true,
-            "with_border": true
-        },
-        {
-            "id": "plasmid_circuit_base",
-            "parameters": [
-                "circuit_genome_base",
-                "circuit_insertion_bp"
-            ],
-            "optional":true,
-            "advanced": false,
-            "allow_multiple": false,
-            "with_border": true
-
-
-        },
-        {
-            "id": "plasmid_output_base",
-            "parameters": [
-                "output_genome_base",
-                "output_insertion_bp"
-            ],
-            "optional":true,
-            "advanced": false,
-            "allow_multiple": false,
-            "with_border": true
-
-        },
-        {
-            "id": "sensor_module_info",
-            "parameters": [
-                "sensor_module_base",
-                "sensor_insertion_bp"
-            ],
-            "optional":true,
-            "advanced": false,
-            "allow_multiple": false,
-            "with_border": true
-
-        }
-    ],
-    "parameters": [ 
-                {
-            "id": "inp_promoter_name",
-            "optional": false,
-            "advanced": false,
-            "allow_multiple": false,
-            "default_values": [""],
-            "field_type": "dropdown",
-            "dropdown_options": {
-                "options": [ 
-                    {
-                        "value" : "pTac",
-                        "display" : "pTac"
-                    },
-                    {
-                        "value" : "pTet",
-                        "display" : "pTet"
-                    },
-                    {
-                        "value" : "pBAD",
-                        "display" : "pBAD"
-                    },
-                    {
-                        "value" : "pLuxStar",
-                        "display" : "pLuxStar"
-                    },
-                    {
-                        "value" : "pPhlF",
-                        "display" : "pPhlF"
-                    },
-                    {
-                        "value" : "pCymRC",
-                        "display" : "pCymRC"
-                    }
-                ]
-
-            }
-
-        },
-        {
-            "id": "custom_inp_promoter_name",
-            "optional": true,
-            "advanced": false,
-            "allow_multiple": false,
-            "default_values": [""],
-            "field_type": "text"
-        },
-        {
-            "id": "low_RPU",
-            "text_options" : {
-                "validate_as" : "float"
-            },
-            "optional": false,
-            "advanced": false,
-            "allow_multiple": false,
-            "default_values": ["0.005"],
-            "field_type": "text"
-        },
-        {
-            "id": "custom_low_RPU",
-            "text_options" : {
-                "validate_as" : "float"
-            },
-            "optional": true,
-            "advanced": false,
-            "allow_multiple": false,
-            "default_values": ["0.005"],
-            "field_type": "text"
-        },
-        {
-            "id": "high_RPU",
-            "text_options" : {
-                "validate_as" : "float"
-            },
-            "optional": false,
-            "advanced": false,
-            "allow_multiple": false,
-            "default_values": ["2.5"],
-            "field_type": "text"
-        },
-        {
-            "id": "custom_high_RPU",
-            "text_options" : {
-                "validate_as" : "float"
-            },
-            "optional": true,
-            "advanced": false,
-            "allow_multiple": false,
-            "default_values": ["2.5"],
-            "field_type": "text"
-        },
-        {
-            "id": "custom_inp_DNA_sequence",
-            "optional": true,
-            "advanced": false,
-            "allow_multiple": false,
-            "default_values": [""],
-            "field_type": "text"
-        },
-        {
-            "id": "out_gene_name",
-            "optional": false,
-            "advanced": false,
-            "allow_multiple": false,
-            "default_values": [""],
-            "field_type": "dropdown",
-            "dropdown_options": {
-                "options": [ 
-                    {
-                        "value" : "YFP",
-                        "display" : "YFP"
-                    },
-                    {
-                        "value" : "RFP",
-                        "display" : "RFP"
-                    },
-                    {
-                        "value" : "BFP",
-                        "display" : "BFP"
-                    },
-                    {
-                        "value" : "sigmaT3",
-                        "display" : "sigmaT3"
-                    },
-                    {
-                        "value" : "sigmaK1FR",
-                        "display" : "sigmaK1FR"
-                    },
-                    {
-                        "value" : "sigmaCGG",
-                        "display" : "sigmaCGG"
-                    },
-                    {
-                        "value" : "sigmaT7",
-                        "display" : "sigmaT7"
-                    }
-
-                ]
-
-            }
-
-        },
-        {
-            "id": "custom_out_gene_name",
-            "optional": true,
-            "advanced": false,
-            "allow_multiple": false,
-            "default_values": [""],
-            "field_type": "text"
-        },
-        {
-            "id": "custom_out_DNA_sequence",
-            "optional": true,
-            "advanced": false,
-            "allow_multiple": false,
-            "default_values": [""],
-            "field_type": "text"
-        },
-        {
-            "id": "truth_table_text",
-            "optional": false,
-            "advanced": false,
-            "allow_multiple": false,
-            "default_values": [""],
-            "field_type": "textarea",
-            "textarea_options" : {
-                "n_rows" : 10
-            }
-        },
-        {
-            "id": "base_plasmid_info",
-            "optional": false,
-            "advanced": false,
-            "allow_multiple": false,
-            "default_values": ["none"],
-            "field_type": "dropdown",
-            "dropdown_options": {
-                "options": [ 
-                    {
-                        "value" : "none",
-                        "display" : "None"
-                    },
-                    {
-                        "value" : "e_coli",
-                        "display": "E-Coli"
-                    },
-                    {
-                        "value" : "tetrlaci",
-                        "display": "TetRLacI"
-                    },
-                    {
-                        "value": "bacteroides_theta_5482",
-                        "display": "Bacteroides thetaiotaomicron"
-                    },
-                    {
-                        "value" : "custom",
-                        "display" : "Custom"
-                    }
-                ]
-            }
-
-
-        },
-        {
-            "id": "output_genome_base",
-            "optional": true,
-            "advanced": false,
-            "allow_multiple": false,
-            "default_values": [""],
-            "field_type": "text" ,
-            "text_options": {
-                "valid_ws_types": ["KBaseGenomes.Genome"]
-                }
-        },
-        {
-           "id": "output_insertion_bp",
-            "text_options" : {
-                "validate_as" : "float"
-            },
-            "optional": true,
-            "advanced": false,
-            "allow_multiple": false,
-            "default_values": ["0"],
-            "field_type": "text"
-        },
-        {
-            "id": "circuit_genome_base",
-            "optional": true,
-            "advanced": false,
-            "allow_multiple": false,
-            "default_values": [""],
-            "field_type": "text" ,
-            "text_options": {
-                "valid_ws_types": ["KBaseGenomes.Genome"]
-                }
-        },
-
-        {
-
-           "id": "circuit_insertion_bp",
-            "text_options" : {
-                "validate_as" : "float"
-            },
-            "optional": true,
-            "advanced": false,
-            "allow_multiple": false,
-            "default_values": ["0"],
-            "field_type": "text"
-
-        },
-        {
-            "id": "sensor_module_base",
-            "optional": true,
-            "advanced": false,
-            "allow_multiple": false,
-            "default_values": [""],
-            "field_type": "text" ,
-            "text_options": {
-                "valid_ws_types": ["KBaseGenomes.Genome"]
-                }
-
-        },
-        {
-
-           "id": "sensor_insertion_bp",
-            "text_options" : {
-                "validate_as" : "float"
-            },
-            "optional": true,
-            "advanced": false,
-            "allow_multiple": false,
-            "default_values": ["0"],
-            "field_type": "text"
-
-        },
-        {
-            "id": "kbase_genome_bool",
-            "optional": false,
-            "advanced": false,
-            "allow_multiple": false,
-            "default_values": [""],
-            "field_type": "dropdown",
-            "dropdown_options":{
-                 "options": [{
-                     "value": "yes",
-                     "display": "Yes"
-                 }, {
-                     "value": "no",
-                     "display": "No"
-                 }]
-                }
-
-        },
-        {
-            "id": "main_output_name",
-            "optional": false,
-            "advanced": false,
-            "allow_multiple": false,
-            "default_values": [""],
-            "field_type": "text",
-            "is_output_name" : true
-        }
-
-    ],
-    "behavior": {
-        "service-mapping": {
-            "url": "",
-            "name": "cello",
-            "method": "run_cello",
-            "input_mapping": [
-                {
-                    "narrative_system_variable": "workspace",
-                    "target_property": "workspace_name"
-                },{
-                    "narrative_system_variable": "workspace_id",
-                    "target_property": "workspace_id"
-                },{
-                    "input_parameter": "promoter_inputs",
-                    "target_property": "promoter_inputs"
-                },
-                {
-                    "input_parameter": "custom_promoter_inputs",
-                    "target_property": "custom_promoter_inputs"
-                },
-                {
-                    "input_parameter" : "gene_outputs",
-                    "target_property": "gene_outputs"
-                },
-                {
-                    "input_parameter" : "custom_gene_outputs",
-                    "target_property" : "custom_gene_outputs"
-                },
-                {
-                    "input_parameter" : "main_output_name",
-                    "target_property" : "main_output_name"
-                },
-                {
-                    "input_parameter" : "plasmid_output_base",
-                    "target_property" : "plasmid_output_base"
-
-                },
-                {
-                    "input_parameter" : "plasmid_circuit_base",
-                    "target_property" : "plasmid_circuit_base"
-
-                },
-                {
-                    "input_parameter" : "kbase_genome_bool",
-                    "target_property" : "kbase_genome_bool"
-                },
-                {
-                    "input_parameter" : "truth_table_text",
-                    "target_property" : "truth_table_text"
-                },
-                {
-                    "input_parameter" : "base_plasmid_info",
-                    "target_property" : "base_plasmid_info"
-
-                },
-                {
-                    "input_parameter" : "sensor_module_info",
-                    "target_property" : "sensor_module_info"
-                }
-            ],
-            "output_mapping": [
-                {
-                    "service_method_output_path": [0,"report_name"],
-                    "target_property": "report_name"
-                },{
-                    "service_method_output_path": [0,"report_ref"],
-                    "target_property": "report_ref"
-                }
-            ]
-        }
+    {
+      "id": "custom_promoter_inputs",
+      "parameters": [
+        "custom_inp_promoter_name",
+        "custom_low_RPU",
+        "custom_high_RPU",
+        "custom_inp_DNA_sequence"
+      ],
+      "optional": true,
+      "advanced": false,
+      "allow_multiple": true,
+      "with_border": true
     },
-    "job_id_output_field": "docker"
+    {
+      "id": "gene_outputs",
+      "parameters": [
+        "out_gene_name"
+      ],
+      "optional": true,
+      "advanced": false,
+      "allow_multiple": true,
+      "with_border": true
+    },
+    {
+      "id": "custom_gene_outputs",
+      "parameters": [
+        "custom_out_gene_name",
+        "custom_out_DNA_sequence"
+      ],
+      "optional": true,
+      "advanced": false,
+      "allow_multiple": true,
+      "with_border": true
+    },
+    {
+      "id": "plasmid_circuit_base",
+      "parameters": [
+        "circuit_genome_base",
+        "circuit_insertion_bp"
+      ],
+      "optional": true,
+      "advanced": false,
+      "allow_multiple": false,
+      "with_border": true
+    },
+    {
+      "id": "plasmid_output_base",
+      "parameters": [
+        "output_genome_base",
+        "output_insertion_bp"
+      ],
+      "optional": true,
+      "advanced": false,
+      "allow_multiple": false,
+      "with_border": true
+    },
+    {
+      "id": "sensor_module_info",
+      "parameters": [
+        "sensor_module_base",
+        "sensor_insertion_bp"
+      ],
+      "optional": true,
+      "advanced": false,
+      "allow_multiple": false,
+      "with_border": true
+    }
+  ],
+  "parameters": [
+    {
+      "id": "inp_promoter_name",
+      "optional": false,
+      "advanced": false,
+      "allow_multiple": false,
+      "default_values": [
+        ""
+      ],
+      "field_type": "dropdown",
+      "dropdown_options": {
+        "options": [
+          {
+            "value": "pTac",
+            "display": "pTac"
+          },
+          {
+            "value": "pTet",
+            "display": "pTet"
+          },
+          {
+            "value": "pBAD",
+            "display": "pBAD"
+          },
+          {
+            "value": "pLuxStar",
+            "display": "pLuxStar"
+          },
+          {
+            "value": "pPhlF",
+            "display": "pPhlF"
+          },
+          {
+            "value": "pCymRC",
+            "display": "pCymRC"
+          }
+        ]
+      }
+    },
+    {
+      "id": "custom_inp_promoter_name",
+      "optional": true,
+      "advanced": false,
+      "allow_multiple": false,
+      "default_values": [
+        ""
+      ],
+      "field_type": "text"
+    },
+    {
+      "id": "low_RPU",
+      "text_options": {
+        "validate_as": "float"
+      },
+      "optional": false,
+      "advanced": false,
+      "allow_multiple": false,
+      "default_values": [
+        "0.005"
+      ],
+      "field_type": "text"
+    },
+    {
+      "id": "custom_low_RPU",
+      "text_options": {
+        "validate_as": "float"
+      },
+      "optional": true,
+      "advanced": false,
+      "allow_multiple": false,
+      "default_values": [
+        "0.005"
+      ],
+      "field_type": "text"
+    },
+    {
+      "id": "high_RPU",
+      "text_options": {
+        "validate_as": "float"
+      },
+      "optional": false,
+      "advanced": false,
+      "allow_multiple": false,
+      "default_values": [
+        "2.5"
+      ],
+      "field_type": "text"
+    },
+    {
+      "id": "custom_high_RPU",
+      "text_options": {
+        "validate_as": "float"
+      },
+      "optional": true,
+      "advanced": false,
+      "allow_multiple": false,
+      "default_values": [
+        "2.5"
+      ],
+      "field_type": "text"
+    },
+    {
+      "id": "custom_inp_DNA_sequence",
+      "optional": true,
+      "advanced": false,
+      "allow_multiple": false,
+      "default_values": [
+        ""
+      ],
+      "field_type": "text"
+    },
+    {
+      "id": "out_gene_name",
+      "optional": false,
+      "advanced": false,
+      "allow_multiple": false,
+      "default_values": [
+        ""
+      ],
+      "field_type": "dropdown",
+      "dropdown_options": {
+        "options": [
+          {
+            "value": "YFP",
+            "display": "YFP"
+          },
+          {
+            "value": "RFP",
+            "display": "RFP"
+          },
+          {
+            "value": "BFP",
+            "display": "BFP"
+          },
+          {
+            "value": "sigmaT3",
+            "display": "sigmaT3"
+          },
+          {
+            "value": "sigmaK1FR",
+            "display": "sigmaK1FR"
+          },
+          {
+            "value": "sigmaCGG",
+            "display": "sigmaCGG"
+          },
+          {
+            "value": "sigmaT7",
+            "display": "sigmaT7"
+          }
+        ]
+      }
+    },
+    {
+      "id": "custom_out_gene_name",
+      "optional": true,
+      "advanced": false,
+      "allow_multiple": false,
+      "default_values": [
+        ""
+      ],
+      "field_type": "text"
+    },
+    {
+      "id": "custom_out_DNA_sequence",
+      "optional": true,
+      "advanced": false,
+      "allow_multiple": false,
+      "default_values": [
+        ""
+      ],
+      "field_type": "text"
+    },
+    {
+      "id": "truth_table_text",
+      "optional": false,
+      "advanced": false,
+      "allow_multiple": false,
+      "default_values": [
+        ""
+      ],
+      "field_type": "textarea",
+      "textarea_options": {
+        "n_rows": 10
+      }
+    },
+    {
+      "id": "base_plasmid_info",
+      "optional": false,
+      "advanced": false,
+      "allow_multiple": false,
+      "default_values": [
+        "none"
+      ],
+      "field_type": "dropdown",
+      "dropdown_options": {
+        "options": [
+          {
+            "value": "none",
+            "display": "None"
+          },
+          {
+            "value": "e_coli",
+            "display": "E-Coli"
+          },
+          {
+            "value": "tetrlaci",
+            "display": "TetRLacI"
+          },
+          {
+            "value": "bacteroides_theta_5482",
+            "display": "Bacteroides thetaiotaomicron"
+          },
+          {
+            "value": "custom",
+            "display": "Custom"
+          }
+        ]
+      }
+    },
+    {
+      "id": "output_genome_base",
+      "optional": true,
+      "advanced": false,
+      "allow_multiple": false,
+      "default_values": [
+        ""
+      ],
+      "field_type": "text",
+      "text_options": {
+        "valid_ws_types": [
+          "KBaseGenomes.Genome"
+        ]
+      }
+    },
+    {
+      "id": "output_insertion_bp",
+      "text_options": {
+        "validate_as": "float"
+      },
+      "optional": true,
+      "advanced": false,
+      "allow_multiple": false,
+      "default_values": [
+        "0"
+      ],
+      "field_type": "text"
+    },
+    {
+      "id": "circuit_genome_base",
+      "optional": true,
+      "advanced": false,
+      "allow_multiple": false,
+      "default_values": [
+        ""
+      ],
+      "field_type": "text",
+      "text_options": {
+        "valid_ws_types": [
+          "KBaseGenomes.Genome"
+        ]
+      }
+    },
+    {
+      "id": "circuit_insertion_bp",
+      "text_options": {
+        "validate_as": "float"
+      },
+      "optional": true,
+      "advanced": false,
+      "allow_multiple": false,
+      "default_values": [
+        "0"
+      ],
+      "field_type": "text"
+    },
+    {
+      "id": "sensor_module_base",
+      "optional": true,
+      "advanced": false,
+      "allow_multiple": false,
+      "default_values": [
+        ""
+      ],
+      "field_type": "text",
+      "text_options": {
+        "valid_ws_types": [
+          "KBaseGenomes.Genome"
+        ]
+      }
+    },
+    {
+      "id": "sensor_insertion_bp",
+      "text_options": {
+        "validate_as": "float"
+      },
+      "optional": true,
+      "advanced": false,
+      "allow_multiple": false,
+      "default_values": [
+        "0"
+      ],
+      "field_type": "text"
+    },
+    {
+      "id": "kbase_genome_bool",
+      "optional": false,
+      "advanced": false,
+      "allow_multiple": false,
+      "default_values": [
+        ""
+      ],
+      "field_type": "dropdown",
+      "dropdown_options": {
+        "options": [
+          {
+            "value": "yes",
+            "display": "Yes"
+          },
+          {
+            "value": "no",
+            "display": "No"
+          }
+        ]
+      }
+    },
+    {
+      "id": "main_output_name",
+      "optional": false,
+      "advanced": false,
+      "allow_multiple": false,
+      "default_values": [
+        ""
+      ],
+      "field_type": "text",
+      "is_output_name": true
+    }
+  ],
+  "behavior": {
+    "service-mapping": {
+      "url": "",
+      "name": "cello",
+      "method": "run_cello",
+      "input_mapping": [
+        {
+          "narrative_system_variable": "workspace",
+          "target_property": "workspace_name"
+        },
+        {
+          "narrative_system_variable": "workspace_id",
+          "target_property": "workspace_id"
+        },
+        {
+          "input_parameter": "promoter_inputs",
+          "target_property": "promoter_inputs"
+        },
+        {
+          "input_parameter": "custom_promoter_inputs",
+          "target_property": "custom_promoter_inputs"
+        },
+        {
+          "input_parameter": "gene_outputs",
+          "target_property": "gene_outputs"
+        },
+        {
+          "input_parameter": "custom_gene_outputs",
+          "target_property": "custom_gene_outputs"
+        },
+        {
+          "input_parameter": "main_output_name",
+          "target_property": "main_output_name"
+        },
+        {
+          "input_parameter": "plasmid_output_base",
+          "target_property": "plasmid_output_base"
+        },
+        {
+          "input_parameter": "plasmid_circuit_base",
+          "target_property": "plasmid_circuit_base"
+        },
+        {
+          "input_parameter": "kbase_genome_bool",
+          "target_property": "kbase_genome_bool"
+        },
+        {
+          "input_parameter": "truth_table_text",
+          "target_property": "truth_table_text"
+        },
+        {
+          "input_parameter": "base_plasmid_info",
+          "target_property": "base_plasmid_info"
+        },
+        {
+          "input_parameter": "sensor_module_info",
+          "target_property": "sensor_module_info"
+        }
+      ],
+      "output_mapping": [
+        {
+          "service_method_output_path": [
+            0,
+            "report_name"
+          ],
+          "target_property": "report_name"
+        },
+        {
+          "service_method_output_path": [
+            0,
+            "report_ref"
+          ],
+          "target_property": "report_ref"
+        }
+      ]
+    }
+  },
+  "job_id_output_field": "docker"
 }

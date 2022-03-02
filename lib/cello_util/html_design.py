@@ -166,7 +166,8 @@ def build_html(results_dir, scratch_dir, user_output_name, config_info):
 
 
     except:
-        logging.critical("Creation of HTML file failed at some point in the function build_html (html_design) .")
+        logging.critical("Creation of HTML file failed at some point " + \
+                        "in the function build_html (html_design) .")
         result_file_path = os.path.join(os.path.dirname(os.path.realpath(__file__)),"error.html")
 
     html_result_dict = {
